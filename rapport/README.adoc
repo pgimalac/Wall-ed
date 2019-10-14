@@ -16,20 +16,21 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
 === Membres du groupe
 
-* Nom1
-* Nom2
-* Nom3
-* Nom4
-* Nom5
-* Nom6
+* Maes
+* Le Mouël
+* Vitrac
+* Jow
+* Gimalac
+* Louvet
+* Masiak
 
 === Tuteur
 
-* xx yy
+* Jean-Claude Dufourd
 
 === Encadrant génie logiciel
 
-* xx yy
+* Attilio Fiandrotti
 
 == Résumé du sujet choisi en français (PAN1)
 
