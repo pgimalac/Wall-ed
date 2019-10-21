@@ -40,6 +40,13 @@ Décrire votre projet sans le scénariser : De quoi s’agit-il ? En quoi
 cette idée est compatible avec le thème de PACT ? Qu’est ce qu’il
 permettrait de faire de façon générale.
 
+Il s'agit d'un petit robot qui recherche et signale des déchets dans un 
+environnement défini. Celui-ci peut aussi ramener les déchets près de la 
+poubelle la plus proche.
+Ce projet a pour but de contribuer à la propreté de nos environnements.
+En particulier, le robot a une optique éducative: il servirait a priori lors 
+d'activités pédagogiques organisées par les enseignants (principalement en 
+primaire) pour sensibiliser les enfants au tri selectif et à la propreté.
 
 
 == English Summary (PAN1)
@@ -52,6 +59,14 @@ In hac habitasse platea dictumst. Maecenas in ligula. Duis tincidunt
 odio sollicitudin quam. Nullam non mauris. Phasellus lacinia, velit sit
 amet bibendum euismod, leo diam interdum ligula, eu scelerisque sem
 purus in tellus.
+
+The project is a small robot which searches his environment for trash and 
+informs people around him.
+He can bring back the wastes toward the closest bin. 
+The purpose is to improve the cleanliness of our surroundings.
+In particular, the robot has a educational vision. Indeed, it would be used in 
+pedagogical activities organized by teachers  - mainly in primary school - to 
+make children aware of cleanliness and garbage sorting. 
 
 *Notes concenant le rapport*
 
