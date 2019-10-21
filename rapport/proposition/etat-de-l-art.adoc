@@ -8,34 +8,18 @@ ressemblant à votre projet et les différences éventuelles. Illustrez
 avec des images si besoin. Utilisez des renvois vers votre
 bibliographie : « comme démontré dans [2], … »
 
-==== XXX
+==== Robots grand public
 
-Et magnis dis parturient montes, nascetur ridiculus mus.
+Les robots aspirateurs sont sans doute les robots nettoyeurs les plus populaires. Depuis les débuts de leur commercialisation il y a une vingtaine d'année, il s'en est vendu des dizaines de millions.
 
-Aenean risus dui, volutpat non, posuere vitae, sollicitudin in, urna.
-Nam eget eros a enim pulvinar rhoncus. Cum sociis natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisis
-massa ut massa. Sed nisi purus, malesuada eu, porta vulputate, suscipit
-auctor, nunc.
+Il s'agit en général de cylindres roulant capables de s'orienter dans une pièce, voire dans un étage entier, et aspirant les saletés. Ils se basent sur des heuristiques ou sur de l'analyse d'images pour les plus developpés.
 
-==== ZZZ
+Le robot de notre projet n'a pas pour objectif de nettoyer le sol mais de ramasser des déchets.
 
-Et magnis dis parturient montes, nascetur ridiculus mus.
+==== Robot ramasseur de déchet
 
-Aenean risus dui, volutpat non, posuere vitae, sollicitudin in, urna.
-Nam eget eros a enim pulvinar rhoncus. Cum sociis natoque penatibus et
-magnis dis parturient montes, nascetur ridiculus mus. Nulla facilisis
-massa ut massa. Sed nisi purus, malesuada eu, porta vulputate, suscipit
-auctor, nunc.
+Nous n'avons pas trouvé de robots ramasseurs de déchets en vente au grand public, mais plusieurs projets de ce genre ont déjà été réalisés, par exemple <<OLYMPSC>> par des lycéens et <<AUTGCR>> par des étudiants ingénieurs indiens.
 
-==== Exemples de citations
+Le premier a pour principale différence le contrôle du robot: le leur est télécommandé alors que le notre devra être 'intelligent' pour s'orienter tout seul, reconnaitre des déchets, les ramasser et les amener à une poubelle.
 
-Les références bibliographiques sont regroupées dans le fichier `References.adoc`
-à la racine du répertoire `rapport`.
-On peut y faire référence dans toutes les sous parties du document.
-
-On peut citer comme exemple l'article de Claude E. Shannon sur la
-théorie de la communication <<RefShannon>>
-ou, bien évidement, la vitrine des projets PACT <<VitrinePACT>>.
-
-Voir <<TOTO,la référence>> très intéressante elle aussi.
+Le second projet est plus proche du notre en terme de conception. Cependant il doit être préprogrammé (il suit un chemin prédéfini) et utilise des capteurs de proximité pour détécter les déchets.
