@@ -53,13 +53,6 @@ primaire) pour sensibiliser les enfants au tri selectif et à la propreté.
 
 *_Note : 15 lignes max, version anglaise du texte précédent_*
 
-Ligula dapibus egestas. Donec sed velit ac lectus mattis sagittis.
-
-In hac habitasse platea dictumst. Maecenas in ligula. Duis tincidunt
-odio sollicitudin quam. Nullam non mauris. Phasellus lacinia, velit sit
-amet bibendum euismod, leo diam interdum ligula, eu scelerisque sem
-purus in tellus.
-
 The project is a small robot which searches his environment for trash and 
 informs people around him.
 He can bring back the wastes toward the closest bin. 
