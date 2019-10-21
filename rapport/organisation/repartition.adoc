@@ -19,20 +19,20 @@ et entre PAN1 et PAN2 respectivement.
 
 [cols=",^,^,^,^,^,^,^",options="header",]
 |====
-| Nom        | Module1 | Module2 | Module3 | Module4 | ModuleN | Module SES | Test & Intégration
-| Nom Expert |         |         |         |         |         |            |
+| Nom        | Estimation du mouvement | Reconnaissance d'image | Androïd | conception visuel | bdd | QR code | Module SES | Test & Intégration
+| Nom Expert |                         |         |         |         |     |    |  X          |
 
-| Eleve1     | X       |         |         |         |         |            |
+| Adrien     |                         |         |         |         |  X    |   |  X          |
 
-| Eleve2     |         | X       |         |         |         |            | X
+| Florian    |                         |         |         |         |   X    |     |  X          | X
 
-| Eleve3     |         |         |         |         |         |            |
+| Lola       |                         |         |     X    |    X     |       |     |  X          |
 
-| Eleve4     | X       |         |         |         |         |            |
+| Nicolas    |                         |   X      |         |         |     |  X  |  X          |
 
-| Eleve5     |         |         |         |         |         |            |
+| Pierre     |     X                   |         |         |         |    |     |  X          | X
 
-| Eleve6     |         |         |         |         |         |            |
+| Romain     |   X                     |         |         |    X     |     |    |  X          |
 
-| Eleve7     |         | X       |         |         |         |            | X
+| Victor     |                         |  X       |   X      |         |     |    |  X          |
 |====
