@@ -16,13 +16,13 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
 === Membres du groupe
 
-* Maes
-* Le Mouël
-* Vitrac
-* Jow
-* Gimalac
-* Louvet
-* Masiak
+* Adrien Maes
+* Florian Le Mouël
+* Lola Vitrac
+* Nicolas Jow
+* Pierre Gimalac
+* Romain Louvet
+* Victor Masiak
 
 === Tuteur
 
@@ -39,6 +39,8 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 Décrire votre projet sans le scénariser : De quoi s’agit-il ? En quoi
 cette idée est compatible avec le thème de PACT ? Qu’est ce qu’il
 permettrait de faire de façon générale.
+
+
 
 == English Summary (PAN1)
 
