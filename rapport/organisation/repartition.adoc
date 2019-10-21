@@ -17,22 +17,22 @@ notions abordées en séances de Génie Logiciel, programmées avant le PAN1
 et entre PAN1 et PAN2 respectivement.
 * Un module SES
 
-[cols=",^,^,^,^,^,^,^",options="header",]
+[cols=",^,^,^,^,^,^,^,^",options="header",]
 |====
-| Nom        | Estimation du mouvement | Reconnaissance d'image | Androïd | conception visuel | bdd | QR code | Module SES | Test & Intégration |
-| Nom Expert |                         |                        |         |                   |     |         |  X         | |
+| Nom        | Estimation du mouvement | Reconnaissance d'image | Androïd | conception visuel | bdd | QR code | Module SES | Test & Intégration 
+| Nom Expert |                         |                        |         |                   |     |         |  X         | 
 
-| Adrien     |                         |                        |         |                   | X   |         |  X         | |
+| Adrien     |                         |                        |         |                   | X   |         |  X         | 
 
-| Florian    |                         |                        |         |                   |  X  |         |  X         | X |
+| Florian    |                         |                        |         |                   |  X  |         |  X         | X 
 
-| Lola       |                         |         |     X    |    X     |       |     |  X          | |
+| Lola       |                         |         |     X    |    X     |       |     |  X          | 
 
-| Nicolas    |                         |   X      |         |         |     |  X  |  X          | |
+| Nicolas    |                         |   X      |         |         |     |  X  |  X          | 
 
-| Pierre     |     X                   |         |         |         |    |     |  X          | X |
+| Pierre     |     X                   |         |         |         |    |     |  X          | X 
 
-| Romain     |   X                     |         |         |    X     |     |    |  X          | |
+| Romain     |   X                     |         |         |    X     |     |    |  X          | 
 
-| Victor     |                         |  X       |   X      |         |     |    |  X          | |
+| Victor     |                         |  X       |   X      |         |     |    |  X          | 
 |====
