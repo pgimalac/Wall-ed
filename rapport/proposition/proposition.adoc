@@ -36,6 +36,7 @@ part il a pour vocation d’éduquer les enfants sur un enjeu de société.
 Ainsi notre projet PACT contribue à deux piliers majeurs du dévelop-
 pement durable.
 
+(dessins de Lola)
 
 
 === Exemples d'utilisation d'AsciiDoc
