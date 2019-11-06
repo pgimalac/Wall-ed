@@ -9,10 +9,10 @@
 [cols=",^,^,,",options="header",]
 |====
 |Tâche |Qui |Quand |Fait |Remarques
-|sujet | | | |
-|sujet en anglais | | | |
-|scenario | | | |
-|architecture (schéma et documentation) | | | |
+|sujet |Florian, Nicolas|21/10 , 6/11 | |
+|sujet en anglais |Adrien, Nicolas |21/10 , 6/11 | |
+|Proposition ; scenario |Romain ; Adrien |21/10 ; 6/11 | |
+|architecture (schéma et documentation) | Pierre, Victor, Lola|6/11 | |
 |découpage en modules | | | |
 |planning temporel (ce document, personnalisé) | | | |
 |====
