@@ -22,9 +22,9 @@
 [cols=",^,^,,",options="header",]
 |====
 |Tâche |Qui |Quand |Fait |Remarques
-|préparation du document | | | |
-|répartition de la parole | | | |
-|répétition | | | |
+|préparation du document | Lola, Victor| 06/11 | |
+|répartition de la parole | 2 minutes chacun| 06/11 | |
+|répétition | Tous | 06/11 | |
 |====
 
 ==== Taches / PAN2 20/01/20
