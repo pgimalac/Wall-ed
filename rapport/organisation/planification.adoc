@@ -11,10 +11,10 @@
 |Tâche |Qui |Quand |Fait |Remarques
 |sujet |Florian, Nicolas|21/10 , 6/11 | |
 |sujet en anglais |Adrien, Nicolas |21/10 , 6/11 | |
-|Proposition ; scenario |Romain ; Adrien |21/10 ; 6/11 | |
-|architecture (schéma et documentation) | Pierre, Victor, Lola|6/11 | |
-|découpage en modules | | | |
-|planning temporel (ce document, personnalisé) | | | |
+|Proposition, scenario |Romain (proposition), Adrien (scénario) |21/10 , 6/11 | |
+|architecture (schéma et documentation) | Pierre (Etat de l'art + documentation) ; Victor, Lola (Diagramme d'utilisation)|6/11 | |
+|découpage en modules | Tous | 14/10 | |
+|planning temporel (ce document, personnalisé) | Nicolas | 06/11 | |
 |====
 
 * présentation 15mn
