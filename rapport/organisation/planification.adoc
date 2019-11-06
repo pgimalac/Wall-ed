@@ -9,12 +9,12 @@
 [cols=",^,^,,",options="header",]
 |====
 |Tâche |Qui |Quand |Fait |Remarques
-|sujet | | | |
-|sujet en anglais | | | |
-|scenario | | | |
-|architecture (schéma et documentation) | | | |
-|découpage en modules | | | |
-|planning temporel (ce document, personnalisé) | | | |
+|sujet |Florian, Nicolas|21/10 , 6/11 | |
+|sujet en anglais |Adrien, Nicolas |21/10 , 6/11 | |
+|Proposition, scenario |Romain (proposition), Adrien (scénario) |21/10 , 6/11 | |
+|architecture (schéma et documentation) | Pierre (Etat de l'art + documentation) ; Victor, Lola (Diagramme d'utilisation)|6/11 | |
+|découpage en modules | Tous | 14/10 | |
+|planning temporel (ce document, personnalisé) | Nicolas | 06/11 | |
 |====
 
 * présentation 15mn
@@ -22,9 +22,9 @@
 [cols=",^,^,,",options="header",]
 |====
 |Tâche |Qui |Quand |Fait |Remarques
-|préparation du document | | | |
-|répartition de la parole | | | |
-|répétition | | | |
+|préparation du document | Lola, Victor| 06/11 | |
+|répartition de la parole | 2 minutes chacun| 06/11 | |
+|répétition | Tous | 06/11 | |
 |====
 
 ==== Taches / PAN2 20/01/20

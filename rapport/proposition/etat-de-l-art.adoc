@@ -14,12 +14,12 @@ Les robots aspirateurs sont sans doute les robots nettoyeurs les plus populaires
 
 Il s'agit en général de cylindres roulant capables de s'orienter dans une pièce, voire dans un étage entier, et aspirant les saletés. Ils se basent sur des heuristiques ou sur de l'analyse d'images pour les plus developpés.
 
-Le robot de notre projet n'a pas pour objectif de nettoyer le sol mais de ramasser des déchets.
+Le robot de notre projet n'a pas pour objectif de nettoyer le sol par lui-même mais plutôt de pousser les personnes à le faire par leur propre initiative.
 
 ==== Robot ramasseur de déchet
 
 Nous n'avons pas trouvé de robots ramasseurs de déchets en vente au grand public, mais plusieurs projets de ce genre ont déjà été réalisés, par exemple <<OLYMPSC>> par des lycéens et <<AUTGCR>> par des étudiants ingénieurs indiens.
 
-Le premier a pour principale différence le contrôle du robot: le leur est télécommandé alors que le notre devra être 'intelligent' pour s'orienter tout seul, reconnaitre des déchets, les ramasser et les amener à une poubelle.
+Le premier a pour principale différence le contrôle du robot : le leur est télécommandé alors que le notre devra être 'intelligent' pour s'orienter tout seul, reconnaitre des déchets, les ramasser et les amener à une poubelle.
 
 Le second projet est plus proche du notre en terme de conception. Cependant il doit être préprogrammé (il suit un chemin prédéfini) et utilise des capteurs de proximité pour détécter les déchets.
