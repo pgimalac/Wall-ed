@@ -62,7 +62,7 @@ Pour ajouter une équation ou un symbole mathématique dans le corps du texte.
 
 * Ceci est un exemple d'image:
 
-image::../images/logo_PACT.png[logo pact]
+image::../images/logo.jpg[logo pact]
 
 * L'image peut être redimensionnée et avoir un titre:
 
