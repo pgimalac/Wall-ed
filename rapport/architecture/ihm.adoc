@@ -26,7 +26,7 @@ Après l'ajout d'un utilisateur, interface pour scanner le QR code de son bracel
 
 image::../images/Story_board_-_Utilisateurs.jpg[Menu utilisateur,400]
 
-Liste des utilisateurs enregistés
+Liste des utilisateurs enregistrés
 
 image::../images/Story_board_-_Statistiques.jpg[Menu Statistiques,400]
 
