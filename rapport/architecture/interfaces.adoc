@@ -3,7 +3,7 @@
 Pour le PAN1, il faut identifier et décrire sommairement toutes les
 interfaces entre modules.
 
-Pour le PAN2, il faut une description complête des interfaces.
+Pour le PAN2, il faut une description complète des interfaces.
 
 Il faut ici une description textuelle de chaque interface, c’est à
 dire +
@@ -35,7 +35,7 @@ A chaque fois qu'un enfant ramasse un déchet, il s'identifie auprès du robot q
 ==== InterfaceBloc3-7
 
 (ROBOT -> SERVEUR)
-- envoi des données brutes sur les intéractions avec les enfants et les déchets trouvés
+- envoi des données brutes sur les interactions avec les enfants et les déchets trouvés
 
 ==== InterfaceBloc1-3
 
