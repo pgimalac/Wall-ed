@@ -20,8 +20,11 @@ projet tout fait en encapsulant un programme déjà existant.
 
 ===== BLOC ROBOT
 Ce bloc inclue trois modules relatifs au fonctionnement et à l'allure du robot.
+
 Système embarqué : ce module s'occupe de la stratégie de déplacement adoptée par le robot (mise en mouvement, trajectoire du robot, de quelle manière est-ce qu'il balaye la pièce). 
+
 Analyse d'image : ce module s'occupe du repérage des déchêts au sol et de la distinction du type de déchêt.
+
 Conception visuelle : ce module englobe l'allure générale du robot (impression 3D de la coque) et l'interaction avec l'élève (accessoires lumineux et sonores) afin qu'elle soit attractive pour l'enfant. 
 
 ===== BLOC UTILISATEUR 
