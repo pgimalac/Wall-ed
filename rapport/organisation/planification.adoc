@@ -12,7 +12,7 @@
 |sujet |Florian, Nicolas|21/10 , 6/11 | |
 |sujet en anglais |Adrien, Nicolas |21/10 , 6/11 | |
 |Proposition, scenario |Romain (proposition), Adrien (scénario) |21/10 , 6/11 | |
-|architecture (schéma et documentation) | Pierre (Etat de l'art + documentation) ; Victor, Lola (Diagramme d'utilisation)|6/11 | |
+|architecture (schéma et documentation) | Pierre (État de l'art + documentation) ; Victor, Lola (Diagramme d'utilisation)|6/11 | |
 |découpage en modules | Tous | 14/10 | |
 |planning temporel (ce document, personnalisé) | Nicolas | 06/11 | |
 |====
