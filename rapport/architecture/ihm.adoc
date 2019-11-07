@@ -11,3 +11,23 @@ dessins au crayon photographiés ou scannés, car ce sont les meilleurs
 supports de discussion : on appelle souvent ces dessins un
 « storyboard ». Une description textuelle fait le lien entre tous les
 éléments de l’IHM (ou des IHMs).
+
+image::../images/Story_board_-_Menu_principal.jpg[Menu Principal]
+
+Menu permettant de naviguer entre les options
+
+image::../images/Story_board_-_Nouveau.jpg
+
+Interface permettant d'ajouter un utilisateur
+
+image::../images/Story_board_-_QR.jpg
+
+Après l'ajout d'un utilisateur, interface pour scanner le QR code de son bracelet
+
+image::../images/Story_board_-_Utilisateurs.jpg
+
+Liste des utilisateurs enregistés
+
+image::../images/Story_board_-_Statistiques.jpg
+
+Statistiques d'un utilisateur
