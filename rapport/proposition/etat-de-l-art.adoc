@@ -17,8 +17,12 @@ Nous n'avons pas trouvé de robots ramasseurs de déchets en vente au grand publ
 
 Le premier a pour principale différence le contrôle du robot : le leur est télécommandé alors que le notre devra être 'intelligent' pour s'orienter tout seul, reconnaître des déchets, les ramasser et les amener à une poubelle.
 
-image::../images/olympiade.jpg[alt]
+image::../images/olympiade.jpg[]
 
 Le second projet est plus proche du notre en terme de conception. Cependant il doit être préprogrammé (il suit un chemin prédéfini) et utilise des capteurs de proximité pour détecter les déchets.
 
-image::../images/autgcr.jpg[alt2]
+image::../images/autgcr.jpg[]
+
+De plus, des projets plus professionnels existent, par exemple <<DUSTBOT>> financé par la commission européenne.
+
+image::../images/dustbot.jpg[]

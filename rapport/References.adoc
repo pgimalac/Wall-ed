@@ -8,3 +8,5 @@ envisageable : titre, auteur, date, page web_*
 http://article.sapub.org/10.5923.j.ijit.20170602.06.html
 * [[OLYMPSC]]OLYMPSC : _Thomas, Valentin et Pierre ont remporté le 1er prix des Olympiades des sciences de l’ingénieur_, *Catherine Perrot*, Extrait du Journal La Montagne, 10/06/2014
 http://www.monnet-mermoz.fr/portail/?tag=robot-ramasseur-de-dechets
+* [[RUSTBOT]]RUSTBOT : _Networked and Cooperating Robots for Urban Hygiene_, *Scuola Superiore Sant'Anna*, projet européen
+http://www.dustbot.org/
