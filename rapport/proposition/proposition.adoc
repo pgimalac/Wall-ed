@@ -35,7 +35,7 @@ notre projet joue sur deux tableaux : d’une part notre robot est
 part il a pour vocation d’éduquer les enfants sur un enjeu de société.
 Ainsi notre projet PACT contribue à deux piliers majeurs du développement durable.
 
-(dessins de Lola)
+image::../images/robot.png[Dessin du robot]
 
 
 === Exemples d'utilisation d'AsciiDoc
@@ -62,7 +62,7 @@ Pour ajouter une équation ou un symbole mathématique dans le corps du texte.
 
 * Ceci est un exemple d'image:
 
-image::../images/logo_PACT.png[logo pact]
+image::../images/logo.jpg[logo pact]
 
 * L'image peut être redimensionnée et avoir un titre:
 
