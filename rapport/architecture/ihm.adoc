@@ -16,18 +16,18 @@ image::../images/Story_board_-_Menu_principal.jpg[Menu Principal]
 
 Menu permettant de naviguer entre les options
 
-image::../images/Story_board_-_Nouveau.jpg
+image::../images/Story_board_-_Nouveau.jpg[Menu Nouveau]
 
 Interface permettant d'ajouter un utilisateur
 
-image::../images/Story_board_-_QR.jpg
+image::../images/Story_board_-_QR.jpg[QR menu]
 
 Après l'ajout d'un utilisateur, interface pour scanner le QR code de son bracelet
 
-image::../images/Story_board_-_Utilisateurs.jpg
+image::../images/Story_board_-_Utilisateurs.jpg[Menu utilisateur]
 
 Liste des utilisateurs enregistés
 
-image::../images/Story_board_-_Statistiques.jpg
+image::../images/Story_board_-_Statistiques.jpg[Menu Statistiques]
 
 Statistiques d'un utilisateur
