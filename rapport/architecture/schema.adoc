@@ -5,7 +5,7 @@ cours d’introduction au Génie Logiciel. N’hésitez pas à faire des
 schémas hiérarchiques, c’est à dire avec un bloc d’un schéma général
 raffiné dans un second schéma ; ou des schémas en plusieurs parties.
 
-image:../Images/Schemafonctionnel.png[Schéma fonctionnel]
+image:../Images/diagramme_d_architecture.jpg[Schéma fonctionnel]
 
 ==== Description des blocs
 
