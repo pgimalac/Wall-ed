@@ -37,3 +37,12 @@ sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 | T2.2  | Détection du tempo                                    |
 | T2.3  | Changement de tempo                                   | X
 |====
+
+
+[cols=",,^",options="header",]
+|====
+| Tâche | Description                                           | Intégré au PAN3
+| T1    | Analyse d'image (détection des déchets)               |
+| T1.1  | Localisation des déchets sur l'image captée           | X
+| T1.2  | Classification des déchets détectés                   |
+|====
