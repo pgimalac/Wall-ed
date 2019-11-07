@@ -19,9 +19,9 @@ devez pas réinventer la roue mais vous ne devez pas non plus avoir votre
 projet tout fait en encapsulant un programme déjà existant.
 
 ===== BLOC ROBOT
-Ce bloc inclue trois modules relatifs au fonctionnement et à l'allure du robot.
+Ce bloc inclut trois modules relatifs au fonctionnement et à l'allure du robot.
 
-Système embarqué : ce module s'occupe de la stratégie de déplacement adoptée par le robot (mise en mouvement, trajectoire du robot, de quelle manière est-ce qu'il balaye la pièce).
+Système embarqué : ce module s'occupe de la stratégie de déplacement adoptée par le robot (mise en mouvement, trajectoire du robot, de quelle manière est-ce qu'il balaye la pièce), ainsi que du ramassage éventuel des déchets.
 
 Analyse d'image : ce module s'occupe du repérage des déchets au sol et de la distinction du type de déchet.
 
@@ -31,7 +31,7 @@ Conception visuelle : ce module englobe l'allure générale du robot (impression
 Application Android : ce module s'occupe de la conception de l'application Android permettant aux professeurs d'avoir accès aux statistiques individuelles (sur chaque élève) et globales liées à l'utilisation du robot.
 
 ===== BLOC QR CODE
-Le module "QR code" permet au robot, via une caméra et un bracelet QR code, de connaître l'identité de l'élève l'ayant aidé à jeter un déchet (afin de mettre à jour les statistiques individuelles de l'élève disponible via l'application).
+Le module "QR code" permet au robot, via une caméra et un bracelet QR code, de connaître l'identité de l'élève l'ayant aidé à jeter un déchet (afin de mettre à jour les statistiques individuelles de l'élève disponibles via l'application).
 
 ===== BLOC SERVEUR ET BDD
 Le module "Bloc serveur et BDD" s'occupe de centraliser et analyser les données.

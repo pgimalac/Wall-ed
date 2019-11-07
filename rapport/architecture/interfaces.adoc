@@ -26,7 +26,7 @@ A chaque fois qu'un enfant ramasse un déchet, il s'identifie auprès du robot q
 ==== InterfaceBloc1-7
 
 (APPLICATION -> SERVEUR)
-- initialisation de la base de donnée des enfants
+- initialisation de la base de données des enfants
 - requête des statistiques
 
 (SERVEUR -> APPLICATION)
@@ -51,4 +51,4 @@ Reconnaissance des déchets
 
 ==== InterfaceBloc4-6
 
-communique l'action visuelle et sonore à faire
+Communique l'action visuelle et sonore à faire

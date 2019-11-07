@@ -19,10 +19,10 @@ et entre PAN1 et PAN2 respectivement.
 
 [cols=",^,^,^,^,^,^,^,^",options="header",]
 |====
-| Nom        | Estimation du mouvement | Reconnaissance d'image | Android | conception visuelle & audio | bdd | QR code | Module SES | Test & Intégration
-| Nom Expert | Tarik Graba             | Michel Roux            | Jean-Claude Dufourd   |     |     |         |  Dana Diminescu         |
+| Nom        | Estimation du mouvement | Reconnaissance d'image | Android | conception visuelle & audio | bdd | QR code | Module SES | Intégration & Tests
+| Nom Expert | Tarik Graba             | Michel Roux            | Jean-Claude Dufourd   |     |     |         |  Dana Diminescu         | Attilio Fiandrotti
 
-| Adrien     |                         |                        |         |                   | X   |         |  X         |
+| Adrien     |                         |                        |         |                   | X   | X       |  X         |
 
 | Florian    |                         |                        |         |                   |  X  |         |  X         | X
 

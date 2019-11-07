@@ -23,7 +23,7 @@ il se trouve qu’à l’instant où vous passez à côté il s’agit du vôtre
 Ainsi, à l’aide d'un petit robot capable de reconnaître les déchets (non dangereux)
 sur le sol, de les amener près d’une poubelle et de capter l’attention
 des enfants par un jeu de sons et de lumières afin qu’ils soient amenés à ramasser et
-jettent le ou les déchets dans la poubelle, notre robot permettrai de remplir
+jettent le ou les déchets dans la poubelle, notre robot permettrait de remplir
 cet objectif. Il sensibilise l'enfant tout en l'amusant, et le pousse à réaliser un geste qu’il
 n’aurait peut-être pas fait naturellement. De plus, la participation
 des enfants est assurée grâce à un système de bons points distribués
