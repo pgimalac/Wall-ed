@@ -5,7 +5,7 @@ cours d’introduction au Génie Logiciel. N’hésitez pas à faire des
 schémas hiérarchiques, c’est à dire avec un bloc d’un schéma général
 raffiné dans un second schéma ; ou des schémas en plusieurs parties.
 
-image::../images/diagramme_d_architecture.jpg[Schéma fonctionnel]
+image::../Images/diagramme_d_architecture.jpg[Schéma fonctionnel]
 
 ==== Description des blocs
 
@@ -18,10 +18,17 @@ disponibles de ce que vous allez produire (coder) vous même. Vous ne
 devez pas réinventer la roue mais vous ne devez pas non plus avoir votre
 projet tout fait en encapsulant un programme déjà existant.
 
-===== NomBloc1
+===== BLOC ROBOT
+Ce bloc inclue trois modules relatifs au fonctionnement et à l'allure du robot.
+Système embarqué : ce module s'occupe de la stratégie de déplacement adoptée par le robot (mise en mouvement, trajectoire du robot, de quelle manière est-ce qu'il balaye la pièce). 
+Analyse d'image : ce module s'occupe du repérage des déchêts au sol et de la distinction du type de déchêt.
+Conception visuelle : ce module englobe l'allure générale du robot (impression 3D de la coque) et l'interaction avec l'élève (accessoires lumineux et sonores) afin qu'elle soit attractive pour l'enfant. 
 
-Description textuelle du bloc 1.
+===== BLOC UTILISATEUR 
+Application Androïd : ce module s'occupe de la conception de l'application Androïd permettant aux professeurs d'avoir accès aux statistiques individuelles (sur chaque élève) et globales liées à l'utilisation du robot. 
 
-===== NomBloc2
+===== BLOC QR CODE
+Le module "QR code" permet au robot, via une caméra et un bracelet QR code, de connaître l'identité de l'élève l'ayant aidé à jeter un déchêt (afin de mettre à jour les statistiques individuelles de l'élève disponible via l'application). 
 
-Description textuelle du bloc 1.
+===== BLOC SERVEUR ET BDD
+Le module "Bloc serveur et BDD" s'occupe de centraliser et analyser les données. 
