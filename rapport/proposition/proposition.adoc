@@ -7,32 +7,32 @@ besoins. Ajouter une image ou une figure pour montrer à quoi cela
 ressemble si besoin._
 
 
-Suite à une récente prise de concience de la population sur la lutte 
+Suite à une récente prise de concience de la population sur la lutte
 contre les déchets, notre projet PACT s’inscrit dans la continuité du
-combat du mouvement CleanWalker : sensibiliser la population sur la 
-question de la pollution due à l’abandon des déchets sur le sol. Il 
-se propose donc par une approche pédagogique et ludique de toucher 
-les générations les plus jeunes dans le but d’augmenter l’impact de 
+combat du mouvement CleanWalker : sensibiliser la population sur la
+question de la pollution due à l’abandon des déchets sur le sol. Il
+se propose donc par une approche pédagogique et ludique de toucher
+les générations les plus jeunes dans le but d’augmenter l’impact de
 cette question sur notre société.
 
-L’objectif est donc de rendre un geste, qui au depart peut dégouter 
+L’objectif est donc de rendre un geste, qui au depart peut dégouter
 ou ennuyer l’enfant, parfaitement naturel grâce à des ateliers dédiés.
-L’idée est de faire passer le message suivant: “Même si ce déchet 
+L’idée est de faire passer le message suivant: “Même si ce déchet
 n’est pas le vôtre, même si ce n’est pas vous qui l’avez laissé là,
 il se trouve qu’à l’instant où vous passez à côté il s’agit du vôtre”.
 Ainsi, à l’aide d'un petit robot capable de reconnaitre les déchets (non dangereux)
 sur le sol, de les amener près d’une poubelle et de capter l’attention
 des enfants par un jeu de sons et de lumières afin qu’ils soient amenés à ramasser et
-jettent le ou les déchets dans la poubelle, notre robot permettrai de remplir 
+jettent le ou les déchets dans la poubelle, notre robot permettrai de remplir
 cet objectif. Il sensibilise l'enfant tout en l'amusant, et le pousse à realiser un geste qu’il
-n’aurait peut-être pas fait naturellement. De plus, la participation 
+n’aurait peut-être pas fait naturellement. De plus, la participation
 des enfants est assurée grâce à un système de bons points distribués
 lorsque la bonne action est réalisée.
 
-Finalement, dans l’optique de contribuer au développement durable, 
-notre projet joue sur deux tableaux : d’une part notre robot est 
+Finalement, dans l’optique de contribuer au développement durable,
+notre projet joue sur deux tableaux : d’une part notre robot est
 écologique, il réduit le nombre de déchets laissés sur le sol, et d’autre
-part il a pour vocation d’éduquer les enfants sur un enjeu de société. 
+part il a pour vocation d’éduquer les enfants sur un enjeu de société.
 Ainsi notre projet PACT contribue à deux piliers majeurs du dévelop-
 pement durable.
 
