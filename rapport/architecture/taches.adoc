@@ -24,30 +24,46 @@ allégé. Mettez-vous d’accord avec vos experts techniques pour savoir ce
 qu’il est réaliste de démontrer au PAN3. N’hésitez pas à redécouper en 2
 sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 
+**Système embarqué:**
 [cols=",,^",options="header",]
 |====
 | Tâche | Description                                           | Intégré au PAN3
-| T1    | Classificateur d’image                                |
-| T1.1  | Changement espace de couleur pour permettre …         | X
-| T1.2  | Extraction de l’histogramme à partir de l’espace XYZ… | X
-| T1.3  | Extraction des caractéristiques …                     |
-| T1.4  | Comparaison des caractéristiques                      | X
-| T2    | Détection de rythme (Module « Audio/Rythme »)         |
-| T2.1  | Découpage signal sonore en bande fréquentielle        | X
-| T2.2  | Détection du tempo                                    |
-| T2.3  | Changement de tempo                                   | X
+| T1    | Déplacement du robot vers un endroit souhaité         |
+| T1.1  | Capacité de se déplacer                               | X
+| T1.2  | Déplacements & rotations jusqu'à repérage des déchets | X
+| T1.3  | Capacité d'aller à un endroit choisi                  | X
+| T2    | Ramassage des déchets                                 |
+| T2.1  | Ajout d'un outil de ramassage                         | X
+| T2.2  | Capacité d'utiliser l'outil                           | X
+| T2.3  | Ramassage d'un déchet choisi                          |
 |====
 
-
+**Analyse d'image**
 [cols=",,^",options="header",]
 |====
 | Tâche | Description                                           | Intégré au PAN3
-| T1    | Analyse d'image (détection des déchets)               |
+| T1    | Détection des déchets                                 |
 | T1.1  | Localisation des déchets sur l'image captée           | X
 | T1.2  | Classification des déchets détectés                   |
-| T2    | Centraliser les données                               |
-| T2.1  | BDD sur un serveur                                    | x
-| T2.2  | Interface d'accès aux données sur l'application       | x
-| T2.3  | Protocole d'envoi d'informations à la BDD par le robot| x
-| T2.4  | Interface de création de profils sur la BDD           |
+|====
+
+**BDD**
+[cols=",,^",options="header",]
+|====
+| Tâche | Description                                           | Intégré au PAN3
+| T1    | Centraliser les données                               |
+| T1.1  | BDD sur un serveur                                    | x
+| T1.2  | Interface d'accès aux données sur l'application       | x
+| T1.3  | Protocole d'envoi d'informations à la BDD par le robot| x
+| T1.4  | Interface de création de profils sur la BDD           |
+|====
+
+**Android**
+[cols=",,^",options="header",]
+|====
+| Tâche | Description                                           | Intégré au PAN3
+| T1    | Création de l'application                             |
+| T1.1  | Design de l'application                               | x
+| T1.2  | Accès à la base de données                            | x
+| T1.3  | Graphes des données                                   |
 |====
