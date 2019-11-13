@@ -1,7 +1,6 @@
 === Description de l’état de l’art
 ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
-*_Note : 1 page max._*
 
 ==== Robots grand public
 
