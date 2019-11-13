@@ -1,4 +1,5 @@
 === Scénarios d’usage
+
 Après avoir remporté avec brio un concours jeunes talents organisé par le ministère de l’éducation nationale, la startup telecomienne à l’origine du robot “Wall-Ed” dépose un mystérieux colis dans la boîte au lettre d’Estelle, professeur des écoles en maternelle. Celle-ci quitte sa maison avec le colis sous le bras et part en direction de l’école.
 
 “Bonjour les enfants, veuillez accueillir votre nouveau camarade : le robot Wall-Ed” dit l’institutrice en entrant dans la classe. Elle sort alors le robot de son emballage, l’allume et le pose au sol. Ce robot coloré se met alors à clignoter et prend la parole d’une voix amicale, s’adressant à Estelle.

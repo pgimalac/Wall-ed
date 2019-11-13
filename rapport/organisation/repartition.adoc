@@ -3,7 +3,7 @@
 [cols=",^,^,^,^,^,^,^,^",options="header",]
 |====
 | Nom        | Estimation du mouvement | Reconnaissance d'image | Android | conception visuelle & audio | bdd | QR code | Module SES | Intégration & Tests
-| Nom Expert | Tarik Graba             | Michel Roux            | Jean-Claude Dufourd   |     |     |         |  Dana Diminescu         | Attilio Fiandrotti
+| Nom Expert | Tarik Graba             | Michel Roux            | Jean-Claude Dufourd   | Ulrich Kühne et Dana Diminescu     |     |         |  Dana Diminescu         | Attilio Fiandrotti
 
 | Adrien     |                         |                        |         |                   | X   | X       |  X         |
 

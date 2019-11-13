@@ -69,3 +69,14 @@ sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 | T1.2  | Accès à la base de données                            | x
 | T1.3  | Graphes des données                                   |
 |====
+
+**Conception visuelle et audio**
+[cols=",,^",options="header",]
+|====
+| Tâche | Description                                           | Intégré au PAN3
+| T1    | Design et impression de la coque extérieure                             |
+| T1.1  | Design et impression de la pince                               | x
+| T1.2  | système de leds opérant            | x
+| T1.3  | système audio opérant                                  |x
+|====
+

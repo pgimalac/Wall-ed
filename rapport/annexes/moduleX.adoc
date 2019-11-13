@@ -26,12 +26,6 @@ int main()
 }
 ----
 
-
-[source,c]
-----
-include::code/test.c[]
-----
-
 Et l'équation:
 
 [latexmath]

@@ -34,20 +34,11 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
 == Résumé du sujet choisi en français (PAN1)
 
-*_Note: 15 lignes max_*
-
-Décrire votre projet sans le scénariser : De quoi s’agit-il ? En quoi
-cette idée est compatible avec le thème de PACT ? Qu’est ce qu’il
-permettrait de faire de façon générale.
-
 Il s'agit d'un petit robot qui recherche et signale la présence des déchets dans un  environnement défini. Celui-ci peut également décider de ramener les déchets à proximité de la poubelle la plus proche lorsque personne n'est présent autour de lui. Des enfants doivent alors intervenir pour jeter le déchet dans la bonne poubelle.
 Ce projet a pour but de contribuer à la propreté de nos environnements. En particulier, le robot présente une optique éducative: il servirait a priori lors d'activités pédagogiques organisées par les enseignants
 (principalement en primaire) dans le but de sensibiliser les enfants au tri sélectif et à la propreté en général.
 
-
 == English Summary (PAN1)
-
-*_Note : 15 lignes max, version anglaise du texte précédent_*
 
 The project consists in a small robot which looks for wastes in a defined environment and
 informs people around him once he founds some.
@@ -56,18 +47,6 @@ The purpose is to improve the cleanliness of our surroundings.
 The robot has, in particular, an educational aim. Indeed, it would rather be used in
 pedagogical activities organized by teachers - mainly in primary school - to
 make children aware of cleanliness and garbage sorting.
-
-*Notes concernant le rapport*
-
-Les différentes pages du document sont rédigées en utilisant le langage
-AsciiDoc. Le squelette de rapport contient des exemples avec entre autre:
-
-* des images,
-* des liens,
-* des équations.
-
-La structure du rapport (parties, sections et la relation avec les
-différents fichiers) se trouve dans le fichier courant.
 
 // en PDF on ne peut pas contrôler la position de la toc
 // Macros non supportées
@@ -130,5 +109,3 @@ include::annexes/modifications.adoc[Modifications (PAN2+)]
 include::annexes/avancement.adoc[Avancement des modules]
 
 include::annexes/moduleX.adoc[Avancement module X]
-
-include::annexes/moduleY.adoc[Avancement module Y]
