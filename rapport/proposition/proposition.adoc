@@ -36,3 +36,6 @@ part il a pour vocation d’éduquer les enfants sur un enjeu de société.
 Ainsi notre projet PACT contribue à deux piliers majeurs du développement durable.
 
 image::../images/robot.png[Dessin du robot]
+
+LOGO DU PROJET :
+image::../images/logo.jpg[logo pact]
