@@ -1,5 +1,6 @@
 === Description des interfaces (PAN1 / PAN2)
 
+////
 Pour le PAN1, il faut identifier et décrire sommairement toutes les
 interfaces entre modules.
 
@@ -14,6 +15,7 @@ données complexes, il faut en décrire le format avec grande précision.
 Si c’est une interface +
 entre deux blocs électroniques, c’est une description des signaux +
 électroniques. Etc.
+////
 
 ==== InterfaceBloc1-2
 
