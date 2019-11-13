@@ -1,11 +1,4 @@
 === Description de la proposition
-*_Note: 2 page max._*
-
-_Décrire de façon détaillée votre projet : motivations de base/problèmes
-constatés avant élaboration du projet, comment votre projet répond à ces
-besoins. Ajouter une image ou une figure pour montrer à quoi cela
-ressemble si besoin._
-
 
 Suite à une récente prise de conscience de la population sur la lutte
 contre les déchets, notre projet PACT s’inscrit dans la continuité du

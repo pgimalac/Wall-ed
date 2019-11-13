@@ -1,8 +1,6 @@
 === Description de l’état de l’art
 ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 
-*_Note : 1 page max._*
-
 ==== Robots grand public
 
 Les robots aspirateurs sont sans doute les robots nettoyeurs les plus populaires. Depuis les débuts de leur commercialisation il y a une vingtaine d'année, il s'en est vendu des dizaines de millions.

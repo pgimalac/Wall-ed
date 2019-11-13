@@ -3,19 +3,10 @@
 Insérez ici vos comptes rendus de réunions : date, durée, participants,
 sujets abordés.
 
-==== Réunion du dd/mm/yyyy
+==== Réunion du 13/11/2019
 
 * Présents:
-** AA
-** BB
-** CC
-* Sujets abordés
-** *xxx* : Nec, iaculis vel, mi. Nullam et augue vitae nunc tristique
-vehicula. Suspendisse eget elit. Duis adipiscing dui non quam.
-* Actions à entreprendre:
-** Fusce sollicitudin molestie dui. Sed magna orci, accumsan nec,
-viverra non, pharetra id, dui. Lorem ipsum dolor sit amet, consectetuer
-adipiscing elit.
-** Interdum arcu, at pellentesque diam metus ut nulla. Vestibulum eu
-dolor sit amet lacus varius fermentum. Morbi dolor enim, pulvinar eget.
-
+** Tout le groupe, Jean-Claude Dufourd
+* Sujets abordés:
+** *retours sur le PAN1* : les principaux points négatifs étaient la description pas assez complète des interfaces et le cas d'utilisation qui n'était pas assez précis.
+* Conséquences: amélioration du rapport en conséquence, précisions sur le cas d'utilisation et le scénario, les consignes sont sont retirées

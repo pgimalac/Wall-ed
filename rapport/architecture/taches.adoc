@@ -1,5 +1,6 @@
 === Tableau détaillé des tâches
 
+////
 ****Note : 2 pages max - les fiches modules seront placées en annexe,
 elles doivent être rédigées avec l’expert.****
 
@@ -23,6 +24,7 @@ Certaines sous-tâches peuvent ne pas être démontrables dans le prototype
 allégé. Mettez-vous d’accord avec vos experts techniques pour savoir ce
 qu’il est réaliste de démontrer au PAN3. N’hésitez pas à redécouper en 2
 sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
+////
 
 **Système embarqué:**
 [cols=",,^",options="header",]

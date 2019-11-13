@@ -1,9 +1,4 @@
 === Scénarios d’usage
-Mettre ici le scénario d’usage que vous avez construit lors des séances
-encadrées par les experts SES. Vous pouvez mettre un scénario amélioré
-(et non celui noté) si vous jugez votre scénario insuffisant pour faire
-comprendre au jury PACT les différentes étapes d’utilisation de votre
-produit/service ou si vous avez changé d’idées entre temps.
 
 Après avoir remporté avec brio un concours jeunes talents organisé par le ministère de l’éducation nationale, la startup telecomienne à l’origine du robot “Wall-Ed” dépose un mystérieux colis dans la boîte au lettre d’Estelle, professeur des écoles en maternelle. Celle-ci quitte sa maison avec le colis sous le bras et part en direction de l’école.
 

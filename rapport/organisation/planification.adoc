@@ -71,10 +71,11 @@
 
 ===== Générales
 
-* Préparer un déroulé de la démo et du ``matériel'' de démo
+// * Préparer un déroulé de la démo et du *matériel* de démo
 
 ===== Modules
 
+////
 * Android
 
 [cols=",^,^,",options="header",]
@@ -87,17 +88,21 @@
 |====
 
 * …
+////
 
 ==== Tâches / PAN4 04/05/20
 
 ===== Générales
 
+////
 * poster pour le stand
 * présentation 4 slides
 * rapport: avancement, rapports de test
+////
 
 ===== Modules
 
+////
 * Android
 
 [cols=",^,^,",options="header",]
@@ -109,3 +114,4 @@
 |====
 
 * …
+////
