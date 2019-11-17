@@ -4,9 +4,9 @@ Après avoir remporté avec brio un concours jeunes talents organisé par le min
 
 “Bonjour les enfants, veuillez accueillir votre nouveau camarade : le robot Wall-Ed” dit l’institutrice en entrant dans la classe. Elle sort alors le robot de son emballage, l’allume et le pose au sol. Ce robot coloré se met alors à clignoter et prend la parole d’une voix amicale, s’adressant à Estelle.
 
-“Bonjour ! Je m’appelle Wall-Ed . Nous allons débuter ma configuration. Veuillez sortir votre téléphone portable, télécharger l’application Wall-Ed et enfin imprimer et distribuer un bracelet à chaque élève.”
+“Bonjour ! Je m’appelle Wall-Ed . Nous allons débuter ma configuration. Veuillez sortir votre téléphone portable, télécharger l’application Wall-Ed et enfin distribuer un bracelet à chaque élève.”
 
-Estelle ouvre l’application et suit les instructions afin d’assigner à chaque élève un bracelet muni d’un QR code. L’activité pédagogique peut alors commencer. Elle dispose au préalable des déchets de différents types dans l’espace choisi. Le robot débute sa mission : il se lance dans la recherche de déchets en se repérant dans l’espace à l’aide de sa caméra et des sons qu’il perçoit.
+Estelle ouvre l’application et suit les instructions afin d’assigner à chaque élève un bracelet coloré. L’activité pédagogique peut alors commencer. Elle dispose au préalable des déchets de différents types dans l’espace choisi. Le robot débute sa mission : il se lance dans la recherche de déchets en se repérant dans l’espace à l’aide de sa caméra et des sons qu’il perçoit.
 
 Il se déplace de manière à balayer la pièce dans laquelle il se trouve (salle de classe ou cour de récréation) en évitant les obstacles, jusqu’à ce qu’il détecte un déchet au sol (sachet plastique, canette, bout de papier,…). Il se dirige alors en direction de ce dernier.
 
@@ -17,6 +17,6 @@ Il incite les enfants présents autour de lui à ramasser le déchet en question
 
 S’il n’a pas de réponse au bout d’un certain temps, il émet un signal différent et plus intense. S’il se rend compte qu’il n’y a pas d’enfants à proximité, il se met en veille.
 
-L’enfant ayant jeté un déchet se voit récompensé lorsqu’il confirme sa bonne action écologique : lorsqu’il scanne son bracelet QR code auprès de la caméra du robot, son nom est enregistré dans la base de données de l’application centrale. Le robot le remercie et lui rappelle de bien se laver les mains.
+L’enfant ayant jeté un déchet se voit récompensé lorsqu’il confirme sa bonne action écologique : lorsqu’il scanne son bracelet auprès de la caméra du robot, son nom est enregistré dans la base de données de l’application centrale. Le robot le remercie et lui rappelle de bien se laver les mains.
 
 L’ensemble des données (réussite / échec de l’enfant à identifier le déchet, statistiques par classes, enfants, …) est collecté en temps réel. Les enseignants peuvent ensuite consulter les statistiques via l’application Wall-Ed. Celles-ci sont également accessibles à la startup qui pourra les analyser (temps avant de trouver un déchet, avant de trouver un enfant, …) afin de pouvoir, par la suite, optimiser les fonctionnalités du robot.
