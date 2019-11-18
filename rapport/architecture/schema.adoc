@@ -4,20 +4,26 @@ image::../images/diagramme_d_architecture.jpg[Schéma fonctionnel]
 
 ==== Description des blocs
 
-===== BLOC ROBOT
-Ce bloc inclut trois modules relatifs au fonctionnement et à l'allure du robot.
+===== BLOC APPLICATION ANDROÏD (1)
 
-Système embarqué : ce module s'occupe de la stratégie de déplacement adoptée par le robot (mise en mouvement, trajectoire du robot, de quelle manière est-ce qu'il balaye la pièce), ainsi que du ramassage éventuel des déchets.
-
-Analyse d'image : ce module s'occupe du repérage des déchets au sol et de la distinction du type de déchet.
-
-Conception visuelle : ce module englobe l'allure générale du robot (impression 3D de la coque) et l'interaction avec l'élève (accessoires lumineux et sonores) afin qu'elle soit attractive pour l'enfant.
-
-===== BLOC UTILISATEUR
 Application Android : ce module s'occupe de la conception de l'application Android permettant aux professeurs d'avoir accès aux statistiques individuelles (sur chaque élève) et globales liées à l'utilisation du robot.
 
-===== BLOC QR CODE
-Le module "QR code" permet au robot, via une caméra et un bracelet QR code, de connaître l'identité de l'élève l'ayant aidé à jeter un déchet (afin de mettre à jour les statistiques individuelles de l'élève disponibles via l'application).
+===== BLOC RECONNAISSANCE DE DECHETS (2)
 
-===== BLOC SERVEUR ET BDD
-Le module "Bloc serveur et BDD" s'occupe de centraliser et analyser les données.
+Ce module s'occupe du repérage des déchets au sol et de la distinction du type de déchet, se faisant par analyse d'image.
+
+===== BLOC COMMUNICATION CLIENT-SERVEUR (3)
+
+Ce module s'occupe de toutes les communications entre l'application, la base de donnée interne au serveur et les différents blocs du robots. On intègre également dans ce module la gestion des statistiques.
+
+===== BLOC INDENTIFICATION PAR BRACELET (4)
+
+Ce module permet une identification de chaque enfant par le robot à l'aide d'un bracelet muni de symboles et/ou de motifs. La reconnaissance du bracelet se fait via la caméra du robot et de la reconnaissance d'image.
+
+===== BLOC CONCEPTION VISUELLE ET INTERACTION (5)
+
+Ce module englobe l'allure générale du robot (impression 3D de la coque) et l'interaction avec l'élève (accessoires lumineux et sonores) afin qu'elle soit attractive pour l'enfant.
+
+===== BLOC SLAM (6)
+
+Ce module s'occupe de la stratégie de déplacement adoptée par le robot (mise en mouvement, trajectoire du robot, de quelle manière est-ce qu'il balaye la pièce), ainsi que du ramassage éventuel des déchets.
