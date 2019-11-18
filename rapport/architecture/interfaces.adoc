@@ -52,7 +52,7 @@ entre deux blocs électroniques, c’est une description des signaux +
 ==== InterfaceBloc3-6
 
 (3 -> 6)
-- incation sur la nature des objets présents sur la photo transmise précédemment par le robot
+- indication sur la nature des objets présents sur la photo transmise précédemment par le robot
 
 (6 -> 3)
 - transmission des photos de l'environnement du robot pour analyse
