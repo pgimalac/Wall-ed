@@ -17,40 +17,51 @@ entre deux blocs électroniques, c’est une description des signaux +
 électroniques. Etc.
 ////
 
-==== InterfaceBloc1-2
+==== InterfaceBloc1-3
 
-Ajout des utilisateurs sur l'application en scannant les QR codes des bracelets des enfants.
+(1 -> 3)
+- initialisation de la base de données des enfants
+- requête des statistiques
+- gestion de l'activité (modes du robot)
+
+(3 -> 1)
+- envoi des statistiques analysées de la BDD
+- transmission des bracelets des enfants à associer, pour l'initialisation de la bdd
+- données d'activité du robot et de son état de fonctionnement (batterie, mode)
 
 ==== InterfaceBloc2-3
 
-A chaque fois qu'un enfant ramasse un déchet, il s'identifie auprès du robot qui lui scanne son QR code.
+(2 -> 3)
+- information sur la nature de l'objet se trouvant sur la photo traitée
 
-==== InterfaceBloc1-7
+(3 -> 2)
+- transmission de l'image fournie par le robot
 
-(APPLICATION -> SERVEUR)
-- initialisation de la base de données des enfants
-- requête des statistiques
+==== InterfaceBloc3-5
 
-(SERVEUR -> APPLICATION)
-- envoi des statistiques de la BDD
-
-==== InterfaceBloc3-7
-
-(ROBOT -> SERVEUR)
-- envoi des données brutes sur les interactions avec les enfants et les déchets trouvés
-
-==== InterfaceBloc1-3
-
-(APPLICATION -> ROBOT)
+(3 -> 5)
+- information sur la nature de l'objet transmis
+- transmission de la base de donnée de la classe
 - gestion des activités (modes du robot)
 
-(ROBOT -> APPLICATION)
-- données d'activité, information sur l'état de fonctionnement (batterie, mode, ...)
+(5 -> 3)
+- données brutes sur l'état de l'activité (intéractions, déchets trouvés, ...)
+- données d'activité du robot et de son état de fonctionnement (batterie, mode)
+- transmission des bracelets des enfants à associer, pour l'initialisation de la bdd
+
+==== InterfaceBloc3-6
+
+(3 -> 6)
+- incation sur la nature des objets présents sur la photo transmise précédemment par le robot
+
+(6 -> 3)
+- transmission des photos de l'environnement du robot pour analyse
 
 ==== InterfaceBloc4-5
 
-Reconnaissance des déchets
+(4 -> 5)
+- transmission des bracelets des enfants à associer, pour l'initialisation de la bdd
+- transmission du nom de l'enfant en intéraction avec le robot (celui qui ramasse le déchet)
 
-==== InterfaceBloc4-6
-
-Communique l'action visuelle et sonore à faire
+(5 -> 4)
+- transmission de la base de donnée finale des enfants
