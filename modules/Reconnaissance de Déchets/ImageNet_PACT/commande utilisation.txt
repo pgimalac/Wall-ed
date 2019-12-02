@@ -1,0 +1,6 @@
+﻿python3 ImageNet_PACT/label_image.py \
+--graph=$HOME/ImageNet_PACT/output_graph.pb \
+--labels=$HOME/ImageNet_PACT/output_labels.txt \
+--input_layer=Placeholder \
+--output_layer=final_result \
+--image=$HOME/Downloads/coca.jpg
