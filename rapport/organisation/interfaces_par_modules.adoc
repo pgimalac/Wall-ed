@@ -1,0 +1,27 @@
+(1)Application Android
+-méthode d'initialisation de la BDD
+-restitution des statistiques
+-afficher les infos des bracelets
+
+(2)Reconnaissance de déchets
+-liste des objets sur l'image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
+
+(3)Client-Serveur
+-initialisation de la BDD & association des bracelets
+-réception/envoi de statistiques (pour l'application)
+-analyse des statistiques
+-transmission Robot(image)/Serveur(reconnaissance de déchets)
+-envoi de la BDD de la classe
+-séléction aléatoire de noms (à envoyer au robot pendant l'activité)
+
+(4)Bracelets
+-reconnaître un bracelet
+
+(5)Conception visuelle
+-code interprétant l'information "type du déchet" provenant de la BDD et interaction avec l'enfant
+-(à l'initialisation) réception de la BDD de la classe & transmission des bracelets
+-envoi des données d'activité (nom de l'enfant, bon/mauvais déchet,...)
+
+(6)SLAM
+-transmission de l'image (BDD & module interaction)
+-navigation (envoi & réception)
