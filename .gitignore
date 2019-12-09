@@ -19,3 +19,5 @@ _book
 
 *.html
 *.xml
+
+modules/Android/Wall-Ed/app/build/*
