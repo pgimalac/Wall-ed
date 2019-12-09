@@ -1,7 +1,10 @@
 (1)Application Android
--méthode d'initialisation de la BDD<\n>
+-méthode d'initialisation de la BDD
+
 -restitution des statistiques
+
 -afficher les infos des bracelets
+
 
 (2)Reconnaissance de déchets
 -liste des objets sur l'image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
