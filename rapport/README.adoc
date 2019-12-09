@@ -91,6 +91,8 @@ include::organisation/planification.adoc[Diagramme de planification temporel des
 
 include::organisation/repartition.adoc[Répartition des élèves par module]
 
+include::organisation/interfaces_par_modules.adoc[Définition des interfaces par module]
+
 include::organisation/plan-tests.adoc[Plans de test (PAN2+)]
 
 <<<
