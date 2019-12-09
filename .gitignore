@@ -21,3 +21,4 @@ _book
 *.xml
 
 modules/Android/Wall-Ed/app/build/*
+modules/Android/Wall-Ed/.gradle/*
