@@ -1,6 +1,6 @@
 === Définition des interfaces par module
 
-==== (1)Application Android
+==== Application Android
 
 -méthode d'initialisation de la BDD
 
@@ -9,12 +9,12 @@
 -afficher les infos des bracelets
 
 
-==== (2)Reconnaissance de déchets
+==== Reconnaissance de déchets
 
 -liste des objets sur l'image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
 
 
-==== (3)Client-Serveur
+==== Client-Serveur
 
 -initialisation de la BDD & association des bracelets
 
@@ -29,12 +29,12 @@
 -séléction aléatoire de noms (à envoyer au robot pendant l'activité)
 
 
-==== (4)Bracelets
+==== Bracelets
 
 -reconnaître un bracelet
 
 
-==== (5)Conception visuelle
+==== Conception visuelle
 
 -code interprétant l'information "type du déchet" provenant de la BDD et interaction avec l'enfant
 
@@ -43,7 +43,7 @@
 -envoi des données d'activité (nom de l'enfant, bon/mauvais déchet,...)
 
 
-==== (6)SLAM
+==== SLAM
 
 -transmission de l'image (BDD & module interaction)
 
