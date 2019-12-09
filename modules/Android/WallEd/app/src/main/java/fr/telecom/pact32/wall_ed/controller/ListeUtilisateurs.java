@@ -1,16 +1,11 @@
 package fr.telecom.pact32.wall_ed.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 import fr.telecom.pact32.wall_ed.R;
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
@@ -20,7 +15,6 @@ public class ListeUtilisateurs extends AppCompatActivity implements View.OnClick
 
     private Button mBtNewUser;
     private ListView mListeUtilisateurs;
-    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +24,6 @@ public class ListeUtilisateurs extends AppCompatActivity implements View.OnClick
 
         mBtNewUser = (Button) findViewById(R.id.ListeUtilisateurs_BtNewUser);
         mBtNewUser.setOnClickListener(this);
-
-        mPreferences = getPreferences(MODE_PRIVATE);
-        •Set<String> set = mPreferences.getStringSet("key", null);
 
         mListeUtilisateurs = (ListView) findViewById(R.id.ListeUtilisateurs_ListUsers);
         Utilisateur utilisateur1 = new Utilisateur("Lucas D", "H");
