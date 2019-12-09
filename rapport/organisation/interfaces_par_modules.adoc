@@ -1,5 +1,5 @@
 (1)Application Android
--méthode d'initialisation de la BDD
+-méthode d'initialisation de la BDD\n
 -restitution des statistiques
 -afficher les infos des bracelets
 
