@@ -10,6 +10,10 @@ import numpy as np
 def main():
     if not verif_image(image):
         return "mauvais format"
+    composantes = HashCreation()
+    for i in range(1,a):
+
+        for j in range(1,b):
 
 
 def verif_image(ima):
@@ -19,6 +23,10 @@ def verif_image(ima):
             if not (val == 1 or val == 0):
                 return False
     return True
+
+def numPrecedent(table, pixel):
+    (i, j) = pixel
+    return [HashRecup(table, (i-1,j)), HashRecup(table, (i, j-1))]
 
 def HashCreation():
     return []
