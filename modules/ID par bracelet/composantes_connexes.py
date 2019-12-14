@@ -5,16 +5,61 @@ image : tableau de 0 et 1
 
 import numpy as np
 
-(a, b) = image.shape()
+## MAIN
+
+#(a, b) = image.shape()
 
 def main():
     if not verif_image(image):
         return "mauvais format"
     composantes = HashCreation()
+    etiquette = 0
+    correspondances = [0]
     for i in range(1,a):
-
         for j in range(1,b):
+            if image[i,j] == 1:
+                etiquettesPrec = numsPrecedent(composantes, (i,j))
+                long = len(etiquettesPrec)
+                if long == 0:
+                    HashAjout(composantes, (i,j), etiquette)
+                    etiquette += 1
+                    correspondances.append(etiquette)
+                elif long == 1:
+                    HashAjout(composantes, (i,j), etiquettesPrec[0])
+                else:
+                    num1 = etiquettesPrec[0]
+                    num2 = etiquettesPrec[1]
+                    HashAjout(composantes, (i,j), num1)
+                    if num1 > num2:
+                        correspondances[num1] = num2
+                    else:
+                        correspondances[num2] = num1
+    triCorrespondances(correspondances)
+    #for elem in composantes:
 
+## FONCTIONS
+
+def triCorrespondances(tab):
+    for k in range(len(tab)):
+        temp = tab[k]
+        tab[k] = tab[temp]
+    k = 1
+    while k < len(tab):
+        continu = True
+        if k == len(tab) - 1:
+            continu = False
+        val = tab[k]
+        valinf = tab[k-1]
+        if val > valinf:
+            tab[k] = valinf + 1
+        while continu:
+            k += 1
+            if tab[k] == val:
+                tab[k] = valinf + 1
+            else:
+                continu = False
+        if k == len(tab) - 1:
+            break
 
 def verif_image(ima):
     for i in range(a):
@@ -24,9 +69,18 @@ def verif_image(ima):
                 return False
     return True
 
-def numPrecedent(table, pixel):
+def numsPrecedent(table, pixel):
     (i, j) = pixel
-    return [HashRecup(table, (i-1,j)), HashRecup(table, (i, j-1))]
+    res = []
+    if i > 0 and image[i-1,j] == 1:
+        res.append(HashRecup(table, (i-1,j)))
+    if j > 0 and image[i,j-1] == 1:
+        res.append(HashRecup(table, (i, j-1)))
+    return res
+
+## TABLE DE HASHAGE
+
+# pas vraiment une table de hashage
 
 def HashCreation():
     return []
