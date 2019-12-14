@@ -7,7 +7,7 @@ import numpy as np
 
 ## MAIN
 
-#(a, b) = image.shape()
+(a,b) = np.shape(image)
 
 def main():
     if not verif_image(image):
@@ -15,8 +15,8 @@ def main():
     composantes = HashCreation()
     etiquette = 0
     correspondances = [0]
-    for i in range(1,a):
-        for j in range(1,b):
+    for i in range(a):
+        for j in range(b):
             if image[i,j] == 1:
                 etiquettesPrec = numsPrecedent(composantes, (i,j))
                 long = len(etiquettesPrec)
@@ -32,10 +32,17 @@ def main():
                     HashAjout(composantes, (i,j), num1)
                     if num1 > num2:
                         correspondances[num1] = num2
+                    elif num1 == num2:
+                        None
                     else:
                         correspondances[num2] = num1
     triCorrespondances(correspondances)
-    #for elem in composantes:
+    for elem in composantes:
+        elem[1] = correspondances[elem[1]]
+    for i in range(a):
+        for j in range(b):
+            if image[i,j] == 1:
+                image[i,j] = HashRecup(composantes, (i,j)) + 1
 
 ## FONCTIONS
 
@@ -46,20 +53,18 @@ def triCorrespondances(tab):
     k = 1
     while k < len(tab):
         continu = True
-        if k == len(tab) - 1:
-            continu = False
         val = tab[k]
         valinf = tab[k-1]
         if val > valinf:
             tab[k] = valinf + 1
+        if k == len(tab) - 1:
+            break
         while continu:
             k += 1
             if tab[k] == val:
                 tab[k] = valinf + 1
             else:
                 continu = False
-        if k == len(tab) - 1:
-            break
 
 def verif_image(ima):
     for i in range(a):
