@@ -18,7 +18,6 @@ _book
 .*.swp
 
 *.html
-*.xml
 
 modules/Android/Wall-Ed/app/build/*
 modules/Android/Wall-Ed/.gradle/*
