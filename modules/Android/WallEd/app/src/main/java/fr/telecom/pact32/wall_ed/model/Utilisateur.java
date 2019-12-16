@@ -6,12 +6,22 @@ import java.io.Serializable;
 
 public class Utilisateur implements Serializable {
 
+    private String prenom;
     private String nom;
-    private String sexe;
+    private String classe;
 
-    public Utilisateur(String nom, String sexe) {
+    public Utilisateur(String prenom, String nom, String classe) {
+        this.prenom = prenom;
         this.nom = nom;
-        this.sexe = sexe;
+        this.classe = classe;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     public String getNom() {
@@ -22,17 +32,16 @@ public class Utilisateur implements Serializable {
         this.nom = nom;
     }
 
-    public String getSexe() {
-        return sexe;
+    public String getClasse() {
+        return classe;
     }
 
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 
     @Override
     public String toString() {
-        return nom + " (" + sexe + ")";
+        return prenom + " " + nom + " (" + classe + ")";
     }
-
 }

@@ -1,6 +1,8 @@
 package fr.telecom.pact32.wall_ed.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -26,8 +28,8 @@ public class ListeUtilisateurs extends AppCompatActivity implements View.OnClick
         mBtNewUser.setOnClickListener(this);
 
         mListeUtilisateurs = (ListView) findViewById(R.id.ListeUtilisateurs_ListUsers);
-        Utilisateur utilisateur1 = new Utilisateur("Lucas D", "H");
-        Utilisateur utilisateur2 = new Utilisateur("Sophie M", "F");
+        Utilisateur utilisateur1 = new Utilisateur("Lucas", "Dujardin", "CP3");
+        Utilisateur utilisateur2 = new Utilisateur("Sophie", "Verdier", "CP3");
         Utilisateur[] utilisateurs = new Utilisateur[]{utilisateur1, utilisateur2};
         ArrayAdapter<Utilisateur> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, utilisateurs);
         mListeUtilisateurs.setAdapter(arrayAdapter);
@@ -36,7 +38,8 @@ public class ListeUtilisateurs extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = new Intent(ListeUtilisateurs.this, AjoutUtilisateur.class);
+        startActivity(intent);
     }
 
 }
