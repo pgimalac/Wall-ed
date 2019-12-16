@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".controller.MainActivity"></activity>
         <activity android:name=".controller.ListeUtilisateurs" />
-        <activity android:name=".controller.AjoutUtilisateur" />
-        <activity android:name=".controller.MainActivity">
+        <activity android:name=".controller.AjoutUtilisateur" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
