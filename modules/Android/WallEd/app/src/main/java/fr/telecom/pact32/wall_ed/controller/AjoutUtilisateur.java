@@ -1,6 +1,8 @@
 package fr.telecom.pact32.wall_ed.controller;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -30,6 +32,23 @@ public class AjoutUtilisateur extends AppCompatActivity {
         classeInput = (EditText) findViewById(R.id.classe_txt);
         okEnregistrer = (Button) findViewById(R.id.enregistrement_button);
         prendrePhoto = (ImageButton) findViewById(R.id.imageButton3);
+
+        okEnregistrer.setEnabled(false); //désactive le bouton de l'interface tant que l'utilisateur n'a pas rempli les infos
+
+        prenomInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+
 
     }
 }
