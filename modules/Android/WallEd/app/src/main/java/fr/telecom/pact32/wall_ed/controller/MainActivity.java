@@ -2,7 +2,6 @@ package fr.telecom.pact32.wall_ed.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -35,4 +34,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(MainActivity.this, ListeUtilisateurs.class);
         startActivity(intent);
     }
+
 }

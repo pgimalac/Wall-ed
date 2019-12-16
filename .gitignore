@@ -34,3 +34,5 @@ modules/Android/WallEd/app/build/*
 modules/Android/WallEd/app/app.iml
 modules/Android/WallEd/app/build.gradle
 modules/Android/WallEd/app/proguard-rules.pro
+modules/Android/WallEd/app/src/androidTest/*
+modules/Android/WallEd/app/src/test/*
