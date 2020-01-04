@@ -7,42 +7,47 @@ import numpy as np
 
 ## MAIN
 
-(a,b) = np.shape(image)
+(a,b) = np.shape(img)
 
 def main():
-    if not verif_image(image):
-        return "mauvais format"
-    composantes = HashCreation()
-    etiquette = 0
-    correspondances = [0]
+    inversionImage(img)
+    determinationComposantes(img)
+
+# renvoie le numéro de la plus grande composante connexe de l'inverse de l'image, donc l'intérieur du cadre
+def determineInterieurCadre(image):
+    composantes = [0]
     for i in range(a):
         for j in range(b):
-            if image[i,j] == 1:
-                etiquettesPrec = numsPrecedent(composantes, (i,j))
-                long = len(etiquettesPrec)
-                if long == 0:
-                    HashAjout(composantes, (i,j), etiquette)
-                    etiquette += 1
-                    correspondances.append(etiquette)
-                elif long == 1:
-                    HashAjout(composantes, (i,j), etiquettesPrec[0])
-                else:
-                    num1 = etiquettesPrec[0]
-                    num2 = etiquettesPrec[1]
-                    HashAjout(composantes, (i,j), num1)
-                    if num1 > num2:
-                        correspondances[num1] = num2
-                    elif num1 == num2:
-                        None
-                    else:
-                        correspondances[num2] = num1
-    triCorrespondances(correspondances)
+            if image[i,j] not in composantes:
+                composantes.append(image[i,j])
+    composantesBord = [0]
+    for i in range(a):
+        if image[i,0] not in composantesBord:
+            composantesBord.append(image[i,0])
+        if image[i,b-1] not in composantesBord:
+            composantesBord.append(image[i,b-1])
+    for j in range(b):
+        if image[0,j] not in composantesBord:
+            composantesBord.append(image[0,j])
+        if image[a-1,j] not in composantesBord:
+            composantesBord.append(image[a-1,j])
+    tailleComposantesPasBord = HashCreation()
     for elem in composantes:
-        elem[1] = correspondances[elem[1]]
+        if elem not in composantesBord:
+            HashAjout(tailleComposantesPasBord, elem, 0)
     for i in range(a):
         for j in range(b):
-            if image[i,j] == 1:
-                image[i,j] = HashRecup(composantes, (i,j)) + 1
+            pixel = image[i,j]
+            if HashExiste(tailleComposantesPasBord, pixel):
+                newVal = HashRecup(tailleComposantesPasBord, pixel) + 1
+                HashModif(tailleComposantesPasBord, pixel, newVal)
+    max = 0
+    plusGrandeComposante = -1
+    for couple in tailleComposantesPasBord:
+        if couple[1] > max:
+            max = couple[1]
+            plusGrandeComposante = couple[0]
+    return plusGrandeComposante
 
 ## FONCTIONS
 
@@ -83,9 +88,47 @@ def numsPrecedent(table, pixel):
         res.append(HashRecup(table, (i, j-1)))
     return res
 
-## TABLE DE HASHAGE
+def inversionImage(image):
+    for i in range(a):
+        for j in range(b):
+            image[i,j] = (image[i,j] + 1)%2
 
-# pas vraiment une table de hashage
+def determinationComposantes(image):
+    if not verif_image(image):
+        return "mauvais format d'image"
+    composantes = HashCreation()
+    etiquette = 0
+    correspondances = [0]
+    for i in range(a):
+        for j in range(b):
+            if image[i,j] == 1:
+                etiquettesPrec = numsPrecedent(composantes, (i,j))
+                long = len(etiquettesPrec)
+                if long == 0:
+                    HashAjout(composantes, (i,j), etiquette)
+                    etiquette += 1
+                    correspondances.append(etiquette)
+                elif long == 1:
+                    HashAjout(composantes, (i,j), etiquettesPrec[0])
+                else:
+                    num1 = etiquettesPrec[0]
+                    num2 = etiquettesPrec[1]
+                    HashAjout(composantes, (i,j), num1)
+                    if num1 > num2:
+                        correspondances[num1] = num2
+                    elif num1 == num2:
+                        None
+                    else:
+                        correspondances[num2] = num1
+    triCorrespondances(correspondances)
+    for elem in composantes:
+        elem[1] = correspondances[elem[1]]
+    for i in range(a):
+        for j in range(b):
+            if image[i,j] == 1:
+                image[i,j] = HashRecup(composantes, (i,j)) + 1
+
+## Dictionnaire
 
 def HashCreation():
     return []
