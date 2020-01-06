@@ -7,13 +7,14 @@ import numpy as np
 
 ## MAIN
 
-(a,b) = np.shape(img)
-
-def main():
+def main(img):
+    (a,b) = np.shape(img)
     inversionImage(img)
     determinationComposantes(img)
+    interieur = determineInterieurCadre(img)
+    return (img,interieur)
 
-# renvoie le numéro de la plus grande composante connexe de l'inverse de l'image, donc l'intérieur du cadre
+# renvoie le numéro de la plus grande composante connexe de l'inverse de l'image qui ne touche pas le bord, donc l'intérieur du cadre
 def determineInterieurCadre(image):
     composantes = [0]
     for i in range(a):
@@ -72,6 +73,7 @@ def triCorrespondances(tab):
                 continu = False
 
 def verif_image(ima):
+    (a,b) = np.shape(ima)
     for i in range(a):
         for j in range(b):
             val = image[i,j]
@@ -89,11 +91,13 @@ def numsPrecedent(table, pixel):
     return res
 
 def inversionImage(image):
+    (a,b) = np.shape(image)
     for i in range(a):
         for j in range(b):
             image[i,j] = (image[i,j] + 1)%2
 
 def determinationComposantes(image):
+    (a,b) = np.shape(image)
     if not verif_image(image):
         return "mauvais format d'image"
     composantes = HashCreation()
