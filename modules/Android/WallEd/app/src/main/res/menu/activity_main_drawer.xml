@@ -7,21 +7,21 @@
         <menu>
             <item
                 android:id="@+id/nav_users"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_list"
                 android:title="Liste des utilisateurs" />
             <item
                 android:id="@+id/nav_add_user"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_menu_add_user"
                 android:title="Ajout d'utilisateur" />
         </menu>
-        <item
-            android:id="@+id/nav_stats"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Statistiques" />
-        <item
-            android:id="@+id/nav_params"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Paramètres" />
     </item>
+    <item
+        android:id="@+id/nav_statistiques"
+        android:icon="@drawable/ic_menu_stats"
+        android:title="Statistiques" />
+    <item
+        android:id="@+id/nav_params"
+        android:icon="@drawable/ic_menu_params"
+        android:title="Paramètres" />
 
 </menu>
