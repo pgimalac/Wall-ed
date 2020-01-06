@@ -9,13 +9,8 @@ import cv2
 import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
-import colorsys
 
 
-def convertToHSI(img):
-    image = Image.open(img)
-    ImageTab = np.array(image)
-    return cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
     
 def seuillageGris(img, seuil):
     image = Image.open(img)
