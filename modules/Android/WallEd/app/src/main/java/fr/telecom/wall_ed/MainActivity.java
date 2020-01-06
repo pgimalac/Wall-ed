@@ -4,6 +4,9 @@ package fr.telecom.wall_ed;
 
 import android.os.Bundle;
 
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 
@@ -72,12 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Fragment possessionsFragment = new PossessionsFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, possessionsFragment)
-                        .addToBackStack(null).commit();
-                break;
-            case R.id.menu_accounts:
-                Fragment accountsFragment = new AccountsFragment();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.main_frame_layout, accountsFragment)
                         .addToBackStack(null).commit();
                 break;
         }
