@@ -1,4 +1,4 @@
-package fr.telecom.pact32.wall_ed.controller;
+package fr.telecom.wall_ed.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import fr.telecom.pact32.wall_ed.R;
+import fr.telecom.wall_ed.R;
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
 
 

@@ -1,4 +1,4 @@
-package fr.telecom.pact32.wall_ed.controller;
+package fr.telecom.wall_ed.controller;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import fr.telecom.pact32.wall_ed.R;
+import fr.telecom.wall_ed.R;
 
 public class AjoutUtilisateur extends AppCompatActivity {
 
