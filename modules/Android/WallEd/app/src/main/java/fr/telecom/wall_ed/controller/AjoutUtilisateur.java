@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed.controller;
+/*package fr.telecom.wall_ed.controller;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -51,4 +51,4 @@ public class AjoutUtilisateur extends AppCompatActivity {
 
 
     }
-}
+}*/

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/menu_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,30 +15,28 @@
 
         <TextView
             android:id="@+id/bienvenue_txt"
-            android:layout_width="374dp"
-            android:layout_height="131dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:background="#0E64A7"
             android:gravity="center"
             android:text="Bienvenue dans Wall-Ed"
             android:textColor="#FCFBFB"
-            android:textSize="50dp"/>
+            android:textSize="35dp"/>
 
         <ImageView
             android:id="@+id/logo_imageView"
             android:layout_width="417dp"
-            android:layout_height="436dp"
+            android:layout_height="400dp"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="124dp"
             app:srcCompat="@drawable/logo" />
 
         <Button
             android:id="@+id/demarrer_button"
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"

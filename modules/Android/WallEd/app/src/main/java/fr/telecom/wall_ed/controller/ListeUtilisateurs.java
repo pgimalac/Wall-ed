@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed.controller;
+/*package fr.telecom.wall_ed.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,4 +42,4 @@ public class ListeUtilisateurs extends AppCompatActivity implements View.OnClick
         startActivity(intent);
     }
 
-}
+}*/

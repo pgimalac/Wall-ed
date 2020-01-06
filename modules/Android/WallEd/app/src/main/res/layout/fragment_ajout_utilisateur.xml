@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AjoutUtilisateurFragment">
 
 
@@ -89,11 +90,6 @@
             android:paddingRight="0dp"
             android:paddingBottom="0dp"
             android:scaleType="centerInside"
-            app:layout_constraintBottom_toTopOf="@+id/enregistrement_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/classe_txt"
             app:srcCompat="@drawable/appareil_photo_2" />
 
     </LinearLayout>

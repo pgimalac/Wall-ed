@@ -1,7 +1,6 @@
 package fr.telecom.wall_ed;
 
 
-
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -23,8 +22,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import fr.telecom.wall_ed.controller.ListeUtilisateurs;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
@@ -41,9 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_users)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -68,15 +63,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         FragmentManager fragmentManager = getSupportFragmentManager();
         int id = item.getItemId();
 
         switch (id) {
             case R.id.nav_users:
-                Fragment listeUtilisateurs = new ListeUtilisateurs();
+                Fragment listeUtilisateurs = new UtilisateursFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, possessionsFragment)
+                        .replace(R.id.nav_host_fragment, listeUtilisateurs)
                         .addToBackStack(null).commit();
                 break;
         }
@@ -84,5 +78,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // ============================================================
+
+    @Override
+    public void onClick(View v) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        int viewId = v.getId();
+        switch (viewId){
+            case R.id.demarrer_button:
+                Fragment main = new MainFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.nav_host_fragment, main)
+                        .addToBackStack(null).commit();
+                break;
+        }
     }
 }
