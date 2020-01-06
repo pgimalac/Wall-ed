@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import fr.telecom.wall_ed.controller.ListeUtilisateurs;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -72,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.menu_possessions:
-                Fragment possessionsFragment = new PossessionsFragment();
+            case R.id.nav_users:
+                Fragment listeUtilisateurs = new ListeUtilisateurs();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.main_frame_layout, possessionsFragment)
+                        .replace(R.id.nav_host_fragment, possessionsFragment)
                         .addToBackStack(null).commit();
                 break;
         }
