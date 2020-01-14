@@ -6,10 +6,7 @@ import android.os.Bundle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -96,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+
     // ==================== CLICK ====================
 
     @Override
@@ -108,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
+            /*case R.id.enregistrement_button:
+                Toast.makeText(getApplicationContext(), , Toast.LENGTH_LONG).show();
+                break;*/
         }
     }
 
