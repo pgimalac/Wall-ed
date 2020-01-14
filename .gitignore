@@ -18,3 +18,15 @@ _book
 .*.swp
 
 *.html
+
+modules/Android/Wall-Ed/*
+modules/Android/WallEd/.idea/*
+modules/Android/WallEd/local.properties
+modules/Android/WallEd/settings.gradle
+modules/Android/WallEd/Wall-Ed.iml
+modules/Android/WallEd/app/build/*
+modules/Android/WallEd/app/app.iml
+modules/Android/WallEd/app/proguard-rules.pro
+modules/Android/WallEd/app/src/androidTest/*
+modules/Android/WallEd/app/src/test/*
+modules/Android/WallEd/.gradle
