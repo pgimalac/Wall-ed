@@ -1,6 +1,7 @@
 package fr.telecom.wall_ed;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,7 +19,7 @@ import android.widget.ListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UtilisateursFragment extends Fragment   {
+public class UtilisateursFragment extends Fragment  {
 
     ListView mListView ;
     private Button mBtNewUser;
@@ -41,12 +42,19 @@ public class UtilisateursFragment extends Fragment   {
         super.onCreate(savedInstanceState);
         View result = inflater.inflate(R.layout.fragment_main, container, false);
         mListView = (ListView) result.findViewById(R.id.listViewUtilisateurs);
-
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity(),
-                android.R.layout.simple_list_item_1, prenoms);
-        mListView.setAdapter(adapter);
         return result;
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity(),
+                android.R.layout.simple_list_item_1, prenoms);
+
+        mListView.setAdapter(adapter);
+
+    }
+
 
 }
 
