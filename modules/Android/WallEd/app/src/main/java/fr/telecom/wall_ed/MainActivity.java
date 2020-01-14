@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_users)
@@ -67,14 +69,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int id = item.getItemId();
-
         switch (id) {
-            case R.id.nav_users:
+            case R.id.menu_users:
                 Fragment listeUtilisateurs = new UtilisateursFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, listeUtilisateurs)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.menu_add_user:
+                Fragment ajoutUtilisateurFragment = new AjoutUtilisateurFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, ajoutUtilisateurFragment)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.menu_statistiques:
+                Fragment statistiques_globales = new Statistiques_globales();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, statistiques_globales)
                         .addToBackStack(null).commit();
                 break;
         }
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    // ============================================================
+    // ==================== CLICK ====================
 
     @Override
     public void onClick(View v) {

@@ -6,21 +6,21 @@
     <item android:title="Utilisateurs">
         <menu>
             <item
-                android:id="@+id/nav_users"
+                android:id="@+id/menu_users"
                 android:icon="@drawable/ic_menu_list"
                 android:title="Liste des utilisateurs" />
             <item
-                android:id="@+id/nav_add_user"
+                android:id="@+id/menu_add_user"
                 android:icon="@drawable/ic_menu_add_user"
                 android:title="Ajout d'utilisateur" />
         </menu>
     </item>
     <item
-        android:id="@+id/nav_statistiques"
+        android:id="@+id/menu_statistiques"
         android:icon="@drawable/ic_menu_stats"
         android:title="Statistiques" />
     <item
-        android:id="@+id/nav_params"
+        android:id="@+id/menu_params"
         android:icon="@drawable/ic_menu_params"
         android:title="Paramètres" />
 
