@@ -25,6 +25,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    private FragmentManager fragmentManager;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -41,11 +42,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_users)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
 
-
+        MainFragment mainFragment = new MainFragment();
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_frame_layout, mainFragment)
+                .addToBackStack(null).commit();
     }
 
     @Override
@@ -55,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
-    }
+    }*/
 
     // ==================== MENU ====================
 
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_users:
                 Fragment listeUtilisateurs = new UtilisateursFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, listeUtilisateurs)
+                        .replace(R.id.main_frame_layout, listeUtilisateurs)
                         .addToBackStack(null).commit();
                 break;
         }
@@ -86,18 +88,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onClick(View v) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int viewId = v.getId();
         switch (viewId){
             case R.id.demarrer_button:
                 Fragment utilisateursFragment = new UtilisateursFragment();
-                /*fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, utilisateursFragment)
-                        .addToBackStack(null).commit();*/
                 fragmentManager.beginTransaction()
-                        .add(R.id.nav_host_fragment, utilisateursFragment)
-                        .addToBackStack("")
-                        .commit();
+                        .replace(R.id.main_frame_layout, utilisateursFragment)
+                        .addToBackStack(null).commit();
                 break;
         }
     }
