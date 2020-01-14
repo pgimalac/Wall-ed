@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/menu_main">
+    app:startDestination="@+id/nav_main">
 
     <fragment
-        android:id="@+id/menu_main"
+        android:id="@+id/nav_main"
         android:name="fr.telecom.wall_ed.MainFragment"
         tools:layout="@layout/fragment_main" />
 
@@ -15,5 +15,15 @@
         android:id="@+id/nav_users"
         android:name="fr.telecom.wall_ed.UtilisateursFragment"
         tools:layout="@layout/fragment_utilisateurs" />
+
+    <fragment
+        android:id="@+id/nav_add_user"
+        android:name="fr.telecom.wall_ed.AjoutUtilisateurFragment"
+        tools:layout="@layout/fragment_ajout_utilisateur" />
+
+    <fragment
+        android:id="@+id/nav_statistiques"
+        android:name="fr.telecom.wall_ed.Statistiques_globales"
+        tools:layout="@layout/fragment_statistiques_globales4" />
 
 </navigation>

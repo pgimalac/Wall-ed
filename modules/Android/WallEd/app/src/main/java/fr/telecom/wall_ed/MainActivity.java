@@ -25,6 +25,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    private FragmentManager fragmentManager;
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -36,16 +37,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_users)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
 
-
+        MainFragment mainFragment = new MainFragment();
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_frame_layout, mainFragment)
+                .addToBackStack(null).commit();
     }
 
     @Override
@@ -55,24 +59,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
-    }
+    }*/
 
     // ==================== MENU ====================
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int id = item.getItemId();
-
         switch (id) {
-            case R.id.nav_users:
+            case R.id.menu_users:
                 Fragment listeUtilisateurs = new UtilisateursFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, listeUtilisateurs)
+                        .replace(R.id.main_frame_layout, listeUtilisateurs)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.menu_add_user:
+                Fragment ajoutUtilisateurFragment = new AjoutUtilisateurFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, ajoutUtilisateurFragment)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.menu_statistiques:
+                Fragment statistiques_globales = new Statistiques_globales();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, statistiques_globales)
                         .addToBackStack(null).commit();
                 break;
         }
@@ -82,22 +96,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    // ============================================================
+    // ==================== CLICK ====================
 
     @Override
     public void onClick(View v) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         int viewId = v.getId();
         switch (viewId){
             case R.id.demarrer_button:
                 Fragment utilisateursFragment = new UtilisateursFragment();
-                /*fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, utilisateursFragment)
-                        .addToBackStack(null).commit();*/
                 fragmentManager.beginTransaction()
-                        .add(R.id.nav_host_fragment, utilisateursFragment)
-                        .addToBackStack("")
-                        .commit();
+                        .replace(R.id.main_frame_layout, utilisateursFragment)
+                        .addToBackStack(null).commit();
                 break;
         }
     }
