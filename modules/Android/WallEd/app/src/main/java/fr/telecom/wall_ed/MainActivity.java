@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override
@@ -88,11 +90,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int viewId = v.getId();
         switch (viewId){
             case R.id.demarrer_button:
-                Fragment main = new MainFragment();
+                Fragment utilisateursFragment = new UtilisateursFragment();
+                /*fragmentManager.beginTransaction()
+                        .replace(R.id.nav_host_fragment, utilisateursFragment)
+                        .addToBackStack(null).commit();*/
                 fragmentManager.beginTransaction()
-                        .replace(R.id.nav_host_fragment, main)
-                        .addToBackStack(null).commit();
+                        .add(R.id.nav_host_fragment, utilisateursFragment)
+                        .addToBackStack("")
+                        .commit();
                 break;
         }
     }
+
 }
