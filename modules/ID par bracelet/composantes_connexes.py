@@ -107,7 +107,7 @@ def determinationComposantes(image):
     for i in range(a):
         for j in range(b):
             if image[i,j] == 1:
-                etiquettesPrec = numsPrecedent(composantes, (i,j))
+                etiquettesPrec = numsPrecedent(composantes, (i,j),image)
                 long = len(etiquettesPrec)
                 if long == 0:
                     HashAjout(composantes, (i,j), etiquette)
