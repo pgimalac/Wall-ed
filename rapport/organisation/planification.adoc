@@ -50,12 +50,12 @@
 |Tâche |Qui |Quand |Fait |Remarques
 |Android | | | |
 |ID_par_bracelet | | | |
-|Reconnaissance de déchets | | | |
+|Reconnaissance de déchets | Nicolas, Victor | 09/01 | | cours vendredi 17/01 & rapport écrit
 |Communication_client-serveur | | | |
-|SLAM | | | |
+|SLAM | Romain, Pierre | 27/01 | |
 |Conception_visuelle-audio | | | |
 |SES | | | |
-|Intégration & Test | | | |
+|Intégration & Test | Pierre, Florian | 15/01 | | interfaces à préciser (concrétiser les attendus)
 |====
 
 ===== Modules
