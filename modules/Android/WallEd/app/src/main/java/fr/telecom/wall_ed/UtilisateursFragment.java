@@ -21,40 +21,30 @@ import android.widget.ListView;
  */
 public class UtilisateursFragment extends Fragment  {
 
-    ListView mListView ;
-    private Button mBtNewUser;
-    private ListView mListeUtilisateurs;
+    private ListView mListView ;
 
-    public UtilisateursFragment() {
-        // Required empty public constructor
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState) ;
+        View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false) ;
+        ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
+        setContentView(R.layout.fragment_utilisateurs);
+        return result ;
+
     }
 
-    private String[] prenoms = new String[]{
-            "Victor", "Pierre", "Nicolas", "Adrien", "Romain", "Florian",
-            "Lola"
-    };
 
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return View = inflater.inflate(R.layout.fragment_main, container, false); //permet de récupérer le layout principal du fragment
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity(),
-                android.R.layout.simple_list_item_1, prenoms);
-
-        mListView.setAdapter(adapter);
-
+        return inflater.inflate(R.layout.fragment_utilisateurs, container, false);
     }
 
 
 }
+
+
+ 
 
 
 
