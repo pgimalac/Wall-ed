@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
+import fr.telecom.pact32.wall_ed.model.Utilisateur;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,14 +31,22 @@ public class UtilisateursFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false);
         ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
-        return result ;
+
+        Utilisateur adrien = new Utilisateur("Adrien", "Maes le S", "CP", "id1");
+        Utilisateur nicolas = new Utilisateur("Nicolas", "Jow le beau", "CE1", "id2") ;
+
+        Utilisateur[] eleves = new Utilisateur[]{adrien, nicolas} ;
+
+        ArrayAdapter<Utilisateur> arrayAdapter = new ArrayAdapter<Utilisateur>(getContext(), android.R.layout.simple_list_item_1, eleves);
+
+        mlistView.setAdapter(arrayAdapter);
     }
 
 
 }
 
 
- 
+
 
 
 
