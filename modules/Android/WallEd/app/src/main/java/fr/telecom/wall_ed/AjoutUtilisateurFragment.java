@@ -33,8 +33,9 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_ajout_utilisateur, container, false);
         ajoutButton = result.findViewById(R.id.enregistrement_button);
+        ajoutButton.setOnClickListener(this);
         prenomEditText = result.findViewById(R.id.prenom_txt);
-        nomEditText = result.findViewById(R.id.Nom_txt);
+        nomEditText = result.findViewById(R.id.nom_txt);
         classeEditText = result.findViewById(R.id.classe_txt);
         return result;
     }
@@ -47,6 +48,9 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+        getActivity().getIntent().putExtra("firstName", prenomEditText.getText().toString());
+        getActivity().getIntent().putExtra("name", nomEditText.getText().toString());
+        getActivity().getIntent().putExtra("group", classeEditText.getText().toString());
         onClickListenerCallback.onClick(v);
     }
 
