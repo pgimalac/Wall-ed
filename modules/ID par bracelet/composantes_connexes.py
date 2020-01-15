@@ -7,8 +7,7 @@ import numpy as np
 
 ## MAIN
 
-def main(ima):
-    img = np.array(ima)
+def main(img):
     (a,b) = np.shape(img)
     inversionImage(img)
     determinationComposantes(img)
@@ -67,7 +66,7 @@ def triCorrespondances(tab):
             tab[k] = valinf + 1
         if k == len(tab) - 1:
             break
-        while continu:
+        while continu and k<len(tab):
             k += 1
             if tab[k] == val:
                 tab[k] = valinf + 1
