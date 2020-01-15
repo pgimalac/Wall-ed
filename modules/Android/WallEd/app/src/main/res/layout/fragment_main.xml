@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/bienvenue_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="#0E64A7"
+            android:gravity="center"
+            android:text="Bienvenue dans Wall-Ed"
+            android:textColor="#FCFBFB"
+            android:textSize="35dp"/>
+
+        <ImageView
+            android:id="@+id/logo_imageView"
+            android:layout_width="417dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="24dp"
+            app:srcCompat="@drawable/logo" />
+
+        <Button
+            android:id="@+id/demarrer_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="#040729"
+            android:text="C'est parti !"
+            android:textColor="#FCFBFB"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>
