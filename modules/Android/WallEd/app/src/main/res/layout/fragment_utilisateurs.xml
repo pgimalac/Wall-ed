@@ -35,13 +35,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="25dp"
-            >
+            ></ListView>
 
 
     </LinearLayout>
 
 
-
-
-
-</RelativeLayout>
