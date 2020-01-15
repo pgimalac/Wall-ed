@@ -22,13 +22,17 @@ def seuillageGris(img, seuil):
         for j in range(dim[1]):
             if imgHSV[i][j][2] < seuil:
                 imgHSV[i][j][2] = 0
+                res[i,j] =  1
             else :
                 imgHSV[i][j][2] = 255
                 imgHSV[i][j][1] = 0
-                res[i,j] =  1
+                
     img2 = cv2.cvtColor(imgHSV, cv2.COLOR_HSV2RGB)
+    plt.imshow(img2)
+    plt.show()
     return res
 
-#resultat = seuillageGris("dechet-menager.jpg", 220)
+resultat = seuillageGris("cadre.png", 220)
+
 #plt.imshow(resultat)
 #plt.show()
