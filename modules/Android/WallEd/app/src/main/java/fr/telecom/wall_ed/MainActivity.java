@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .addToBackStack(null).commit();
 
         mPrefs = getPreferences(MODE_PRIVATE);
+        loadUsers();
     }
 
     @Override
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         mUsers.add(user);
         this.saveUsers();
+    }
+
+    public ArrayList<Utilisateur> getUsers(){
+        return mUsers;
     }
 
     // ==================== MENU ====================
