@@ -25,19 +25,13 @@ public class UtilisateursFragment extends Fragment  {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState) ;
-        View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false) ;
-        ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
-        setContentView(R.layout.fragment_utilisateurs);
-        return result ;
-
     }
-
-
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_utilisateurs, container, false);
+        View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false);
+        ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
+        return result ;
     }
 
 
