@@ -19,7 +19,7 @@ import fr.telecom.pact32.wall_ed.model.Utilisateur;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UtilisateursFragment extends Fragment  {
+public class UtilisateursFragment extends Fragment  implements View.OnClickListener, View.OnLongClickListener {
 
     private ListView mListView ;
 
@@ -44,7 +44,15 @@ public class UtilisateursFragment extends Fragment  {
         return result;
     }
 
+    @Override
+    public void onClick(View v) {
 
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
 }
 
 
