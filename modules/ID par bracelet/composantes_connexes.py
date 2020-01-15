@@ -7,7 +7,8 @@ import numpy as np
 
 ## MAIN
 
-def main(img):
+def main(ima):
+    img = np.array(ima)
     (a,b) = np.shape(img)
     inversionImage(img)
     determinationComposantes(img)
