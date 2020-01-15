@@ -1,6 +1,7 @@
 package fr.telecom.wall_ed;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -20,11 +23,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import fr.telecom.pact32.wall_ed.model.Utilisateur;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
-    private FragmentManager fragmentManager;
-    private AppBarConfiguration mAppBarConfiguration;
+    private FragmentManager fragmentManager = null;
+    private AppBarConfiguration mAppBarConfiguration = null;
+    private ArrayList<fr.telecom.pact32.wall_ed.model.Utilisateur> mUsers = null;
+    private SharedPreferences mPrefs = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager.beginTransaction()
                 .replace(R.id.main_frame_layout, mainFragment)
                 .addToBackStack(null).commit();
+
+        mPrefs = getPreferences(MODE_PRIVATE);
     }
 
     @Override
@@ -62,6 +74,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }*/
+
+    private void loadUsers(){
+        Gson gson = new Gson();
+        String json = mPrefs.getString("mUsers", "");
+        Type listType = new TypeToken<ArrayList<fr.telecom.pact32.wall_ed.model.Utilisateur>>(){}.getType();
+        mUsers = gson.fromJson(json, listType);
+    }
+
+    private void saveUsers(){
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mUsers);
+        prefsEditor.putString("mUsers", json);
+        prefsEditor.apply();
+    }
+
+    private void addUser(fr.telecom.pact32.wall_ed.model.Utilisateur user){
+        if (mUsers==null){
+            mUsers = new ArrayList<>();
+        }
+        mUsers.add(user);
+        this.saveUsers();
+    }
 
     // ==================== MENU ====================
 
@@ -107,9 +142,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
-            /*case R.id.enregistrement_button:
-                Toast.makeText(getApplicationContext(), , Toast.LENGTH_LONG).show();
-                break;*/
+            case R.id.enregistrement_button:
+                addUser(new Utilisateur(getIntent().getExtras().getString("firstName"), getIntent().getExtras().getString("name"), getIntent().getExtras().getString("group"), "0"));
+                break;
         }
     }
 
