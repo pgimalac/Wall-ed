@@ -38,8 +38,8 @@
 |Tâche |Qui |Quand |Fait |Remarques
 |mise à jour selon remarques du jury | Adrien, Florian | 17/11 | | amélioration des interfaces
 |mise à jour de l’architecture | | | |
-|interfaces | | | |
-|plan de test par module et global | | | |
+|interfaces | Florian | 15/01 | |
+|plan de test par module et global | Tout le monde | 15/01 | |
 |avancement | | | |
 |====
 
