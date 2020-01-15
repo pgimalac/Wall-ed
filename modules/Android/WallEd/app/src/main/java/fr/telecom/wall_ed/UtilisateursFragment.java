@@ -39,10 +39,8 @@ public class UtilisateursFragment extends Fragment  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        super.onCreate(savedInstanceState);
-        View result = inflater.inflate(R.layout.fragment_main, container, false);
-        mListView = (ListView) result.findViewById(R.id.listViewUtilisateurs);
-        return result;
+        return View = inflater.inflate(R.layout.fragment_main, container, false); //permet de récupérer le layout principal du fragment
+
     }
 
     @Override

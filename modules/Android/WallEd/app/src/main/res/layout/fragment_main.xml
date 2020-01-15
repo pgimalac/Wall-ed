@@ -44,7 +44,8 @@
             android:text="C'est parti !"
             android:textColor="#FCFBFB"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 
