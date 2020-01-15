@@ -40,6 +40,8 @@ public class UtilisateursFragment extends Fragment  {
         ArrayAdapter<Utilisateur> arrayAdapter = new ArrayAdapter<Utilisateur>(getContext(), android.R.layout.simple_list_item_1, eleves);
 
         mlistView.setAdapter(arrayAdapter);
+
+        return result;
     }
 
 
