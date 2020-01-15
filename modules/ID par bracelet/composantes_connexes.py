@@ -16,6 +16,7 @@ def main(img):
 
 # renvoie le numéro de la plus grande composante connexe de l'inverse de l'image qui ne touche pas le bord, donc l'intérieur du cadre
 def determineInterieurCadre(image):
+    (a,b) = np.shape(image)
     composantes = [0]
     for i in range(a):
         for j in range(b):
@@ -72,8 +73,8 @@ def triCorrespondances(tab):
             else:
                 continu = False
 
-def verif_image(ima):
-    (a,b) = np.shape(ima)
+def verif_image(image):
+    (a,b) = np.shape(image)
     for i in range(a):
         for j in range(b):
             val = image[i,j]
@@ -81,7 +82,7 @@ def verif_image(ima):
                 return False
     return True
 
-def numsPrecedent(table, pixel):
+def numsPrecedent(table, pixel, image):
     (i, j) = pixel
     res = []
     if i > 0 and image[i-1,j] == 1:

@@ -1,8 +1,8 @@
 from composantes_connexes import *
-from filtreImage import *
-from determinationPics import *
-from HistogramConstructor import *
-
+from filtreImage import seuillageGris
+from determinationPics import main
+from HistogramConstructor import histo
+from determinationPics import determinationPics
 from PIL import Image
 
 def test(img):
