@@ -41,6 +41,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+
         onClickListenerCallback.onClick(v);
     }
 
