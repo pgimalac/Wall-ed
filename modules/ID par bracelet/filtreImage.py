@@ -26,13 +26,13 @@ def seuillageGris(img, seuil):
             else :
                 imgHSV[i][j][2] = 255
                 imgHSV[i][j][1] = 0
-                
+
     img2 = cv2.cvtColor(imgHSV, cv2.COLOR_HSV2RGB)
     plt.imshow(img2)
     plt.show()
     return res
 
-resultat = seuillageGris("cadre.png", 220)
+resultat = seuillageGris("/home/adrien/Documents/pact/pact32/modules/ID par bracelet/cadre.png", 220)
 
 #plt.imshow(resultat)
 #plt.show()

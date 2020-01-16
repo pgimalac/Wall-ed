@@ -101,7 +101,7 @@ def determinationComposantes(image):
     (a,b) = np.shape(image)
     if not verif_image(image):
         return "mauvais format d'image"
-    composantes = HashCreation()
+    composantes = HashCreation(a,b)
     etiquette = 0
     correspondances = [0]
     for i in range(a):
@@ -133,30 +133,26 @@ def determinationComposantes(image):
             if image[i,j] == 1:
                 image[i,j] = HashRecup(composantes, (i,j)) + 1
 
-## Dictionnaire
+## Dictionnaire sous forme de tableau (complexité en temps bien meilleure)
 
-def HashCreation():
-    return []
+def HashCreation(a,b):
+    res = np.zeros((a,b))
+    for i in range(a):
+        for j in range(b):
+            res[i,j] = -1
+    return res
 
 def HashAjout(table, cle, elem):
-    table.append([cle, elem])
+    table[cle] = elem
 
 def HashRecup(table, cle):
-    for elem in table:
-        if elem[0] == cle:
-            return elem[1]
+    return table[cle]
 
 def HashExiste(table, cle):
-    for elem in table:
-        if elem[0] == cle:
-            return True
+    return table[cle] != -1
 
 def HashModif(table, cle, newVal):
-    for elem in table:
-        if elem[0] == cle:
-            elem[1] = newVal
+    table[cle] = newVal
 
 def HashSuppr(table, cle):
-    for i in range(len(table)):
-        if table[i][0] == cle:
-            table.pop(i)
+    table[cle] = -1
