@@ -33,16 +33,16 @@ def determineInterieurCadre(image):
             composantesBord.append(image[0,j])
         if image[a-1,j] not in composantesBord:
             composantesBord.append(image[a-1,j])
-    tailleComposantesPasBord = HashCreation()
+    tailleComposantesPasBord = []
     for elem in composantes:
         if elem not in composantesBord:
-            HashAjout(tailleComposantesPasBord, elem, 0)
+            tailleComposantesPasBord.append([elem, 0])
     for i in range(a):
         for j in range(b):
             pixel = image[i,j]
-            if HashExiste(tailleComposantesPasBord, pixel):
-                newVal = HashRecup(tailleComposantesPasBord, pixel) + 1
-                HashModif(tailleComposantesPasBord, pixel, newVal)
+            if Existe(tailleComposantesPasBord, pixel):
+                newVal = Recup(tailleComposantesPasBord, pixel) + 1
+                Modif(tailleComposantesPasBord, pixel, newVal)
     max = 0
     plusGrandeComposante = -1
     for couple in tailleComposantesPasBord:
@@ -50,6 +50,23 @@ def determineInterieurCadre(image):
             max = couple[1]
             plusGrandeComposante = couple[0]
     return plusGrandeComposante
+
+def Recup(tab, cle):
+    for elem in tab:
+        if elem[0] == cle:
+            return elem[1]
+
+def Modif(tab, cle, val):
+    for elem in tab:
+        if elem[0] == cle:
+            elem[1] = val
+
+def Existe(tab, cle):
+    for elem in tab:
+        if elem[0] == cle:
+            return True
+    else:
+        return False
 
 ## FONCTIONS
 
@@ -116,8 +133,8 @@ def determinationComposantes(image):
                 elif long == 1:
                     HashAjout(composantes, (i,j), etiquettesPrec[0])
                 else:
-                    num1 = etiquettesPrec[0]
-                    num2 = etiquettesPrec[1]
+                    num1 = int(etiquettesPrec[0])
+                    num2 = int(etiquettesPrec[1])
                     HashAjout(composantes, (i,j), num1)
                     if num1 > num2:
                         correspondances[num1] = num2
@@ -126,8 +143,11 @@ def determinationComposantes(image):
                     else:
                         correspondances[num2] = num1
     triCorrespondances(correspondances)
-    for elem in composantes:
-        elem[1] = correspondances[elem[1]]
+    for i in range(a):
+        for j in range(b):
+            composantes[i,j] = correspondances[int(composantes[i,j])]
+    #for elem in composantes:
+    #    elem[1] = correspondances[elem[1]]
     for i in range(a):
         for j in range(b):
             if image[i,j] == 1:

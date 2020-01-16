@@ -3,7 +3,7 @@ import numpy as np
 
 def determinationPics(histogramme):
     premierPic = max(histogramme)
-    deuxiemePic = max2(histogramme)
+    deuxiemePic = max2(histogramme, premierPic)
     return (premierPic,deuxiemePic)
 
 def max(tab):

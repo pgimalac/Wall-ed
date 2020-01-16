@@ -32,7 +32,7 @@ def seuillageGris(img, seuil):
     plt.show()
     return res
 
-resultat = seuillageGris("/home/adrien/Documents/pact/pact32/modules/ID par bracelet/cadre.png", 220)
+resultat = seuillageGris("/home/adrien/Documents/pact/pact32/modules/ID par bracelet/cadre.png", 150)
 
 #plt.imshow(resultat)
 #plt.show()
