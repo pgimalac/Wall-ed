@@ -60,5 +60,5 @@ L2=[['plastic', 0.9617398, 0, 0, 1560], ['plastic', 0.95831627, 0, 390, 1560], [
 
 def triSeuil(L):
     return [x for x in L if x[1] > 0.7]
-L3 = triSeuil(L2)
+L3 = triSeuil(L1)
 locateWaste(L3)
