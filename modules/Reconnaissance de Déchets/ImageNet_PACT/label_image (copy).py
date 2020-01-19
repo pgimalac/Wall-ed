@@ -78,9 +78,10 @@ def analyseImage(graph, file_name, h=2340, l=4160, input_layer="Placeholder", ou
 
   start_total = time.clock()
   R=[]
+  i=0
 
   c = min(h,l) # les images découpées seront de forme carrée ; on récupère le côté maximum d'un tel carré
-  L = [i/3 for i in range(2, 3+1)] # Liste des tailles relatives des sous-images
+  L = [i/3 for i in range(1, 3+1)] # Liste des tailles relatives des sous-images
 
   for k in range(len(L)):
     start_step = time.clock()
@@ -90,12 +91,14 @@ def analyseImage(graph, file_name, h=2340, l=4160, input_layer="Placeholder", ou
     step = int(taille/4) # Nombre de pixels dont on se décale à chaque itération
     for dx in range(0, l-taille, step):
       for dy in range(0, h-taille, step):
+        i+=1
         t = read_tensor_from_image_file(file_name, dy, dx, taille, taille)
         r = analyseSousImage(graph, t, input_layer, output_layer, label_file)
         R.append([r[0], r[1], dx, dy, taille])
     print(" - Execution time: " + str(time.clock()-start_step) + " sec")
 
   print("Total execution time: " + str(time.clock()-start_total) + " sec")
+  print("Network applied " + str(i) + " times" + chr(13))
 
   return R
 
