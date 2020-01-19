@@ -25,7 +25,7 @@ For more options, search https://tfhub.dev for image feature vector modules.
 
 The top layer receives as input a 2048-dimensional vector (assuming
 Inception V3) for each image. We train a softmax layer on top of this
-representation. If the softmax layer contains N labels, this corresponds
+representation. If the layer contains N labels, this corresponds
 to learning N + 2048*N model parameters for the biases and weights.
 
 Here's an example, which assumes you have a folder containing class-named

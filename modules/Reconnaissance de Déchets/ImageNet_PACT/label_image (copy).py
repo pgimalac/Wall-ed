@@ -1,18 +1,3 @@
-# Copyright 2017 The TensorFlow Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ==============================================================================
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -91,21 +76,29 @@ def chargeReseau(model_file):
 
 def analyseImage(graph, file_name, h=2340, l=4160, input_layer="Placeholder", output_layer="final_result", label_file="/home/victor/ImageNet_PACT/output_labels.txt"):
 
+  start_total = time.clock()
   R=[]
+  i=0
 
   c = min(h,l) # les images découpées seront de forme carrée ; on récupère le côté maximum d'un tel carré
   L = [i/3 for i in range(1, 3+1)] # Liste des tailles relatives des sous-images
 
   for k in range(len(L)):
-    print("Etape " + str(k+1) + "/" + str(len(L))) # Affiche l'avancement
+    start_step = time.clock()
+    print("Step " + str(k+1) + "/" + str(len(L)), end="") # Affiche l'avancement
     rapport = L[k] # Rapport de taille entre la nouvelle image et l'ancienne
     taille = int(c*rapport) # Taille de la nouvelle image
     step = int(taille/4) # Nombre de pixels dont on se décale à chaque itération
     for dx in range(0, l-taille, step):
       for dy in range(0, h-taille, step):
+        i+=1
         t = read_tensor_from_image_file(file_name, dy, dx, taille, taille)
         r = analyseSousImage(graph, t, input_layer, output_layer, label_file)
         R.append([r[0], r[1], dx, dy, taille])
+    print(" - Execution time: " + str(time.clock()-start_step) + " sec")
+
+  print("Total execution time: " + str(time.clock()-start_total) + " sec")
+  print("Network applied " + str(i) + " times" + chr(13))
 
   return R
 
@@ -136,3 +129,12 @@ def drawBox(L, img_path="/home/victor/Downloads/test.jpg"):
     draw = ImageDraw.Draw(source_img)
     draw.rectangle([(x,y), (x+t,y+t)], outline="black" )
   source_img.show()
+
+def drawResult(P, img_path="/home/victor/Downloads/test.jpg"):
+  source_img = Image.open(img_path)
+  draw = ImageDraw.Draw(source_img)
+  for point in P:
+    (x,y)=point
+    draw.rectangle([x-10, y-10, x+10, y+10])
+  source_img.show()
+
