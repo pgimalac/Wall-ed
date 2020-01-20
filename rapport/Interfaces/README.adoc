@@ -1,5 +1,4 @@
-= Rapport d’avancement du groupe “3.2”
-PACT groupe 3.2 (Les plus beaux)
+= Interfaces du groupe “3.2”
 ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :doctype: book
 :stem: latexmath
@@ -8,3 +7,11 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :toc: macro
 :sectnums:
 :imagesdir: images
+
+== Interfaces par module
+
+include::interfaces_par_module.adoc[interfaces par module]
+
+== Description des interfaces
+
+include::description_des_interfaces.adoc[description des interfaces]
