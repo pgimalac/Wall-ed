@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         }
     }
 
+
     public ArrayList<Utilisateur> getUser () {
         return (mUsers);
     }
