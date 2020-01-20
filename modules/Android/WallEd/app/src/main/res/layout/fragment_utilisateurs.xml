@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UtilisateursFragment">
+    tools:context=".view.UtilisateursFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/utilisateurs_new"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:text="+"
-            tools:layout_editor_absoluteX="354dp"
-            tools:layout_editor_absoluteY="0dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+            <ImageButton
+                android:id="@+id/imgBt_utilisateurs_addUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_add_user" />
+
+            <ImageButton
+                android:id="@+id/imgBt_utilisateurs_modifyUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_modify_user" />
+
+            <ImageButton
+                android:id="@+id/imgBt_utilisateurs_deleteUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_delete_user" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView4"
@@ -32,11 +52,9 @@
             android:id="@+id/listViewUtilisateurs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="25dp"
-            ></ListView>
-
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_marginTop="25dp"></ListView>
 
     </LinearLayout>
 

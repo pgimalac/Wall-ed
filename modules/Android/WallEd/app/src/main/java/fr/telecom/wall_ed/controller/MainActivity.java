@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed;
+package fr.telecom.wall_ed.controller;
 
 
 import android.content.SharedPreferences;
@@ -21,12 +21,16 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
+import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
+import fr.telecom.wall_ed.view.MainFragment;
+import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.view.Statistiques_globales;
+import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {

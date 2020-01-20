@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed;
+package fr.telecom.wall_ed.view;
 
 
 import android.content.Context;
@@ -15,11 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
+import fr.telecom.wall_ed.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UtilisateursFragment extends Fragment  {
+public class UtilisateursFragment extends Fragment  implements View.OnClickListener, View.OnLongClickListener {
 
     private ListView mListView ;
 
@@ -44,8 +45,14 @@ public class UtilisateursFragment extends Fragment  {
         return result;
     }
 
+    @Override
+    public void onClick(View v) {
+    }
 
-
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
 
 }
 
