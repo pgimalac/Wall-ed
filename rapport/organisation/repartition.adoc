@@ -3,7 +3,7 @@
 [cols=",^,^,^,^,^,^,^,^",options="header",]
 |====
 | Nom        | SLAM | Reconnaissance de déchets | Android | conception visuelle & audio | communication client-serveur | identification par bracelet | Module SES | Intégration & Tests
-| Nom Expert | Tarik Graba             | Michel Roux            | Jean-Claude Dufourd   | Ulrich Kühne et Dana Diminescu     | Jean-Claude Moissinic   |         |  Dana Diminescu         | Attilio Fiandrotti
+| Nom Expert | Tarik Graba             | Attilio Fiandrotti            | Jean-Claude Dufourd   | Ulrich Kühne et Dana Diminescu     | Jean-Claude Moissinic   |    Michel Roux     |  Dana Diminescu         | Attilio Fiandrotti
 
 | Adrien     |                         |                        |         |                   | X   | X       |  X         |
 
