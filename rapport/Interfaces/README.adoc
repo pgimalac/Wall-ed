@@ -1,0 +1,10 @@
+= Rapport d’avancement du groupe “3.2”
+PACT groupe 3.2 (Les plus beaux)
+ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
+:doctype: book
+:stem: latexmath
+:source-highlighter: coderay
+:toc-title: Table des matières
+:toc: macro
+:sectnums:
+:imagesdir: images
