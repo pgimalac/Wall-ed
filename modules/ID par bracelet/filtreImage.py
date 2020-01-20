@@ -28,7 +28,7 @@ def seuillageGris(img, seuil):
                 imgHSV[i][j][1] = 0
     return res
 
-resultat = seuillageGris("/home/adrien/Documents/pact/pact32/modules/ID par bracelet/cadre.png", 150)
+resultat = seuillageGris(cadre.png", 150)
 
 #plt.imshow(resultat)
 #plt.show()
