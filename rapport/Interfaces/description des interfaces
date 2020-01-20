@@ -1,13 +1,14 @@
 Interface Application / Client-Serveur
 
 (Appli → C-S)
-- appel à la méthode initBDD (prend en argument la liste des élèves de la classe)
-- requête des statistiques
+- appel à la méthode initBDD
+- appel à la méthode addBDD (prend en argument nom, prénom et identifiant bracelet de l'élève sous forme de String)
+- appel à la méthode addAction (prend en argument: l'identifiant bracelet de l'élève qui a agit, le type du déchet et le type donné par l'élève sous forme de String)
+- appel à la méthode getStats (prend en argument un identifiant de session sous forme de Int)
 - gestion de l’activité (modes du robot)
 
 (C-S → Appli)
-- envoi des statistiques analysées de la BDD
-- transmission des bracelets des enfants à associer, pour l’initialisation de la bdd
+- réponse à getStats (envoi des statistiques de la session concernée sous forme de tableau de tuples)
 - données d’activité du robot et de son état de fonctionnement (batterie, mode)
 
 
