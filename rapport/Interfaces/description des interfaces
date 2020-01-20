@@ -5,7 +5,7 @@ Interface Application / Client-Serveur
 - appel à la méthode addBDD (prend en argument nom, prénom et identifiant bracelet de l'élève sous forme de String)
 - appel à la méthode addAction (prend en argument: l'identifiant bracelet de l'élève qui a agit, le type du déchet et le type donné par l'élève sous forme de String)
 - appel à la méthode getStats (prend en argument un identifiant de session sous forme de Int)
-- gestion de l’activité (modes du robot)
+- gestion de l’activité (modes du robot) (éventuellement)
 
 (C-S → Appli)
 - réponse à getStats (envoi des statistiques de la session concernée sous forme de tableau de tuples)
