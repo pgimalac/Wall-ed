@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed;
+package fr.telecom.wall_ed.view;
 
 
 import android.content.Context;
@@ -10,26 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import fr.telecom.wall_ed.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements View.OnClickListener{
+public class AjoutUtilisateurFragment extends Fragment implements View.OnClickListener {
 
     private View.OnClickListener onClickListenerCallback;
-    private Button demarrer_button;
 
-    public MainFragment() {
+    private Button ajoutButton;
+    private EditText prenomEditText;
+    private EditText nomEditText;
+    private EditText classeEditText;
+
+    public AjoutUtilisateurFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_main, container, false);
-        demarrer_button = result.findViewById(R.id.demarrer_button);
-        demarrer_button.setOnClickListener(this);
+        View result = inflater.inflate(R.layout.fragment_ajout_utilisateur, container, false);
+        ajoutButton = result.findViewById(R.id.enregistrement_button);
+        ajoutButton.setOnClickListener(this);
+        prenomEditText = result.findViewById(R.id.prenom_txt);
+        nomEditText = result.findViewById(R.id.nom_txt);
+        classeEditText = result.findViewById(R.id.classe_txt);
         return result;
     }
 
@@ -41,7 +50,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-
+        getActivity().getIntent().putExtra("firstName", prenomEditText.getText().toString());
+        getActivity().getIntent().putExtra("name", nomEditText.getText().toString());
+        getActivity().getIntent().putExtra("group", classeEditText.getText().toString());
         onClickListenerCallback.onClick(v);
     }
 

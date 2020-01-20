@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed;
+package fr.telecom.wall_ed.view;
 
 
 import android.os.Bundle;
@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import fr.telecom.wall_ed.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Statistiques_globales extends Fragment {
+public class Statistiques_individuelles extends Fragment {
 
 
-    public Statistiques_globales() {
+    public Statistiques_individuelles() {
         // Required empty public constructor
     }
 
@@ -25,7 +27,7 @@ public class Statistiques_globales extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistiques_globales4, container, false);
+        return inflater.inflate(R.layout.fragment_statistiques_individuelles2, container, false);
     }
 
 }

@@ -1,4 +1,4 @@
-package fr.telecom.wall_ed;
+package fr.telecom.wall_ed.view;
 
 
 import android.content.Context;
@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
+import fr.telecom.wall_ed.R;
 
 /**
  * A simple {@link Fragment} subclass.
