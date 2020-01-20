@@ -4,6 +4,7 @@ package fr.telecom.wall_ed.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -73,6 +74,8 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.bt_photo:
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Uri uri  = Uri.parse("file:///sdcard/photo.jpg");
+                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(intent, 0);
         }
     }
