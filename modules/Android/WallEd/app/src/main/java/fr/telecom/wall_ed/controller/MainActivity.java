@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);1
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         // Passing each menu ID as a set of Ids because each
@@ -150,15 +150,20 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
+        Fragment utilisateursFragment;
         switch (viewId){
             case R.id.demarrer_button:
-                Fragment utilisateursFragment = new UtilisateursFragment();
+                utilisateursFragment = new UtilisateursFragment();
                 fragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
             case R.id.enregistrement_button:
                 addUser(new Utilisateur(getIntent().getExtras().getString("firstName"), getIntent().getExtras().getString("name"), getIntent().getExtras().getString("group"), "0"));
+                utilisateursFragment = new UtilisateursFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, utilisateursFragment)
+                        .addToBackStack(null).commit();
                 break;
         }
     }

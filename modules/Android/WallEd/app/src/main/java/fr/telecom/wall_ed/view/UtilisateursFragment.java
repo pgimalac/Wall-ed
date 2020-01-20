@@ -52,6 +52,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false);
         ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
 
+
         /*Utilisateur adrien = new Utilisateur("Adrien", "Maes le S", "CP", "id1");
         Utilisateur nicolas = new Utilisateur("Nicolas", "Jow le beau", "CE1", "id2") ;
         Utilisateur jcd = new Utilisateur ("Jean-Claude","Dufourd", "CE2", "id3");
