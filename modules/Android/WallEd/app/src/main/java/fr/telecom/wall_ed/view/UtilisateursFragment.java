@@ -24,6 +24,7 @@ import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 public class UtilisateursFragment extends Fragment  implements View.OnClickListener, View.OnLongClickListener {
 
     private ListView mListView ;
+    private
 
     private InterfaceGestionUtilisateurs callBackUtilisateur ;
 
@@ -66,7 +67,6 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         mlistView.setAdapter(arrayAdapter);
 
         return result;
-
 
     }
 
