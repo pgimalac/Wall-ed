@@ -24,5 +24,5 @@ def histo(img, imgConnex, n):
     for i in range(dim[0]):
         for j in range(dim[1]):
             if imgConnex[i][j] == n :
-                histogramme[ImHSV[i][j][2],1]+= 1
+                histogramme[ImHSV[i][j][0],1]+= 1
     return histogramme
