@@ -27,6 +27,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
+import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
 import fr.telecom.wall_ed.view.MainFragment;
 import fr.telecom.wall_ed.R;
@@ -34,7 +35,7 @@ import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private FragmentManager fragmentManager = null;
     private AppBarConfiguration mAppBarConfiguration = null;
@@ -161,5 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
     }
+
+    public ArrayList<Utilisateur> getUser () {
+        return (mUsers);
+    }
+
 
 }

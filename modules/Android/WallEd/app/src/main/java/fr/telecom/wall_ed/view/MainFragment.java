@@ -55,4 +55,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             throw new ClassCastException(e.toString()+ " View.OnClickListener");
         }
     }
+
+
+
 }

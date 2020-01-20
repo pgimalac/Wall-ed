@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import fr.telecom.pact32.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +24,24 @@ import fr.telecom.wall_ed.R;
 public class UtilisateursFragment extends Fragment  implements View.OnClickListener, View.OnLongClickListener {
 
     private ListView mListView ;
+
+    private InterfaceGestionUtilisateurs callBackUtilisateur ;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        createCallbackToParentActivity() ;
+    }
+
+    private void createCallbackToParentActivity() {
+        try {
+            //Parent activity will automatically subscribe to callback
+            callBackUtilisateur = (InterfaceGestionUtilisateurs) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ "InterfaceGestionUtilisateurs");
+        }
+    }
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState) ;
@@ -35,6 +54,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
         Utilisateur adrien = new Utilisateur("Adrien", "Maes le S", "CP", "id1");
         Utilisateur nicolas = new Utilisateur("Nicolas", "Jow le beau", "CE1", "id2") ;
+        Utilisateur jcd = new Utilisateur ("Jean-Claude Dufourt","Dufourt", "CE2", "id3");
 
         Utilisateur[] eleves = new Utilisateur[]{adrien, nicolas} ;
 
