@@ -40,7 +40,7 @@ Nous avons rapidement compris que nous allions avoir besoin de récupérer un r�
 
 \paragraph*{}
 
-Nous sommes tout d’abord tombé sur un projet assez complet\footnote{\url{https://pythonawesome.com/a-growing-image-dataset-of-waste-in-the-wild/}}, contenant une implémentation du réseau Mask-RCNN ainsi qu’une base de données de divers détritus dans la nature. Nous avons essayé de comprendre son fonctionnement et de le tester, mais nous avons finalement abandonné cette piste pour deux raisons :
+Nous avons tout d’abord trouvé un projet assez complet\footnote{\url{https://pythonawesome.com/a-growing-image-dataset-of-waste-in-the-wild/}}, contenant une implémentation du réseau Mask-RCNN ainsi qu’une base de données de divers détritus dans la nature. Nous avons essayé de comprendre son fonctionnement et de le tester, mais nous avons finalement abandonné cette piste pour deux raisons :
 
 \begin{itemize}
   \item Nous avons trouvé très peu de documentation sur internet. Hors, nous avons rencontré de multiples problèmes d’installation des différentes dépendances, que nous n’avons pas réussi à résoudre complètement.
@@ -51,11 +51,11 @@ Nous sommes tout d’abord tombé sur un projet assez complet\footnote{\url{http
 
 Nous avons alors trouvé le réseau Inception V3, pré-entraîné sur la banque d’images ImageNet. Après nous être documenté sur internet, il nous a semblé que ce réseau était très performant, et surtout adapté à notre situation.
 Nous avons donc cherché une base d’images de déchets pour pouvoir ré-entraîner la dernière couche du réseau. Nous avons trouvé une base d’images sur un challenge kaggle\footnote{\url{https://www.kaggle.com/asdasdasasdas/garbage-classification/data}} disposant de six classes : carton, verre, métal, papier, plastique et non recyclable. Cette base de données nous a semblé correspondre parfaitement à nos besoin, mais nous avions cependant des doutes sur sa taille (environ 500 images par catégorie, ce qui nous semblait peu).
-Nous avons donc suivi un tutoriel du site de tensoflow\footnote{\url{https://www.tensorflow.org/hub/tutorials/image\textunderscore retraining}} pour ré-entraîner la dernière couche du réseau avec notre base de données. L'évolution de l'entraînement est présentée dans la figure \ref{entropy} ci-dessous :
+Nous avons suivi un tutoriel du site de tensoflow\footnote{\url{https://www.tensorflow.org/hub/tutorials/image\textunderscore retraining}} pour ré-entraîner la dernière couche du réseau avec notre base de données. L'évolution de l'entraînement est présentée dans la figure \ref{entropy} ci-dessous :
 
 \begin{figure}[H]
 	\center
-	\includegraphics[width=7cm]{entropy.png}
+	\includegraphics[width=8cm]{entropy.png}
 	\caption{Ré-entraînement de la dernière couche du réseau Inception V3 sur notre BDD}
 	\label{entropy}
 \end{figure}
@@ -66,11 +66,11 @@ Après entraînement, le taux d’erreurs du réseau est d’environ 10\%. Ce pr
 
 \paragraph*{}
 
-Nous nous sommes ensuite intéressés aux cas ou l’image contient plusieurs déchets, qui ne sont pas centrés sur celle-ci. Nous avons pour cela choisi de balayer l’image, et d’appliquer le réseau sur des portions extraites de l’image, pour sélectionner celles qui produisent une réponse forte de l’une des classes. Puisque, le réseau passe plusieurs fois sur chaque déchets (à différentes échelles, de manière plus ou moins centrée, etc.), il faut donc ensuite trier les coordonnées retournées. Nous avons pour cela décidé d’effectuer un barycentre des coordonnées retournées pour chacune des classes.
+Nous nous sommes ensuite intéressés aux cas ou l’image contient plusieurs déchets, qui ne sont pas centrés sur celle-ci. Nous avons pour cela choisi de balayer l’image, et d’appliquer le réseau sur des portions extraites de l’image, pour sélectionner celles qui produisent une réponse forte de l’une des classes. Puisque, le réseau passe plusieurs fois sur chaque déchets (à différentes échelles, de manière plus ou moins centrée, etc.), il faut ensuite trier les coordonnées retournées. Nous avons pour cela décidé d’effectuer un barycentre des coordonnées retournées pour chacune des classes.
 Cette méthode nous a donné des résultats plutôt satisfaisants, mais présente deux inconvénients majeurs :
 \begin{itemize}
   \item Le temps d’exécution : en effet, si un appel du réseau se fait relativement rapidement, nous l’appelons ici plusieurs centaines de fois.
-  \item Le manque d'adaptabilité : puisque nous effectuons un barycentre pour chacune des classes, on ne peut détecter qu’un seul déchet de chaque type sur l’image fournie.
+  \item Le manque d'adaptabilité : puisque nous effectuons un barycentre pour chacune des classes, on ne peut détecter qu’un seul déchet de chaque classe sur l’image fournie.
 \end{itemize}
 
 \paragraph*{}
@@ -86,12 +86,12 @@ Les déchets détectés sont représentés par un point noir. Le type detecté n
 
 \begin{figure}[H]
 	\center
-	\includegraphics[width=7cm]{result.jpg}
+	\includegraphics[width=8cm]{result.jpg}
 	\caption{Test du réseau}
 	\label{result}
 \end{figure}
 
-A titre indicatif, nous avons fait tourner l’algorithme sur un CPU i7, et cela a pris environ 4 minutes et 15 secondes.
+A titre indicatif, nous avons fait tourner l’algorithme sur un CPU i7, et cela a pris 4 minutes et 15 secondes.
 
 \section{Ce que nous allons faire maintenant}
 
@@ -102,8 +102,11 @@ Dans les semaines qui vont suivre, nous allons nous concentrer sur plusieurs poi
   \item Tout d’abord, nous allons chercher à exploiter la première sortie du réseau Inception V3, afin d’améliorer et d’accélérer la détection sur une image avec plusieurs déchets non centrés.
   \item Nous allons ensuite chercher à rajouter une étape au ré-entraînement du réseau, où nous défreezerons toutes les couches.
   \item Nous chercherons aussi à agrandir notre BDD, soit en en trouvant une nouvelle avec plus d'images, soit en développant un scrapper pour google images.
-  \item Enfin, nous continuerons d'explorer d'autres options pour le choix de l'architecture du réseau, Inception n'étant pas vraiment connu pour être rapide. Le réseau Mobilenet est par exemple apparu a de multiples reprises dans nos lectures.
+  \item Enfin, nous continuerons d'explorer d'autres options pour le choix de l'architecture du réseau, Inception n'étant pas vraiment connu pour être rapide. Le réseau Mobilenet est par exemple apparu à de multiples reprises dans nos lectures.
 \end{itemize}
 
+\paragraph*{}
+
+Notons finalement que nous disposons maintenant d'un accès à un ordinateur plus puissant pour effectuer nos tests.
 
 \end{document}
