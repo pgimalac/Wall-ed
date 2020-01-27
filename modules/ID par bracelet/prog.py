@@ -231,8 +231,8 @@ def convertToHSI(img):
 
 def histo(img, imgConnex, n):
     ImHSV = convertToHSI(img)
-    histogramme = np.zeros((256,2))
-    for i in range(256):
+    histogramme = np.zeros((180,2))
+    for i in range(180):
         histogramme[i,0] = i
     dim = ImHSV.shape
     for i in range(dim[0]):
@@ -285,7 +285,7 @@ def max2(tab,max1):
     max = -math.inf
     indice_max = -1
     for i in range(len(tab)):
-        if (i < (max1 - 45) or i > (max1 + 45)) and tab[i,1] > max:
+        if (i < (max1 - 45) or i > (max1 + 45)) and (i < (max1 + 180 - 45) or i > (max1 - 180 + 45)) and tab[i,1] > max:
             max = tab[i,1]
             indice_max = tab[i,0]
     return indice_max
