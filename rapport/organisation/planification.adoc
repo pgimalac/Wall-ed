@@ -51,7 +51,7 @@
 |Android | Lola, Victor | 20/01| | bon pour PAN3, attention aux fins de vies
 |ID_par_bracelet | Adrien, Nicolas | 24/01 | | module en bonne voie & rapport à fournir
 |Reconnaissance de déchets | Nicolas, Victor | 09/01 | | cours vendredi 17/01 & rapport écrit
-|Communication_client-serveur | Adrien, Florian | 27/01 | |
+|Communication_client-serveur | Adrien, Florian | 27/01 | | commencer à coder les interfaces du projet
 |SLAM | Romain, Pierre | 27/01 | |
 |Conception_visuelle-audio | | | |
 |SES | | | |
