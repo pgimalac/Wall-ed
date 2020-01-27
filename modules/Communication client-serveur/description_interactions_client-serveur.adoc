@@ -1,4 +1,4 @@
-description de toutes les commandes et de toutes les réponses entre le client et le serveur.
+=== description de toutes les commandes et de toutes les réponses entre le client et le serveur.
 
 
 Client : application mobile
@@ -21,7 +21,7 @@ Le client et le serveur sont des objets java, les commandes et réponses sont do
 
 
 
-Commande du client :	
+==== Commandes du client :	
 
 demande d’accès aux stats d’une session: prend en argument une session (String)
 
@@ -29,14 +29,14 @@ création d’un dossier (nouvelle session)
 
 authentification: prend en argument un nom d’utilisateur et un mot de passe (sous forme de String)
 
-Réponse du serveur :
+==== Réponse du serveur :
 
 page web (code html) contenant les stats demandées
 
 validation de la création du dossier
 
 
-Description des différents échanges lors d’une session :
+=== Description des différents échanges lors d’une session :
 
 
 DEBUT : 
