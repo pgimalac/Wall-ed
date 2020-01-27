@@ -8,4 +8,6 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :sectnums:
 :imagesdir: images
 
+== Description des interactions entre le client et le serveur
+
 include::description_interactions_client-serveur.adoc[Description des interactions entre le client et le serveur]
