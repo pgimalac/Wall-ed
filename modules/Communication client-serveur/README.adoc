@@ -4,7 +4,8 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :doctype: book
 :stem: latexmath
 :source-highlighter: coderay
-:toc-title: Table des matières
 :toc: macro
 :sectnums:
 :imagesdir: images
+
+include::description_interactions_client-serveur[Description des interactions entre le client et le serveur]
