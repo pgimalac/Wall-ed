@@ -51,7 +51,7 @@
 |Android | 20/01 | Lola, Victor| | bon pour PAN3, attention aux fins de vies
 |ID_par_bracelet | 24/01 | Adrien, Nicolas | |
 |Reconnaissance de déchets | Nicolas, Victor | 09/01 | | cours vendredi 17/01 & rapport écrit
-|Communication_client-serveur | | | |
+|Communication_client-serveur | Adrien, Florian | 27/01 | |
 |SLAM | Romain, Pierre | 27/01 | |
 |Conception_visuelle-audio | | | |
 |SES | | | |
