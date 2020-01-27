@@ -1,4 +1,4 @@
-=Rapport du module client-serveur
+= Rapport du module client-serveur
 
 ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :doctype: book
