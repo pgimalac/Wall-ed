@@ -41,45 +41,45 @@ validation de la création du dossier
 
 DEBUT : 
 
-sur l’application création d’une nouvelle session, ajout des utilisateurs (enfants : récupération de la liste des enfants du serveur et association de chaque enfant sélectionné à un bracelet via un scan avec le téléphone du bracelet)
+- sur l’application création d’une nouvelle session, ajout des utilisateurs (enfants : récupération de la liste des enfants du serveur et association de chaque enfant sélectionné à un bracelet via un scan avec le téléphone du bracelet)
 
-choix des paramètres de session (durée, type de lieu, type de session)
+- choix des paramètres de session (durée, type de lieu, type de session)
 
-une fois l’initialisation terminée, transfert des informations au serveur qui crée alors la session dans la bdd
+- une fois l’initialisation terminée, transfert des informations au serveur qui crée alors la session dans la bdd
 
-retour du serveur : “ok session initialisée”
+- retour du serveur : “ok session initialisée”
 
-début de la session via un bouton start sur l’application : envoi du message au serveur, transmission du message au robot, qui retourne le statut (erreur ou ok début de recherche de déchet), retour à l’application “session en cours”
+- début de la session via un bouton start sur l’application : envoi du message au serveur, transmission du message au robot, qui retourne le statut (erreur ou ok début de recherche de déchet), retour à l’application “session en cours”
 
-passage en MODE RECHERCHE
+- passage en MODE RECHERCHE
 
 
 MODE RECHERCHE :
 
-envoi des stats du robot au serveur (activité), transmis à l’appli, toutes les 30 sec
+- envoi des stats du robot au serveur (activité), transmis à l’appli, toutes les 30 sec
 
-déplacement aléatoire et prise de photo toutes les 1 sec et transmission au serveur, qui analyse l’image
+- déplacement aléatoire et prise de photo toutes les 1 sec et transmission au serveur, qui analyse l’image
 
-si déchet trouvé -> passage en MODE VERIFICATION
+- si déchet trouvé -> passage en MODE VERIFICATION
 
-si sur l’appli on sélectionne le bouton “fin de session”, ou si le timer arrive à expiration -> passage en FIN
+- si sur l’appli on sélectionne le bouton “fin de session”, ou si le timer arrive à expiration -> passage en FIN
 
 
 MODE VERIFICATION :
 
-envoi d’un message “stop mouvement” au robot et un message “déchet trouvé” à l’appli
+- envoi d’un message “stop mouvement” au robot et un message “déchet trouvé” à l’appli
 
-le serveur envoie également le type de déchet au robot qui attend un scan de bracelet et un appui sur un bouton “type de déchet” sur sa coque
+- le serveur envoie également le type de déchet au robot qui attend un scan de bracelet et un appui sur un bouton “type de déchet” sur sa coque
 
-une fois cette étape effectuée, envoi au serveur de la réponse de l’enfant associée à l’id du bracelet
+- une fois cette étape effectuée, envoi au serveur de la réponse de l’enfant associée à l’id du bracelet
 
-le serveur ajoute une entrée à la table de la bdd et transfert le résultat à l’appli qui fait évoluer le graph des stats en temps réel
+- le serveur ajoute une entrée à la table de la bdd et transfert le résultat à l’appli qui fait évoluer le graph des stats en temps réel
 
-on repasse en MODE RECHERCHE
+- on repasse en MODE RECHERCHE
 
 
 FIN
 
-le robot s’éteint, l’appli vide son cache de statistiques et de paramètres, le serveur met toutes les données temporaires dans la bdd (du coup ce qui est plus haut se fait là quant aux actions du serveur sur la bdd)
+- le robot s’éteint, l’appli vide son cache de statistiques et de paramètres, le serveur met toutes les données temporaires dans la bdd (du coup ce qui est plus haut se fait là quant aux actions du serveur sur la bdd)
 
-le serveur retourne en mode attente d’initialisation
+- le serveur retourne en mode attente d’initialisation
