@@ -1,5 +1,10 @@
 ## MAIN
 
+'''
+découpage de l'algorithme en quatres étapes, détermination du seuillage, de la composante connexe, de l'histogramme et enfin des pics
+il y a donc 4 parties qui suivent, chacune implémentant une étape en une ou plusieurs fonctions
+'''
+
 def main(img):
     imageFiltree = seuillageGris(img, 80)
     imageComp, composante = main_composantes(imageFiltree)
@@ -23,17 +28,13 @@ import numpy as np
 def seuillageGris(img, seuil):
     image = Image.open(img)
     ImageTab = np.array(image)
-    imgHSV = cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
-    dim = imgHSV.shape
+    imgHSI = cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
+    dim = imgHSI.shape
     res = np.zeros((dim[0],dim[1]))
     for i in range(dim[0]):
         for j in range(dim[1]):
-            if imgHSV[i][j][2] < seuil:
-                imgHSV[i][j][2] = 0
+            if imgHSI[i][j][2] < seuil:
                 res[i,j] =  1
-            else :
-                imgHSV[i][j][2] = 255
-                imgHSV[i][j][1] = 0
     return res
 
 ## COMPOSANTES CONNEXES
@@ -46,6 +47,11 @@ image : tableau de 0 et 1
 import numpy as np
 
 # Main
+
+'''
+découpage de cette étape en sous étape, car cette étape est la plus longue et la plus compliquée
+On inverse d'abord l'image, puis on détermine les composantes connexes de l'image, puis celle qui nous intéresse
+'''
 
 def main_composantes(img):
     (a,b) = np.shape(img)
@@ -130,15 +136,6 @@ def triCorrespondances(tab):
             else:
                 continu = False
 
-def verif_image(image):
-    (a,b) = np.shape(image)
-    for i in range(a):
-        for j in range(b):
-            val = image[i,j]
-            if not (val == 1 or val == 0):
-                return False
-    return True
-
 def numsPrecedent(table, pixel, image):
     (i, j) = pixel
     res = []
@@ -156,8 +153,6 @@ def inversionImage(image):
 
 def determinationComposantes(image):
     (a,b) = np.shape(image)
-    if not verif_image(image):
-        return "mauvais format d'image"
     composantes = HashCreation(a,b)
     etiquette = 0
     correspondances = [0]
@@ -186,8 +181,6 @@ def determinationComposantes(image):
     for i in range(a):
         for j in range(b):
             composantes[i,j] = correspondances[int(composantes[i,j])]
-    #for elem in composantes:
-    #    elem[1] = correspondances[elem[1]]
     for i in range(a):
         for j in range(b):
             if image[i,j] == 1:
@@ -217,7 +210,7 @@ def HashModif(table, cle, newVal):
 def HashSuppr(table, cle):
     table[cle] = -1
 
-## CONSTRUCTION DE L'HISTOGRAMME
+## CONSTRUCTION DE L'HISTOGRAMME ET DETERMINATION DES PICS
 
 import cv2
 import matplotlib.pyplot as plt
