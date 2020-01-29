@@ -15,7 +15,7 @@ def main(img):
 ## FILTRE IMAGE
 
 '''
-algorythme de seuillage de l'image
+algorithme de seuillage de l'image
 '''
 
 import cv2
