@@ -8,6 +8,10 @@ ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
 :sectnums:
 :imagesdir: images
 
+== Matériel utilisé
+
+Nous utiliserons un pc fixe classique comme serveur. Un OS linux (basé sur Debian) sera utilisé. La base de donnée sera du MariaDB, le serveur web (servant également de reverse proxy si besoin) sera du nginx ; les deux tourneront sous docker. Le code java pourrait également être exécuté dans un conteneur docker.
+
 == Description des interactions entre les clients et le serveur
 
 include::description_interactions_client-serveur.adoc[Description des interactions entre le client et le serveur]
