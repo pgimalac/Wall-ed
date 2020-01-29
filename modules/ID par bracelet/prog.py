@@ -6,7 +6,7 @@ il y a donc 4 parties qui suivent, chacune implémentant une étape en une ou pl
 '''
 
 def main(img):
-    imageFiltree = seuillageGris(img, 80)
+    imageFiltree = seuillageGris(img, 100)
     imageComp, composante = main_composantes(imageFiltree)
     histogramme = histo(img, imageComp, composante)
     l1, l2 = determinationLABEL(histogramme)
