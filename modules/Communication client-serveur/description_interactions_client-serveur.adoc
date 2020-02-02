@@ -1,0 +1,85 @@
+=== description de toutes les commandes et de toutes les réponses entre le client et le serveur.
+
+
+Client : application mobile
+
+Serveur : serveur et bdd
+
+Connection: wifi
+
+Protocole: TCP
+
+La fréquence de de création d’un dossier est une fois par an.
+
+La fréquence d’accès aux stats dépend entièrement de l’utilisateur, mais il est raisonnable de penser que l’utilisateur sépare au moins ses demandes de 5 min.
+
+Les données sont brutes (texte ou valeur) pour la plupart des échanges sauf la page de stats qui serait un code html donc plus massive (quelques Ko).
+
+Les échanges peuvent être asynchrones.
+
+Le client et le serveur sont des objets java, les commandes et réponses sont donc des méthodes.
+
+
+
+==== Commandes du client :	
+
+demande d’accès aux stats d’une session: prend en argument une session (String)
+
+création d’un dossier (nouvelle session)
+
+authentification: prend en argument un nom d’utilisateur et un mot de passe (sous forme de String)
+
+==== Réponse du serveur :
+
+page web (code html) contenant les stats demandées
+
+validation de la création du dossier
+
+
+=== Description des différents échanges lors d’une session :
+
+
+DEBUT : 
+
+- sur l’application création d’une nouvelle session, ajout des utilisateurs (enfants : récupération de la liste des enfants du serveur et association de chaque enfant sélectionné à un bracelet via un scan avec le téléphone du bracelet)
+
+- choix des paramètres de session (durée, type de lieu, type de session)
+
+- une fois l’initialisation terminée, transfert des informations au serveur qui crée alors la session dans la bdd
+
+- retour du serveur : “ok session initialisée”
+
+- début de la session via un bouton start sur l’application : envoi du message au serveur, transmission du message au robot, qui retourne le statut (erreur ou ok début de recherche de déchet), retour à l’application “session en cours”
+
+- passage en MODE RECHERCHE
+
+
+MODE RECHERCHE :
+
+- envoi des stats du robot au serveur (activité), transmis à l’appli, toutes les 30 sec
+
+- déplacement aléatoire et prise de photo toutes les 1 sec et transmission au serveur, qui analyse l’image
+
+- si déchet trouvé -> passage en MODE VERIFICATION
+
+- si sur l’appli on sélectionne le bouton “fin de session”, ou si le timer arrive à expiration -> passage en FIN
+
+
+MODE VERIFICATION :
+
+- envoi d’un message “stop mouvement” au robot et un message “déchet trouvé” à l’appli
+
+- le serveur envoie également le type de déchet au robot qui attend un scan de bracelet et un appui sur un bouton “type de déchet” sur sa coque
+
+- une fois cette étape effectuée, envoi au serveur de la réponse de l’enfant associée à l’id du bracelet
+
+- le serveur ajoute une entrée à la table de la bdd et transfert le résultat à l’appli qui fait évoluer le graph des stats en temps réel
+
+- on repasse en MODE RECHERCHE
+
+
+FIN
+
+- le robot s’éteint, l’appli vide son cache de statistiques et de paramètres, le serveur met toutes les données temporaires dans la bdd (du coup ce qui est plus haut se fait là quant aux actions du serveur sur la bdd)
+
+- le serveur retourne en mode attente d’initialisation
