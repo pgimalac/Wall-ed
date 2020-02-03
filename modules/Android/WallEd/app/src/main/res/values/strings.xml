@@ -14,10 +14,8 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="add_user_text">AJOUT D\'UN UTILISATEUR</string>
+    <string name="add_user_text">Ajout d\'un utilisateur</string>
+    <string name="add_user_take_picture">Prendre la photo du bracelet</string>
     <string name="user_name">Nom</string>
     <string name="user_firstName">Prénom</string>
     <string name="user_class">Classe</string>

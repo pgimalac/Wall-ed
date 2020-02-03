@@ -220,10 +220,10 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView imageViewPhoto = findViewById(R.id.imageView_photo);
+        /*ImageView imageViewPhoto = findViewById(R.id.imageView_photo);
         if (resultCode == RESULT_OK){
             imageViewPhoto.setImageURI(image_uri);
-        }
+        }*/
     }
 
     private void openCamera(){
