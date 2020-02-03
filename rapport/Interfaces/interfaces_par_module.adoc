@@ -1,9 +1,9 @@
 Application Android
 
 
--méthode d’initialisation de la BDD
+-méthode d’initialisation de la BDD qui renvoie un identifiant entier pour stocker les futures informations
 
--restitution des statistiques
+-restitution des statistiques: méthode getStats qui prend l'identifiant mentionné ci-dessus et qui renvoie la liste des statistiques au format JSON
 
 -afficher les infos des bracelets
 
@@ -17,11 +17,11 @@ Reconnaissance de déchets
 
 
 Client-Serveur
+-connexion entre le client et le serveur par TCP
 
+-initialisation de la BDD & association des bracelets au nom des élèves
 
--initialisation de la BDD & association des bracelets
-
--réception/envoi de statistiques (pour l’application)
+-réception/envoi de statistiques (pour l’application) au format JSON
 
 -analyse des statistiques
 

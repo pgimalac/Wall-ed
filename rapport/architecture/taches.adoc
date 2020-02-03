@@ -33,11 +33,7 @@ sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 | T1    | Déplacement du robot vers un endroit souhaité         |
 | T1.1  | Capacité de se déplacer                               | X
 | T1.2  | Déplacements & rotations jusqu'à repérage des déchets | X
-| T1.3  | Capacité d'aller à un endroit choisi                  | X
-| T2    | Ramassage des déchets                                 |
-| T2.1  | Ajout d'un outil de ramassage                         | X
-| T2.2  | Capacité d'utiliser l'outil                           | X
-| T2.3  | Ramassage d'un déchet choisi                          |
+| T1.3  | Capacité d'aller à un endroit choisi                  |
 |====
 
 **Analyse d'image**

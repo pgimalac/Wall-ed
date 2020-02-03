@@ -1,20 +1,19 @@
 Interface Application / Client-Serveur
 
 
-(Appli → C-S)
+(Android → Client-Serveur)
+- appel à la méthode initBDD qui initialise la base de données pour stocker de futures informations sur une séance, renvoie un identifiant de session
 
-- appel à la méthode initBDD
+- appel à la méthode addPupil (prend en argument nom, prénom et identifiant bracelet de l'élève sous forme de Strings)
 
-- appel à la méthode addBDD (prend en argument nom, prénom et identifiant bracelet de l'élève sous forme de String)
-
-- appel à la méthode getStats (prend en argument un identifiant de session sous forme de Int)
+- appel à la méthode getStats (prend en argument un identifiant de session sous forme de Int, renvoie les informations d'une session au format JSON)
 
 - gestion de l’activité (modes du robot) (éventuellement)
 
 
-(C-S → Appli)
+(Client-Serveur → Android)
 
-- réponse à getStats (envoi des statistiques de la session concernée sous forme de tableau de tuples)
+- réponse à getStats (prend l'identifiant de la session, renvoie des statistiques de la session concernée au format JSON)
 
 - données d’activité du robot et de son état de fonctionnement (batterie, mode) (éventuellement)
 
@@ -23,28 +22,28 @@ Interface Application / Client-Serveur
 Interface Reconnaissance de déchets / Client-Serveur
 
 
-(Rec → C-S)
+(Reconnaissance de déchets → Client-Serveur)
 
-- appel au code python reconnaissant les déchets (prend en entrée un fichier image et renvoie une liste des déchets avec leur type et coordonnées respectives)
+- appel au code python reconnaissant les déchets (prend en entrée un fichier image et renvoie une liste des déchets avec leur type et coordonnées respectives au format JSON)
 
 
-(C-S → Rec)
+(Client-Serveur → Reconnaissance de déchets)
 
-- transmission de l’image fournie par le robot (fichier image en entrée du code python)
+- transmission de l’image fournie par le robot (module Image de la bibliothèque PIL) en entrée du code python
 
 
 
 Interface Conception visuelle et interaction / Client-Serveur
 
 
-(C-S → Conception visu & inter)
+(Client-Serveur → Conception visuelle et interaction)
 
-- appel à la méthode sendObjectType (prend en argument une liste telle que renvoyée par le code python de reconnaissance de déchets)
+- appel à la méthode sendObjectType (prend en argument les informations d'une image au format JSON telles que renvoyées par le code python de reconnaissance de déchets)
 
 - gestion des activités (modes du robot) (éventuellement)
 
 
-(Conception visu & inter → C-S)
+(Conception visuelle et interaction → Client-Serveur)
 
 - appel à la méthode addAction (prend en argument: l'identifiant bracelet de l'élève qui a agit, le type du déchet et le type donné par l'élève sous forme de String)
 
@@ -55,23 +54,19 @@ Interface Conception visuelle et interaction / Client-Serveur
 Interface Client-Serveur / SLAM
 
 
-(C-S → SLAM)
+(Client-Serveur → SLAM)
 
 - appel à la méthode sendObjectType définie plus haut
 
+(SLAM → Client-Serveur)
 
-(SLAM → C-S)
-
-- appel à la méthode sendPicture (prend en argument un fichier image)
+- appel à la méthode sendPicture (prend en argument un fichier image du module Image de la bibliothèque PIL de python)
 
 
 
 Interface ID par bracelet / Conception visuelle et interaction
 
 
-(ID → Conception visu & inter)
+(ID par bracelet → Conception visuelle et interaction)
 
-- transmission du nom de l’enfant en intéraction avec le robot (celui qui ramasse le déchet) (String)
-
-
-(Conception visu & inter → ID)
+- méthode getChild qui renvoie le nom de l’enfant en interaction avec le robot (celui qui ramasse le déchet) sous forme de String
