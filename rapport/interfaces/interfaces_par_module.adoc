@@ -1,4 +1,4 @@
-=== Application Android
+==== Application Android
 
 
 - méthode d’initialisation de la BDD qui renvoie un identifiant entier pour stocker les futures informations
@@ -9,14 +9,14 @@
 
 
 
-=== Reconnaissance de déchets
+==== Reconnaissance de déchets
 
 
 - liste des objets sur l’image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
 
 
 
-=== Client-Serveur
+==== Client-Serveur
 - connexion entre le client et le serveur par TCP
 
 - initialisation de la BDD & association des bracelets au nom des élèves
@@ -33,14 +33,14 @@
 
 
 
-=== Bracelets
+==== Bracelets
 
 
 - reconnaître un bracelet
 
 
 
-=== Conception visuelle
+==== Conception visuelle
 
 
 - code interprétant l’information "type du déchet" provenant de la BDD et interaction avec l’enfant
@@ -51,7 +51,7 @@
 
 
 
-=== SLAM
+==== SLAM
 
 
 - transmission de l’image (BDD & module interaction)
