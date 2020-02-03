@@ -27,12 +27,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
@@ -51,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
-    private Uri image_uri;
+    private Uri mImage_uri;
 
-    private FragmentManager fragmentManager = null;
+    private FragmentManager mFragmentManager = null;
     private AppBarConfiguration mAppBarConfiguration = null;
     private ArrayList<fr.telecom.pact32.wall_ed.model.Utilisateur> mUsers = null;
     private SharedPreferences mPrefs = null;
@@ -80,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                 .build();
 
         MainFragment mainFragment = new MainFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
                 .replace(R.id.main_frame_layout, mainFragment)
                 .addToBackStack(null).commit();
 
@@ -143,19 +140,19 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         switch (id) {
             case R.id.menu_users:
                 Fragment listeUtilisateurs = new UtilisateursFragment();
-                fragmentManager.beginTransaction()
+                mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, listeUtilisateurs)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_add_user:
                 Fragment ajoutUtilisateurFragment = new AjoutUtilisateurFragment();
-                fragmentManager.beginTransaction()
+                mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, ajoutUtilisateurFragment)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_statistiques:
                 Fragment statistiques_globales = new Statistiques_globales();
-                fragmentManager.beginTransaction()
+                mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, statistiques_globales)
                         .addToBackStack(null).commit();
                 break;
@@ -176,14 +173,14 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         switch (viewId){
             case R.id.demarrer_button:
                 utilisateursFragment = new UtilisateursFragment();
-                fragmentManager.beginTransaction()
+                mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
             case R.id.enregistrement_button:
                 addUser(new Utilisateur(getIntent().getExtras().getString("firstName"), getIntent().getExtras().getString("name"), getIntent().getExtras().getString("group"), "0"));
                 utilisateursFragment = new UtilisateursFragment();
-                fragmentManager.beginTransaction()
+                mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
@@ -230,9 +227,9 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "Image bracelet");
         values.put(MediaStore.Images.Media.DESCRIPTION, "Image d'un bracelet d'identification");
-        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        mImage_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mImage_uri);
         startActivityForResult(cameraIntent, IMAGE_CAPTURE_CODE);
     }
 
