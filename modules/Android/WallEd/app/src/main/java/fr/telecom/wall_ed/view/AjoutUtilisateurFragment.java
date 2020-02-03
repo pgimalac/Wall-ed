@@ -1,12 +1,18 @@
 package fr.telecom.wall_ed.view;
 
 
+import android.Manifest;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -16,10 +22,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.BitSet;
 
 import fr.telecom.wall_ed.R;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -73,10 +82,8 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
                 onClickListenerCallback.onClick(v);
                 break;
             case R.id.bt_photo:
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Uri uri  = Uri.parse("file:///sdcard/photo.jpg");
-                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
-                startActivityForResult(intent, 0);
+                onClickListenerCallback.onClick(v);
+                break;
         }
     }
 
@@ -89,10 +96,5 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        imageViewPhoto.setImageBitmap(bitmap);
-    }
+
 }
