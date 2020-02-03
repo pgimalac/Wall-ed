@@ -1,59 +1,59 @@
-Application Android
+=== Application Android
 
 
--méthode d’initialisation de la BDD qui renvoie un identifiant entier pour stocker les futures informations
+- méthode d’initialisation de la BDD qui renvoie un identifiant entier pour stocker les futures informations
 
--restitution des statistiques: méthode getStats qui prend l'identifiant mentionné ci-dessus et qui renvoie la liste des statistiques au format JSON
+- restitution des statistiques: méthode getStats qui prend l'identifiant mentionné ci-dessus et qui renvoie la liste des statistiques au format JSON
 
--afficher les infos des bracelets
-
-
-
-Reconnaissance de déchets
-
-
--liste des objets sur l’image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
+- afficher les infos des bracelets
 
 
 
-Client-Serveur
--connexion entre le client et le serveur par TCP
+=== Reconnaissance de déchets
 
--initialisation de la BDD & association des bracelets au nom des élèves
 
--réception/envoi de statistiques (pour l’application) au format JSON
-
--analyse des statistiques
-
--transmission Robot(image)/Serveur(reconnaissance de déchets)
-
--envoi de la BDD de la classe
-
--séléction aléatoire de noms (à envoyer au robot pendant l’activité)
+- liste des objets sur l’image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
 
 
 
-Bracelets
+=== Client-Serveur
+- connexion entre le client et le serveur par TCP
+
+- initialisation de la BDD & association des bracelets au nom des élèves
+
+- réception/envoi de statistiques (pour l’application) au format JSON
+
+- analyse des statistiques
+
+- transmission Robot(image)/Serveur(reconnaissance de déchets)
+
+- envoi de la BDD de la classe
+
+- séléction aléatoire de noms (à envoyer au robot pendant l’activité)
 
 
--reconnaître un bracelet
+
+=== Bracelets
+
+
+- reconnaître un bracelet
 
 
 
-Conception visuelle
+=== Conception visuelle
 
 
--code interprétant l’information "type du déchet" provenant de la BDD et interaction avec l’enfant
+- code interprétant l’information "type du déchet" provenant de la BDD et interaction avec l’enfant
 
--(à l’initialisation) réception de la BDD de la classe & transmission des bracelets
+- (à l’initialisation) réception de la BDD de la classe & transmission des bracelets
 
--envoi des données d’activité (nom de l’enfant, bon/mauvais déchet,…​)
-
-
-
-SLAM
+- envoi des données d’activité (nom de l’enfant, bon/mauvais déchet,…​)
 
 
--transmission de l’image (BDD & module interaction)
 
--navigation (envoi & réception)
+=== SLAM
+
+
+- transmission de l’image (BDD & module interaction)
+
+- navigation (envoi & réception)
