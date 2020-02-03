@@ -2,49 +2,49 @@
 
 ==== Application Android
 
--méthode d'initialisation de la BDD
+- méthode d'initialisation de la BDD
 
--restitution des statistiques
+- restitution des statistiques
 
--afficher les infos des bracelets
+- afficher les infos des bracelets
 
 
 ==== Reconnaissance de déchets
 
--liste des objets sur l'image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
+- liste des objets sur l'image, de leur direction par rapport au robot, de leur type(, avec un taux de certitude)
 
 
 ==== Client-Serveur
 
--initialisation de la BDD & association des bracelets
+- initialisation de la BDD & association des bracelets
 
--réception/envoi de statistiques (pour l'application)
+- réception/envoi de statistiques (pour l'application)
 
--analyse des statistiques
+- analyse des statistiques
 
--transmission Robot(image)/Serveur(reconnaissance de déchets)
+- transmission Robot(image)/Serveur(reconnaissance de déchets)
 
--envoi de la BDD de la classe
+- envoi de la BDD de la classe
 
--séléction aléatoire de noms (à envoyer au robot pendant l'activité)
+- séléction aléatoire de noms (à envoyer au robot pendant l'activité)
 
 
 ==== Bracelets
 
--reconnaître un bracelet
+- reconnaître un bracelet
 
 
 ==== Conception visuelle
 
--code interprétant l'information "type du déchet" provenant de la BDD et interaction avec l'enfant
+- code interprétant l'information "type du déchet" provenant de la BDD et interaction avec l'enfant
 
--(à l'initialisation) réception de la BDD de la classe & transmission des bracelets
+- (à l'initialisation) réception de la BDD de la classe & transmission des bracelets
 
--envoi des données d'activité (nom de l'enfant, bon/mauvais déchet,...)
+- envoi des données d'activité (nom de l'enfant, bon/mauvais déchet,...)
 
 
 ==== SLAM
 
--transmission de l'image (BDD & module interaction)
+- transmission de l'image (BDD & module interaction)
 
--navigation (envoi & réception)
+- navigation (envoi & réception)
