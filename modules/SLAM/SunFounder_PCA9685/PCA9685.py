@@ -45,8 +45,8 @@ class PWM(object):
         self.address = address
         self.bus_number = bus_number
         self.bus = smbus.SMBus(self.bus_number)
-        self.setup()
-        self.frequency = frequency
+        #self.setup()
+        #self.frequency = frequency
 
     def _debug_(self, message):
         if self._DEBUG:
