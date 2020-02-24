@@ -31,9 +31,9 @@ authentification: prend en argument un nom d’utilisateur et un mot de passe (s
 
 ==== Réponse du serveur :
 
-page web (code html) contenant les stats demandées
+tableau contenant les statistiques de la session
 
-validation de la création du dossier
+validation de la création du dossier (String "OK")
 
 
 === Description des différents échanges lors d’une session :
