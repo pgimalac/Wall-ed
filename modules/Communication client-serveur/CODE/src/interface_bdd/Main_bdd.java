@@ -37,12 +37,13 @@ public class Main_bdd {
    public void open(){
       
       Thread t = new Thread(new Runnable(){
+    	 @Override
          public void run(){
             while(isRunning == true){
                
                try {
                   Socket client = server.accept();
-                  System.out.println("Connexion cliente reçue.");                  
+                  System.out.println("Connexion cliente reÃ§ue.");                  
                   Thread t = new Thread(new ClientProcessor(client));
                   t.start();
                   
