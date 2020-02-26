@@ -17,7 +17,7 @@ public class Connect_bdd {
 	         
 	      Connection conn = DriverManager.getConnection(url, user, passwd);
 	      
-	      System.out.println("connection ok");
+	      System.out.println("Connexion ok");
 	      
 	      /*
 	      //Création d'un objet Statement
