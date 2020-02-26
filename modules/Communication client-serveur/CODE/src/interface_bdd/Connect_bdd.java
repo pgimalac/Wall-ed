@@ -1,19 +1,25 @@
 package interface_bdd;
-import org.mariadb.jdbc.*;
+import java.sql.DriverManager;
+import java.sql.Connection;
 
 public class Connect_bdd {
 	
-	public int connexion() {
+	public static void main(String[] args) {
 	
 		try {
-	      Class.forName("Driver");
+	      Class.forName("org.mariadb.jdbc.Driver");
+	      
+	      System.out.println("Driver OK");
 	         
-	      String url = "jdbc:postgresql://localhost:5432/Ecole";
-	      String user = "postgres";
-	      String passwd = "postgres";
+	      String url = "jdbc:mariadb://localhost:3306/pact";
+	      String user = "pact";
+	      String passwd = "pactpact";
 	         
 	      Connection conn = DriverManager.getConnection(url, user, passwd);
-	         
+	      
+	      System.out.println("connection ok");
+	      
+	      /*
 	      //Création d'un objet Statement
 	      Statement state = conn.createStatement();
 	      //L'objet ResultSet contient le résultat de la requête SQL
@@ -24,6 +30,7 @@ public class Connect_bdd {
 
 	      result.close();
 	      state.close();
+	      */
 	         
 	    } catch (Exception e) {
 	      e.printStackTrace();
