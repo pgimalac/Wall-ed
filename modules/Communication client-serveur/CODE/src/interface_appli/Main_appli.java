@@ -26,7 +26,7 @@ public class Main_appli implements Runnable{
       }
    }
    
-   
+   @Override
    public void run(){
 
       for(int i =0; i < 10; i++){
@@ -45,10 +45,10 @@ public class Main_appli implements Runnable{
             writer.write(commande);
             writer.flush();
             
-            System.out.println("Commande " + commande + " envoyée au serveur");
+            System.out.println("Commande " + commande + " envoyï¿½e au serveur");
             
             String response = read();
-            System.out.println("\t * " + name + " : Réponse reçue " + response);
+            System.out.println("\t * " + name + " : Rï¿½ponse reï¿½ue " + response);
             
          } catch (IOException e1) {
             e1.printStackTrace();
@@ -64,6 +64,18 @@ public class Main_appli implements Runnable{
       writer.write("CLOSE");
       writer.flush();
       writer.close();
+   }
+   
+   public void initBDD() {
+	   //todo
+   }
+   
+   public void addPupil(String lastName, String firstName, String braceletID) {
+	   //todo
+   }
+   
+   public void getStats(int sessionID) {
+	   //todo
    }
    
    private String getCommand(){

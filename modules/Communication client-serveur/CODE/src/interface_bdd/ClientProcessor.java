@@ -18,6 +18,7 @@ public class ClientProcessor implements Runnable{
       sock = pSock;
    }
    
+   @Override
    public void run(){
       System.err.println("Lancement du traitement de la connexion cliente");
 
@@ -36,7 +37,7 @@ public class ClientProcessor implements Runnable{
             debug = "Thread : " + Thread.currentThread().getName() + ". ";
             debug += "Demande de l'adresse : " + remote.getAddress().getHostAddress() +".";
             debug += " Sur le port : " + remote.getPort() + ".\n";
-            debug += "\t -> Commande reçue : " + response + "\n";
+            debug += "\t -> Commande reï¿½ue : " + response + "\n";
             System.err.println("\n" + debug);
             
             String toSend = "";
@@ -52,7 +53,7 @@ public class ClientProcessor implements Runnable{
                   toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
                   break;
                case "CLOSE":
-                  toSend = "Communication terminée"; 
+                  toSend = "Communication terminï¿½e"; 
                   closeConnexion = true;
                   break;
                default : 
