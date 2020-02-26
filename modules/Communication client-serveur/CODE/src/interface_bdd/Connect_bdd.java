@@ -1,39 +1,60 @@
 package interface_bdd;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
 import java.sql.Connection;
 
 public class Connect_bdd {
 	
-	public static void main(String[] args) {
+	private static String base = "pact";
+	private static String user = "pact";
+	private static String passwd = "pactpact";
+	
+	public void setDataBase(String base) {
+		Connect_bdd.base = base;
+	}
+	
+	public void setUser(String user, String passwd) {
+		Connect_bdd.user = user;
+		Connect_bdd.passwd = passwd;
+	}
+	
+	public String getConnectionBase() {
+		return Connect_bdd.base;
+	}
+	
+	public String getConnectionUser() {
+		return Connect_bdd.user;
+	}
+	
+	public static ResultSetMetaData executeSQL(String commandeSQL) {
+		
+		ResultSetMetaData resultMeta = null;
 	
 		try {
 	      Class.forName("org.mariadb.jdbc.Driver");
 	      
 	      System.out.println("Driver OK");
 	         
-	      String url = "jdbc:mariadb://localhost:3306/pact";
-	      String user = "pact";
-	      String passwd = "pactpact";
-	         
-	      Connection conn = DriverManager.getConnection(url, user, passwd);
+	      Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/" + Connect_bdd.base, Connect_bdd.user, Connect_bdd.passwd);
 	      
 	      System.out.println("Connexion ok");
 	      
-	      /*
 	      //Création d'un objet Statement
 	      Statement state = conn.createStatement();
 	      //L'objet ResultSet contient le résultat de la requête SQL
-	      ResultSet result = state.executeQuery("SELECT * FROM classe");
+	      ResultSet result = state.executeQuery(commandeSQL);
 	      //On récupère les MetaData
-	      ResultSetMetaData resultMeta = result.getMetaData();
+	      resultMeta = result.getMetaData();
 	      
 
 	      result.close();
 	      state.close();
-	      */
 	         
 	    } catch (Exception e) {
 	      e.printStackTrace();
 	    }
+		return resultMeta;
 	}
 }

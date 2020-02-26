@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import interface_appli.ClientProcessor;
 import interface_appli.Main_appli;
 import interface_bdd.*;
 
