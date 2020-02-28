@@ -57,4 +57,37 @@ public class Connect_bdd {
 	    }
 		return resultMeta;
 	}
+	
+	
+	public static String lastExecuteSQL(String commandeSQL, String enregistrement) {
+		
+		String res = "";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+		      
+		    System.out.println("Driver OK");
+		         
+		    Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/" + Connect_bdd.base, Connect_bdd.user, Connect_bdd.passwd);
+		      
+		    System.out.println("Connexion ok");
+		      
+		    //Création d'un objet Statement
+		    Statement state = conn.createStatement();
+		    //L'objet ResultSet contient le résultat de la requête SQL
+		    ResultSet result = state.executeQuery(commandeSQL);
+		    
+		    result.last();
+		    
+		    res = result.getString(enregistrement);
+
+		    result.close();
+		    state.close();
+		         
+		} catch (Exception e) {
+		      e.printStackTrace();
+		}
+		
+		return res;
+	}
 }
