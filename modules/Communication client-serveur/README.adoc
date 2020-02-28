@@ -18,7 +18,7 @@ Une base de donnée par établissement scolaire :
 
 - Une table globale, un enregistrement par session (champs : identifiant de la session, date, heure de début, heure de fin, nombre d'enfants)
 
-- Une table par session pour les déchets, un enregistrement par ramassage de déchet (champs : identifiant de l'action, identifiant de session, identifiant de bracelet, type de déchet, réponse de l'élève)
+- Une table par session pour les déchets, un enregistrement par ramassage de déchet (champs : identifiant de l'action, identifiant de session, identifiant de bracelet, type de déchet, réponse de l'élève, heure du ramassage)
 
 - Une table par session pour les élèves, un enregistrement par élève (champs : identifiant de bracelet, identifiant de l'élève)
 
