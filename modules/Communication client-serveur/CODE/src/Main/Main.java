@@ -12,6 +12,8 @@ import interface_server.*;
 public class Main {
 
 	   public static void main(String[] args) {
+		   
+		   // init de deux Main_server (un robot et un appli)
 	    
 	      String host = "127.0.0.1";
 	      int port = 2345;
@@ -20,5 +22,14 @@ public class Main {
 	      ts.open();
 	      
 	      System.out.println("Serveur initialisé.");
+	      
+	      
+	      // TODO
+	      
+	      
+	   }
+	   
+	   public static void initilisation() {
+		   
 	   }
 }

@@ -6,14 +6,26 @@ public class Initialisation {
 	// récupération de la liste des enfants avec leurs ID de bracelets
 	// --> on stocke ça dans les tableaux suivants
 	
-	private final String[] noms;
-	private final String[] prenoms;
-	private final int[] ids;
 	
-	public Initialisation(String[] noms, String[] prenoms, int[] ids) {
+	/* SI ON UTILISE UN CONSTRUCTEUR AU LIEU D'UNE METHODE STATIQUE
+	 * 
+	private static final String[] noms;
+	private static final String[] prenoms;
+	private static final int[] ids;
+	private static final String date, heureDebut;
+	private static final int[] bracelets;
+	*/
+	
+	public static Session initialisation(String[] noms, String[] prenoms, int[] ids, String date, String heureDebut, int[] bracelets) {
+		/* IDEM
+		
 		this.noms = noms;
 		this.prenoms = prenoms;
 		this.ids = ids;
+		this.bracelets = bracelets;
+		this.date = date;
+		this.heureDebut = heureDebut;
+		*/
 		
 		int[] elevesID = AjoutEleve.addEleves(noms, prenoms);
 		
@@ -24,15 +36,12 @@ public class Initialisation {
 			listeEleves[i] = suivant;
 		}
 		
-		// on récupère les infos de la session (dates et heures) et des bracelets
-		
-		String date, heureDebut, heureFin;
-		int[] bracelets;
-		
 		Main_bdd.initSessionID();
 		int sessionID = Main_bdd.setSessionID();
 		
-		Session session = new Session(sessionID, listeEleves, bracelets, date, heureDebut, heureFin);
+		Session session = new Session(sessionID, listeEleves, bracelets, date, heureDebut);
+		
+		return session;
 		
 	}
 

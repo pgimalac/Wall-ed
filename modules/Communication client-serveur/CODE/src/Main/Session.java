@@ -13,13 +13,12 @@ public class Session {
 	private String table_ramassage;
 	private String table_eleves;
 	
-	public Session(int id, Eleve[] eleves, int[] bracelets, String date, String heureDebut, String heureFin) {
+	public Session(int id, Eleve[] eleves, int[] bracelets, String date, String heureDebut) {
 		this.sessionID = id;
 		this.eleves = eleves;
 		this.nbEleves = this.eleves.length;
 		this.date = date;
 		this.heureDebut = heureDebut;
-		this.heureFin = heureFin;
 		
 		int lastID = AjoutEleve.getLastEleveID();
 		int tempID;
@@ -41,9 +40,12 @@ public class Session {
 			}
 		}
 		
+	}
+	
+	public void finSession(String heureFin) {
+		this.heureFin = heureFin;
 		String[] values = {Integer.toString(this.sessionID), this.date, this.heureDebut, this.heureFin, Integer.toString(this.nbEleves)};
 		Edition_table.addEnregistrement("GLOBALE", values);
-		
 	}
 	
 	public int getSessionID() {
@@ -74,6 +76,7 @@ public class Session {
 		for (int i = 0; i < this.eleves.length; i++) {
 			if (this.eleves[i].getEleveID() == id) {
 				result = true;
+				break;
 			}
 		}
 		return result;
