@@ -53,6 +53,7 @@ public class Session {
 		this.heureFin = now3.toString();
 		String[] values = {Integer.toString(this.sessionID), this.date, this.heureDebut, this.heureFin, Integer.toString(this.nbEleves)};
 		Edition_table.addEnregistrement("GLOBALE", values);
+		Initialisation.setSessionEnCours(null);
 	}
 	
 	public int getSessionID() {

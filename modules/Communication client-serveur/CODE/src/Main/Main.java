@@ -1,5 +1,6 @@
 package Main;
 
+/*
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -7,6 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import interface_bdd.*;
+*/
 import interface_server.*;
 
 public class Main {
