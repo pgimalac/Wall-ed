@@ -29,12 +29,9 @@ public class Main {
 	      
 	   }
 	   
-	   public static int initSession() {
-		   //todo (renvoie l'identifiant de la session créée)
-	   }
-	   
-	   public static void addPupil(String lastName, String firstName, String braceletID) {
-		   //todo
+	   public static int initSession(String[] noms, String[] prenoms, int[] braceletsID) {
+		   Session sessionEnCours = Initialisation.initialisation(noms, prenoms, braceletsID);
+		   return sessionEnCours.getSessionID();
 	   }
 	   
 	   public static void getStats(int sessionID) {

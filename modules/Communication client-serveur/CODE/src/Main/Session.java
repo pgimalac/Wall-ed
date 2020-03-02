@@ -1,5 +1,6 @@
 package Main;
 import interface_bdd.*;
+import java.time.*;
 
 public class Session {
 	
@@ -13,12 +14,10 @@ public class Session {
 	private String table_ramassage;
 	private String table_eleves;
 	
-	public Session(int id, Eleve[] eleves, int[] bracelets, String date, String heureDebut) {
+	public Session(int id, Eleve[] eleves, int[] bracelets) {
 		this.sessionID = id;
 		this.eleves = eleves;
 		this.nbEleves = this.eleves.length;
-		this.date = date;
-		this.heureDebut = heureDebut;
 		
 		int lastID = AjoutEleve.getLastEleveID();
 		int tempID;
@@ -42,8 +41,16 @@ public class Session {
 		
 	}
 	
-	public void finSession(String heureFin) {
-		this.heureFin = heureFin;
+	public void debutSession() {
+		LocalDate now = java.time.LocalDate.now();
+		this.date = now.toString();
+		LocalTime now2 = java.time.LocalTime.now();
+		this.heureDebut = now2.toString();
+	}
+	
+	public void finSession() {
+		LocalTime now3 = java.time.LocalTime.now();
+		this.heureFin = now3.toString();
 		String[] values = {Integer.toString(this.sessionID), this.date, this.heureDebut, this.heureFin, Integer.toString(this.nbEleves)};
 		Edition_table.addEnregistrement("GLOBALE", values);
 	}

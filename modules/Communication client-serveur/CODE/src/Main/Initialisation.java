@@ -16,7 +16,7 @@ public class Initialisation {
 	private static final int[] bracelets;
 	*/
 	
-	public static Session initialisation(String[] noms, String[] prenoms, int[] ids, String date, String heureDebut, int[] bracelets) {
+	public static Session initialisation(String[] noms, String[] prenoms, int[] bracelets) {
 		/* IDEM
 		
 		this.noms = noms;
@@ -39,7 +39,7 @@ public class Initialisation {
 		Main_bdd.initSessionID();
 		int sessionID = Main_bdd.setSessionID();
 		
-		Session session = new Session(sessionID, listeEleves, bracelets, date, heureDebut);
+		Session session = new Session(sessionID, listeEleves, bracelets);
 		
 		return session;
 		
