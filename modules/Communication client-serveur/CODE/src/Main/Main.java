@@ -29,7 +29,15 @@ public class Main {
 	      
 	   }
 	   
-	   public static void initilisation() {
-		   
+	   public static int initSession() {
+		   //todo (renvoie l'identifiant de la session créée)
+	   }
+	   
+	   public static void addPupil(String lastName, String firstName, String braceletID) {
+		   //todo
+	   }
+	   
+	   public static void getStats(int sessionID) {
+		   //todo (renvoie //todo)
 	   }
 }

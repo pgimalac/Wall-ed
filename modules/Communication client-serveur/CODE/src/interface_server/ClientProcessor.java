@@ -37,22 +37,22 @@ public class ClientProcessor implements Runnable{
             debug = "Thread : " + Thread.currentThread().getName() + ". ";
             debug += "Demande de l'adresse : " + remote.getAddress().getHostAddress() +".";
             debug += " Sur le port : " + remote.getPort() + ".\n";
-            debug += "\t -> Commande re�ue : " + response + "\n";
+            debug += "\t -> Commande reçue : " + response + "\n";
             System.err.println("\n" + debug);
             
             String toSend = "";
             
             switch(response.toUpperCase()){
-               case "FULL":
+               case "initSession":
                   toSend = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM).format(new Date());
                   break;
-               case "DATE":
+               case "addPupil":
                   toSend = DateFormat.getDateInstance(DateFormat.FULL).format(new Date());
                   break;
-               case "HOUR":
+               case "getStats":
                   toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
                   break;
-               case "CLOSE":
+               case "close":
                   toSend = "Communication terminée"; 
                   closeConnexion = true;
                   break;
