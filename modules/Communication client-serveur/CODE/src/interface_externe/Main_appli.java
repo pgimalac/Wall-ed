@@ -1,4 +1,4 @@
-package interface_appli;
+package interface_externe;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;

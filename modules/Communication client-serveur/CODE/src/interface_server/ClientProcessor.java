@@ -1,4 +1,4 @@
-package interface_appli;
+package interface_server;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,7 +53,7 @@ public class ClientProcessor implements Runnable{
                   toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
                   break;
                case "CLOSE":
-                  toSend = "Communication termin�e"; 
+                  toSend = "Communication terminée"; 
                   closeConnexion = true;
                   break;
                default : 
