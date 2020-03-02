@@ -4,16 +4,20 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Random;
+
+import Main.Main;
 
 public class Main_appli implements Runnable{
 
    private Socket connexion = null;
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
-   private String[] listCommands = {"initSession", "addPupil", "getStats", "close"};
    private static int count = 0;
-   private String name = "Client-";   
+   private String name = "Client-";
+   private String command = "none";
    
    public Main_appli(String host, int port){
       name += ++count;
@@ -29,22 +33,32 @@ public class Main_appli implements Runnable{
    @Override
    public void run(){
 
-      for(int i =0; i < 10; i++){
-         try {
-            Thread.currentThread().sleep(1000);
-         } catch (InterruptedException e) {
-            e.printStackTrace();
-         }
+      while(!connexion.isClosed()){
          try {
 
             
             writer = new PrintWriter(connexion.getOutputStream(), true);
             reader = new BufferedInputStream(connexion.getInputStream());
             
-            writer.write(commande);
+            switch(command){
+            case "initSession":
+            	command = "none";
+            	break;
+            case "getStats":
+            	command = "none";
+            	break;
+            case "close":
+                writer.write("close");
+                writer.flush();
+                writer.close();
+            	break;
+            default :                    
+            	break;
+            }
+            writer.write(command);
             writer.flush();
             
-            System.out.println("Commande " + commande + " envoyée au serveur");
+            System.out.println("Commande " + command + " envoyée au serveur");
             
             String response = read();
             System.out.println("\t * " + name + " : Réponse reçue " + response);
@@ -52,29 +66,19 @@ public class Main_appli implements Runnable{
          } catch (IOException e1) {
             e1.printStackTrace();
          }
-         
-         try {
-            Thread.currentThread().sleep(1000);
-         } catch (InterruptedException e) {
-            e.printStackTrace();
-         }
       }
-      
-      writer.write("close");
-      writer.flush();
-      writer.close();
    }
    
    public void initSession() {
-	   //todo
-   }
-   
-   public void addPupil(String lastName, String firstName, String braceletID) {
-	   //todo
+	   command = "initSession";
    }
    
    public void getStats(int sessionID) {
-	   //todo
+	   command = "getStats";
+   }
+   
+   public void stop() {
+	   command = "close";
    }
    
    private String read() throws IOException{      

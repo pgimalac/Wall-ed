@@ -28,7 +28,6 @@ public class Main_server {
 	public Main_server(String pHost, int pPort){
 		host = pHost;
 		port = pPort;
-		main = pmain;
 		try {
 			server = new ServerSocket(port, 100, InetAddress.getByName(host));
 		} catch (UnknownHostException e) {

@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.text.DateFormat;
 import java.util.Date;
+import Main.*;
 
 public class ClientProcessor implements Runnable{
 
@@ -42,23 +43,22 @@ public class ClientProcessor implements Runnable{
             
             String toSend = "";
             
-            switch(response.toUpperCase()){
+            switch(response){
                case "initSession":
-                  toSend = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM).format(new Date());
-                  break;
-               case "addPupil":
-                  toSend = DateFormat.getDateInstance(DateFormat.FULL).format(new Date());
-                  break;
+            	   Main.initSession();
+            	   toSend = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM).format(new Date());
+            	   break;
                case "getStats":
-                  toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
-                  break;
+            	   Main.getStats(sessionID);
+            	   toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
+            	   break;
                case "close":
-                  toSend = "Communication terminée"; 
-                  closeConnexion = true;
-                  break;
+            	   toSend = "Communication terminée"; 
+            	   closeConnexion = true;
+            	   break;
                default : 
-                  toSend = "Commande inconnue !";                     
-                  break;
+            	   toSend = "Commande inconnue !";                     
+            	   break;
             }
             
             writer.write(toSend);
