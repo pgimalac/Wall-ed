@@ -5,8 +5,12 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
-import java.text.DateFormat;
-import java.util.Date;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import Main.*;
 
 public class ClientProcessor implements Runnable{
@@ -45,15 +49,30 @@ public class ClientProcessor implements Runnable{
             
             switch(response){
                case "initSession":
-            	   Main.initSession();
-            	   toSend = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.MEDIUM).format(new Date());
-            	   break;
+            	   writer.write("send");
+            	   writer.flush();
+            	   String stringData = read();
+            	   JSONObject data = decode(stringData);
+            	   int nb = (int) data.get("numberOfStudents");
+            	   String[] noms = new String[nb];
+            	   String[] prenoms = new String[nb];
+            	   int[] braceletsID = new int[nb];
+            	   JSONObject lastNames = (JSONObject)data.get("lastNames");
+            	   JSONObject firstNames = (JSONObject)data.get("firstNames");
+            	   JSONObject IDs = (JSONObject)data.get("IDs");
+            	   for (int i =0; i<nb; i++) {
+            		   noms[i] = (String)lastNames.get(((Integer)i).toString());
+            		   prenoms[i] = (String)firstNames.get(((Integer)i).toString());
+            		   braceletsID[i] = (int)IDs.get(((Integer)i).toString());
+            	   }
+            	   Activite act = new Activite(noms, prenoms, braceletsID, this);
+               	   break;
                case "getStats":
             	   Main.getStats(sessionID);
-            	   toSend = DateFormat.getTimeInstance(DateFormat.MEDIUM).format(new Date());
-            	   break;
+               	   break;
                case "close":
-            	   toSend = "Communication terminée"; 
+            	   writer.write("Communication terminée");
+            	   writer.flush();
             	   closeConnexion = true;
             	   break;
                default : 
@@ -89,4 +108,10 @@ public class ClientProcessor implements Runnable{
       return response;
    }
    
+   private JSONObject decode(String input) throws ParseException {
+	   JSONParser parser = new JSONParser();
+	   Object ObjData = parser.parse(input);
+	   JSONObject jSONData = (JSONObject)(((JSONArray)ObjData).get(1));
+	   return jSONData;
+   }
 }

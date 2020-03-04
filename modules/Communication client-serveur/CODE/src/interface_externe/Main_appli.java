@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
+import org.json.simple.JSONObject;
 
 import Main.Main;
 
@@ -18,6 +19,7 @@ public class Main_appli implements Runnable{
    private static int count = 0;
    private String name = "Client-";
    private String command = "none";
+   private JSONObject data;
    
    public Main_appli(String host, int port){
       name += ++count;
@@ -42,6 +44,12 @@ public class Main_appli implements Runnable{
             
             switch(command){
             case "initSession":
+            	writer.write(command);
+            	writer.flush();
+            	if("send"==read()) {
+            		data.writeJSONString(writer);
+            		writer.flush();
+            	}
             	command = "none";
             	break;
             case "getStats":
@@ -69,8 +77,25 @@ public class Main_appli implements Runnable{
       }
    }
    
-   public void initSession() {
+   public void initSession(String[] noms, String[] prenoms, int[] braceletsID) {
 	   command = "initSession";
+	   int nb = noms.length;
+	   JSONObject lastNames = new JSONObject();
+	   JSONObject firstNames = new JSONObject();
+	   JSONObject IDs = new JSONObject();
+	   for(int i = 0; i<nb;i++) {
+		   lastNames.put(((Integer)i).toString(),noms[i] );
+	   }
+	   for(int i = 0; i<nb;i++) {
+		   firstNames.put(((Integer)i).toString(),prenoms[i] );
+	   }for(int i = 0; i<nb;i++) {
+		   IDs.put(((Integer)i).toString(),braceletsID[i] );
+	   }
+	   data = new JSONObject();
+	   data.put("numberOfStudents", nb);
+	   data.put("lastNames", lastNames);
+	   data.put("firstNames", firstNames);
+	   data.put("IDs", IDs);
    }
    
    public void getStats(int sessionID) {
