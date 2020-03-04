@@ -35,11 +35,6 @@ public class Main {
 	      
 	   }
 	   
-	   public static int initSession(String[] noms, String[] prenoms, int[] braceletsID) {
-		   Session sessionEnCours = Initialisation.initialisation(noms, prenoms, braceletsID);
-		   return sessionEnCours.getSessionID();
-	   }
-	   
 	   public static void getStats(int sessionID) {
 		   //todo (renvoie //todo)
 	   }
@@ -49,7 +44,7 @@ public class Main {
 		   
 		   String pythonScriptPath = "/home/adrien/Documents/test.py"; // à définir
 		   String[] cmd = new String[3];
-		   cmd[0] = "python"; // check version of installed python: python -V
+		   cmd[0] = "python";
 		   cmd[1] = pythonScriptPath;
 		   cmd[2] = image;
 		    

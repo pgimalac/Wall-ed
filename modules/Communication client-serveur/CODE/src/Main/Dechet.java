@@ -22,7 +22,7 @@ public class Dechet {
 		this.heureRamassage = java.time.LocalTime.now().toString();
 		this.reponseEleve = reponseEleve;
 		
-		String[] values = {Integer.toString(this.dechetID), Integer.toString(this.getSessionID()), Integer.toString(this.braceletID), this.type, this.typePropose, String.valueOf(this.reponseEleve), this.heureRamassage};
+		String[] values = {Integer.toString(this.dechetID), Integer.toString(this.session.getSessionID()), Integer.toString(this.braceletID), this.type, this.typePropose, String.valueOf(this.reponseEleve), this.heureRamassage};
 		
 		Edition_table.addEnregistrement(session.getTable_ramassage(), values);
 	}
@@ -31,8 +31,8 @@ public class Dechet {
 		return this.dechetID;
 	}
 
-	public int getSessionID() {
-		return this.session.getSessionID();
+	public Session getSession() {
+		return this.session;
 	}
 
 	public int getBraceletID() {
