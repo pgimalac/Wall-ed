@@ -101,5 +101,8 @@ public class Session {
 		return table_eleves;
 	}
 
+	public Eleve[] getEleves() {
+		return this.eleves;
+	}
 
 }

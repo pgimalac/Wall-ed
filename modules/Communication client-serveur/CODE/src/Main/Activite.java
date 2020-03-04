@@ -12,10 +12,9 @@ public class Activite {
 	
 	public Activite(String[] noms, String[] prenoms, int[] braceletsID, ClientProcessor clientApp) {
 		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
-		this.clientRobot = Client_server.inform(this.session.getSessionID());
+		this.clientRobot = Client_server.inform(this.session.getSessionID(), this.session.getEleves());
 		this.mode = null;
 		this.clientApp = clientApp;
-		// send to the robot the list of students for this session
 	}
 	
 	public Session getSession() {
@@ -48,12 +47,14 @@ public class Activite {
 		// --> envoyer au robot les infos du déchet
 		// --> on récupère du robot les infos et on crée l'objet déchet :
 		
-		Dechet dechet = new Dechet(); //paramètres à remplir
+		Dechet dechet = new Dechet(braceletID, type, typePropose, reponseEleve); //paramètres à remplir
+		this.changeMode();
 	}
 	
 	private void changeToRECHERCHE() {
 		// send to the robot the change of state
 		// on reçoit des photos du robot, que l'on passe dans l'IA, et que l'on retransmet au robot
+		this.clientRobot.modeRecherche();
 	}
 	
 	public void start() {
