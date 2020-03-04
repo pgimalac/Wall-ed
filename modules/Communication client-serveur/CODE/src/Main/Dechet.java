@@ -1,5 +1,6 @@
 package Main;
 
+import interface_bdd.Connect_bdd;
 import interface_bdd.Edition_table;
 
 public class Dechet {
@@ -13,9 +14,12 @@ public class Dechet {
 	private final boolean reponseEleve;
 	private final String heureRamassage;
 	
-	public Dechet(int dechetID, int braceletID, String type, String typePropose, boolean reponseEleve) {
-		this.dechetID = dechetID;
+	public Dechet(int braceletID, String type, String typePropose, boolean reponseEleve) {
 		this.session = Initialisation.getSessionEnCours();
+		
+		String query = "SELECT * FROM " + this.session.getTable_ramassage();
+		this.dechetID = Integer.parseInt(Connect_bdd.lastExecuteSQL(query, "dechetID")) + 1;
+		
 		this.braceletID = braceletID;
 		this.type = type;
 		this.typePropose = typePropose;

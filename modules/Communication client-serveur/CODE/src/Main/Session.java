@@ -27,6 +27,9 @@ public class Session {
 		String[] args = {"dechetID", "sessionID", "braceletID", "typeDechet", "reponseEleve"};
 		String[] args2 = {"braceletID", "eleveID"};
 		
+		String[] blank_dechet = {"0", "0", "0", "none", "none", "none", "none"};
+		Edition_table.addEnregistrement(table_ramassage, blank_dechet);
+		
 		Creation_table.createTable(table_ramassage, args);
 		Creation_table.createTable(table_eleves, args2);
 		
