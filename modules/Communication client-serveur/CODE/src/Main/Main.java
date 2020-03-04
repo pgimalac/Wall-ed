@@ -11,6 +11,10 @@ import interface_bdd.*;
 */
 import interface_server.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Main {
 
 	   public static void main(String[] args) {
@@ -38,5 +42,24 @@ public class Main {
 	   
 	   public static void getStats(int sessionID) {
 		   //todo (renvoie //todo)
+	   }
+	   
+	   public static String executePythonScriptForAI(String image) throws IOException {
+		   // arguments : nom de la fonction puis paramètres (comme en C)
+		   
+		   String pythonScriptPath = "/home/adrien/Documents/test.py"; // à définir
+		   String[] cmd = new String[3];
+		   cmd[0] = "python"; // check version of installed python: python -V
+		   cmd[1] = pythonScriptPath;
+		   cmd[2] = image;
+		    
+		   // create runtime to execute external command
+		   Runtime rt = Runtime.getRuntime();
+		   Process pr = rt.exec(cmd);
+		    
+		   // retrieve output from python script
+		   BufferedReader bfr = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+		   String line = bfr.readLine();
+		   return line;
 	   }
 }
