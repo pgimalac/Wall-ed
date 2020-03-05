@@ -41,6 +41,8 @@ import fr.telecom.wall_ed.model.Serveur;
 import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
 import fr.telecom.wall_ed.view.MainFragment;
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.view.SessionFragment;
+import fr.telecom.wall_ed.view.SettingsFragment;
 import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
@@ -159,6 +161,12 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                 Fragment statistiques_globales = new Statistiques_globales();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, statistiques_globales)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.menu_params:
+                Fragment settings_fragment = new SettingsFragment();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, settings_fragment)
                         .addToBackStack(null).commit();
                 break;
         }
