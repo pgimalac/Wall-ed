@@ -17,10 +17,11 @@ public class AjoutEleve {
 		return elevesID;
 	}
 	
-	public static void addEleve(String nom, String prenom) {
+	public static int addEleve(String nom, String prenom) {
 		lastID = getLastEleveID();
 		String[] champs = {Integer.toString(lastID + 1), nom, prenom};
 		Edition_table.addEnregistrement("ELEVES", champs);
+		return lastID + 1;
 	}
 	
 	public static int getLastEleveID() {

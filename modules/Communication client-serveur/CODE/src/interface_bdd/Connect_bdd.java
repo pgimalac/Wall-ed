@@ -31,6 +31,8 @@ public class Connect_bdd {
 	public static ResultSetMetaData executeSQL(String commandeSQL) {
 		
 		ResultSetMetaData resultMeta = null;
+		
+		System.out.println(commandeSQL);
 	
 		try {
 	      Class.forName("org.mariadb.jdbc.Driver");
@@ -48,6 +50,7 @@ public class Connect_bdd {
 	      //On récupère les MetaData
 	      resultMeta = result.getMetaData();
 	      
+	      System.out.println(commandeSQL);
 
 	      result.close();
 	      state.close();
@@ -63,6 +66,8 @@ public class Connect_bdd {
 		
 		String res = "";
 		
+		 System.out.println(commandeSQL);
+		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 		      
@@ -76,6 +81,8 @@ public class Connect_bdd {
 		    Statement state = conn.createStatement();
 		    //L'objet ResultSet contient le résultat de la requête SQL
 		    ResultSet result = state.executeQuery(commandeSQL);
+		    
+		    System.out.println(commandeSQL);
 		    
 		    result.last();
 		    
