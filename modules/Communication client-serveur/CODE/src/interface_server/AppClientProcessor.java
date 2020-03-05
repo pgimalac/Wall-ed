@@ -19,6 +19,7 @@ public class AppClientProcessor implements Runnable{
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
    private int sessionID;
+   private Activite act;
    
    public AppClientProcessor(Socket pSock){
       sock = pSock;
@@ -66,9 +67,11 @@ public class AppClientProcessor implements Runnable{
             		   braceletsID[i] = (int)IDs.get(strI);
             	   }
             	   Activite act = new Activite(noms, prenoms, braceletsID, this);
-            	   sessionID = act.getSession().getSessionID();
+            	   this.act = act;
+            	   this.sessionID = act.getSession().getSessionID();
             	   writer.write(Integer.toString(sessionID));
             	   writer.flush();
+            	   act.changeMode();
                	   break;
                case "getStats":
             	   Main.getStats(sessionID);

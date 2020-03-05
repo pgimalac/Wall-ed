@@ -16,15 +16,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+	
+	private static String host = "127.0.0.1";
+    private static int port = 2345;
 
 	   public static void main(String[] args) {
 		   
 		   // init de deux Main_server (un robot et un appli)
-	    
-	      String host = "127.0.0.1";
-	      int port = 2345;
 	      
-	      Main_server ts = new Main_server(host, port);
+	      Main_server ts = new Main_server(host, port, "app");
 	      ts.open();
 	      
 	      System.out.println("Serveur initialisé.");
@@ -57,5 +57,12 @@ public class Main {
 		   String line = bfr.readLine();
 		   bfr.close();
 		   return line;
+	   }
+	   
+	   public static RobotClientProcessor inform(Session session, Eleve[] eleves) {
+		   Main_server rb = new Main_server(host, port+1, "robot");
+		   rb.setSession(session);
+		   rb.open();
+		   return rb.getRobotApp();
 	   }
 }

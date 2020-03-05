@@ -1,18 +1,18 @@
 package Main;
 
-import interface_server.AppClientProcessor;
+import interface_server.*;
 
 public class Activite {
 	
 	private String mode;
 	private final Session session;
 	private final AppClientProcessor clientApp;
-	private final AppClientProcessor clientRobot;
+	private final RobotClientProcessor clientRobot;
 	
 	
 	public Activite(String[] noms, String[] prenoms, int[] braceletsID, AppClientProcessor clientApp) {
 		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
-		this.clientRobot = Client_server.inform(this.session.getSessionID(), this.session.getEleves());
+		this.clientRobot = Main.inform(this.session, this.session.getEleves());
 		this.mode = null;
 		this.clientApp = clientApp;
 	}

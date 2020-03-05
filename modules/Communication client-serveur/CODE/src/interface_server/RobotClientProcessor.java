@@ -18,10 +18,11 @@ public class RobotClientProcessor implements Runnable{
    private Socket sock;
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
-   private int sessionID;
+   private final Session session;
    
-   public RobotClientProcessor(Socket pSock){
+   public RobotClientProcessor(Socket pSock, Session session){
       sock = pSock;
+      this.session = session;
    }
    
    @Override
@@ -37,8 +38,8 @@ public class RobotClientProcessor implements Runnable{
             reader = new BufferedInputStream(sock.getInputStream());
                         
             String response = read();
-            InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
             
+            InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
             String debug = "";
             debug = "Thread : " + Thread.currentThread().getName() + ". ";
             debug += "Demande de l'adresse : " + remote.getAddress().getHostAddress() +".";
@@ -47,27 +48,8 @@ public class RobotClientProcessor implements Runnable{
             System.err.println("\n" + debug);
             
             switch(response){
-               case "initSession":
-            	   writer.write("send");
-            	   writer.flush();
-            	   String stringData = read();
-            	   JSONObject data = decode(stringData);
-            	   int nb = (int) data.get("numberOfStudents");
-            	   String[] noms = new String[nb];
-            	   String[] prenoms = new String[nb];
-            	   int[] braceletsID = new int[nb];
-            	   JSONObject lastNames = (JSONObject)data.get("lastNames");
-            	   JSONObject firstNames = (JSONObject)data.get("firstNames");
-            	   JSONObject IDs = (JSONObject)data.get("IDs");
-            	   for (int i =0; i<nb; i++) {
-            		   String strI = Integer.toString(i);
-            		   noms[i] = (String)lastNames.get(strI);
-            		   prenoms[i] = (String)firstNames.get(strI);
-            		   braceletsID[i] = (int)IDs.get(strI);
-            	   }
-               	   break;
-               case "getStats":
-            	   Main.getStats(sessionID);
+               case "init":
+            	   // encoder 
                	   break;
                case "close":
             	   writer.write("Communication terminée");
@@ -117,5 +99,27 @@ public class RobotClientProcessor implements Runnable{
 		e.printStackTrace();
 	}
 	   return jSONData;
+   }
+   
+   private JSONObject encode(String[] noms, String[] prenoms, int[] ids) {
+	   int nb = noms.length;
+	   JSONObject lastNames = new JSONObject();
+	   JSONObject firstNames = new JSONObject();
+	   JSONObject IDs = new JSONObject();
+	   for(int i = 0; i<nb;i++) {
+		   lastNames.put(((Integer)i).toString(), noms[i]);
+	   }
+	   for(int i = 0; i<nb;i++) {
+		   firstNames.put(((Integer)i).toString(), prenoms[i]);
+	   }for(int i = 0; i<nb;i++) {
+		   IDs.put(((Integer)i).toString(),ids[i] );
+	   }
+	   JSONObject data = new JSONObject();
+	   data.put("numberOfStudents", nb);
+	   data.put("lastNames", lastNames);
+	   data.put("firstNames", firstNames);
+	   data.put("IDs", IDs);
+	   
+	   return data;
    }
 }
