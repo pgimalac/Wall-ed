@@ -13,7 +13,7 @@
 - [x] Monter la voiture
 - [x] Configuration des servos
 - [x] Utilisation des roues avant / arrières
-- [ ] Ecrire un script pour faire se déplacer la voiture de manière aléatoire
+- [x] Ecrire un script pour faire se déplacer la voiture de manière aléatoire
 - [ ] Corriger l'inclinaison des roues
 - [ ] Prise de photos avec la caméra
 
@@ -21,3 +21,4 @@
 - [ ] Envoyer les photos au module reconnaissance d'images
 - [ ] Envoyer des informations au module BDD
 - [ ] Prendre des informations depuis l'application (?)
+- [ ] Recevoir la demande d'arrêt du programme depuis le serveur/l'application
