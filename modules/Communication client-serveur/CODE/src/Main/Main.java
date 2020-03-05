@@ -40,7 +40,7 @@ public class Main {
 	   }
 	   
 	   public static String executePythonScriptForAI(String image) throws IOException {
-		   // arguments : nom de la fonction puis paramètres (comme en C)
+		   // image : nom de l'image
 		   
 		   String pythonScriptPath = "/home/adrien/Documents/test.py"; // à définir
 		   String[] cmd = new String[3];
@@ -55,6 +55,7 @@ public class Main {
 		   // retrieve output from python script
 		   BufferedReader bfr = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 		   String line = bfr.readLine();
+		   bfr.close();
 		   return line;
 	   }
 }

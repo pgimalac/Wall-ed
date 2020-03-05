@@ -11,6 +11,9 @@ def initConnexion():
 	liste_eleves = socket.recv(255)
 	return json.loads(liste_eleves)
 
+def receiveSomething():
+	return json.loads(socket.recv(255))
+
 def sendSomething(something):
 	socket.send(pickle.dumps(something))
 
