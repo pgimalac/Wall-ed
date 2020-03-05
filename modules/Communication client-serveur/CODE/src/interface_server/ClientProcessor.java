@@ -18,6 +18,7 @@ public class ClientProcessor implements Runnable{
    private Socket sock;
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
+   private int sessionID;
    
    public ClientProcessor(Socket pSock){
       sock = pSock;
@@ -61,11 +62,15 @@ public class ClientProcessor implements Runnable{
             	   JSONObject firstNames = (JSONObject)data.get("firstNames");
             	   JSONObject IDs = (JSONObject)data.get("IDs");
             	   for (int i =0; i<nb; i++) {
-            		   noms[i] = (String)lastNames.get(((Integer)i).toString());
-            		   prenoms[i] = (String)firstNames.get(((Integer)i).toString());
-            		   braceletsID[i] = (int)IDs.get(((Integer)i).toString());
+            		   String strI = Integer.toString(i);
+            		   noms[i] = (String)lastNames.get(strI);
+            		   prenoms[i] = (String)firstNames.get(strI);
+            		   braceletsID[i] = (int)IDs.get(strI);
             	   }
             	   Activite act = new Activite(noms, prenoms, braceletsID, this);
+            	   sessionID = act.getSession().getSessionID();
+            	   writer.write(Integer.toString(sessionID));
+            	   writer.flush();
                	   break;
                case "getStats":
             	   Main.getStats(sessionID);
@@ -108,10 +113,17 @@ public class ClientProcessor implements Runnable{
       return response;
    }
    
-   private JSONObject decode(String input) throws ParseException {
+   private JSONObject decode(String input){
 	   JSONParser parser = new JSONParser();
-	   Object ObjData = parser.parse(input);
-	   JSONObject jSONData = (JSONObject)(((JSONArray)ObjData).get(1));
+	   Object ObjData;
+	   JSONObject jSONData = new JSONObject();
+	try {
+		ObjData = parser.parse(input);
+		   jSONData = (JSONObject)(((JSONArray)ObjData).get(1));
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	   return jSONData;
    }
 }
