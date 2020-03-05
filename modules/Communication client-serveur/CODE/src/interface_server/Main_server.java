@@ -14,6 +14,7 @@ public class Main_server {
 	private String host = "127.0.0.1";
 	private ServerSocket server = null;
 	private boolean isRunning = true;
+	private String type;
 	   
 	public Main_server(){
 		try {
@@ -25,9 +26,10 @@ public class Main_server {
 		}
 	}
 	   
-	public Main_server(String pHost, int pPort){
+	public Main_server(String pHost, int pPort, String ptype){
 		host = pHost;
 		port = pPort;
+		type = ptype;
 		try {
 			server = new ServerSocket(port, 100, InetAddress.getByName(host));
 		} catch (UnknownHostException e) {
@@ -45,9 +47,18 @@ public class Main_server {
 	               
 					try {
 						Socket client = server.accept();
-						System.out.println("Connexion cliente reçue.");                  
-						Thread t = new Thread(new ClientProcessor(client));
-						t.start();
+						System.out.println("Connexion cliente reçue.");
+						Thread t;
+						switch(type) {
+							case "app":
+								t = new Thread(new AppClientProcessor(client));
+								t.start();
+								break;
+							case "robot":
+								t = new Thread(new RobotClientProcessor(client));
+								t.start();
+								break;
+						}
 	                  
 					} catch (IOException e) {
 						e.printStackTrace();

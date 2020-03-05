@@ -13,20 +13,20 @@ import org.json.simple.parser.ParseException;
 
 import Main.*;
 
-public class ClientProcessor implements Runnable{
+public class AppClientProcessor implements Runnable{
 
    private Socket sock;
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
    private int sessionID;
    
-   public ClientProcessor(Socket pSock){
+   public AppClientProcessor(Socket pSock){
       sock = pSock;
    }
    
    @Override
    public void run(){
-      System.err.println("Lancement du traitement de la connexion cliente");
+      System.err.println("Lancement du traitement de la connexion appli");
 
       boolean closeConnexion = false;
       while(!sock.isClosed()){
@@ -45,8 +45,6 @@ public class ClientProcessor implements Runnable{
             debug += " Sur le port : " + remote.getPort() + ".\n";
             debug += "\t -> Commande reçue : " + response + "\n";
             System.err.println("\n" + debug);
-            
-            String toSend = "";
             
             switch(response){
                case "initSession":
@@ -81,12 +79,10 @@ public class ClientProcessor implements Runnable{
             	   closeConnexion = true;
             	   break;
                default : 
-            	   toSend = "Commande inconnue !";                     
+            	   writer.write("Commande inconnue !");
+            	   writer.flush();
             	   break;
             }
-            
-            writer.write(toSend);
-            writer.flush();
             
             if(closeConnexion){
                System.err.println("COMMANDE CLOSE DETECTEE ! ");
