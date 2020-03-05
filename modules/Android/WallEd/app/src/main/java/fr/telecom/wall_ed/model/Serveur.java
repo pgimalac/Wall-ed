@@ -25,4 +25,11 @@ public class Serveur {
         //TODO
     }
 
+    /**
+     * Asks the server to end the session
+     */
+    public void endSession(){
+        //TODO
+    }
+
 }
