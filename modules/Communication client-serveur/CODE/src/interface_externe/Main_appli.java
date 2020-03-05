@@ -20,6 +20,7 @@ public class Main_appli implements Runnable{
    private String name = "Client-";
    private String command = "none";
    private JSONObject data;
+   private int sessionID;
    
    public Main_appli(String host, int port){
       name += ++count;
@@ -49,6 +50,7 @@ public class Main_appli implements Runnable{
             	if("send"==read()) {
             		data.writeJSONString(writer);
             		writer.flush();
+            		sessionID = Integer.parseInt(read());
             	}
             	command = "none";
             	break;
@@ -63,8 +65,6 @@ public class Main_appli implements Runnable{
             default :                    
             	break;
             }
-            writer.write(command);
-            writer.flush();
             
             System.out.println("Commande " + command + " envoyée au serveur");
             
