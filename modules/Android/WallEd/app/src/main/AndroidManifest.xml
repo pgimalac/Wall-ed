@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="fr.telecom.wall_ed">
 
+<<<<<<< HEAD
     <user-permission android:name="android.permission.WRITE_ETERNAL_STORAGE"/>
     <user-permission android:name="android.permission.REAL_ETERNAL_STORAGE"/>
+=======
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+>>>>>>> 4a713a3b8e7e3a17cca8373cfa90dc5b05ccf0a0
 
     <application
         android:allowBackup="true"

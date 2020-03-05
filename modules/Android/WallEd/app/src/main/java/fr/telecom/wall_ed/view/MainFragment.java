@@ -14,13 +14,10 @@ import android.widget.Button;
 import fr.telecom.wall_ed.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MainFragment extends Fragment implements View.OnClickListener{
 
-    private View.OnClickListener onClickListenerCallback;
-    private Button demarrer_button;
+    private View.OnClickListener mOnClickListenerCallback;
+    private Button mDemarrerButton;
 
     public MainFragment() {
         // Required empty public constructor
@@ -30,8 +27,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_main, container, false);
-        demarrer_button = result.findViewById(R.id.demarrer_button);
-        demarrer_button.setOnClickListener(this);
+        mDemarrerButton = result.findViewById(R.id.demarrer_button);
+        mDemarrerButton.setOnClickListener(this);
         return result;
     }
 
@@ -44,13 +41,13 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        onClickListenerCallback.onClick(v);
+        mOnClickListenerCallback.onClick(v);
     }
 
     private void createCallbackToParentActivity(){
         try {
             //Parent activity will automatically subscribe to callback
-            onClickListenerCallback = (View.OnClickListener) getActivity();
+            mOnClickListenerCallback = (View.OnClickListener) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ " View.OnClickListener");
         }

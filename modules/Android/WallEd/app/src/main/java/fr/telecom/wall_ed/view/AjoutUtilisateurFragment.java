@@ -2,38 +2,28 @@ package fr.telecom.wall_ed.view;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-
-import java.util.BitSet;
 
 import fr.telecom.wall_ed.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AjoutUtilisateurFragment extends Fragment implements View.OnClickListener {
 
-    private View.OnClickListener onClickListenerCallback;
+    private View.OnClickListener mOnClickListenerCallback;
 
-    private Button ajoutButton;
-    private Button photoButton;
-    private EditText prenomEditText;
-    private EditText nomEditText;
-    private EditText classeEditText;
-    private ImageView imageViewPhoto;
+    private Button mAjoutButton;
+    private Button mPhotoButton;
+    private EditText mPrenomEditText;
+    private EditText mNomEditText;
+    private EditText mClasseEditText;
 
     public AjoutUtilisateurFragment() {
         // Required empty public constructor
@@ -43,15 +33,15 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_ajout_utilisateur, container, false);
 
-        ajoutButton = result.findViewById(R.id.enregistrement_button);
-        ajoutButton.setOnClickListener(this);
+        mAjoutButton = result.findViewById(R.id.enregistrement_button);
+        mAjoutButton.setOnClickListener(this);
 
-        photoButton = result.findViewById(R.id.bt_photo);
-        photoButton.setOnClickListener(this);
+        mPhotoButton = result.findViewById(R.id.bt_photo);
+        mPhotoButton.setOnClickListener(this);
 
-        prenomEditText = result.findViewById(R.id.prenom_txt);
-        nomEditText = result.findViewById(R.id.nom_txt);
-        classeEditText = result.findViewById(R.id.classe_txt);
+        mPrenomEditText = result.findViewById(R.id.prenom_txt);
+        mNomEditText = result.findViewById(R.id.nom_txt);
+        mClasseEditText = result.findViewById(R.id.classe_txt);
         return result;
     }
 
@@ -66,30 +56,25 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
 
         switch (v.getId()){
             case R.id.enregistrement_button:
-                getActivity().getIntent().putExtra("firstName", prenomEditText.getText().toString());
-                getActivity().getIntent().putExtra("name", nomEditText.getText().toString());
-                getActivity().getIntent().putExtra("group", classeEditText.getText().toString());
-                onClickListenerCallback.onClick(v);
+                getActivity().getIntent().putExtra("firstName", mPrenomEditText.getText().toString());
+                getActivity().getIntent().putExtra("name", mNomEditText.getText().toString());
+                getActivity().getIntent().putExtra("group", mClasseEditText.getText().toString());
+                mOnClickListenerCallback.onClick(v);
                 break;
             case R.id.bt_photo:
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
+                mOnClickListenerCallback.onClick(v);
+                break;
         }
     }
 
     private void createCallbackToParentActivity(){
         try {
             //Parent activity will automatically subscribe to callback
-            onClickListenerCallback = (View.OnClickListener) getActivity();
+            mOnClickListenerCallback = (View.OnClickListener) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ " View.OnClickListener");
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        imageViewPhoto.setImageBitmap(bitmap);
-    }
+
 }
