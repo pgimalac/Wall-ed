@@ -49,11 +49,11 @@ public class Connect_bdd {
 	      ResultSet result = state.executeQuery(commandeSQL);
 	      //On récupère les MetaData
 	      resultMeta = result.getMetaData();
-	      
-	      System.out.println(commandeSQL);
 
 	      result.close();
 	      state.close();
+	      
+	      System.out.println("Commande exécutée");
 	         
 	    } catch (Exception e) {
 	      e.printStackTrace();
@@ -82,14 +82,14 @@ public class Connect_bdd {
 		    //L'objet ResultSet contient le résultat de la requête SQL
 		    ResultSet result = state.executeQuery(commandeSQL);
 		    
-		    System.out.println(commandeSQL);
-		    
 		    result.last();
 		    
 		    res = result.getString(enregistrement);
 
 		    result.close();
 		    state.close();
+		    
+		    System.out.println("Commande exécutée");
 		         
 		} catch (Exception e) {
 		      e.printStackTrace();

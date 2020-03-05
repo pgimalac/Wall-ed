@@ -6,17 +6,12 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/adrien/Documents/pact/pact32/modules/Communication client-serveur/CODE/mariadb-java-client-2.5.4.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="mariadb-java-client-2.5.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/florian/eclipse-workspace/pact32/modules/Communication client-serveur/CODE/json-simple-1.1.1.jar">
+	<classpathentry kind="lib" path="json-simple-1.1.1.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

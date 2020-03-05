@@ -12,7 +12,7 @@ public class Edition_table {
 			}
 		}
 		valeurs += ")";
-		String query = "INSERT INTO " + table + " VALUES" + valeurs;
+		String query = "INSERT INTO " + table + " VALUES " + valeurs;
 		Connect_bdd.executeSQL(query);
 	}
 	
