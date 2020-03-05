@@ -7,10 +7,12 @@ import front_wheels
 class Car():
     ''' Whole car control class '''
 
+    _DEBUG = False
+
     def __init__(self, debug=False):
-        self.debug = debug
         self.back_wheels = back_wheels.Back_Wheels(debug=debug)
         self.front_wheels = front_wheels.Front_Wheels(debug=debug)
+        self.debug = debug
         self.camera = None
 
     #########################
@@ -25,13 +27,13 @@ class Car():
 
     @property
     def debug(self):
-        return self.debug
+        return self._DEBUG
 
     @debug.setter
     def debug(self, debug):
         ''' Set if debug information shows '''
         if debug in (True, False):
-            self.debug = debug
+            self._DEBUG = debug
         else:
             raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
 
@@ -79,7 +81,7 @@ class Car():
 
     def turn_straight(self):
         ''' Turn the front wheels back straight '''
-        self.turn(0)
+        self.front_wheels.turn_straight()
 
     def turn_right(self):
         ''' Turn the front wheels to the right '''
@@ -134,22 +136,32 @@ if __name__ == "__main__":
     delta = 0.1
     car = Car(debug=True)
 
-    car.turn_straight()
-    car.forward()
+    try:
+        car.turn_straight()
+        car.forward()
 
-    for i in range(car.turning_max):
-        car.speed = i
-        car.turn(car.turning_offset + i)
-        time.sleep(delta)
+        for i in range(car.turning_max):
+            print("Going right: %i" % i)
+            car.speed = 10 + 2 * i
+            if i % 5 == 0:
+                car.turn(car.front_wheels.straight_angle + i)
+            time.sleep(delta)
 
-    for i in range(car.turning_max, -car.turning_max):
-        car.turn(car.turning_offset + i)
-        time.sleep(delta)
+        for i in range(-car.turning_max + 1, car.turning_max):
+            print("Going left: %i" % -i)
+            if i % 5 == 0:
+                car.turn(car.front_wheels.straight_angle - i)
+            time.sleep(delta)
 
-    for i in range(-car.turning_max, 0):
-        car.turn(car.turning_offset + i)
-        car.speed = -i
-        time.sleep(delta)
+        for i in range(-car.turning_max + 1, 1):
+            print("Going right: %i" % i)
+            car.turn(car.front_wheels.straight_angle + i)
+            car.speed = 10 + -2 * i
+            time.sleep(delta)
 
-    car.turn_straight()
-    car.stop()
+    except KeyboardInterrupt:
+        print("Interrupted !")
+    finally:
+        print("Done")
+        car.turn_straight()
+        car.stop()
