@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         Fragment utilisateursFragment;
         switch (viewId){
             case R.id.demarrer_button:
+            case R.id.session_bt_stop:
                 utilisateursFragment = new UtilisateursFragment();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
