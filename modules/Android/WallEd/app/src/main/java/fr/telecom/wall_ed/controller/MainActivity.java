@@ -86,8 +86,9 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
         serveur = new Serveur();
         mPrefs = getPreferences(MODE_PRIVATE);
-        loadUsers(); //TODO: à supprimer lorsque la ligne suivante aura été implémentée
-        //mUsers = serveur.getUsers();
+        loadUsers();
+        //TODO: supprimer la ligne ci-dessus lorsque la ligne ci-dessous aura été implémentée
+        //TODO: mUsers = serveur.getUsers();
     }
 
  /*   @Override
