@@ -41,15 +41,17 @@ class PWM(object):
     _DEBUG = False
     _DEBUG_INFO = 'DEBUG "PCA9685.py":'
 
-    def __init__(self, bus_number=1, address=0x40):
+    def __init__(self, bus_number=1, address=0x40, frequency=60):
         self.address = address
         self.bus_number = bus_number
         self.bus = smbus.SMBus(self.bus_number)
+        self.setup()
+        self.frequency = frequency
 
-    def _debug_(self,message):
+    def _debug_(self, message):
         if self._DEBUG:
-            print(self._DEBUG_INFO,message)
-    
+            print(self._DEBUG_INFO, message)
+
     def setup(self):
         '''Init the class with bus_number and address'''
         self._debug_('Reseting PCA9685 MODE1 (without SLEEP) and MODE2')
@@ -113,8 +115,7 @@ class PWM(object):
             tmp_addresses = tmp_addresses.split(':')
             if len(tmp_addresses) < 2:
                 continue
-            else:
-                tmp_addresses = tmp_addresses[1]
+            tmp_addresses = tmp_addresses[1]
             tmp_addresses = tmp_addresses.strip().split(' ')
             for address in tmp_addresses:
                 if address != '--':
