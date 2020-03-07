@@ -50,6 +50,7 @@ public class Activite {
 	public void stop() {
 		this.session.finSession();
 		this.mode = "FIN";
+		this.clientRobot.closeConnexion();
 		// --> terminer les connexions et le thread !!
 	}
 

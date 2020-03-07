@@ -22,6 +22,7 @@ public class Main_appli implements Runnable{
    private JSONObject data;
    private int sessionID;
    
+   
    public Main_appli(String host, int port){
       name += ++count;
       try {

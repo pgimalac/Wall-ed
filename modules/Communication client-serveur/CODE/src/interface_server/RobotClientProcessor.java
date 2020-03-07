@@ -19,6 +19,7 @@ public class RobotClientProcessor implements Runnable{
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
    private final Activite act;
+   private boolean closeConnexion = false;
    
    public RobotClientProcessor(Socket pSock, Activite act){
       sock = pSock;
@@ -29,7 +30,6 @@ public class RobotClientProcessor implements Runnable{
    public void run(){
       System.err.println("Lancement du traitement de la connexion robot");
 
-      boolean closeConnexion = false;
       while(!sock.isClosed()){
          
          try {
@@ -79,15 +79,12 @@ public class RobotClientProcessor implements Runnable{
             		   String type = (String) data.get("type");
             		   String typePropose = (String) data.get("typePropose");
             		   boolean reponseEleve = (boolean) data.get("reponseEleve");
-            		   this.act.changeMode();
             		   Dechet dechet = new Dechet(this.act.getSession(), braceletID, type, typePropose, reponseEleve);
+            		   this.act.changeMode();
             		   // send this dechet info to the app ?
             	   }
-               case "close":
-            	   writer.write("Communication terminée");
-            	   writer.flush();
-            	   closeConnexion = true;
-            	   break;
+               case "stoping":
+            	   this.closeConnexion = true;
                default : 
             	   writer.write("Commande inconnue !");
             	   writer.flush();
@@ -156,5 +153,9 @@ public class RobotClientProcessor implements Runnable{
    
    public void modeRecherche() {
 	   // send "RECHERCHE" to the robot
+   }
+   
+   public void closeConnexion() {
+	   // send the command close to the robot
    }
 }

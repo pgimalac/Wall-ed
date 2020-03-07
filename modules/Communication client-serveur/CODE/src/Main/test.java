@@ -3,6 +3,7 @@ package Main;
 import java.io.IOException;
 
 import interface_bdd.*;
+import interface_externe.Main_appli;
 
 public class test {
 
@@ -27,6 +28,13 @@ public class test {
 		
 		System.out.println(resp);
 		*/
+		
+		Main_appli mn = new Main_appli("127.0.0.1", 2345);
+		mn.run();
+		String[] noms = {"AA", "BB"};
+		String[] prenoms = {"aa", "bb"};
+		int[] braceletsID = {1,2};
+		mn.initSession(noms, prenoms, braceletsID);
 	}
 
 }

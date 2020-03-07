@@ -71,7 +71,7 @@ public class AppClientProcessor implements Runnable{
             	   this.sessionID = act.getSession().getSessionID();
             	   writer.write(Integer.toString(sessionID));
             	   writer.flush();
-            	   act.changeMode();
+            	   this.act.start();
                	   break;
                case "getStats":
             	   Main.getStats(sessionID);
@@ -79,6 +79,7 @@ public class AppClientProcessor implements Runnable{
                case "close":
             	   writer.write("Communication terminée");
             	   writer.flush();
+            	   this.act.stop();
             	   closeConnexion = true;
             	   break;
                default : 
