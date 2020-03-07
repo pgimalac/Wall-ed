@@ -59,9 +59,9 @@ public class Main {
 		   return line;
 	   }
 	   
-	   public static RobotClientProcessor inform(Session session, Eleve[] eleves) {
+	   public static RobotClientProcessor inform(Activite act, Eleve[] eleves) {
 		   Main_server rb = new Main_server(host, port+1, "robot");
-		   rb.setSession(session);
+		   rb.setActivite(act);
 		   rb.open();
 		   return rb.getRobotApp();
 	   }

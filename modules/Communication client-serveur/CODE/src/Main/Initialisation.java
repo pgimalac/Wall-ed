@@ -3,8 +3,6 @@ import interface_bdd.*;
 
 public class Initialisation {
 	
-	private static Session sessionEnCours;
-	
 	// récupération de la liste des enfants avec leurs ID de bracelets
 	// --> on stocke ça dans les tableaux suivants
 	
@@ -42,20 +40,10 @@ public class Initialisation {
 		int sessionID = Main_bdd.setSessionID();
 		
 		Session session = new Session(sessionID, listeEleves, bracelets);
-		Initialisation.setSessionEnCours(session);
 		
 		return session;
 		
 	}
-
-	public static Session getSessionEnCours() {
-		return sessionEnCours;
-	}
-
-	public static void setSessionEnCours(Session sessionEnCours) {
-		Initialisation.sessionEnCours = sessionEnCours;
-	}
-	
 	
 
 }

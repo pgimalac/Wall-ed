@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import Main.Activite;
 import Main.Main;
 import Main.Session;
 
@@ -18,7 +19,7 @@ public class Main_server {
 	private String type;
 	private RobotClientProcessor clientRobot;
 	private AppClientProcessor clientApp;
-	private Session session;
+	private Activite act;
 	   
 	public Main_server(){
 		try {
@@ -59,7 +60,7 @@ public class Main_server {
 								t.start();
 								break;
 							case "robot":
-								t = new Thread(clientRobot = new RobotClientProcessor(client, session));
+								t = new Thread(clientRobot = new RobotClientProcessor(client, act));
 								t.start();
 								break;
 						}
@@ -93,11 +94,11 @@ public class Main_server {
 		return this.clientRobot;
 	}
 	
-	public void setSession(Session session) {
-		this.session = session;
+	public void setActivite(Activite act) {
+		this.act = act;
 	}
 	
-	public Session getSession() {
-		return this.session;
+	public Activite getSession() {
+		return this.act;
 	}
 }

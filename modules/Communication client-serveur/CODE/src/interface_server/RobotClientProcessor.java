@@ -18,11 +18,11 @@ public class RobotClientProcessor implements Runnable{
    private Socket sock;
    private PrintWriter writer = null;
    private BufferedInputStream reader = null;
-   private final Session session;
+   private final Activite act;
    
-   public RobotClientProcessor(Socket pSock, Session session){
+   public RobotClientProcessor(Socket pSock, Activite act){
       sock = pSock;
-      this.session = session;
+      this.act = act;
    }
    
    @Override
@@ -49,8 +49,40 @@ public class RobotClientProcessor implements Runnable{
             
             switch(response){
                case "init":
-            	   // encoder 
+            	   Eleve[] elvs = this.act.getSession().getEleves();
+            	   int nb = elvs.length;
+            	   String[] noms = new String[nb];
+            	   String[] prenoms = new String[nb];
+            	   int[] ids = new int[nb];
+            	   for (int i = 0; i < nb; i++) {
+            		   noms[i] = elvs[i].getNom();
+            		   prenoms[i] = elvs[i].getPrenom();
+            		   ids[i] = elvs[i].getEleveID();
+            	   }
+            	   JSONObject toSend = this.encode(noms, prenoms, ids);
+            	   toSend.writeJSONString(writer);
+            	   writer.flush();
                	   break;
+               case "newImage":
+            	   // TODO
+            	   String stringData1 = read();
+            	   // receive the image, store it in a specific folder created for this session and launch IA
+            	   // then send results to the robot
+            	   // receive the answer of the robot :
+            	   String stringData = read();
+            	   JSONObject data = decode(stringData);
+            	   boolean trashFound = (boolean) data.get("trashFound");
+            	   // --> if trash found then we get the trash info and continue in "RECHERCHE" mode
+            	   // --> if no trash found nothing is done more
+            	   if (trashFound) {
+            		   int braceletID = (int) data.get("braceletID");
+            		   String type = (String) data.get("type");
+            		   String typePropose = (String) data.get("typePropose");
+            		   boolean reponseEleve = (boolean) data.get("reponseEleve");
+            		   this.act.changeMode();
+            		   Dechet dechet = new Dechet(this.act.getSession(), braceletID, type, typePropose, reponseEleve);
+            		   // send this dechet info to the app ?
+            	   }
                case "close":
             	   writer.write("Communication terminée");
             	   writer.flush();
@@ -95,7 +127,6 @@ public class RobotClientProcessor implements Runnable{
 		ObjData = parser.parse(input);
 		   jSONData = (JSONObject)(((JSONArray)ObjData).get(1));
 	} catch (ParseException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	   return jSONData;
@@ -121,5 +152,9 @@ public class RobotClientProcessor implements Runnable{
 	   data.put("IDs", IDs);
 	   
 	   return data;
+   }
+   
+   public void modeRecherche() {
+	   // send "RECHERCHE" to the robot
    }
 }

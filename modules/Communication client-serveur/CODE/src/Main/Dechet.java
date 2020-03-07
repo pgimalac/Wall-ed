@@ -14,8 +14,8 @@ public class Dechet {
 	private final boolean reponseEleve;
 	private final String heureRamassage;
 	
-	public Dechet(int braceletID, String type, String typePropose, boolean reponseEleve) {
-		this.session = Initialisation.getSessionEnCours();
+	public Dechet(Session session, int braceletID, String type, String typePropose, boolean reponseEleve) {
+		this.session = session;
 		
 		String query = "SELECT * FROM " + this.session.getTable_ramassage();
 		this.dechetID = Integer.parseInt(Connect_bdd.lastExecuteSQL(query, "dechetID")) + 1;
