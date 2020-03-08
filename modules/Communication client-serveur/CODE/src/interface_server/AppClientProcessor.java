@@ -20,6 +20,7 @@ public class AppClientProcessor implements Runnable{
    private BufferedInputStream reader = null;
    private int sessionID;
    private Activite act;
+   private boolean initDone = false;
    
    public AppClientProcessor(Socket pSock){
       sock = pSock;
@@ -27,7 +28,7 @@ public class AppClientProcessor implements Runnable{
    
    @Override
    public void run(){
-      System.err.println("Lancement du traitement de la connexion appli");
+      System.err.println("[AppCP] Lancement du traitement de la connexion appli");
 
       boolean closeConnexion = false;
       while(!sock.isClosed()){
@@ -50,9 +51,9 @@ public class AppClientProcessor implements Runnable{
                case "initSession":
             	   writer.write("send");
             	   writer.flush();
-            	   System.out.println("asked app to send init info");
+            	   System.out.println("[AppCP] asked app to send init info");
             	   String stringData = read();
-            	   System.out.println("info received, decoding ...");
+            	   System.out.println("[AppCP] info received, decoding ...");
             	   Thread.sleep(2000);
             	   JSONObject data = decode(stringData);
             	   long nbtemp = (long)data.get("numberOfStudents");
@@ -70,42 +71,43 @@ public class AppClientProcessor implements Runnable{
             		   long temp = (long)IDs.get(strI);
             		   braceletsID[i] = (int) temp;
             	   }
-            	   System.out.println("decoded !");
+            	   System.out.println("[AppCP] decoded !");
             	   System.out.println(noms[0]);
             	   Thread.sleep(4000);
-            	   System.out.println("creating activity");
+            	   System.out.println("[AppCP] creating activity");
             	   Activite act = new Activite(noms, prenoms, braceletsID, this);
-            	   System.out.println("activity created");
+            	   System.out.println("[AppCP] activity created");
             	   this.act = act;
             	   this.sessionID = act.getSession().getSessionID();
             	   writer.write(Integer.toString(sessionID));
             	   writer.flush();
             	   this.act.start();
+            	   this.initDone = true;
                	   break;
                case "getStats":
             	   Main.getStats(sessionID);
                	   break;
                case "close":
-            	   writer.write("Communication terminée");
+            	   writer.write("[AppCP] Communication terminée");
             	   writer.flush();
             	   this.act.stop();
             	   closeConnexion = true;
             	   break;
                default : 
-            	   writer.write("Commande inconnue !");
+            	   writer.write("[AppCP] Commande inconnue !");
             	   writer.flush();
             	   break;
             }
             
             if(closeConnexion){
-               System.err.println("COMMANDE CLOSE DETECTEE ! ");
+               System.err.println("[AppCP] COMMANDE CLOSE DETECTEE ! ");
                writer = null;
                reader = null;
                sock.close();
                break;
             }
          }catch(SocketException e){
-            System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
+            System.err.println("[AppCP] LA CONNEXION A ETE INTERROMPUE ! ");
             break;
          } catch (IOException e) {
             e.printStackTrace();
@@ -134,5 +136,9 @@ public class AppClientProcessor implements Runnable{
 		e.printStackTrace();
 	}
 	   return json;
+   }
+   
+   public boolean getInitSate() {
+	   return this.initDone;
    }
 }

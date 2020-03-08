@@ -6,17 +6,17 @@ public class Activite {
 	
 	private String mode;
 	private final Session session;
-	private final AppClientProcessor clientApp;
-	private final RobotClientProcessor clientRobot;
+	public final AppClientProcessor clientApp;
+	public final RobotClientProcessor clientRobot;
 	
 	
-	public Activite(String[] noms, String[] prenoms, int[] braceletsID, AppClientProcessor clientApp) {
-		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
-		System.out.println("initialisation completed");
-		this.clientRobot = Main.inform(this, this.session.getEleves());
-		System.out.println("informed Main, RobotClientProcessor ok");
-		this.mode = null;
+	public Activite(String[] noms, String[] prenoms, int[] braceletsID, AppClientProcessor clientApp) throws InterruptedException {
 		this.clientApp = clientApp;
+		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
+		System.out.println("[ACTIVITE] initialisation completed");
+		this.clientRobot = Main.inform(this, this.session.getEleves());
+		System.out.println("[ACTIVITE] informed Main, RobotClientProcessor ok");
+		this.mode = null;
 	}
 	
 	public Session getSession() {

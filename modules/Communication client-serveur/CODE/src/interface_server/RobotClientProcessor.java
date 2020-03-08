@@ -22,7 +22,8 @@ public class RobotClientProcessor implements Runnable{
    private boolean closeConnexion = false;
    private boolean changeMode = false;
    private boolean initDone = false;
-   private String action;
+   private String action = "none";
+   private String command;
    
    public RobotClientProcessor(Socket pSock, Activite act){
       sock = pSock;
@@ -31,7 +32,7 @@ public class RobotClientProcessor implements Runnable{
    
    @Override
    public void run(){
-      System.err.println("Lancement du traitement de la connexion robot");
+      System.out.println("[RobotCP] Lancement du traitement de la connexion robot");
 
       while(!sock.isClosed()){
          
@@ -40,16 +41,37 @@ public class RobotClientProcessor implements Runnable{
             writer = new PrintWriter(sock.getOutputStream());
             reader = new BufferedInputStream(sock.getInputStream());
             
-            
-            if (this.changeMode && this.initDone) {
-            	System.out.println("NOT reading socket because of specific action");
+            if (!this.act.clientApp.getInitSate()) {System.err.println("[RobotCP] Waiting app initialisation to be finished");}
+            while (!this.act.clientApp.getInitSate()) {
+            	Thread.sleep(5000);
+            	System.out.println("[RobotCP] Still not finished");
             }
-            else action = read();
             
-            System.out.println("action required with robot : " + action);
+            if (this.initDone) {
+            	
+            	System.err.println("[RobotCP] init done, waiting to see if change mode needed");
+            	Thread.sleep(5000);
+            	if (this.changeMode) {
+            		System.out.println("[RobotCP] NOT reading socket because of specific action");
+            		action = command;
+            	}
+            	else {
+                	System.err.println("[RobotCP] reading socket");
+                	Thread.sleep(5000);
+                	action = read();
+                }
+            }
+            else {
+            	System.err.println("[RobotCP] reading socket");
+            	Thread.sleep(5000);
+            	action = read();
+            }
+            
+            System.out.println("[RobotCP] action required with robot : " + action);
             
             switch(action){
                case "init":
+            	   System.out.print("[RobotCP] sending students to robot : ");
             	   Eleve[] elvs = this.act.getSession().getEleves();
             	   int nb = elvs.length;
             	   String[] noms = new String[nb];
@@ -63,6 +85,7 @@ public class RobotClientProcessor implements Runnable{
             	   JSONObject toSend = this.encode(noms, prenoms, ids);
             	   toSend.writeJSONString(writer);
             	   writer.flush();
+            	   System.out.println("done");
             	   this.initDone = true;
                	   break;
                case "newImage":
@@ -92,24 +115,27 @@ public class RobotClientProcessor implements Runnable{
             	   writer.flush();
             	   this.changeMode = false;
                default : 
-            	   writer.write("Commande inconnue !");
-            	   writer.flush();
+            	   System.out.println("[RobotCP] Commande inconnue de la part du robot");
+            	   //writer.write("Commande inconnue !");
+            	   //writer.flush();
             	   break;
             }
 
             if(closeConnexion){
-               System.err.println("COMMANDE CLOSE DETECTEE ! ");
+               System.err.println("[RobotCP] COMMANDE CLOSE DETECTEE ! ");
                writer = null;
                reader = null;
                sock.close();
                break;
             }
          }catch(SocketException e){
-            System.err.println("LA CONNEXION A ETE INTERROMPUE ! ");
+            System.err.println("[RobotCP] LA CONNEXION A ETE INTERROMPUE ! ");
             break;
          } catch (IOException e) {
             e.printStackTrace();
-         }         
+         } catch (InterruptedException e) {
+			e.printStackTrace();
+		}         
       }
    }
    
@@ -159,11 +185,11 @@ public class RobotClientProcessor implements Runnable{
    
    public void modeRecherche() {
 	   this.changeMode = true;
-	   this.action = "RECHERCHE";
+	   this.command = "RECHERCHE";
    }
    
    public void closeConnexion() {
 	   this.changeMode = true;
-	   this.action = "close";
+	   this.command = "close";
    }
 }

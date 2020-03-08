@@ -61,8 +61,8 @@ public class Main_server {
 								t.start();
 								break;
 							case "robot":
-								t = new Thread(clientRobot = new RobotClientProcessor(client, act));
 								robotConnected = true;
+								t = new Thread(clientRobot = new RobotClientProcessor(client, act));
 								t.start();
 								break;
 						}

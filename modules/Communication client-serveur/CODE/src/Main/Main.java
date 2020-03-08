@@ -27,7 +27,7 @@ public class Main {
 	      Main_server ts = new Main_server(host, port, "app");
 	      ts.open();
 	      
-	      System.out.println("Serveur initialisé.");
+	      System.out.println("[MAIN] Serveur initialisé.");
 	      
 	      
 	      // TODO
@@ -59,12 +59,16 @@ public class Main {
 		   return line;
 	   }
 	   
-	   public static RobotClientProcessor inform(Activite act, Eleve[] eleves) {
+	   public static RobotClientProcessor inform(Activite act, Eleve[] eleves) throws InterruptedException {
 		   Main_server rb = new Main_server(host, port+1, "robot");
 		   rb.setActivite(act);
 		   rb.open();
-		   System.out.println("Waiting for a robot connexion");
-		   while (!rb.robotConnected) {}
+		   System.out.println("[MAIN] Waiting for a robot connexion");
+		   while (!rb.robotConnected) {
+			   Thread.sleep(5000);
+			   System.out.println("[MAIN] Robot still not connected");
+		   }
+		   System.out.println("[MAIN] robot connected, finishing activity creation");
 		   return rb.getRobotApp();
 	   }
 }

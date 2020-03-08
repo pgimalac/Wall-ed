@@ -2,14 +2,14 @@ import socket
 import pickle
 import json
 
-hote = "localhost"
+hote = "192.168.1.15"
 port = 2346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def initConnexion():
 	socket.connect((hote,port))
-	sendSomething("init")
+	socket.send(bytes("init",'utf-8'))
 	liste_eleves = socket.recv(255)
 	return json.loads(liste_eleves)
 

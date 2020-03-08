@@ -35,6 +35,7 @@ public class Session {
 		
 		for (int i = 0; i < this.nbEleves; i++) {
 			tempID = this.eleves[i].getEleveID();
+			System.out.println(tempID);
 			if (tempID > lastID) {
 				AjoutEleve.addEleve(eleves[i].getNom(), eleves[i].getPrenom());
 				String[] braceletEleve = {Integer.toString(bracelets[i]), Integer.toString(eleves[i].getEleveID())};
