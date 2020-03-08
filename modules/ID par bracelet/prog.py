@@ -100,11 +100,7 @@ def trirapide(L):
     
     
 def main(img):
-<<<<<<< HEAD
-    imageFiltree = seuillageGris(img, 110)
-=======
     imageFiltree = seuillageGris(img, 90)
->>>>>>> a6716693ed0bfadb6722cc6b2b6884b568d2654e
     imageComp, composante = main_composantes(imageFiltree)
     histogramme = histo(img, imageComp, composante)
     l1, l2 = determinationLABEL(histogramme)
