@@ -1,5 +1,6 @@
 package interface_server;
 import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -24,7 +25,8 @@ public class RobotClientProcessor implements Runnable{
    private boolean initDone = false;
    private String action = "none";
    private String command;
-   private String imageStoringPath = "/home/adrien/Images";
+   private String imageStoringPath = "/home/adrien/Images/pactImages/";
+   private int numberOfImages = 0;
    
    public RobotClientProcessor(Socket pSock, Activite act){
       sock = pSock;
@@ -91,9 +93,13 @@ public class RobotClientProcessor implements Runnable{
                	   break;
                case "newImage":
             	   // TODO
-            	   String stringData1 = read();
-            	   // receive the image, store it in a specific folder created for this session and launch IA
-            	   // then send results to the robot
+            	   byte[] b = new byte[20000];
+            	   this.numberOfImages++;
+            	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   reader.read(b, 0, b.length);
+            	   image.write(b, 0, b.length);
+            	   Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   // then send results to the robot with a json file
             	   // receive the answer of the robot :
             	   String stringData = read();
             	   JSONObject data = decode(stringData);
