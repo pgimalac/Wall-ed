@@ -36,7 +36,6 @@ public class AppClientProcessor implements Runnable{
             
             writer = new PrintWriter(sock.getOutputStream());
             reader = new BufferedInputStream(sock.getInputStream());
-                        
             String response = read();
             InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
             
@@ -51,9 +50,13 @@ public class AppClientProcessor implements Runnable{
                case "initSession":
             	   writer.write("send");
             	   writer.flush();
+            	   System.out.println("asked app to send init info");
             	   String stringData = read();
+            	   System.out.println("info received, decoding ...");
+            	   Thread.sleep(2000);
             	   JSONObject data = decode(stringData);
-            	   int nb = (int) data.get("numberOfStudents");
+            	   long nbtemp = (long)data.get("numberOfStudents");
+            	   int nb = (int)nbtemp;
             	   String[] noms = new String[nb];
             	   String[] prenoms = new String[nb];
             	   int[] braceletsID = new int[nb];
@@ -64,9 +67,15 @@ public class AppClientProcessor implements Runnable{
             		   String strI = Integer.toString(i);
             		   noms[i] = (String)lastNames.get(strI);
             		   prenoms[i] = (String)firstNames.get(strI);
-            		   braceletsID[i] = (int)IDs.get(strI);
+            		   long temp = (long)IDs.get(strI);
+            		   braceletsID[i] = (int) temp;
             	   }
+            	   System.out.println("decoded !");
+            	   System.out.println(noms[0]);
+            	   Thread.sleep(4000);
+            	   System.out.println("creating activity");
             	   Activite act = new Activite(noms, prenoms, braceletsID, this);
+            	   System.out.println("activity created");
             	   this.act = act;
             	   this.sessionID = act.getSession().getSessionID();
             	   writer.write(Integer.toString(sessionID));
@@ -100,7 +109,9 @@ public class AppClientProcessor implements Runnable{
             break;
          } catch (IOException e) {
             e.printStackTrace();
-         }         
+         } catch (InterruptedException e) {
+			e.printStackTrace();
+		}         
       }
    }
    
@@ -114,16 +125,14 @@ public class AppClientProcessor implements Runnable{
    }
    
    private JSONObject decode(String input){
-	   JSONParser parser = new JSONParser();
-	   Object ObjData;
-	   JSONObject jSONData = new JSONObject();
+	   JSONParser parser;
+	   JSONObject json = null;
 	try {
-		ObjData = parser.parse(input);
-		   jSONData = (JSONObject)(((JSONArray)ObjData).get(1));
+		parser = new JSONParser();
+		json = (JSONObject) parser.parse(input);
 	} catch (ParseException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	   return jSONData;
+	   return json;
    }
 }

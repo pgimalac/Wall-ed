@@ -12,7 +12,7 @@ public class Main_bdd {
 	}
 	
 	public static void initSessionID() {
-		String query = "SELECT * FROM GLOBAL";
+		String query = "SELECT * FROM GLOBALE";
 		int id = Integer.parseInt(Connect_bdd.lastExecuteSQL(query, "sessionID"));
 		sessionID = id;
 	}

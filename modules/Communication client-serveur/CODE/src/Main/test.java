@@ -30,7 +30,12 @@ public class test {
 		*/
 		
 		Main_appli mn = new Main_appli("127.0.0.1", 2345);
-		mn.run();
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				mn.run();
+			}
+		});
+		t.start();
 		String[] noms = {"AA", "BB"};
 		String[] prenoms = {"aa", "bb"};
 		int[] braceletsID = {1,2};

@@ -51,6 +51,7 @@ public class Main_appli implements Runnable{
             	if("send"==read()) {
             		data.writeJSONString(writer);
             		writer.flush();
+            		System.out.println("init info sent");
             		sessionID = Integer.parseInt(read());
             	}
             	command = "none";
@@ -67,10 +68,13 @@ public class Main_appli implements Runnable{
             	break;
             }
             
+            if (command != "none") {
+            	
             System.out.println("Commande " + command + " envoyée au serveur");
             
             String response = read();
             System.out.println("\t * " + name + " : Réponse reçue " + response);
+            }
             
          } catch (IOException e1) {
             e1.printStackTrace();
@@ -97,6 +101,7 @@ public class Main_appli implements Runnable{
 	   data.put("lastNames", lastNames);
 	   data.put("firstNames", firstNames);
 	   data.put("IDs", IDs);
+	   System.out.println("initialising session");
    }
    
    public void getStats(int sessionID) {

@@ -13,7 +13,7 @@ import Main.Session;
 public class Main_server {
 	
 	private int port = 2345;
-	private String host = "127.0.0.1";
+	private String host = "192.168.1.15";
 	private ServerSocket server = null;
 	private boolean isRunning = true;
 	private String type;
@@ -98,7 +98,7 @@ public class Main_server {
 		this.act = act;
 	}
 	
-	public Activite getSession() {
+	public Activite getActivite() {
 		return this.act;
 	}
 }

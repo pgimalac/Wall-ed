@@ -4,7 +4,7 @@ import interface_server.*;
 
 public class Activite {
 	
-	private String mode;
+	private String mode = "INIT";
 	private final Session session;
 	private final AppClientProcessor clientApp;
 	private final RobotClientProcessor clientRobot;
@@ -12,7 +12,9 @@ public class Activite {
 	
 	public Activite(String[] noms, String[] prenoms, int[] braceletsID, AppClientProcessor clientApp) {
 		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
+		System.out.println("initialisation completed");
 		this.clientRobot = Main.inform(this, this.session.getEleves());
+		System.out.println("informed Main, RobotClientProcessor ok");
 		this.mode = null;
 		this.clientApp = clientApp;
 	}
