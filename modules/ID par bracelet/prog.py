@@ -4,7 +4,101 @@
 découpage de l'algorithme en quatres étapes, détermination du seuillage, de la composante connexe, de l'histogramme et enfin des pics
 il y a donc 4 parties qui suivent, chacune implémentant une étape en une ou plusieurs fonctions
 '''
+def mainServeur(img1,img2,img3,img4,img5,img6):
+    L =[]
+    Color = [["JAUNE",0]
+            ["VERT" , 0]
+            ["MAGENTA" , 0]
+            ["BLEU", 0]
+            ["TURQUOISE", 0]
+            ["ROUGE", 0]]
+    
+    
+trouverCouleurImg(img1,Color)
+trouverCouleurImg(img2,Color)
+trouverCouleurImg(img3,Color)
+trouverCouleurImg(img4,Color)
+trouverCouleurImg(img5,Color)
+trouverCouleurImg(img6,Color)
+     
+max1 = 0
+i1 = 0
+max2 = 0
+i2 = 0
+for i in range(6):
+    if Color[i][1] > max1:
+        max1 = Color[i][1]
+        i1 = i
+        
+L.append[Color[i1][0]]
 
+del Color[i1]
+
+for i in range(6):
+    if Color[i][1] > max2:
+        max2 = Color[i][1]
+        i2 = i
+L.append(Color[i2][0])
+
+return L
+
+
+
+def trouverCouleurImg(img,Color):
+    if main(img)[0] == "JAUNE":
+        Color[0][1] = Color[0][1] + 1
+    elif main(img)[0] == "VERT":
+        Color[0][1] = Color[1][1] + 1
+    elif main(img)[0] == "MAGENTA":
+        Color[0][1] = Color[2][1] + 1
+    elif main(img)[0] == "BLEU":
+        Color[0][1] = Color[3][1] + 1
+    elif main(img)[0] == "TURQUOISE":
+        Color[0][1] = Color[4][1] + 1
+    elif main(img)[0] == "ROUGE":
+        Color[0][1] = Color[5][1] + 1
+        
+    
+    if main(img)[1] == "JAUNE":
+        Color[0][1] = Color[0][1] + 1
+    elif main(img)[1] == "VERT":
+        Color[0][1] = Color[1][1] + 1
+    elif main(img)[1] == "MAGENTA":
+        Color[0][1] = Color[2][1] + 1
+    elif main(img)[1] == "BLEU":
+        Color[0][1] = Color[3][1] + 1
+    elif main(img)[1] == "TURQUOISE":
+        Color[0][1] = Color[4][1] + 1
+    elif main(img)[1] == "ROUGE":
+        Color[0][1] = Color[5][1] + 1
+        
+def trirapide(L):
+    
+    def trirap(L, g, d):
+        pivot = L[(g+d)//2]
+        i = g
+        j = d
+        while True:
+            while L[i]<pivot:
+                i+=1
+            while L[j]>pivot:
+                j-=1
+            if i>j:
+                break
+            if i<j:
+                L[i], L[j] = L[j], L[i]
+            i+=1
+            j-=1
+        if g<j:
+            trirap(L,g,j)
+        if i<d:
+            trirap(L,i,d)
+ 
+    g=0
+    d=len(L)-1
+    trirap(L,g,d)
+    
+    
 def main(img):
 <<<<<<< HEAD
     imageFiltree = seuillageGris(img, 110)
