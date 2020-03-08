@@ -24,7 +24,7 @@ public class Session {
 		table_ramassage = "RAMA_" + Integer.toString(this.sessionID);
 		table_eleves = "ELEV_" + Integer.toString(this.sessionID);
 		
-		String[] args = {"dechetID", "sessionID", "braceletID", "typeDechet", "reponseEleve"};
+		String[] args = {"dechetID", "sessionID", "braceletID", "type", "typePropose", "reponseEleve", "heureRamassage"};
 		String[] args2 = {"braceletID", "eleveID"};
 		
 		Creation_table.createTable(table_ramassage, args);

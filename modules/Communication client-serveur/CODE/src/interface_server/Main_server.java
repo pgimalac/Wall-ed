@@ -20,6 +20,7 @@ public class Main_server {
 	private RobotClientProcessor clientRobot;
 	private AppClientProcessor clientApp;
 	private Activite act;
+	public boolean robotConnected = false;
 	   
 	public Main_server(){
 		try {
@@ -61,6 +62,7 @@ public class Main_server {
 								break;
 							case "robot":
 								t = new Thread(clientRobot = new RobotClientProcessor(client, act));
+								robotConnected = true;
 								t.start();
 								break;
 						}

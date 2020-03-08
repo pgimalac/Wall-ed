@@ -4,7 +4,7 @@ import interface_server.*;
 
 public class Activite {
 	
-	private String mode = "INIT";
+	private String mode;
 	private final Session session;
 	private final AppClientProcessor clientApp;
 	private final RobotClientProcessor clientRobot;
@@ -46,6 +46,7 @@ public class Activite {
 	
 	public void start() {
 		this.session.debutSession();
+		this.mode = "INIT";
 		this.changeMode();
 	}
 	

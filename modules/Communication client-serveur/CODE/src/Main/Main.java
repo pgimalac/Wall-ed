@@ -63,6 +63,8 @@ public class Main {
 		   Main_server rb = new Main_server(host, port+1, "robot");
 		   rb.setActivite(act);
 		   rb.open();
+		   System.out.println("Waiting for a robot connexion");
+		   while (!rb.robotConnected) {}
 		   return rb.getRobotApp();
 	   }
 }

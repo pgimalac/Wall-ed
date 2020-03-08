@@ -20,6 +20,9 @@ public class RobotClientProcessor implements Runnable{
    private BufferedInputStream reader = null;
    private final Activite act;
    private boolean closeConnexion = false;
+   private boolean changeMode = false;
+   private boolean initDone = false;
+   private String action;
    
    public RobotClientProcessor(Socket pSock, Activite act){
       sock = pSock;
@@ -36,18 +39,16 @@ public class RobotClientProcessor implements Runnable{
             
             writer = new PrintWriter(sock.getOutputStream());
             reader = new BufferedInputStream(sock.getInputStream());
-                        
-            String response = read();
             
-            InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
-            String debug = "";
-            debug = "Thread : " + Thread.currentThread().getName() + ". ";
-            debug += "Demande de l'adresse : " + remote.getAddress().getHostAddress() +".";
-            debug += " Sur le port : " + remote.getPort() + ".\n";
-            debug += "\t -> Commande reçue : " + response + "\n";
-            System.err.println("\n" + debug);
             
-            switch(response){
+            if (this.changeMode && this.initDone) {
+            	System.out.println("NOT reading socket because of specific action");
+            }
+            else action = read();
+            
+            System.out.println("action required with robot : " + action);
+            
+            switch(action){
                case "init":
             	   Eleve[] elvs = this.act.getSession().getEleves();
             	   int nb = elvs.length;
@@ -62,6 +63,7 @@ public class RobotClientProcessor implements Runnable{
             	   JSONObject toSend = this.encode(noms, prenoms, ids);
             	   toSend.writeJSONString(writer);
             	   writer.flush();
+            	   this.initDone = true;
                	   break;
                case "newImage":
             	   // TODO
@@ -83,8 +85,12 @@ public class RobotClientProcessor implements Runnable{
             		   this.act.changeMode();
             		   // send this dechet info to the app ?
             	   }
-               case "stoping":
+               case "close":
             	   this.closeConnexion = true;
+               case "RECHERCHE":
+            	   writer.write(action);
+            	   writer.flush();
+            	   this.changeMode = false;
                default : 
             	   writer.write("Commande inconnue !");
             	   writer.flush();
@@ -152,10 +158,12 @@ public class RobotClientProcessor implements Runnable{
    }
    
    public void modeRecherche() {
-	   // send "RECHERCHE" to the robot
+	   this.changeMode = true;
+	   this.action = "RECHERCHE";
    }
    
    public void closeConnexion() {
-	   // send the command close to the robot
+	   this.changeMode = true;
+	   this.action = "close";
    }
 }
