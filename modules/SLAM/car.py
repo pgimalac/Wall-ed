@@ -1,8 +1,8 @@
 import time
-import random
 
 import back_wheels
 import front_wheels
+import camera
 
 class Car():
     ''' Whole car control class '''
@@ -12,8 +12,8 @@ class Car():
     def __init__(self, debug=False):
         self.back_wheels = back_wheels.Back_Wheels(debug=debug)
         self.front_wheels = front_wheels.Front_Wheels(debug=debug)
+        self.camera = camera.Camera(debug=debug)
         self.debug = debug
-        self.camera = None
 
     #########################
     #    DEBUG FUNCTIONS    #
@@ -38,17 +38,13 @@ class Car():
             raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
 
         if self.debug:
-            print(self._DEBUG_INFO, "Set debug on")
-            print(self._DEBUG_INFO, "Set front wheels debug on")
-            self.front_wheels.debug = True
-            print(self._DEBUG_INFO, "Set back wheels debug on")
-            self.back_wheels.debug = True
+            print(self._DEBUG_INFO, "Set car debug on")
         else:
-            print(self._DEBUG_INFO, "Set debug off")
-            print(self._DEBUG_INFO, "Set front wheels debug off")
-            self.front_wheels.debug = False
-            print(self._DEBUG_INFO, "Set back wheels debug off")
-            self.back_wheels.debug = False
+            print(self._DEBUG_INFO, "Set car debug off")
+
+        self.front_wheels.debug = debug
+        self.back_wheels.debug = debug
+        self.camera.debug = debug
 
     #########################
     #   GENERAL FUNCTIONS   #
@@ -59,6 +55,7 @@ class Car():
         self._debug_('Turn to "Ready" position')
         self.front_wheels.ready()
         self.back_wheels.ready()
+        self.camera.ready()
 
     def calibration(self):
         ''' Get the front wheels to the calibration position. '''
@@ -131,6 +128,46 @@ class Car():
     def speed(self, speed):
         ''' Set moving speeds '''
         self.back_wheels.speed = speed
+
+    ###########################
+    # CAMERA MOTORS FUNCTIONS #
+    ###########################
+
+    def camera_turn_left(self, step=None):
+        ''' Control the pan servo to make the camera turning left '''
+        if step is None:
+            self.camera.turn_left()
+        else:
+            self.camera.turn_left(step=step)
+
+    def camera_turn_right(self, step=None):
+        ''' Control the pan servo to make the camera turning right '''
+        if step is None:
+            self.camera.turn_right()
+        else:
+            self.camera.turn_right(step=step)
+
+    def camera_turn_up(self, step=None):
+        ''' Control the tilt servo to make the camera turning up '''
+        if step is None:
+            self.camera.turn_up()
+        else:
+            self.camera.turn_up(step=step)
+
+    def camera_turn_down(self, step=None):
+        '''Control the tilt servo to make the camera turning down'''
+        if step is None:
+            self.camera.turn_down()
+        else:
+            self.camera.turn_down(step=step)
+
+    def camera_to_position(self, expect_pan, expect_tilt, delay=None):
+        '''Control two servo to write the camera to ready position'''
+        if delay is None:
+            self.camera.to_position(expect_pan, expect_tilt)
+        else:
+            self.camera.to_position(expect_pan, expect_tilt, delay=delay)
+
 
 if __name__ == "__main__":
     delta = 0.1

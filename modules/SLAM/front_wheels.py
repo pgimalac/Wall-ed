@@ -30,6 +30,7 @@ class Front_Wheels():
         self._max_angle = 0
         self.turning_max = 45
         self._turning_offset = int(self.db.get('turning_offset', default_value=0))
+        self.cali_turning_offset = None
 
         self.wheel = Servo.Servo(self._channel, bus_number=bus_number, offset=self.turning_offset)
         self.debug = debug

@@ -15,7 +15,7 @@ import time
 from SunFounder_PCA9685 import Servo
 import filedb
 
-class Camera(object):
+class Camera():
     '''Camera movement control class'''
     pan_channel = 1         # Pan servo channel
     tilt_channel = 2        # Tilt servo channel
@@ -26,7 +26,7 @@ class Camera(object):
     CALI_TILT = 90          # Calibration position angle
 
     CAMERA_DELAY = 0.005
-    PAN_STEP = 15               # Pan step = 5 degree
+    PAN_STEP = 15           # Pan step = 5 degree
     TILT_STEP = 10          # Tilt step = 5 degree
 
     _DEBUG = False
@@ -54,7 +54,8 @@ class Camera(object):
         self.current_tilt = 0
         self.ready()
 
-    def safe_plus(self, variable, plus_value):
+    @staticmethod
+    def safe_plus(variable, plus_value):
         ''' Plus angle safely with no over ranges '''
         variable += plus_value
         if variable > 180:
