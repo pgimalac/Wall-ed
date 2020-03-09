@@ -32,6 +32,7 @@ public class Main_appli implements Runnable{
       } catch (IOException e) {
          e.printStackTrace();
       }
+      System.out.println("socket created on port");
    }
    
    @Override
@@ -46,14 +47,21 @@ public class Main_appli implements Runnable{
             
             switch(command){
             case "initSession":
+            	System.out.println("sending command to server");
             	writer.write(command);
             	writer.flush();
-            	if("send"==read()) {
+            	String resp = read();
+            	System.out.println("receiving request");
+            	if (resp.equals("send")) {
+            		System.out.println("sending init info");
+            		Thread.sleep(2000);
             		data.writeJSONString(writer);
             		writer.flush();
             		System.out.println("init info sent");
             		sessionID = Integer.parseInt(read());
+            		System.out.println("this session ID is : " + Integer.toString(sessionID));
             	}
+            	else {System.out.println("no matching");}
             	command = "none";
             	break;
             case "getStats":
@@ -68,21 +76,15 @@ public class Main_appli implements Runnable{
             	break;
             }
             
-            if (command != "none") {
-            	
-            System.out.println("Commande " + command + " envoyée au serveur");
             
-            String response = read();
-            System.out.println("\t * " + name + " : Réponse reçue " + response);
-            }
-            
-         } catch (IOException e1) {
+         } catch (IOException | InterruptedException e1) {
             e1.printStackTrace();
          }
       }
    }
    
    public void initSession(String[] noms, String[] prenoms, int[] braceletsID) {
+	   command = "initSession";
 	   int nb = noms.length;
 	   JSONObject lastNames = new JSONObject();
 	   JSONObject firstNames = new JSONObject();
@@ -100,9 +102,7 @@ public class Main_appli implements Runnable{
 	   data.put("lastNames", lastNames);
 	   data.put("firstNames", firstNames);
 	   data.put("IDs", IDs);
-	   System.out.println("initialising session");
-	   command = "initSession";
-   }
+	   }
    
    public void getStats(int sessionID) {
 	   command = "getStats";

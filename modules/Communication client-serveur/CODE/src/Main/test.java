@@ -7,7 +7,7 @@ import interface_externe.Main_appli;
 
 public class test {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		// System.out.println(Main.executePythonScriptForAI("blabla"));
 		
@@ -29,7 +29,9 @@ public class test {
 		System.out.println(resp);
 		*/
 		
-		Main_appli mn = new Main_appli("127.0.0.1", 2345);
+		System.out.println("creating socket, connecting to server");
+		Main_appli mn = new Main_appli("192.168.2.4", 2345);
+		System.out.println("connected");
 		Thread t = new Thread(new Runnable() {
 			public void run() {
 				mn.run();
@@ -38,6 +40,7 @@ public class test {
 		t.start();
 		String[] noms = {"AA", "BB"};
 		String[] prenoms = {"aa", "bb"};
+		Thread.sleep(2000);
 		int[] braceletsID = {1,2};
 		mn.initSession(noms, prenoms, braceletsID);
 	}
