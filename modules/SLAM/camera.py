@@ -11,7 +11,9 @@
 **********************************************************************
 '''
 
+import os
 import time
+import cv2
 from SunFounder_PCA9685 import Servo
 import filedb
 
@@ -43,16 +45,45 @@ class Camera():
 
         self.pan_servo = Servo.Servo(self.pan_channel, bus_number=bus_number, offset=self.pan_offset)
         self.tilt_servo = Servo.Servo(self.tilt_channel, bus_number=bus_number, offset=self.tilt_offset)
+
         self.debug = debug
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Pan servo channel:', self.pan_channel)
-            print(self._DEBUG_INFO, 'Tilt servo channel:', self.tilt_channel)
-            print(self._DEBUG_INFO, 'Pan offset value:', self.pan_offset)
-            print(self._DEBUG_INFO, 'Tilt offset value:', self.tilt_offset)
+        self._debug_('Pan servo channel: %i' % self.pan_channel)
+        self._debug_('Tilt servo channel: %i' % self.tilt_channel)
+        self._debug_('Pan offset value: %i' % self.pan_offset)
+        self._debug_('Tilt offset value: %i' % self.tilt_offset)
 
         self.current_pan = 0
         self.current_tilt = 0
         self.ready()
+
+        self.webcam_setup()
+
+    def _debug_(self, message):
+        if self.debug:
+            print(self._DEBUG_INFO, message)
+
+    @property
+    def debug(self):
+        return self._DEBUG
+
+    @debug.setter
+    def debug(self, debug):
+        ''' Set if debug information shows '''
+        if debug in (True, False):
+            self._DEBUG = debug
+        else:
+            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+
+        if self._DEBUG:
+            print(self._DEBUG_INFO, "Set debug on")
+            print(self._DEBUG_INFO, "Set pan servo and tilt servo debug on")
+            self.pan_servo.debug = True
+            self.tilt_servo.debug = True
+        else:
+            print(self._DEBUG_INFO, "Set debug off")
+            print(self._DEBUG_INFO, "Set pan servo and tilt servo debug off")
+            self.pan_servo.debug = False
+            self.tilt_servo.debug = False
 
     @staticmethod
     def safe_plus(variable, plus_value):
@@ -66,29 +97,25 @@ class Camera():
 
     def turn_left(self, step=PAN_STEP):
         ''' Control the pan servo to make the camera turning left '''
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn left at step:', step)
+        self._debug_('Turn left at step: %i' % step)
         self.current_pan = self.safe_plus(self.current_pan, step)
         self.pan_servo.write(self.current_pan)
 
     def turn_right(self, step=PAN_STEP):
         ''' Control the pan servo to make the camera turning right '''
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn right at step:', step)
+        self._debug_('Turn right at step: %i' % step)
         self.current_pan = self.safe_plus(self.current_pan, -step)
         self.pan_servo.write(self.current_pan)
 
     def turn_up(self, step=TILT_STEP):
         ''' Control the tilt servo to make the camera turning up '''
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn up at step:', step)
+        self._debug_('Turn up at step: %i' % step)
         self.current_tilt = self.safe_plus(self.current_tilt, step)
         self.tilt_servo.write(self.current_tilt)
 
     def turn_down(self, step=TILT_STEP):
         '''Control the tilt servo to make the camera turning down'''
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn down at step:', step)
+        self._debug_('Turn down at step: %i' % step)
         self.current_tilt = self.safe_plus(self.current_tilt, -step)
         self.tilt_servo.write(self.current_tilt)
 
@@ -96,8 +123,7 @@ class Camera():
         '''Control two servo to write the camera to ready position'''
         pan_diff = self.current_pan - expect_pan
         tilt_diff = self.current_tilt - expect_tilt
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn to posision [%s, %s] (pan, tilt)' % (expect_pan, expect_tilt))
+        self._debug_('Turn to posision [%s, %s] (pan, tilt)' % (expect_pan, expect_tilt))
         while True:
             if pan_diff != 0 or tilt_diff != 0:
                 pan_diff = self.current_pan - expect_pan
@@ -125,8 +151,7 @@ class Camera():
 
     def ready(self):
         ''' Set the camera to ready position '''
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn to "Ready" position')
+        self._debug_('Turn to "Ready" position')
         self.pan_servo.offset = self.pan_offset
         self.tilt_servo.offset = self.tilt_offset
         self.current_pan = self.READY_PAN
@@ -136,8 +161,7 @@ class Camera():
 
     def calibration(self):
         ''' Control two servo to write the camera to calibration position '''
-        if self._DEBUG:
-            print(self._DEBUG_INFO, 'Turn to "Calibration" position')
+        self._debug_('Turn to "Calibration" position')
         self.pan_servo.write(self.CALI_PAN)
         self.tilt_servo.write(self.CALI_TILT)
         self.cali_pan_offset = self.pan_offset
@@ -174,28 +198,44 @@ class Camera():
         self.db.set('pan_offset', self.pan_offset)
         self.db.set('tilt_offset', self.tilt_offset)
 
-    @property
-    def debug(self):
-        return self._DEBUG
+    @staticmethod
+    def find_webcam():
+        path = '/dev/'
+        video = "video"
+        for _, _, f in os.walk(path):
+            for file in f:
+                if file.startswith(video):
+                    try:
+                        cam = cv2.VideoCapture(int(file[len(video):]))
+                    except ValueError:
+                        continue
 
-    @debug.setter
-    def debug(self, debug):
-        ''' Set if debug information shows '''
-        if debug in (True, False):
-            self._DEBUG = debug
-        else:
-            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+                    if cam.isOpened():
+                        return cam
+        return None
 
-        if self._DEBUG:
-            print(self._DEBUG_INFO, "Set debug on")
-            print(self._DEBUG_INFO, "Set pan servo and tilt servo debug on")
-            self.pan_servo.debug = True
-            self.tilt_servo.debug = True
+    def webcam_setup(self):
+        self.webcam = self.find_webcam()
+        if self.webcam is None:
+            self._debug_("Could not initialize webcam")
         else:
-            print(self._DEBUG_INFO, "Set debug off")
-            print(self._DEBUG_INFO, "Set pan servo and tilt servo debug off")
-            self.pan_servo.debug = False
-            self.tilt_servo.debug = False
+            self._debug_("Webcam successfully initialized")
+
+        return self.webcam is not None
+
+    def capture(self):
+        ret, img = self.webcam.read()
+
+        if not ret:
+            if not self.webcam_setup():
+                return None
+
+            ret, img = self.webcam.read()
+            if not ret:
+                self._debug_("Could not connect to the webcam")
+                return None
+
+        return img
 
 if __name__ == '__main__':
     camera = Camera()

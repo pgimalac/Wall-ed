@@ -7,8 +7,6 @@ import camera
 class Car():
     ''' Whole car control class '''
 
-    _DEBUG = False
-
     def __init__(self, debug=False):
         self.back_wheels = back_wheels.Back_Wheels(debug=debug)
         self.front_wheels = front_wheels.Front_Wheels(debug=debug)
@@ -19,6 +17,7 @@ class Car():
     #    DEBUG FUNCTIONS    #
     #########################
 
+    _DEBUG = False
     _DEBUG_INFO = 'DEBUG "car.py":'
 
     def _debug_(self, message):
@@ -56,17 +55,6 @@ class Car():
         self.front_wheels.ready()
         self.back_wheels.ready()
         self.camera.ready()
-
-    def calibration(self):
-        ''' Get the front wheels to the calibration position. '''
-        self._debug_('Turn to "Calibration" position')
-        self.front_wheels.calibration()
-        self.back_wheels.calibration()
-
-    def cali_ok(self):
-        ''' Save the calibration value '''
-        self.front_wheels.cali_ok()
-        self.back_wheels.cali_ok()
 
     ##########################
     # FRONT WHEELS FUNCTIONS #
@@ -168,6 +156,19 @@ class Car():
         else:
             self.camera.to_position(expect_pan, expect_tilt, delay=delay)
 
+    ###########################
+    # CAMERA WEBCAM FUNCTIONS #
+    ###########################
+
+    @property
+    def webcam(self):
+        return self.camera.webcam
+
+    def webcam_setup(self):
+        return self.camera.webcam_setup()
+
+    def capture(self):
+        return self.camera.capture()
 
 if __name__ == "__main__":
     delta = 0.1
