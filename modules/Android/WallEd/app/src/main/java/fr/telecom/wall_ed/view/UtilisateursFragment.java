@@ -52,10 +52,6 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         ListView listView = result.findViewById(R.id.LU);
         listView.setAdapter(mCallBackUtilisateur.getUserAdaptateur());
 
-        ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
-        ArrayAdapter<Utilisateur> arrayAdapter = new ArrayAdapter<Utilisateur>(getContext(), android.R.layout.simple_list_item_1, mCallBackUtilisateur.getUser());
-        mlistView.setAdapter(arrayAdapter);
-
         displayListeUtilisateurs();
 
         return result;
