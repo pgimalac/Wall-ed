@@ -1,4 +1,5 @@
 package interface_server;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+
+import javax.imageio.ImageIO;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -93,9 +96,11 @@ public class RobotClientProcessor implements Runnable{
                	   break;
                case "newImage":
             	   // TODO
+            	   //BufferedImage imageData = ImageIO.read(reader);
             	   byte[] b = new byte[20000];
             	   this.numberOfImages++;
             	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   //ImageIO.write(imageData, "png", image);
             	   reader.read(b, 0, b.length);
             	   image.write(b, 0, b.length);
             	   Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages));
