@@ -2,7 +2,7 @@ import socket
 import pickle
 import json
 
-hote = "192.168.1.15"
+hote = "192.168.2.4"
 port = 2346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

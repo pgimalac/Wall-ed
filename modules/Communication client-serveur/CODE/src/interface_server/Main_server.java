@@ -13,7 +13,7 @@ import Main.Session;
 public class Main_server {
 	
 	private int port = 2345;
-	private String host = "192.168.1.15";
+	private String host = "192.168.2.4";
 	private ServerSocket server = null;
 	private boolean isRunning = true;
 	private String type;
