@@ -74,10 +74,10 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     private void displayListeUtilisateurs() {
         ArrayList<Utilisateur> LU = mCallBackUtilisateur.getUser();
-        LU.add(new Utilisateur("Masiak", "Victor", "CP", ""));
-        LU.add(new Utilisateur("Maes", "Adrien", "CE1", ""));
-        LU.add(new Utilisateur("Louvet", "Romain", "CE2", ""));
-        LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", ""));
+        LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
+        LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
+        LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
+        LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
     }
 
 }
