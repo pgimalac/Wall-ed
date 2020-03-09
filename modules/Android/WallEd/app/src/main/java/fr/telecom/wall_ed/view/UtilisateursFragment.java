@@ -20,7 +20,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     private ListView mListView ;
 
-    private InterfaceGestionUtilisateurs callBackUtilisateur ;
+    private InterfaceGestionUtilisateurs mcallBackUtilisateur ;
 
     @Override
     public void onAttach(Context context) {

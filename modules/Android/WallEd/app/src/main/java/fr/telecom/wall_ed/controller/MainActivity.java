@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     }
 
     private void displayListeUtilisateurs() {
-        LU = new ArrayList<fr.telecom.wall_ed.controller.Utilisateur>();
+        LU = new ArrayList<Utilisateur>();
         LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Masiak", "Victor", "CP"));
         LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Maes", "Adrien", "CE1"));
         LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Louvet", "Romain", "CE2"));
