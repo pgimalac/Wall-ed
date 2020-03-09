@@ -28,7 +28,7 @@ public class RobotClientProcessor implements Runnable{
    private boolean initDone = false;
    private String action = "none";
    private String command;
-   private String imageStoringPath = "/home/Téléchargements";
+   private String imageStoringPath = "/home/adrien/Images/pactImages";
    private int numberOfImages = 0;
    
    public RobotClientProcessor(Socket pSock, Activite act){
@@ -98,7 +98,7 @@ public class RobotClientProcessor implements Runnable{
             	   // TODO
             	   BufferedImage imageData = ImageIO.read(reader);
             	   this.numberOfImages++;
-            	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages)+".png");
             	   ImageIO.write(imageData, "png", image);
             	   //reader.read(b, 0, b.length);
             	   //image.write(b, 0, b.length);
