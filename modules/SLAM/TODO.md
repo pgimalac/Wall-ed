@@ -14,8 +14,7 @@
 - [x] Configuration des servos
 - [x] Utilisation des roues avant / arrières
 - [x] Ecrire un script pour faire se déplacer la voiture de manière aléatoire
-- [ ] Corriger l'inclinaison des roues
-- [ ] Prise de photos avec la caméra
+- [x] Prise de photos avec la caméra
 
 #### Synchronisation avec les autres modules
 - [ ] Envoyer les photos au module reconnaissance d'images

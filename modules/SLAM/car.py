@@ -1,5 +1,3 @@
-import time
-
 import back_wheels
 import front_wheels
 import camera
@@ -171,31 +169,26 @@ class Car():
         return self.camera.capture()
 
 if __name__ == "__main__":
+    import cv2
+
     delta = 0.1
     car = Car(debug=True)
 
     try:
         car.turn_straight()
         car.forward()
+        car.speed = 30
 
-        for i in range(car.turning_max):
-            print("Going right: %i" % i)
-            car.speed = 10 + 2 * i
-            if i % 5 == 0:
-                car.turn(car.front_wheels.straight_angle + i)
-            time.sleep(delta)
+        for i in range(121):
+            car.turn((i % 11) - 5)
+            car.camera_to_position(85 + (i % 11), 95 - (i % 11))
 
-        for i in range(-car.turning_max + 1, car.turning_max):
-            print("Going left: %i" % -i)
-            if i % 5 == 0:
-                car.turn(car.front_wheels.straight_angle - i)
-            time.sleep(delta)
-
-        for i in range(-car.turning_max + 1, 1):
-            print("Going right: %i" % i)
-            car.turn(car.front_wheels.straight_angle + i)
-            car.speed = 10 + -2 * i
-            time.sleep(delta)
+            if i % 10 == 0:
+                img = car.capture()
+                if img is None:
+                    print("Photo error")
+                else:
+                    cv2.imwrite("/tmp/cv2%i" % i, img)
 
     except KeyboardInterrupt:
         print("Interrupted !")
