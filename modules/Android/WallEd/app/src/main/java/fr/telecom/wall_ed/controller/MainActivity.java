@@ -30,7 +30,10 @@ import androidx.appcompat.widget.Toolbar;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -44,7 +47,7 @@ import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
-public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -54,6 +57,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     private AppBarConfiguration mAppBarConfiguration = null;
     private ArrayList<fr.telecom.pact32.wall_ed.model.Utilisateur> mUsers = null;
     private SharedPreferences mPrefs = null;
+
+    ListView lv ;
+    ArrayList<fr.telecom.wall_ed.controller.Utilisateur> LU ;
+    UtilisateurAdapter utAdapter ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +92,30 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
         mPrefs = getPreferences(MODE_PRIVATE);
         loadUsers();
+
+        lv = findViewById(R.id.LU);
+        displayListeUtilisateurs();
+    }
+
+    private void displayListeUtilisateurs() {
+        LU = new ArrayList<fr.telecom.wall_ed.controller.Utilisateur>();
+        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Masiak", "Victor", "CP"));
+        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Maes", "Adrien", "CE1"));
+        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Louvet", "Romain", "CE2"));
+        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Dufourt", "Jean-claude", "CM1"));
+
+        utAdapter = new UtilisateurAdapter(LU,this);
+        lv.setAdapter(utAdapter);
+    }
+
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        int pos = lv.getPositionForView(buttonView);
+        if (pos != ListView.INVALID_POSITION) {
+            fr.telecom.wall_ed.controller.Utilisateur u = LU.get(pos);
+            u.setSelected(isChecked);
+
+            Toast.makeText( this, "clicked on User" + u.getTheName() + ". State is " + isChecked, Toast.LENGTH_SHORT).show() ;
+        }
     }
 
  /*   @Override
