@@ -45,7 +45,6 @@ import fr.telecom.wall_ed.model.Serveur;
 import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
 import fr.telecom.wall_ed.view.MainFragment;
 import fr.telecom.wall_ed.R;
-import fr.telecom.wall_ed.view.SessionFragment;
 import fr.telecom.wall_ed.view.SettingsFragment;
 import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     private ArrayList<fr.telecom.wall_ed.model.Utilisateur> mUsers = null;
     private SharedPreferences mPrefs = null;
 
-    private ArrayList<Utilisateur> LU ;
     private UtilisateurAdapter utAdapter ;
 
 
@@ -100,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         //TODO: supprimer la ligne ci-dessus lorsque la ligne ci-dessous aura été implémentée
         //TODO: mUsers = serveur.getUsers();
 
-        utAdapter = new UtilisateurAdapter(LU,getContext());
+        utAdapter = new UtilisateurAdapter(mUsers,this);
 
     }
 
@@ -108,11 +106,10 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         ListView lv = findViewById(R.id.LU);
         int pos = lv.getPositionForView(buttonView);
         if (pos != ListView.INVALID_POSITION) {
-            Utilisateur u = LU.get(pos);
+            Utilisateur u = mUsers.get(pos);
             u.setSelected(isChecked);
             Toast.makeText( this, "clicked on User" + u.getPrenom() + ". State is " + isChecked, Toast.LENGTH_SHORT).show() ;
         }
-
     }
 
  /*   @Override
@@ -159,6 +156,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
     public ArrayList<Utilisateur> getUser () {
         return (mUsers);
+    }
+
+    @Override
+    public UtilisateurAdapter getUserAdaptateur() {
+        return utAdapter;
     }
 
     // ==================== MENU ====================
