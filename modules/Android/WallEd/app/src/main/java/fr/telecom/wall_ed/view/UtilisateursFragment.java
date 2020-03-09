@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import fr.telecom.wall_ed.controller.UtilisateurAdapter;
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
@@ -19,8 +23,9 @@ import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 public class UtilisateursFragment extends Fragment  implements View.OnClickListener, View.OnLongClickListener {
 
     private ListView mListView ;
+    private InterfaceGestionUtilisateurs mCallBackUtilisateur ;
 
-    private InterfaceGestionUtilisateurs callBackUtilisateur ;
+    private ListView lv ;
 
     @Override
     public void onAttach(Context context) {
@@ -47,6 +52,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false);
         ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
 
+        displayListeUtilisateurs();
 
         /*Utilisateur adrien = new Utilisateur("Adrien", "Maes le S", "CP", "id1");
         Utilisateur nicolas = new Utilisateur("Nicolas", "Jow le beau", "CE1", "id2") ;
@@ -71,6 +77,17 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     @Override
     public boolean onLongClick(View v) {
         return false;
+    }
+
+
+    private void displayListeUtilisateurs() {
+        LU = new ArrayList<Utilisateur>();
+        LU.add(new Utilisateur("Masiak", "Victor", "CP", ""));
+        LU.add(new Utilisateur("Maes", "Adrien", "CE1", ""));
+        LU.add(new Utilisateur("Louvet", "Romain", "CE2", ""));
+        LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", ""));
+
+        
     }
 
 }

@@ -37,6 +37,7 @@ import android.widget.CheckBox;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
@@ -62,9 +63,8 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     private ArrayList<fr.telecom.wall_ed.model.Utilisateur> mUsers = null;
     private SharedPreferences mPrefs = null;
 
-    ListView lv ;
-    ArrayList<fr.telecom.wall_ed.controller.Utilisateur> LU ;
-    UtilisateurAdapter utAdapter ;
+    private ArrayList<Utilisateur> LU ;
+    private UtilisateurAdapter utAdapter ;
 
 
     @Override
@@ -99,28 +99,18 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         loadUsers();
         //TODO: supprimer la ligne ci-dessus lorsque la ligne ci-dessous aura été implémentée
         //TODO: mUsers = serveur.getUsers();
-        lv = findViewById(R.id.LU);
-        displayListeUtilisateurs();
-    }
 
-    private void displayListeUtilisateurs() {
-        LU = new ArrayList<fr.telecom.wall_ed.controller.Utilisateur>();
-        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Masiak", "Victor", "CP"));
-        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Maes", "Adrien", "CE1"));
-        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Louvet", "Romain", "CE2"));
-        LU.add(new fr.telecom.wall_ed.controller.Utilisateur("Dufourt", "Jean-claude", "CM1"));
+        utAdapter = new UtilisateurAdapter(LU,getContext());
 
-        utAdapter = new UtilisateurAdapter(LU,this);
-        lv.setAdapter(utAdapter);
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        ListView lv = findViewById(R.id.LU);
         int pos = lv.getPositionForView(buttonView);
         if (pos != ListView.INVALID_POSITION) {
-            fr.telecom.wall_ed.controller.Utilisateur u = LU.get(pos);
+            Utilisateur u = LU.get(pos);
             u.setSelected(isChecked);
-
-            Toast.makeText( this, "clicked on User" + u.getTheName() + ". State is " + isChecked, Toast.LENGTH_SHORT).show() ;
+            Toast.makeText( this, "clicked on User" + u.getPrenom() + ". State is " + isChecked, Toast.LENGTH_SHORT).show() ;
         }
 
     }

@@ -1,4 +1,5 @@
 package fr.telecom.wall_ed.controller;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,52 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import fr.telecom.wall_ed.R;
-
-class Utilisateur {
-    String name ;
-    String surname ;
-    String classe ;
-    boolean selected = false ;
-
-    public Utilisateur (String name, String surname, String  classe) {
-        super();
-        this.name = name ;
-        this.surname = surname ;
-        this.classe = classe ;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public String getTheName() {
-        return name;
-    }
-
-    public void setTheName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getClasse() {
-        return classe;
-    }
-
-    public void setClasse(String classe) {
-        this.classe = classe;
-    }
-}
+import fr.telecom.wall_ed.model.Utilisateur;
 
 public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
 
@@ -93,9 +49,9 @@ public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
         }
 
         Utilisateur u = listeUtilisateurs.get(position);
-        holder.userName.setText(u.getTheName());
-        holder.userSurname.setText(u.getSurname());
-        holder.userName.setText(u.getTheName());
+        holder.userName.setText(u.getPrenom());
+        holder.userSurname.setText(u.getNom());
+        holder.userName.setText(u.getNom());
         holder.userCheckBox.setTag(u);
 
 
