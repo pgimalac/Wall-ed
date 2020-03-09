@@ -83,7 +83,6 @@ public class Main_appli implements Runnable{
    }
    
    public void initSession(String[] noms, String[] prenoms, int[] braceletsID) {
-	   command = "initSession";
 	   int nb = noms.length;
 	   JSONObject lastNames = new JSONObject();
 	   JSONObject firstNames = new JSONObject();
@@ -102,6 +101,7 @@ public class Main_appli implements Runnable{
 	   data.put("firstNames", firstNames);
 	   data.put("IDs", IDs);
 	   System.out.println("initialising session");
+	   command = "initSession";
    }
    
    public void getStats(int sessionID) {
