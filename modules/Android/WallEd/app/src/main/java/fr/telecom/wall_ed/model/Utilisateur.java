@@ -1,4 +1,4 @@
-package fr.telecom.pact32.wall_ed.model;
+package fr.telecom.wall_ed.model;
 
 import java.io.Serializable;
 

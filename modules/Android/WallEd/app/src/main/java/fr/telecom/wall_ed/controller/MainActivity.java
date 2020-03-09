@@ -38,11 +38,14 @@ import android.widget.CheckBox;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import fr.telecom.pact32.wall_ed.model.Utilisateur;
+import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
+import fr.telecom.wall_ed.model.Serveur;
 import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
 import fr.telecom.wall_ed.view.MainFragment;
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.view.SessionFragment;
+import fr.telecom.wall_ed.view.SettingsFragment;
 import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
@@ -51,11 +54,12 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
-    private Uri mImage_uri;
 
+    private Uri mImage_uri;
+    private Serveur serveur;
     private FragmentManager mFragmentManager = null;
     private AppBarConfiguration mAppBarConfiguration = null;
-    private ArrayList<fr.telecom.pact32.wall_ed.model.Utilisateur> mUsers = null;
+    private ArrayList<fr.telecom.wall_ed.model.Utilisateur> mUsers = null;
     private SharedPreferences mPrefs = null;
 
     ListView lv ;
@@ -90,9 +94,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                 .replace(R.id.main_frame_layout, mainFragment)
                 .addToBackStack(null).commit();
 
+        serveur = new Serveur();
         mPrefs = getPreferences(MODE_PRIVATE);
         loadUsers();
-
+        //TODO: supprimer la ligne ci-dessus lorsque la ligne ci-dessous aura été implémentée
+        //TODO: mUsers = serveur.getUsers();
         lv = findViewById(R.id.LU);
         displayListeUtilisateurs();
     }
@@ -116,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
             Toast.makeText( this, "clicked on User" + u.getTheName() + ". State is " + isChecked, Toast.LENGTH_SHORT).show() ;
         }
+
     }
 
  /*   @Override
@@ -136,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     private void loadUsers(){
         Gson gson = new Gson();
         String json = mPrefs.getString("mUsers", "");
-        Type listType = new TypeToken<ArrayList<fr.telecom.pact32.wall_ed.model.Utilisateur>>(){}.getType();
+        Type listType = new TypeToken<ArrayList<Utilisateur>>(){}.getType();
         mUsers = gson.fromJson(json, listType);
     }
 
@@ -148,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         prefsEditor.apply();
     }
 
-    private void addUser(fr.telecom.pact32.wall_ed.model.Utilisateur user){
+    private void addUser(Utilisateur user){
         if (mUsers==null){
             mUsers = new ArrayList<>();
         }
@@ -186,6 +193,12 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                 Fragment statistiques_globales = new Statistiques_globales();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, statistiques_globales)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.menu_params:
+                Fragment settings_fragment = new SettingsFragment();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, settings_fragment)
                         .addToBackStack(null).commit();
                 break;
         }
@@ -227,6 +240,13 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                 }else{
                     openCamera();
                 }
+            case R.id.session_bt_stop:
+                serveur.endSession();
+                utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, utilisateursFragment)
+                        .addToBackStack(null).commit();
+                break;
         }
     }
 

@@ -11,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import fr.telecom.pact32.wall_ed.model.Utilisateur;
+import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class UtilisateursFragment extends Fragment  implements View.OnClickListener, View.OnLongClickListener {
 
     private ListView mListView ;
