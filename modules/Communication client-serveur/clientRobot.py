@@ -1,8 +1,10 @@
 import socket
 import pickle
 import json
+import imageio
+import numpy
 
-hote = "192.168.2.4"
+hote = "192.168.2.6"
 port = 2346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,8 +15,9 @@ def initConnexion():
 	liste_eleves = socket.recv(255)
 	return json.loads(liste_eleves)
 
-def sendSomething(something):
-	socket.send(pickle.dumps(something))
+def sendFile(filepath):
+	file = open(filepath,'rb')
+	socket.sendfile(file)
 	return json.loads(socket.recv(255))
 
 def stopConnexion():

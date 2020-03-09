@@ -30,7 +30,7 @@ public class test {
 		*/
 		
 		System.out.println("creating socket, connecting to server");
-		Main_appli mn = new Main_appli("192.168.2.4", 2345);
+		Main_appli mn = new Main_appli("192.168.2.6", 2345);
 		System.out.println("connected");
 		Thread t = new Thread(new Runnable() {
 			public void run() {
