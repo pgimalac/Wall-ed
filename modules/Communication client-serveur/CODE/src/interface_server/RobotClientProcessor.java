@@ -1,8 +1,12 @@
 package interface_server;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -28,7 +32,7 @@ public class RobotClientProcessor implements Runnable{
    private boolean initDone = false;
    private String action = "none";
    private String command;
-   private String imageStoringPath = "/home/adrien/Images/pactImages";
+   private String imageStoringPath = "/home/Téléchargements/";
    private int numberOfImages = 0;
    
    public RobotClientProcessor(Socket pSock, Activite act){
@@ -96,12 +100,11 @@ public class RobotClientProcessor implements Runnable{
                	   break;
                case "newImage":
             	   // TODO
-            	   BufferedImage imageData = ImageIO.read(reader);
+            	   byte[] b= new byte[20000];
             	   this.numberOfImages++;
-            	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages)+".png");
-            	   ImageIO.write(imageData, "png", image);
-            	   //reader.read(b, 0, b.length);
-            	   //image.write(b, 0, b.length);
+            	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   reader.read(b, 0, b.length);
+            	   image.write(b, 0, b.length);
             	   Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages));
             	   // then send results to the robot with a json file
             	   // receive the answer of the robot :
