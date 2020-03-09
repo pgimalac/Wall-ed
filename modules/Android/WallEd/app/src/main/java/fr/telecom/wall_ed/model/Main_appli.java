@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Random;
 import org.json.simple.JSONObject;
 
 public class Main_appli implements Runnable{
@@ -39,7 +36,6 @@ public class Main_appli implements Runnable{
 
         while(!connexion.isClosed()){
             try {
-
 
                 writer = new PrintWriter(connexion.getOutputStream(), true);
                 reader = new BufferedInputStream(connexion.getInputStream());
@@ -74,7 +70,6 @@ public class Main_appli implements Runnable{
                     default :
                         break;
                 }
-
 
             } catch (IOException | InterruptedException e1) {
                 e1.printStackTrace();

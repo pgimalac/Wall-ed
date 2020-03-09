@@ -5,15 +5,23 @@ import fr.telecom.wall_ed.model.Utilisateur;
 
 public class Serveur {
 
+    private Main_appli mn;
+
     public Serveur(){
-        //TODO
+        mn = new Main_appli("192.168.2.4", 2345);
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                mn.run();
+            }
+        });
+        t.start();
     }
 
     /**
      * @return users saved from previous sessions
      */
     public ArrayList<Utilisateur> getUsers(){
-        //TODO
+        //TODO (on attend le code d'Adrien)
         return new ArrayList<>();
     }
 
@@ -22,7 +30,15 @@ public class Serveur {
      * @param users : users that will participate in the activity
      */
     public void startNewSession(ArrayList<Utilisateur> users){
-        //TODO
+        String[] noms = new String[users.size()];
+        String[] prenoms = new String[users.size()];
+        int[] braceletsID = new int[users.size()];
+        for (int i=0 ; i<users.size() ; i++){
+            noms[i] = users.get(i).getNom();
+            prenoms[i] = users.get(i).getPrenom();
+            braceletsID[i] = Integer.parseInt(users.get(i).getId());
+        }
+        mn.initSession(noms, prenoms, braceletsID);
     }
 
     /**
