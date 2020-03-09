@@ -1,0 +1,4 @@
+#Thu Mar 05 16:36:10 CET 2020
+base.0=D\:\\Git\\pact32\\modules\\Android\\WallEd\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
