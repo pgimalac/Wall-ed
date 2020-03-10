@@ -32,7 +32,7 @@ public class RobotClientProcessor implements Runnable{
    private boolean initDone = false;
    private String action = "none";
    private String command;
-   private String imageStoringPath = "/home/Téléchargements/";
+   private String imageStoringPath = "/home/adrien/Images/pactImages/";
    private int numberOfImages = 0;
    
    public RobotClientProcessor(Socket pSock, Activite act){

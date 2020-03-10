@@ -93,6 +93,27 @@ public class AppClientProcessor implements Runnable{
             	   this.act.stop();
             	   closeConnexion = true;
             	   break;
+               case "getEleves":
+            	   Eleve[] liste = Main.getElevesInBDD();
+            	   int len = liste.length;
+            	   JSONObject nims = new JSONObject();
+            	   JSONObject prenims = new JSONObject();
+            	   JSONObject ids = new JSONObject();
+            	   for(int i = 0; i<len;i++) {
+            		   nims.put(((Integer)i).toString(),liste[i].getNom() );
+            	   }
+            	   for(int i = 0; i<len;i++) {
+            		   prenims.put(((Integer)i).toString(),liste[i].getPrenom() );
+            	   }for(int i = 0; i<len;i++) {
+            		   ids.put(((Integer)i).toString(),liste[i].getEleveID());
+            	   }
+            	   data = new JSONObject();
+            	   data.put("numberOfStudents", len);
+            	   data.put("lastNames", nims);
+            	   data.put("firstNames", prenims);
+            	   data.put("IDs", ids);
+            	   data.writeJSONString(writer);
+            	   writer.flush();
                default : 
             	   writer.write("[AppCP] Commande inconnue !");
             	   writer.flush();

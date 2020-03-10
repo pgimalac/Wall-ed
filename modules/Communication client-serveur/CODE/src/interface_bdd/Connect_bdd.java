@@ -2,6 +2,7 @@ package interface_bdd;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLDataException;
 import java.sql.Statement;
 import java.sql.Connection;
 
@@ -91,8 +92,11 @@ public class Connect_bdd {
 		    
 		    System.out.println("Commande exécutée");
 		         
+		} catch (SQLDataException e) {
+			return "none";
+			
 		} catch (Exception e) {
-		      e.printStackTrace();
+		    e.printStackTrace();
 		}
 		
 		return res;

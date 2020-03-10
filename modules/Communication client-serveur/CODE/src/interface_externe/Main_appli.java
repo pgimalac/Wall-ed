@@ -8,7 +8,10 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Random;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import Main.Eleve;
 import Main.Main;
 
 public class Main_appli implements Runnable{
@@ -21,6 +24,8 @@ public class Main_appli implements Runnable{
    private String command = "none";
    private JSONObject data;
    private int sessionID;
+   private Eleve[] eleves;
+   private boolean initEleve = false;
    
    
    public Main_appli(String host, int port){
@@ -72,6 +77,14 @@ public class Main_appli implements Runnable{
                 writer.flush();
                 writer.close();
             	break;
+            case "getEleves":
+            	writer.write(command);
+            	writer.flush();
+            	String res = read();
+            	JSONObject eleves = this.decode(res);
+            	this.eleves = this.jsonToEleve(eleves);
+            	this.initEleve = true;
+            	command = "none";
             default :                    
             	break;
             }
@@ -104,6 +117,10 @@ public class Main_appli implements Runnable{
 	   data.put("IDs", IDs);
 	   }
    
+   public void recupEleves() {
+	   command = "getEleves";
+   }
+   
    public void getStats(int sessionID) {
 	   command = "getStats";
    }
@@ -120,4 +137,38 @@ public class Main_appli implements Runnable{
       response = new String(b, 0, stream);      
       return response;
    }   
+   
+   private JSONObject decode(String input){
+	   JSONParser parser;
+	   JSONObject json = null;
+	try {
+		parser = new JSONParser();
+		json = (JSONObject) parser.parse(input);
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+	   return json;
+   }
+   
+   public Eleve[] jsonToEleve(JSONObject json) {
+	   long nbtemp = (long)json.get("numberOfStudents");
+	   int nb = (int)nbtemp;
+	   String nom;
+	   String prenom;
+	   int ID;
+	   JSONObject lastNames = (JSONObject)json.get("lastNames");
+	   JSONObject firstNames = (JSONObject)json.get("firstNames");
+	   JSONObject IDs = (JSONObject)json.get("IDs");
+	   Eleve[] res = new Eleve[nb];
+	   for (int i =0; i<nb; i++) {
+		   String strI = Integer.toString(i);
+		   nom = (String)lastNames.get(strI);
+		   prenom = (String)firstNames.get(strI);
+		   long temp = (long)IDs.get(strI);
+		   ID = (int) temp;
+		   Eleve elev = new Eleve(ID, nom, prenom);
+		   res[i] = elev;
+	   }
+	   return res;
+   }
 }

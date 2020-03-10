@@ -29,6 +29,7 @@ public class test {
 		System.out.println(resp);
 		*/
 		
+		/*
 		System.out.println("creating socket, connecting to server");
 		Main_appli mn = new Main_appli("192.168.2.6", 2345);
 		System.out.println("connected");
@@ -43,6 +44,10 @@ public class test {
 		Thread.sleep(2000);
 		int[] braceletsID = {1,2};
 		mn.initSession(noms, prenoms, braceletsID);
+		*/
+		
+		String query = "SELECT * FROM ELEVES where nom = 'ozeifj'";
+		System.out.println(Connect_bdd.lastExecuteSQL(query, "eleveID"));
 	}
 
 }

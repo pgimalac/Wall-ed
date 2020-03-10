@@ -7,11 +7,23 @@ public class AjoutEleve {
 	public static int[] addEleves(String[] noms, String[] prenoms) {
 		int[] elevesID = new int[noms.length];
 		lastID = getLastEleveID();
+		String nom = "";
+		String prenom = "";
+		String decidingID;
 		for (int i = 0; i < noms.length; i++) {
-			int id = lastID + 1 + i;
-			String[] champs = {Integer.toString(id), noms[i], prenoms[i]};
-			Edition_table.addEnregistrement("ELEVES", champs);
-			elevesID[i] = id;
+			nom = noms[i];
+			prenom = prenoms[i];
+			String query = "SELECT * FROM ELEVES WHERE nom = " + nom + "AND prenom = " + prenom;
+			decidingID = Connect_bdd.lastExecuteSQL(query, "eleveID");
+			if (decidingID == "none") {
+				lastID++;
+				String[] champs = {Integer.toString(lastID), noms[i], prenoms[i]};
+				Edition_table.addEnregistrement("ELEVES", champs);
+				elevesID[i] = lastID;
+			}
+			else {
+				elevesID[i] = Integer.parseInt(decidingID);
+			}
 		}
 		
 		return elevesID;
