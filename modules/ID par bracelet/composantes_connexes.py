@@ -16,6 +16,7 @@ def main(img):
 
 # renvoie le numéro de la plus grande composante connexe de l'inverse de l'image qui ne touche pas le bord, donc l'intérieur du cadre
 def determineInterieurCadre(image):
+    (a,b) = np.shape(image)
     composantes = [0]
     for i in range(a):
         for j in range(b):
@@ -32,16 +33,16 @@ def determineInterieurCadre(image):
             composantesBord.append(image[0,j])
         if image[a-1,j] not in composantesBord:
             composantesBord.append(image[a-1,j])
-    tailleComposantesPasBord = HashCreation()
+    tailleComposantesPasBord = []
     for elem in composantes:
         if elem not in composantesBord:
-            HashAjout(tailleComposantesPasBord, elem, 0)
+            tailleComposantesPasBord.append([elem, 0])
     for i in range(a):
         for j in range(b):
             pixel = image[i,j]
-            if HashExiste(tailleComposantesPasBord, pixel):
-                newVal = HashRecup(tailleComposantesPasBord, pixel) + 1
-                HashModif(tailleComposantesPasBord, pixel, newVal)
+            if Existe(tailleComposantesPasBord, pixel):
+                newVal = Recup(tailleComposantesPasBord, pixel) + 1
+                Modif(tailleComposantesPasBord, pixel, newVal)
     max = 0
     plusGrandeComposante = -1
     for couple in tailleComposantesPasBord:
@@ -49,6 +50,23 @@ def determineInterieurCadre(image):
             max = couple[1]
             plusGrandeComposante = couple[0]
     return plusGrandeComposante
+
+def Recup(tab, cle):
+    for elem in tab:
+        if elem[0] == cle:
+            return elem[1]
+
+def Modif(tab, cle, val):
+    for elem in tab:
+        if elem[0] == cle:
+            elem[1] = val
+
+def Existe(tab, cle):
+    for elem in tab:
+        if elem[0] == cle:
+            return True
+    else:
+        return False
 
 ## FONCTIONS
 
@@ -65,15 +83,15 @@ def triCorrespondances(tab):
             tab[k] = valinf + 1
         if k == len(tab) - 1:
             break
-        while continu:
+        while continu and k<len(tab):
             k += 1
             if tab[k] == val:
                 tab[k] = valinf + 1
             else:
                 continu = False
 
-def verif_image(ima):
-    (a,b) = np.shape(ima)
+def verif_image(image):
+    (a,b) = np.shape(image)
     for i in range(a):
         for j in range(b):
             val = image[i,j]
@@ -81,7 +99,7 @@ def verif_image(ima):
                 return False
     return True
 
-def numsPrecedent(table, pixel):
+def numsPrecedent(table, pixel, image):
     (i, j) = pixel
     res = []
     if i > 0 and image[i-1,j] == 1:
@@ -100,13 +118,13 @@ def determinationComposantes(image):
     (a,b) = np.shape(image)
     if not verif_image(image):
         return "mauvais format d'image"
-    composantes = HashCreation()
+    composantes = HashCreation(a,b)
     etiquette = 0
     correspondances = [0]
     for i in range(a):
         for j in range(b):
             if image[i,j] == 1:
-                etiquettesPrec = numsPrecedent(composantes, (i,j))
+                etiquettesPrec = numsPrecedent(composantes, (i,j),image)
                 long = len(etiquettesPrec)
                 if long == 0:
                     HashAjout(composantes, (i,j), etiquette)
@@ -115,8 +133,8 @@ def determinationComposantes(image):
                 elif long == 1:
                     HashAjout(composantes, (i,j), etiquettesPrec[0])
                 else:
-                    num1 = etiquettesPrec[0]
-                    num2 = etiquettesPrec[1]
+                    num1 = int(etiquettesPrec[0])
+                    num2 = int(etiquettesPrec[1])
                     HashAjout(composantes, (i,j), num1)
                     if num1 > num2:
                         correspondances[num1] = num2
@@ -125,37 +143,36 @@ def determinationComposantes(image):
                     else:
                         correspondances[num2] = num1
     triCorrespondances(correspondances)
-    for elem in composantes:
-        elem[1] = correspondances[elem[1]]
+    for i in range(a):
+        for j in range(b):
+            composantes[i,j] = correspondances[int(composantes[i,j])]
+    #for elem in composantes:
+    #    elem[1] = correspondances[elem[1]]
     for i in range(a):
         for j in range(b):
             if image[i,j] == 1:
                 image[i,j] = HashRecup(composantes, (i,j)) + 1
 
-## Dictionnaire
+## Dictionnaire sous forme de tableau (complexité en temps bien meilleure)
 
-def HashCreation():
-    return []
+def HashCreation(a,b):
+    res = np.zeros((a,b))
+    for i in range(a):
+        for j in range(b):
+            res[i,j] = -1
+    return res
 
 def HashAjout(table, cle, elem):
-    table.append([cle, elem])
+    table[cle] = elem
 
 def HashRecup(table, cle):
-    for elem in table:
-        if elem[0] == cle:
-            return elem[1]
+    return table[cle]
 
 def HashExiste(table, cle):
-    for elem in table:
-        if elem[0] == cle:
-            return True
+    return table[cle] != -1
 
 def HashModif(table, cle, newVal):
-    for elem in table:
-        if elem[0] == cle:
-            elem[1] = newVal
+    table[cle] = newVal
 
 def HashSuppr(table, cle):
-    for i in range(len(table)):
-        if table[i][0] == cle:
-            table.pop(i)
+    table[cle] = -1
