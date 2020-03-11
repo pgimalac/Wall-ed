@@ -6,7 +6,6 @@ Created on Mon Jan  6 17:30:46 2020
 """
 
 import cv2
-import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 
@@ -17,12 +16,12 @@ def convertToHSI(img):
 
 def histo(img, imgConnex, n):
     ImHSV = convertToHSI(img)
-    histogramme = np.zeros((256,2))
+    histogramme = np.zeros((256, 2))
     for i in range(256):
-        histogramme[i,0] = i
+        histogramme[i, 0] = i
     dim = ImHSV.shape
     for i in range(dim[0]):
         for j in range(dim[1]):
-            if imgConnex[i][j] == n :
-                histogramme[ImHSV[i][j][0],1]+= 1
+            if imgConnex[i][j] == n:
+                histogramme[ImHSV[i][j][0], 1] += 1
     return histogramme

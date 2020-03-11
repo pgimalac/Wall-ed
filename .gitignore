@@ -30,3 +30,7 @@ modules/Android/WallEd/app/proguard-rules.pro
 modules/Android/WallEd/app/src/androidTest/*
 modules/Android/WallEd/app/src/test/*
 modules/Android/WallEd/.gradle/*
+
+*.class
+*.pyc
+*/__pycache__/*
