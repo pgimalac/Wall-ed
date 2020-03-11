@@ -1,3 +1,6 @@
+import time
+import random
+
 import back_wheels
 import front_wheels
 import camera
@@ -167,6 +170,23 @@ class Car():
 
     def capture(self):
         return self.camera.capture()
+
+    ###########################
+    #     OTHER FUNCTIONS     #
+    ###########################
+
+    def randomMove(self, delay=5):
+        try:
+            direction = random.randint(-45, 45)
+            self.turn(90 + direction)
+            self.forward()
+            self.speed = 75
+            self.camera_to_position(0, 0)
+            time.sleep(delay)
+        finally:
+            self.camera_to_position(0, 0)
+            self.turn_straight()
+            self.stop()
 
 if __name__ == "__main__":
     import cv2

@@ -12,12 +12,9 @@ def initConnexion():
     liste_eleves = socket.recv(255)
     return json.loads(liste_eleves)
 
-def sendPath(filepath):
+def sendFile(filepath):
     with open(filepath, 'rb') as file:
-        sendFile(file)
-
-def sendFile(file):
-    socket.sendfile(file)
+        socket.sendfile(file)
     return json.loads(socket.recv(255))
 
 def stopConnexion():
