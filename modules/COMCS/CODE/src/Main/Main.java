@@ -47,7 +47,7 @@ public class Main {
 	   public static String executePythonScriptForAI(String image) throws IOException {
 		   // image : nom de l'image
 		   
-		   String pythonScriptPath = "/home/adrien/Documents/test.py"; // à définir
+		   String pythonScriptPath = "/home/adrien/Documents/pact/pact32/modules/COMCS/AI.py"; // à définir
 		   String[] cmd = new String[3];
 		   cmd[0] = "python";
 		   cmd[1] = pythonScriptPath;
