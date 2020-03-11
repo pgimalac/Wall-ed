@@ -8,9 +8,9 @@ public class Serveur {
     private Main_appli mn;
 
     public Serveur(){
-        mn = new Main_appli("192.168.2.4", 2345);
         Thread t = new Thread(new Runnable() {
             public void run() {
+                mn = new Main_appli("192.168.2.4", 2345);
                 mn.run();
             }
         });
