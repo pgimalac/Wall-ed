@@ -20,6 +20,7 @@
     <string name="user_firstName">Prénom</string>
     <string name="user_class">Classe</string>
     <string name="add_user_bt">Ajouter l\'utilisateur</string>
+    <string name="user_new_session">Nouvelle session</string>
 
     <string name="session_stats_1">Aucun déchet ramassé pour le moment</string>
     <string name="session_stop">Fin de la session</string>

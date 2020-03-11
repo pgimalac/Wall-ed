@@ -1,9 +1,13 @@
 package fr.telecom.wall_ed.view;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,6 +18,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import fr.telecom.wall_ed.model.InterfaceServeur;
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
@@ -23,6 +28,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     private ListView mListView ;
     private InterfaceGestionUtilisateurs mCallBackUtilisateur ;
+    private InterfaceServeur mCallbackServeur;
 
     private ListView lv ;
 
@@ -34,10 +40,14 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     private void createCallbackToParentActivity() {
         try {
-            //Parent activity will automatically subscribe to callback
             mCallBackUtilisateur = (InterfaceGestionUtilisateurs) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ "InterfaceGestionUtilisateurs");
+        }
+        try {
+            mCallbackServeur = (InterfaceServeur) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ "InterfaceServeur");
         }
     }
 
@@ -60,6 +70,9 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.users_start_new_session){
+            mCallbackServeur.startNewSession(mCallBackUtilisateur.getUser());
+        }
     }
 
     @Override

@@ -39,6 +39,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.telecom.wall_ed.model.InterfaceServeur;
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 import fr.telecom.wall_ed.model.Serveur;
@@ -50,7 +51,7 @@ import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
-public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -94,10 +95,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
         serveur = new Serveur();
         mPrefs = getPreferences(MODE_PRIVATE);
-        loadUsers();
+        //loadUsers();
         //TODO: supprimer la ligne ci-dessus lorsque la ligne ci-dessous aura été implémentée
         //TODO: mUsers = serveur.getUsers();
 
+        mUsers = new ArrayList<>();
         utAdapter = new UtilisateurAdapter(mUsers,this);
 
     }
@@ -161,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     @Override
     public UtilisateurAdapter getUserAdaptateur() {
         return utAdapter;
+    }
+
+    @Override
+    public void startNewSession(ArrayList<Utilisateur> users) {
+        serveur.startNewSession(users);
     }
 
     // ==================== MENU ====================
