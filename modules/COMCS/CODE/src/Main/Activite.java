@@ -3,13 +3,13 @@ package Main;
 import interface_server.*;
 
 public class Activite {
-	
+
 	private String mode;
 	private final Session session;
 	public final AppClientProcessor clientApp;
 	public final RobotClientProcessor clientRobot;
-	
-	
+
+
 	public Activite(String[] noms, String[] prenoms, int[] braceletsID, AppClientProcessor clientApp) throws InterruptedException {
 		this.clientApp = clientApp;
 		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
@@ -18,15 +18,15 @@ public class Activite {
 		System.out.println("[ACTIVITE] informed Main, RobotClientProcessor ok");
 		this.mode = null;
 	}
-	
+
 	public Session getSession() {
 		return this.session;
 	}
-	
+
 	public String getMode() {
 		return this.mode;
 	}
-	
+
 	public void changeMode() {
 		switch (mode) {
 		case "FIN":
@@ -40,16 +40,16 @@ public class Activite {
 			this.clientRobot.modeRecherche();
 			break;
 		}
-			
+
 	}
 
-	
+
 	public void start() {
 		this.session.debutSession();
 		this.mode = "INIT";
 		this.changeMode();
 	}
-	
+
 	public void stop() {
 		this.session.finSession();
 		this.mode = "FIN";

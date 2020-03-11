@@ -35,8 +35,8 @@ class Back_Wheels():
 
         self.db = filedb.fileDB(db=db)
 
-        self.forward_A = int(self.db.get('forward_A', default_value=1))
-        self.forward_B = int(self.db.get('forward_B', default_value=1))
+        self.forward_A = int(self.db.get('forward_A', default_value=0))
+        self.forward_B = int(self.db.get('forward_B', default_value=0))
 
         self.cali_forward_A = None
         self.cali_forward_B = None
