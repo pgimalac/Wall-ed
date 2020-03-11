@@ -1,9 +1,12 @@
+# coding: utf-8
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
 ## Ici c'est nous
 import sys
+import json
 import time
 from PIL import Image, ImageDraw
 
@@ -76,7 +79,7 @@ def chargeReseau(model_file):
 
 
 
-def analyseImage(graph, file_name, h=2340, l=4160, input_layer="Placeholder", output_layer="final_result", label_file="/home/victor/ImageNet_PACT/output_labels.txt"):
+def analyseImage(graph, file_name, h=2340, l=4160, input_layer="Placeholder", output_layer="final_result", label_file="/home/adrien/Documents/pact/pact32/modules/COMCS/ImageNet_PACT/output_labels.txt"):
 
   start_total = time.clock()
   R=[]
@@ -206,6 +209,6 @@ def tout(path_g, path_f):
     graph = load_graph(path_g)
   L1 = analyseImage(graph, getImage(path_f))
   L2 = triSeuil(L1)
-  return locateWaste(L2)
+  print(json.dumps(locateWaste(L2)))
   
-tout(sys.argv[1])
+tout("/home/adrien/Documents/pact/pact32/modules/COMCS/ImageNet_PACT/output_graph.pb",sys.argv[1])

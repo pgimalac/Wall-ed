@@ -59,7 +59,11 @@ public class Main {
 		    
 		   // retrieve output from python script
 		   BufferedReader bfr = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-		   String line = bfr.readLine();
+		   String line = "";
+		   String temp;
+		   while ((temp = bfr.readLine()) != null) {
+			   line += temp + " \n";
+		   }
 		   bfr.close();
 		   return line;
 	   }

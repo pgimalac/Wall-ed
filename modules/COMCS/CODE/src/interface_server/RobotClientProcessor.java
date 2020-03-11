@@ -105,8 +105,10 @@ public class RobotClientProcessor implements Runnable{
             	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
             	   reader.read(b, 0, b.length);
             	   image.write(b, 0, b.length);
-            	   Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages));
-            	   // then send results to the robot with a json file
+            	   String AIresult = Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   // then send results to the robot
+            	   writer.write(AIresult);
+            	   writer.flush();
             	   // receive the answer of the robot :
             	   String stringData = read();
             	   JSONObject data = decode(stringData);
