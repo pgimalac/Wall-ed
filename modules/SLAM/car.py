@@ -195,7 +195,7 @@ class Car():
         if tilt_pos != 0 or pan_pos != 0:
             return
 
-        dist = math.sqrt()
+        # dist = math.sqrt()
 
 if __name__ == "__main__":
     import cv2

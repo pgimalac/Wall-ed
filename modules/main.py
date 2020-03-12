@@ -8,7 +8,12 @@ from COMCS import clientRobot
 imgPath = "/tmp/cv2-img.png"
 
 car = Car(debug=True)
-eleves = json.loads(clientRobot.initConnexion())
+rawStudents = json.loads(clientRobot.initConnexion())
+
+nbEleves = rawStudents["numberOfStudents"]
+students = {}
+for i in range(nbEleves):
+    students[rawStudents["ids"][i]] = rawStudents["firstnames"], rawStudents["lastnames"]
 
 count = 20
 try:
@@ -32,6 +37,11 @@ try:
                 height = img[0].size
                 print(trash, x, y, width, height)
                 car.goNear(width, height, x, y, 0, 0)
+                # appelle coque pour dire qu'il y a un déchet
+                # récupérer les infos de l'interaction
+                # id bracelet, type proposé par la coque, bool réponse enfant
+                # clientRobot.sendInfoCoque(ident, trash, type_rand, rep)
+                break
 
 except KeyboardInterrupt:
     print("Interrupted !", file=sys.stderr)

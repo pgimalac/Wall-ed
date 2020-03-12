@@ -18,6 +18,9 @@ def initConnexion():
     liste_eleves = socket.recv(255)
     return json.loads(liste_eleves)
 
+def sendInfoCoque(id_bracelet, type_trash, type_random, answer):
+    pass
+
 def sendFile(filepath):
     sendMessage("newImage")
     with open(filepath, 'rb') as file:
