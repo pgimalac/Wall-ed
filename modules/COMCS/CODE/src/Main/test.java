@@ -31,7 +31,7 @@ public class test {
 		
 		/*
 		System.out.println("creating socket, connecting to server");
-		Main_appli mn = new Main_appli("137.194.157.141", 22345);
+		Main_appli mn = new Main_appli("192.168.2.4", 22345);
 		System.out.println("connected");
 		Thread t = new Thread(new Runnable() {
 			public void run() {

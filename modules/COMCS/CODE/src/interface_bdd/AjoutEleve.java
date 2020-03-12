@@ -13,7 +13,7 @@ public class AjoutEleve {
 		for (int i = 0; i < noms.length; i++) {
 			nom = noms[i];
 			prenom = prenoms[i];
-			String query = "SELECT * FROM ELEVES WHERE nom = " + nom + "AND prenom = " + prenom;
+			String query = "SELECT * FROM ELEVES WHERE nom = '" + nom + "' AND prenom = '" + prenom + "'";
 			decidingID = Connect_bdd.lastExecuteSQL(query, "eleveID");
 			if (decidingID == "none") {
 				lastID++;
@@ -30,10 +30,10 @@ public class AjoutEleve {
 	}
 	
 	public static int addEleve(String nom, String prenom) {
-		lastID = getLastEleveID();
-		String[] champs = {Integer.toString(lastID + 1), nom, prenom};
-		Edition_table.addEnregistrement("ELEVES", champs);
-		return lastID + 1;
+		String[] noms = {nom};
+		String[] prenoms = {prenom};
+		int[] res = addEleves(noms, prenoms);
+		return res[0];
 	}
 	
 	public static int getLastEleveID() {

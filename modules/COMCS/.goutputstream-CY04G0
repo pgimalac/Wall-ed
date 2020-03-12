@@ -10,20 +10,14 @@ port = 22346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def sendMessage(message):
-    socket.send(bytes(message, 'utf-8'))
-
 def initConnexion():
-    socket.connect((hote, port))
-    sendMessage("init")
-    liste_eleves = socket.recv(255)
-    return json.loads(liste_eleves)
-
-def sendInfoCoque(id_bracelet, type_trash, type_random, answer):
-    pass
+	socket.connect((hote,port))
+	socket.send(bytes("init",'utf-8'))
+	liste_eleves = socket.recv(255)
+	return json.loads(liste_eleves)
 
 def sendImage(filepath):
-    sendMessage("newImage")
+	socket.send(bytes("newImage",'utf-8'))
 	print("sent command")
 	time.sleep(5)
 	print(socket.recv(255))
@@ -35,4 +29,4 @@ def sendImage(filepath):
 	return json.loads(socket.recv(255))
 
 def stopConnexion():
-    socket.close()
+	socket.close()
