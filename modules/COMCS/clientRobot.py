@@ -12,7 +12,8 @@ def initConnexion():
     liste_eleves = socket.recv(255)
     return json.loads(liste_eleves)
 
-def sendFile(filepath):
+def sendImage(filepath):
+    socket.send(bytes("newImage", 'utf-8'))
     with open(filepath, 'rb') as file:
         socket.sendfile(file)
     return json.loads(socket.recv(255))
