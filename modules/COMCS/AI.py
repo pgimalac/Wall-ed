@@ -74,7 +74,7 @@ def load_labels(label_file):
 def chargeReseau(model_file):
   #tempsDepart = time.time()
   graph = load_graph(model_file)
-  #print("Temps : " + str(time.time()-tempsDepart))
+  #print("Temps,  " + str(time.time()-tempsDepart))
   return graph
 
 
@@ -85,7 +85,7 @@ def analyseImage(graph, file_name, h=2340, l=4160, input_layer="Placeholder", ou
   R=[]
   i=0
 
-  c = min(h,l) # les images découpées seront de forme carrée ; on récupère le côté maximum d'un tel carré
+  c = min(h, l) # les images découpées seront de forme carrée ; on récupère le côté maximum d'un tel carré
   L = [i/3 for i in range(1, 3+1)] # Liste des tailles relatives des sous-images
 
   for k in range(len(L)):
@@ -130,16 +130,16 @@ def analyseSousImage(graph, tensor, input_layer, output_layer, label_file):
 def drawBox(L, img_path="/home/victor/Downloads/test.jpg"):
   source_img = Image.open(img_path)
   for item in L:
-    x,y,t = item[2], item[3], item[4]
+    x, y, t = item[2], item[3], item[4]
     draw = ImageDraw.Draw(source_img)
-    draw.rectangle([(x,y), (x+t,y+t)], outline="black" )
+    draw.rectangle([(x, y), (x+t, y+t)], outline="black" )
   source_img.show()
 
 def drawResult(P, img_path="/home/victor/Downloads/test.jpg"):
   source_img = Image.open(img_path)
   draw = ImageDraw.Draw(source_img)
   for point in P:
-    (x,y)=point
+    (x, y)=point
     draw.rectangle([x-10, y-10, x+10, y+10])
   source_img.show()
 
@@ -158,21 +158,21 @@ def locateWaste(List):
         h = k[4]
         x2 = x1 + h
         y2 = y1 + h
-        if WasteType == "cardboard" :
-            CBList.append([(x1+x2)/2,(y1+y2)/2])
-        elif WasteType == "metal" :
-            MetalList.append([(x1+x2)/2,(y1+y2)/2])
-        elif WasteType == "plastic" :
-            PlasticList.append([(x1+x2)/2,(y1+y2)/2])
-        elif WasteType == "glass" :
-            GlassList.append([(x1+x2)/2,(y1+y2)/2])
-    # print("cardboard :")
+        if WasteType == "cardboard":
+            CBList.append([(x1+x2)/2, (y1+y2)/2])
+        elif WasteType == "metal":
+            MetalList.append([(x1+x2)/2, (y1+y2)/2])
+        elif WasteType == "plastic":
+            PlasticList.append([(x1+x2)/2, (y1+y2)/2])
+        elif WasteType == "glass":
+            GlassList.append([(x1+x2)/2, (y1+y2)/2])
+    # print("cardboard, ")
     # print(getCenter(CBList))
-    # print("metal :")
+    # print("metal, ")
     # print(getCenter(MetalList))
-    # print("plastic :")
+    # print("plastic, ")
     # print(getCenter(PlasticList))
-    # print("Glass :")
+    # print("Glass, ")
     # print(getCenter(GlassList))
     d = {}
 
@@ -197,19 +197,19 @@ def locateWaste(List):
 def seperateObject(L):
     L1 = [L[0]]
     L.pop(0)
-    while len(L) > 1 :
-        for k in L :
+    while len(L) > 1:
+        for k in L:
                 L1.append(k)
                 L1.remove(k)
 
 def getCenter(L):
     X = 0
     Y = 0
-    if len(L) > 0 :
-        for k in L :
+    if len(L) > 0:
+        for k in L:
             X = X + k[0]
             Y = Y + k[1]
-        return [X//len(L),Y//len(L)]
+        return [X//len(L), Y//len(L)]
 
 def triSeuil(L):
     return [x for x in L if x[1] > 0.7]
@@ -223,10 +223,10 @@ graph = 0
 
 def tout(path_g, path_f):
   global graph
-  if graph==0:
+  if graph == 0:
     graph = load_graph(path_g)
   L1 = analyseImage(graph, getImage(path_f))
   L2 = triSeuil(L1)
   print(json.dumps(locateWaste(L2)))
 
-tout("/home/adrien/Documents/pact/pact32/modules/COMCS/ImageNet_PACT/output_graph.pb",sys.argv[1])
+tout("/home/adrien/Documents/pact/pact32/modules/COMCS/ImageNet_PACT/output_graph.pb", sys.argv[1])

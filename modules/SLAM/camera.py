@@ -19,8 +19,6 @@ import filedb
 
 class Camera():
     '''Camera movement control class'''
-    pan_channel = 1         # Pan servo channel
-    tilt_channel = 2        # Tilt servo channel
 
     READY_PAN = 90          # Ready position angle
     READY_TILT = 90         # Ready position angle
@@ -36,6 +34,9 @@ class Camera():
 
     def __init__(self, debug=False, bus_number=1, db="config"):
         ''' Init the servo channel '''
+        pan_channel = 1         # Pan servo channel
+        tilt_channel = 2        # Tilt servo channel
+
         self.db = filedb.fileDB(db=db)
         self.pan_offset = int(self.db.get('pan_offset', default_value=0))
         self.tilt_offset = int(self.db.get('tilt_offset', default_value=0))
@@ -43,12 +44,12 @@ class Camera():
         self.cali_pan_offset = None
         self.cali_tilt_offset = None
 
-        self.pan_servo = Servo.Servo(self.pan_channel, bus_number=bus_number, offset=self.pan_offset)
-        self.tilt_servo = Servo.Servo(self.tilt_channel, bus_number=bus_number, offset=self.tilt_offset)
+        self.pan_servo = Servo.Servo(pan_channel, bus_number=bus_number, offset=self.pan_offset)
+        self.tilt_servo = Servo.Servo(tilt_channel, bus_number=bus_number, offset=self.tilt_offset)
 
         self.debug = debug
-        self._debug_('Pan servo channel: %i' % self.pan_channel)
-        self._debug_('Tilt servo channel: %i' % self.tilt_channel)
+        self._debug_('Pan servo channel: %i' % pan_channel)
+        self._debug_('Tilt servo channel: %i' % tilt_channel)
         self._debug_('Pan offset value: %i' % self.pan_offset)
         self._debug_('Tilt offset value: %i' % self.tilt_offset)
 
@@ -57,6 +58,10 @@ class Camera():
         self.ready()
 
         self.webcam_setup()
+
+    #########################
+    #    DEBUG FUNCTIONS    #
+    #########################
 
     def _debug_(self, message):
         if self.debug:
@@ -94,6 +99,10 @@ class Camera():
         if variable < 0:
             variable = 0
         return variable
+
+    #########################
+    #     MOVE FUNCTIONS    #
+    #########################
 
     def turn_left(self, step=PAN_STEP):
         ''' Control the pan servo to make the camera turning left '''
@@ -149,6 +158,10 @@ class Camera():
             else:
                 break
 
+    #########################
+    # CALIBRATION FUNCTIONS #
+    #########################
+
     def ready(self):
         ''' Set the camera to ready position '''
         self._debug_('Turn to "Ready" position')
@@ -197,6 +210,10 @@ class Camera():
         self.tilt_offset = self.cali_tilt_offset
         self.db.set('pan_offset', self.pan_offset)
         self.db.set('tilt_offset', self.tilt_offset)
+
+    #########################
+    #    WEBCAM FUNCTIONS   #
+    #########################
 
     @staticmethod
     def find_webcam():

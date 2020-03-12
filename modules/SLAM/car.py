@@ -1,4 +1,5 @@
 import time
+import math
 import random
 
 import back_wheels
@@ -176,6 +177,7 @@ class Car():
     ###########################
 
     def randomMove(self, delay=5):
+        ''' moves randomly for delay secs and then stops, looking front '''
         try:
             direction = random.randint(-45, 45)
             self.turn(90 + direction)
@@ -187,6 +189,13 @@ class Car():
             self.camera_to_position(0, 0)
             self.turn_straight()
             self.stop()
+
+    def goNear(self, width, height, x, y, tilt_pos, pan_pos):
+        # no idea how to do it if the tilt or the pan aren't at 0
+        if tilt_pos != 0 or pan_pos != 0:
+            return
+
+        dist = math.sqrt()
 
 if __name__ == "__main__":
     import cv2

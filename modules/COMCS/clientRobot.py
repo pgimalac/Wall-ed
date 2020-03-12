@@ -9,16 +9,20 @@ port = 2346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+def sendMessage(message):
+    socket.send(bytes(message, 'utf-8'))
+
 def initConnexion():
-	socket.connect((hote,port))
-	socket.send(bytes("init",'utf-8'))
-	liste_eleves = socket.recv(255)
-	return json.loads(liste_eleves)
+    socket.connect((hote, port))
+    sendMessage("init")
+    liste_eleves = socket.recv(255)
+    return json.loads(liste_eleves)
 
 def sendFile(filepath):
-	file = open(filepath,'rb')
-	socket.sendfile(file)
-	return json.loads(socket.recv(255))
+    sendMessage("newImage")
+    with open(filepath, 'rb') as file:
+        socket.sendfile(file)
+    return json.loads(socket.recv(255))
 
 def stopConnexion():
-	socket.close()
+    socket.close()
