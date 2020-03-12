@@ -1,10 +1,10 @@
 NAME = walled_server
 BIN_FOLDER = bin/
-DEPS_FOLDER = ".:json-simple-1.1.1.jar:mariadb-java-client-2.5.4.jar:"
+DEPS_FOLDER = "src:json-simple-1.1.1.jar:mariadb-java-client-2.5.4.jar:"
 
 SOURCES = sources.txt
 
-MAIN_PATH_MANIFEST = "src/Main/Main"
+MAIN_PATH_MANIFEST = "Main.Main"
 
 MANIFEST = "MANIFEST.MF"
 JAR = $(NAME).jar
@@ -12,7 +12,7 @@ JAR = $(NAME).jar
 all:
 	@mkdir -p $(BIN_FOLDER)
 	#@find -name "*.java" > sources.txt
-	javac -Xlint:all -cp $(DEPS_FOLDER) -d $(BIN_FOLDER) @$(SOURCES)
+	javac -cp $(DEPS_FOLDER) -d $(BIN_FOLDER) @$(SOURCES)
 	@echo -e "Class-Path: ./json-simple-1.1.1.jar\n ./mariadb-java-client-2.5.4.jar\nMain-Class: "$(MAIN_PATH_MANIFEST) > $(MANIFEST)
 	jar -cmf $(MANIFEST) $(JAR) -C $(BIN_FOLDER) ./
 
