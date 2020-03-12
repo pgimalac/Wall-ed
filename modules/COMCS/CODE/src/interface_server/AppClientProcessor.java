@@ -41,7 +41,7 @@ public class AppClientProcessor implements Runnable{
             InetSocketAddress remote = (InetSocketAddress)sock.getRemoteSocketAddress();
             
             String debug = "";
-            debug = "Thread : " + Thread.currentThread().getName() + ". ";
+            debug = "[AppCP] " + Thread.currentThread().getName() + ". ";
             debug += "Demande de l'adresse : " + remote.getAddress().getHostAddress() +".";
             debug += " Sur le port : " + remote.getPort() + ".\n";
             debug += "\t -> Commande reçue : " + response + "\n";
@@ -53,7 +53,7 @@ public class AppClientProcessor implements Runnable{
             	   writer.flush();
             	   System.out.println("[AppCP] asked app to send init info");
             	   String stringData = read();
-            	   System.out.println("[AppCP] info received, decoding ...");
+            	   System.out.print("[AppCP] info received, decoding ...");
             	   Thread.sleep(2000);
             	   JSONObject data = decode(stringData);
             	   long nbtemp = (long)data.get("numberOfStudents");
@@ -71,8 +71,7 @@ public class AppClientProcessor implements Runnable{
             		   long temp = (long)IDs.get(strI);
             		   braceletsID[i] = (int) temp;
             	   }
-            	   System.out.println("[AppCP] decoded !");
-            	   System.out.println(noms[0]);
+            	   System.out.println("decoded !");
             	   Thread.sleep(4000);
             	   System.out.println("[AppCP] creating activity");
             	   Activite act = new Activite(noms, prenoms, braceletsID, this);
@@ -114,6 +113,7 @@ public class AppClientProcessor implements Runnable{
             	   data.put("IDs", ids);
             	   data.writeJSONString(writer);
             	   writer.flush();
+            	   System.out.println("[AppCP] info sent");
             	   break;
                default : 
             	   writer.write("[AppCP] Commande inconnue !");

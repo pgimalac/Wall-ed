@@ -4,8 +4,8 @@ import json
 import imageio
 import numpy
 
-hote = "192.168.2.6"
-port = 2346
+hote = "192.168.2.4"
+port = 22346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 

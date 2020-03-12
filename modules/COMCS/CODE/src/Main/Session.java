@@ -19,8 +19,6 @@ public class Session {
 		this.eleves = eleves;
 		this.nbEleves = this.eleves.length;
 		
-		int lastID = AjoutEleve.getLastEleveID();
-		int tempID;
 		table_ramassage = "RAMA_" + Integer.toString(this.sessionID);
 		table_eleves = "ELEV_" + Integer.toString(this.sessionID);
 		
@@ -34,13 +32,8 @@ public class Session {
 		Edition_table.addEnregistrement(table_ramassage, blank_dechet);
 		
 		for (int i = 0; i < this.nbEleves; i++) {
-			tempID = this.eleves[i].getEleveID();
-			System.out.println(tempID);
-			if (tempID > lastID) {
-				AjoutEleve.addEleve(eleves[i].getNom(), eleves[i].getPrenom());
-				String[] braceletEleve = {Integer.toString(bracelets[i]), Integer.toString(eleves[i].getEleveID())};
-				Edition_table.addEnregistrement(table_eleves, braceletEleve);
-			}
+			String[] braceletEleve = {Integer.toString(bracelets[i]), Integer.toString(eleves[i].getEleveID())};
+			Edition_table.addEnregistrement(table_eleves, braceletEleve);
 		}
 		System.out.println("[Session] tables in database created");
 		

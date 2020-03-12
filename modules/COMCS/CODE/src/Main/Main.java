@@ -108,9 +108,9 @@ public class Main {
 		   int lastID = AjoutEleve.getLastEleveID();
 		   Eleve[] liste = new Eleve[lastID];
 		   for (int i=1; i < lastID+1;i++) {
-			   String query = "SELEC * FROM ELEVES WHERE eleveID = " + Integer.toString(i);
+			   String query = "SELECT * FROM ELEVES WHERE eleveID = '" + Integer.toString(i) + "'";
 			   Eleve temp = new Eleve(i, Connect_bdd.lastExecuteSQL(query, "prenom"),Connect_bdd.lastExecuteSQL(query, "nom"));
-			   liste[i] = temp;
+			   liste[i-1] = temp;
 		   }
 		   return liste;
 	   }
