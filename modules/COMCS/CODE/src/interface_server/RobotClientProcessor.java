@@ -124,12 +124,15 @@ public class RobotClientProcessor implements Runnable{
             		   this.act.changeMode();
             		   // send this dechet info to the app ?
             	   }
+            	   break;
                case "close":
             	   this.closeConnexion = true;
+            	   break;
                case "RECHERCHE":
             	   writer.write(action);
             	   writer.flush();
             	   this.changeMode = false;
+            	   break;
                default : 
             	   System.out.println("[RobotCP] Commande inconnue de la part du robot");
             	   //writer.write("Commande inconnue !");

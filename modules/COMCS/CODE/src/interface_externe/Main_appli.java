@@ -85,6 +85,7 @@ public class Main_appli implements Runnable{
             	this.eleves = this.jsonToEleve(eleves);
             	this.initEleve = true;
             	command = "none";
+            	break;
             default :                    
             	break;
             }

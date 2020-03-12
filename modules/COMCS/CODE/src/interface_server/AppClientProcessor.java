@@ -114,6 +114,7 @@ public class AppClientProcessor implements Runnable{
             	   data.put("IDs", ids);
             	   data.writeJSONString(writer);
             	   writer.flush();
+            	   break;
                default : 
             	   writer.write("[AppCP] Commande inconnue !");
             	   writer.flush();
