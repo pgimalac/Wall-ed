@@ -4,6 +4,8 @@ package fr.telecom.wall_ed.view;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onCreateView");
         View result = inflater.inflate(R.layout.fragment_ajout_utilisateur, container, false);
 
         mAjoutButton = result.findViewById(R.id.enregistrement_button);
@@ -44,12 +47,14 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onAttach(Context context) {
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onAttach");
         super.onAttach(context);
         createCallbackToParentActivity();
     }
 
     @Override
     public void onClick(View v) {
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onClick (" + v.getId() + ")");
 
         switch (v.getId()){
             case R.id.enregistrement_button:
@@ -65,6 +70,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     }
 
     private void createCallbackToParentActivity(){
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans createCallbackToParentActivity");
         try {
             //Parent activity will automatically subscribe to callback
             mOnClickListenerCallback = (View.OnClickListener) getActivity();

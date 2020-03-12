@@ -1,28 +1,32 @@
 package fr.telecom.wall_ed.model;
 
 import java.util.ArrayList;
-import fr.telecom.wall_ed.model.Utilisateur;
 
 public class Serveur {
 
     private Main_appli mn;
 
     public Serveur(){
-        Thread t = new Thread(new Runnable() {
+        Thread t1 = new Thread(new Runnable() {
             public void run() {
-                mn = new Main_appli("192.168.2.4", 2345);
+                mn = new Main_appli("192.168.2.4", 22345);
                 mn.run();
             }
         });
-        t.start();
+        t1.start();
     }
 
     /**
      * @return users saved from previous sessions
      */
     public ArrayList<Utilisateur> getUsers(){
-        //TODO (on attend le code d'Adrien)
-        return new ArrayList<>();
+        ArrayList<Utilisateur> users = new ArrayList<>();
+        Eleve[] eleves = mn.getEleves();
+        for (int i=0 ; i<eleves.length ; i++){
+            Utilisateur user = new Utilisateur(eleves[i].getPrenom(), eleves[i].getNom(), "PlaceHolder", ""+eleves[i].getEleveID());
+            users.add(user);
+        }
+        return users;
     }
 
     /**
@@ -45,7 +49,7 @@ public class Serveur {
      * Asks the server to end the session
      */
     public void endSession(){
-        //TODO
+        mn.stop();
     }
 
 }

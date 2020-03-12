@@ -1,19 +1,14 @@
 package fr.telecom.wall_ed.view;
 
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -62,7 +57,13 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         ListView listView = result.findViewById(R.id.LU);
         listView.setAdapter(mCallBackUtilisateur.getUserAdaptateur());
 
-        displayListeUtilisateurs();
+        Button button1 = result.findViewById(R.id.users_start_new_session);
+        button1.setOnClickListener(this);
+
+        Button button2 = result.findViewById(R.id.users_end_session);
+        button2.setOnClickListener(this);
+
+        //displayListeUtilisateurs();
 
         return result;
 
@@ -70,8 +71,14 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.users_start_new_session){
-            mCallbackServeur.startNewSession(mCallBackUtilisateur.getUser());
+        int id = v.getId();
+        switch (id) {
+            case R.id.users_start_new_session:
+                mCallbackServeur.startNewSession(mCallBackUtilisateur.getUser());
+                break;
+            case R.id.users_end_session:
+                mCallbackServeur.endSession();
+                break;
         }
     }
 
