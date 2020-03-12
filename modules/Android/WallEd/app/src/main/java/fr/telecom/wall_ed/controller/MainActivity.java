@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -39,6 +40,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.telecom.wall_ed.model.InterfaceServeur;
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 import fr.telecom.wall_ed.model.Serveur;
@@ -50,7 +52,7 @@ import fr.telecom.wall_ed.view.Statistiques_globales;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
-public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,10 +97,15 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
         serveur = new Serveur();
         mPrefs = getPreferences(MODE_PRIVATE);
-        loadUsers();
-        //TODO: supprimer la ligne ci-dessus lorsque la ligne ci-dessous aura été implémentée
-        //TODO: mUsers = serveur.getUsers();
 
+        try{
+            Thread.sleep(500);
+            mUsers = serveur.getUsers();
+            Log.i("PACT32_DEBUG", "Déroulement nominal : mUsers récupérée sur serveur");
+        }catch (Exception e){
+            mUsers = new ArrayList<>();
+            Log.e("PACT32_DEBUG", "Solution de secours : mUsers initialisée vide");
+        }
         utAdapter = new UtilisateurAdapter(mUsers,this);
     }
 
@@ -111,21 +119,6 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         }
     }
 
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-  */
-
-    /*@Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
-    }*/
-
     private void loadUsers(){
         Gson gson = new Gson();
         String json = mPrefs.getString("mUsers", "");
@@ -134,11 +127,13 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     }
 
     private void saveUsers(){
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        //TODO: replace with server-oriented code
+        /*SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(mUsers);
         prefsEditor.putString("mUsers", json);
         prefsEditor.apply();
+        */
     }
 
     private void addUser(Utilisateur user){
@@ -160,6 +155,16 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     @Override
     public UtilisateurAdapter getUserAdaptateur() {
         return utAdapter;
+    }
+
+    @Override
+    public void startNewSession(ArrayList<Utilisateur> users) {
+        serveur.startNewSession(users);
+    }
+
+    @Override
+    public void endSession() {
+        serveur.endSession();
     }
 
     // ==================== MENU ====================

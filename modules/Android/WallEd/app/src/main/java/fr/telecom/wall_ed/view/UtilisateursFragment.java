@@ -3,17 +3,17 @@ package fr.telecom.wall_ed.view;
 
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import fr.telecom.wall_ed.model.InterfaceServeur;
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
@@ -23,6 +23,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     private ListView mListView ;
     private InterfaceGestionUtilisateurs mCallBackUtilisateur ;
+    private InterfaceServeur mCallbackServeur;
     private ListView lv ;
 
     @Override
@@ -33,10 +34,14 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     private void createCallbackToParentActivity() {
         try {
-            //Parent activity will automatically subscribe to callback
             mCallBackUtilisateur = (InterfaceGestionUtilisateurs) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ "InterfaceGestionUtilisateurs");
+        }
+        try {
+            mCallbackServeur = (InterfaceServeur) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ "InterfaceServeur");
         }
     }
 
@@ -51,11 +56,13 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         ListView listView = result.findViewById(R.id.LU);
         listView.setAdapter(mCallBackUtilisateur.getUserAdaptateur());
 
-        ListView mlistView = result.findViewById(R.id.listViewUtilisateurs);
-        ArrayAdapter<Utilisateur> arrayAdapter = new ArrayAdapter<Utilisateur>(getContext(), android.R.layout.simple_list_item_1, mCallBackUtilisateur.getUser());
-        mlistView.setAdapter(arrayAdapter);
+        Button button1 = result.findViewById(R.id.users_start_new_session);
+        button1.setOnClickListener(this);
 
-        displayListeUtilisateurs();
+        Button button2 = result.findViewById(R.id.users_end_session);
+        button2.setOnClickListener(this);
+
+        //displayListeUtilisateurs();
 
         return result;
 
@@ -63,6 +70,15 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.users_start_new_session:
+                mCallbackServeur.startNewSession(mCallBackUtilisateur.getUser());
+                break;
+            case R.id.users_end_session:
+                mCallbackServeur.endSession();
+                break;
+        }
     }
 
     @Override

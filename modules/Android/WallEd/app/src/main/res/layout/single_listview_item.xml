@@ -1,69 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.UtilisateursFragment">
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            >
-            <ImageButton
-                android:id="@+id/imgBt_utilisateurs_addUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_add_user" />
+    <TextView
+        android:id="@+id/name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/checkBox" />
 
-            <ImageButton
-                android:id="@+id/imgBt_utilisateurs_modifyUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_modify_user" />
+    <TextView
+        android:id="@+id/surname_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name_txt"
+        android:layout_toRightOf="@+id/checkBox"/>
 
-            <ImageButton
-                android:id="@+id/imgBt_utilisateurs_deleteUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_delete_user" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/classe_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name_txt"
+        android:layout_toRightOf="@+id/checkBox"
+        />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Liste des élèves"
-            android:textSize="40dp"
-            android:gravity="center"
-            android:textColor="#009688"
-            />
-
-        <ListView
-            android:id="@+id/LU"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
-        </ListView>
-
-        <ListView
-            android:id="@+id/listViewUtilisateurs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_marginTop="25dp"></ListView>
-
-    </LinearLayout>
-
-</FrameLayout>
-
+</LinearLayout>
