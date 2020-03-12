@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Android/WallEd/app/src/androidTest/java"/>
+	<classpathentry excluding="fr/telecom/wall_ed/controller/" kind="src" path="Android/WallEd/app/src/main/java"/>
+	<classpathentry kind="src" path="Android/WallEd/app/src/main/java/fr/telecom/wall_ed/controller"/>
+	<classpathentry kind="src" path="Android/WallEd/app/src/test/java"/>
+	<classpathentry kind="src" path="COMCS/CODE/src"/>
+	<classpathentry kind="lib" path="Android/WallEd/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="COMCS/CODE/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="COMCS/CODE/mariadb-java-client-2.5.4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
