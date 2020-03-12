@@ -174,7 +174,7 @@ def locateWaste(List):
     # print(getCenter(PlasticList))
     # print("Glass :")
     # print(getCenter(GlassList))
-    return [getCenter(CBList), getCenter(MetalList), getCenter(PlasticList), getCenter(GlassList)]
+    return {"cardboard" : getCenter(CBList), "metal" : getCenter(MetalList), "plastic" : getCenter(PlasticList), "glass" : getCenter(GlassList)}
 
 def seperateObject(L):
     L1 = [L[0]]
@@ -209,6 +209,11 @@ def tout(path_g, path_f):
     graph = load_graph(path_g)
   L1 = analyseImage(graph, getImage(path_f))
   L2 = triSeuil(L1)
-  print(json.dumps(locateWaste(L2)))
+  dicores = locateWaste(L2)
+  if dicores["cardboard"] is None: del dicores["carboard"]
+  if dicores["metal"] is None: del dicores["metal"]
+  if dicores["plastic"] is None: del dicores["plastic"]
+  if dicores["glass"] is None: del dicores["glass"]
+  print(json.dumps(dicores))
   
 tout("/home/adrien/Documents/pact/pact32/modules/COMCS/ImageNet_PACT/output_graph.pb",sys.argv[1])

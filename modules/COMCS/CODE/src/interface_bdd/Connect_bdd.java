@@ -33,16 +33,16 @@ public class Connect_bdd {
 		
 		ResultSetMetaData resultMeta = null;
 		
-		System.out.println(commandeSQL);
+		//System.out.println(commandeSQL);
 	
 		try {
 	      Class.forName("org.mariadb.jdbc.Driver");
 	      
-	      System.out.println("Driver OK");
+	      //System.out.println("Driver OK");
 	         
 	      Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/" + Connect_bdd.base, Connect_bdd.user, Connect_bdd.passwd);
 	      
-	      System.out.println("Connexion ok");
+	      //System.out.println("Connexion ok");
 	      
 	      //Création d'un objet Statement
 	      Statement state = conn.createStatement();
@@ -67,16 +67,16 @@ public class Connect_bdd {
 		
 		String res = "";
 		
-		 System.out.println(commandeSQL);
+		 //System.out.println(commandeSQL);
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 		      
-		    System.out.println("Driver OK");
+		    //System.out.println("Driver OK");
 		         
 		    Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/" + Connect_bdd.base, Connect_bdd.user, Connect_bdd.passwd);
 		      
-		    System.out.println("Connexion ok");
+		    //System.out.println("Connexion ok");
 		      
 		    //Création d'un objet Statement
 		    Statement state = conn.createStatement();

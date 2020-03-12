@@ -9,7 +9,7 @@ public class test {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		//System.out.println(Main.executePythonScriptForAI("/home/adrien/Images/test.jpg"));
+		System.out.println(Main.executePythonScriptForAI("/home/adrien/Images/test.jpg"));
 		
 		/*
 		String name = "GLOBALE";
@@ -29,7 +29,7 @@ public class test {
 		System.out.println(resp);
 		*/
 		
-		
+		/*
 		System.out.println("creating socket, connecting to server");
 		Main_appli mn = new Main_appli("192.168.2.4", 22345);
 		System.out.println("connected");
@@ -44,7 +44,7 @@ public class test {
 		Thread.sleep(2000);
 		int[] braceletsID = {1,2};
 		mn.initSession(noms, prenoms, braceletsID);
-		
+		*/
 		/*
 		String query = "SELECT * FROM ELEVES where nom = 'ozeifj'";
 		System.out.println(Connect_bdd.lastExecuteSQL(query, "eleveID"));

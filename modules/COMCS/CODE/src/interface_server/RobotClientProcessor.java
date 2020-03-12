@@ -100,12 +100,19 @@ public class RobotClientProcessor implements Runnable{
                	   break;
                case "newImage":
             	   // TODO
-            	   byte[] b= new byte[20000];
+            	   //byte[] b= new byte[20000];
+            	   writer.write("sendImage");
+            	   writer.flush();
             	   this.numberOfImages++;
+            	   BufferedImage imageData = ImageIO.read(reader);
+            	   System.out.println("image received, storing it");
             	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
-            	   reader.read(b, 0, b.length);
-            	   image.write(b, 0, b.length);
-            	   String AIresult = Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   ImageIO.write(imageData, "png", image);
+            	   System.out.println("image stored, launching IA");
+            	   //reader.read(b, 0, b.length);
+            	   //image.write(b, 0, b.length);
+            	   String AIresult = Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages) + ".jpg");
+            	   System.out.println("ai done");
             	   // then send results to the robot
             	   writer.write(AIresult);
             	   writer.flush();
