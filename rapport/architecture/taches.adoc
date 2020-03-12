@@ -39,10 +39,11 @@ sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 **Analyse d'image**
 [cols=",,^",options="header",]
 |====
-| Tâche | Description                                           | Intégré au PAN3
-| T1    | Détection des déchets                                 |
-| T1.1  | Localisation des déchets sur l'image captée           | X
-| T1.2  | Classification des déchets détectés                   |
+| Tâche | Description                                            | Intégré au PAN3
+| T1    | Détection des déchets                                  |
+| T1.1  | Localisation des déchets sur l'image captée            | X
+| T1.2  | Classification des déchets détectés                    | X
+| T1.3  | Localisation et classification en un temps raisonnable |
 |====
 
 **BDD**
@@ -70,9 +71,10 @@ sous-taches, l’une démontrable au PAN3 et l’autre uniquement au PAN4.
 [cols=",,^",options="header",]
 |====
 | Tâche | Description                                           | Intégré au PAN3
-| T1    | Design et impression de la coque extérieure                             |
-| T1.1  | Design et impression de la pince                               | x
-| T1.2  | système de leds opérant            | x
-| T1.3  | système audio opérant                                  |x
+| T1    | Design et impression de la coque extérieure           |
+| T1.1  | système de leds opérant                               | x
+| T1.2  | système audio opérant                                 | x
+| T1.3  | afficher des informations sur l'écran                 | x
+| T1.4  | prendre des informations par l'écran tactile          |
 |====
 
