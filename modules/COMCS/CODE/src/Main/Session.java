@@ -42,7 +42,7 @@ public class Session {
 				Edition_table.addEnregistrement(table_eleves, braceletEleve);
 			}
 		}
-		System.out.println("tables in database created");
+		System.out.println("[Session] tables in database created");
 		
 	}
 	

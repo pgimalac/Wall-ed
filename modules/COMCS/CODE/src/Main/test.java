@@ -9,7 +9,7 @@ public class test {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		System.out.println(Main.executePythonScriptForAI("/home/adrien/Images/test.jpg"));
+		System.err.println(Main.executePythonScriptForAI("/home/adrien/Images/test.jpg"));
 		
 		/*
 		String name = "GLOBALE";

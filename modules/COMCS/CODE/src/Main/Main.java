@@ -22,7 +22,7 @@ import interface_bdd.Connect_bdd;
 
 public class Main {
 	
-	private static String host = "137.194.157.141";
+	private static String host = "192.168.2.4";
     private static int port = 22345;
 
 	   public static void main(String[] args) {
@@ -59,13 +59,14 @@ public class Main {
 		    
 		   // retrieve output from python script
 		   BufferedReader bfr = new BufferedReader(new InputStreamReader(pr.getInputStream()));
-		   String line = "";
+		   String res = "";
 		   String temp;
 		   while ((temp = bfr.readLine()) != null) {
-			   line += temp + " \n";
+			   System.out.println(temp);
+			   res = temp;
 		   }
 		   bfr.close();
-		   return line;
+		   return res;
 	   }
 	   
 	   public static RobotClientProcessor inform(Activite act, Eleve[] eleves) throws InterruptedException {
