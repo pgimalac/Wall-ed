@@ -30,10 +30,10 @@ public class AjoutEleve {
 	}
 	
 	public static int addEleve(String nom, String prenom) {
-		lastID = getLastEleveID();
-		String[] champs = {Integer.toString(lastID + 1), nom, prenom};
-		Edition_table.addEnregistrement("ELEVES", champs);
-		return lastID + 1;
+		String[] noms = {nom};
+		String[] prenoms = {prenom};
+		int[] res = addEleves(noms, prenoms);
+		return res[0];
 	}
 	
 	public static int getLastEleveID() {

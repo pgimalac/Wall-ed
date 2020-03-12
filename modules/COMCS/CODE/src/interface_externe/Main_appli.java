@@ -21,6 +21,8 @@ public class Main_appli implements Runnable{
     private int sessionID;
     private Eleve[] eleves = {};
     private boolean initEleve = false;
+    private String nomE = null;
+    private String prenomE = null;
 
 
 
@@ -76,7 +78,15 @@ public class Main_appli implements Runnable{
                         this.initEleve = true;
                         command = "none";
                         break;
-
+                    case "sendEleve":
+                    	writer.write(this.nomE);
+                    	writer.flush();
+                    	writer.write(this.prenomE);
+                    	writer.flush();
+                    	command = "none";
+                    	this.nomE = null;
+                    	this.prenomE = null;
+                    	break;
                     case "close":
                         writer.write("close");
                         writer.flush();
@@ -115,6 +125,12 @@ public class Main_appli implements Runnable{
 
     public void recupEleves() {
         command = "getEleves";
+    }
+    
+    public void sendEleve(String nom, String prenom) {
+    	this.nomE = nom;
+    	this.prenomE = prenom;
+    	command = "sendEleve";
     }
 
     public void getStats(int sessionID) {

@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Main.*;
+import interface_bdd.AjoutEleve;
 
 public class AppClientProcessor implements Runnable{
 
@@ -114,6 +115,11 @@ public class AppClientProcessor implements Runnable{
             	   data.writeJSONString(writer);
             	   writer.flush();
             	   System.out.println("[AppCP] info sent");
+            	   break;
+               case "recupNewEleve":
+            	   String nom = read();
+            	   String prenom = read();
+            	   AjoutEleve.addEleve(nom, prenom);
             	   break;
                default : 
             	   writer.write("[AppCP] Commande inconnue !");
