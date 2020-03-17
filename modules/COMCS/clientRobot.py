@@ -5,8 +5,8 @@ import imageio
 import numpy
 import time
 
-hote = "192.168.2.4"
-port = 22346
+hote = "127.0.0.1"
+port = 2346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -19,13 +19,11 @@ def initConnexion():
 def sendImage(filepath):
 	socket.send(bytes("newImage",'utf-8'))
 	print("sent command")
-	time.sleep(5)
 	print(socket.recv(255))
-	time.sleep(5)
 	file = open(filepath,'rb')
-	socket.send(pickle.dumps(file))
+	data = file.read()
+	socket.sendall(data)
 	print("sent image")
-	time.sleep(5)
 	return json.loads(socket.recv(255))
 
 def stopConnexion():
