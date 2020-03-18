@@ -23,6 +23,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     private EditText mPrenomEditText;
     private EditText mNomEditText;
     private EditText mClasseEditText;
+    private EditText mIdEditText;
 
     public AjoutUtilisateurFragment() {
         // Required empty public constructor
@@ -42,6 +43,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         mPrenomEditText = result.findViewById(R.id.prenom_txt);
         mNomEditText = result.findViewById(R.id.nom_txt);
         mClasseEditText = result.findViewById(R.id.classe_txt);
+        mIdEditText = result.findViewById(R.id.id_txt);
         return result;
     }
 
@@ -61,6 +63,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
                 getActivity().getIntent().putExtra("firstName", mPrenomEditText.getText().toString());
                 getActivity().getIntent().putExtra("name", mNomEditText.getText().toString());
                 getActivity().getIntent().putExtra("group", mClasseEditText.getText().toString());
+                getActivity().getIntent().putExtra("id", mIdEditText.getText().toString());
                 mOnClickListenerCallback.onClick(v);
                 break;
             case R.id.bt_photo:
