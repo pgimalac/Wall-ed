@@ -63,7 +63,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         Button button2 = result.findViewById(R.id.users_end_session);
         button2.setOnClickListener(this);
 
-        //displayListeUtilisateurs();
+        displayListeUtilisateurs();
 
         return result;
 
