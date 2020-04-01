@@ -9,7 +9,7 @@ Nous avons codé en python la reconnaissance d'image. La fonction python est fon
 === Module COMCS (communication client-serveur) - Adrien Maes et Florian Le Mouël
 
 Ce module se décompose en deux sous parties : une partie gestion interne du serveur et de la base de donnée utilisée, et une partie gérant les intéractions JAVA-JAVA et JAVA-PYTHON avec l'application Android et le robot.
-Le minimum de fonctionnalités pour le projet est fonctionnel : création d'une session, ajout d'enfants, démarrage et arrêt d'une activité.
+Le minimum de fonctionnalités pour le projet est fonctionnel : création d'une session, ajout d'enfants, démarrage et arrêt d'une activité. Le lien entre le robot et le serveur qui analyse les images est lui aussi assuré.
 
 *Partie BDD et serveur*
 
