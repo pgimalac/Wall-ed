@@ -21,13 +21,13 @@ Le code Java permettant d'exécuter du code Python et de l'analyser est impléme
 
 Les communications entre le serveur et l'application et entre le serveur et le robot sont parfaitement fonctionnelles, les échanges de données se font au format JSON et les images sont bien transmises entre le robot et le serveur.
 
-=== Module ?? - Reconnaissance d'images - Victor Masiak et Nicolas Jow
+=== Module reconnaissance d'images - Victor Masiak et Nicolas Jow
 
 Après le PAN2, nous avons cherché à améliorer les performances du réseau, principalement en terme de vitesse. Nous nous sommes intéressés à divers implémentations de réseaux, que nous avons essayées. Nous nous sommes notamment attardés sur le projet https://github.com/jwyang/faster-rcnn.pytorch, mais n’arrivons pas à le faire fonctionner pour le moment, à cause de divers problèmes d’installations et de dépendances.
 
 Nous continuons de chercher comment résoudre ces problèmes. En parallèle, nous nous intéressons à d’autres projets, notamment :
-https://github.com/pedropro/TACO
-https://github.com/matterport/Mask_RCNN
+* https://github.com/pedropro/TACO
+* https://github.com/matterport/Mask_RCNN
 Nous rencontrons là encore des problèmes d’installations et de dépendances, que nous cherchons à résoudre.
 
 Nous considérons également désormais le réseau conseillé par notre expert : Détectron 2 (https://colab.research.google.com/drive/16jcaJoc6bCFAQ96jDe2HwtXj7BMD_-m5#scrollTo=QHnVupBBn9eR) en espérant ne pas rencontrer les mêmes difficultés de version pour son installation.
