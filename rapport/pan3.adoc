@@ -6,18 +6,18 @@
 
 Nous avons codé en python la reconnaissance d'image. La fonction python est fonctionnelle. Le module est prêt à être intégré au code du robot.
 
-=== Module COMCS (communication clien-serveur) - Adrien Maes et Florian Le Mouël
+=== Module COMCS (communication client-serveur) - Adrien Maes et Florian Le Mouël
 
 Ce module se décompose en deux sous parties : une partie gestion interne du serveur et de la base de donnée utilisée, et une partie gérant les intéractions JAVA-JAVA et JAVA-PYTHON avec l'application Android et le robot.
 Le minimum de fonctionnalités pour le projet est fonctionnel : création d'une session, ajout d'enfants, démarrage et arrêt d'une activité.
 
-==== Partie BDD et serveur
+*Partie BDD et serveur*
 
 Le SGBD est installé (MariaDB dans un conteneur Docker) et fonctionnel, le code Java permettant l'édition d'une base de donnée est implémenté.
 Pour l'instant, le code serveur tourne sur un ordinateur portable.
 Le code Java permettant d'exécuter du code Python et de l'analyser est implémenté (pour faire tourner le module RECOD).
 
-==== Partie interface
+*Partie interface*
 
 Les communications entre le serveur et l'application et entre le serveur et le robot sont parfaitement fonctionnelles, les échanges de données se font au format JSON et les images sont bien transmises entre le robot et le serveur.
 
@@ -27,7 +27,7 @@ Les communications entre le serveur et l'application et entre le serveur et le r
 
 La partie code étant terminée, la seule chose restante à faire est la création des bracelets. Pour l'instant nous utilisons des bracelets en papier. Nous cherchons un moyen d'avoir des vrais bracelets mais si cela n'est pas possible nous resterons sur les bracelets en papier.
 
-== Module COMCS
+=== Module COMCS
 
 Le système de statistiques en temps réel n'est pas implémenté. De plus il n'est pas non plus possible de consulter les statistiques depuis l'application ou depuis un site web.
 Ceci est donc notre objectif pour le PAN 4.
