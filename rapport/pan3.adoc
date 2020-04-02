@@ -36,6 +36,31 @@ Nous considérons également désormais le réseau conseillé par notre expert :
 
 Pour PAN3, nous avions donc prévu d’utiliser le réseau Inception V3, associé à une méthode de balayage. Celui-ci fonctionne très bien en terme d’efficacité des détections, mais est extrêmement lent (trop pour pouvoir traiter les images en temps réel). Aucune modification n’y a été apportée depuis le PAN2, sauf quelques modifications mineures pour l’intégration.
 
+=== Module Android - Victor Masiak et Lola Vitrac
+
+Le module Android était déjà bien avancé après le PAN 2, puisque nous disposions du squelette de l'application (pages vierges mais "fonctionnelles"), ainsi que d'un menu nous permettant de naviguer entre celles-ci.
+
+Les modifications les plus importantes ont été celles en interaction avec le module client-serveur :
+
+* Echange de listes d'élèves (réception par l'application à son ouverture, potentielle mise à jour à envoyer au serveur pendant l'utilisation).
+* Gestion du début et de la fin d'une session via l'application
+
+D'autres modifications propres à ce module ont été réalisées :
+
+* Ajout des checkboxes dans la liste des utilisateurs, pour permettre d'interagir avec une partie de la liste seulement (par exemple lancer une session avec une partie seulement de la classe).
+* Améliorations esthétiques de certaines pages.
+
+Ci-dessous quelques captures d'écran :
+
+.Menu principal
+image::menu.png[Menu]
+
+.Ajout d'un utilisateur
+image::liste.png[Liste]
+
+.Liste des utilisateurs
+image::liste.png[Liste]
+
 
 == PLAN DE TRAVAIL POUR LE PAN 4
 
@@ -49,3 +74,10 @@ Le système de statistiques en temps réel n'est pas implémenté. De plus il n'
 Ceci est donc notre objectif pour le PAN 4.
 En outre, pour l'instant nous ne travaillons qu'avec un seul robot et une seule application. Si nous avons le temps, nous envisageons d'implémenter la possibilité d'avoir plusieurs comptes (ce qui implique entre autre la création de base de donnée et la gestion de l'authentification des utilisateurs).
 
+=== Module Android
+
+Il nous reste trois tâches à réaliser pour le PAN 4 :
+
+* Implémentation de la page "statistiques". Il s'agit surtout de discuter avec le reste du groupe des statistiques que nous afficherons, la difficulté technique étant faible.
+* Gestion de la fin de vies des activités et fragments. Dans l'état actuel des choses, les activités et fragments ne sont jamais détruits, ce qui doit être corrigé.
+* Lissages esthétiques.
