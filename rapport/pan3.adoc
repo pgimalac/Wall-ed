@@ -53,13 +53,13 @@ D'autres modifications propres à ce module ont été réalisées :
 Ci-dessous quelques captures d'écran :
 
 .Menu principal
-image::menu.png[Menu]
+image::menu.png[Menu, 384, 216]
 
 .Ajout d'un utilisateur
-image::ajout.png[Ajout]
+image::ajout.png[Ajout, 384, 216]
 
 .Liste des utilisateurs
-image::liste.png[Liste]
+image::liste.png[Liste, 384, 216]
 
 
 == PLAN DE TRAVAIL POUR LE PAN 4
