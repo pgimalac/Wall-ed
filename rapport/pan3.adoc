@@ -64,7 +64,11 @@ image::liste.png[Liste, 216, 384]
 
 === Module SLAM - Pierre Gimalac & Romain Louvet
 
-En ce qui concerne le module système embarqué, nous sommes parvenu à faire rouler la voiture de manière autonome. Nous avons décidé que son déplacement durant les phases de recherche de déchets serait aléatoire. Nous sommes parvenus à prendre et enregistrer des photos avec la caméra fournie dans le kit pendant les phases de déplacement pour pouvoir, par la suite, les faire traiter par le module détection de déchets.
+En ce qui concerne le module système embarqué, nous sommes parvenu à faire rouler la voiture de manière autonome, nous avons récupéré le code source de SunFounder et avons créé nos propres classes Python et nos propres fonctions autour pour le rendre plus lisible et plus facilement utilisable (et avons modifié ce que nous voulions modifier).
+
+Nous avons décidé que son déplacement durant les phases de recherche de déchets serait aléatoire.
+
+Nous sommes parvenus à prendre et enregistrer des photos avec la caméra fournie dans le kit pendant les phases de déplacement pour pouvoir, par la suite, les faire traiter par le module détection de déchets.
 
 === Module Conception visuelle et audio - Lola Vitrac & Romain Louvet
 
