@@ -56,7 +56,7 @@ Ci-dessous quelques captures d'écran :
 image::menu.png[Menu]
 
 .Ajout d'un utilisateur
-image::liste.png[Liste]
+image::ajout.png[Ajout]
 
 .Liste des utilisateurs
 image::liste.png[Liste]
