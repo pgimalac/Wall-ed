@@ -18,7 +18,8 @@ _book
 .*.swp
 
 *.html
-
+modules/COMCS/CODE/.idea/*
+modules/COMCS/CODE/CODE-SERVEUR-PACT.iml
 modules/Android/Wall-Ed/*
 modules/Android/WallEd/.idea/*
 modules/Android/WallEd/local.properties
