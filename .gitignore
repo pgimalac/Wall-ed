@@ -31,3 +31,5 @@ modules/Android/WallEd/app/proguard-rules.pro
 modules/Android/WallEd/app/src/androidTest/*
 modules/Android/WallEd/app/src/test/*
 modules/Android/WallEd/.gradle/*
+modules/Android/WallEd/build.gradle
+modules/Android/WallEd/gradle/wrapper/gradle-wrapper.properties
