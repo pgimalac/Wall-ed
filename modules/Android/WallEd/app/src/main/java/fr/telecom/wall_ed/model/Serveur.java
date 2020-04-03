@@ -9,7 +9,7 @@ public class Serveur {
     public Serveur(){
         Thread t1 = new Thread(new Runnable() {
             public void run() {
-                mn = new Main_appli("127.0.0.1", 22345);
+                mn = new Main_appli("192.168.1.15", 22345);
                 mn.run();
             }
         });

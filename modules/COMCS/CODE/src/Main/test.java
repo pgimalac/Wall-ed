@@ -6,10 +6,16 @@ import interface_bdd.*;
 import interface_externe.Main_appli;
 
 public class test {
+	
+	private static String imageStoringPath = "/home/adrien/Images/pactImages/";
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		System.out.println(Main.executePythonScriptForAI("/home/adrien/Images/test.jpg"));
+		int numberOfImages = 1;
+		String imagePath = imageStoringPath + Integer.toString(numberOfImages) + ".jpg";
+		System.out.println("starting AI");
+		String bal = Main.executePythonScriptForAI(imagePath);
+		System.out.println(bal);
 		
 		/*
 		String name = "GLOBALE";

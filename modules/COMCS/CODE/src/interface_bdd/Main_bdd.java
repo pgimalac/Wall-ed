@@ -22,7 +22,7 @@ public class Main_bdd {
 	}
 	
 	public static Eleve getEleveByID(int id) {
-		String query = "SELECT * FROM ELEVES WHERE ELEVEID = " + Integer.toString(id);
+		String query = "SELECT * FROM ELEVES WHERE eleveID = " + Integer.toString(id);
 		String prenom = Connect_bdd.lastExecuteSQL(query, "prenom");
 		String nom = Connect_bdd.lastExecuteSQL(query, "nom");
 		return new Eleve(id, prenom, nom);

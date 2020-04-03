@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
 
 import javax.imageio.ImageIO;
 
@@ -103,15 +104,17 @@ public class RobotClientProcessor implements Runnable{
             	   writer.write("sendImage");
             	   writer.flush();
             	   this.numberOfImages++;
-            	   System.out.println("image received, storing it");
-            	   FileOutputStream image = new FileOutputStream(this.imageStoringPath + Integer.toString(this.numberOfImages));
+            	   System.out.println("receiving image");
+            	   String imagePath = this.imageStoringPath + Integer.toString(this.numberOfImages) + ".jpg";
+            	   
+            	   FileOutputStream image = new FileOutputStream(imagePath);
             	   int n;
-            	   while((n=reader.read(b,0,b.length))==20000){
+            	   while((n=reader.read(b,0,b.length))>=20000){
    	            		image.write(b,0,n);                                        
             	   }
             	   image.write(b,0,n);
             	   System.out.println("image stored, launching IA");
-            	   String AIresult = Main.executePythonScriptForAI(this.imageStoringPath + Integer.toString(this.numberOfImages) + ".jpg");
+            	   String AIresult = Main.executePythonScriptForAI(imagePath);
             	   System.out.println("ai done");
             	   // then send results to the robot
             	   writer.write(AIresult);
