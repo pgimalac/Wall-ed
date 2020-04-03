@@ -55,7 +55,7 @@ import fr.telecom.wall_ed.view.UtilisateursFragment;
 public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     //If testing without the server, set to false; otherwise, set to true
-    private static final boolean SERVER_AVAILABLE = false;
+    private static final boolean SERVER_AVAILABLE = true;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
