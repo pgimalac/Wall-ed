@@ -22,7 +22,7 @@ import interface_bdd.Connect_bdd;
 
 public class Main {
 	
-	private static String host = "192.168.2.4";
+	private static String host = "127.0.0.1";
     private static int port = 22345;
 
 	   public static void main(String[] args) {

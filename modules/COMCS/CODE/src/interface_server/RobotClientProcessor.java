@@ -53,27 +53,27 @@ public class RobotClientProcessor implements Runnable{
             
             if (!this.act.clientApp.getInitSate()) {System.err.println("[RobotCP] Waiting app initialisation to be finished");}
             while (!this.act.clientApp.getInitSate()) {
-            	Thread.sleep(5000);
+            	Thread.sleep(3000);
             	System.out.println("[RobotCP] Still not finished");
             }
             
             if (this.initDone) {
             	
             	System.err.println("[RobotCP] init done, waiting to see if change mode needed");
-            	Thread.sleep(5000);
+            	Thread.sleep(3000);
             	if (this.changeMode) {
             		System.out.println("[RobotCP] NOT reading socket because of specific action");
             		action = command;
             	}
             	else {
                 	System.err.println("[RobotCP] reading socket");
-                	Thread.sleep(5000);
+                	Thread.sleep(3000);
                 	action = read();
                 }
             }
             else {
             	System.err.println("[RobotCP] reading socket");
-            	Thread.sleep(5000);
+            	Thread.sleep(3000);
             	action = read();
             }
             
