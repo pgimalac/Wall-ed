@@ -9,6 +9,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import Main.Eleve;
+
 public class Main_appli implements Runnable{
 
     private Socket connexion = null;

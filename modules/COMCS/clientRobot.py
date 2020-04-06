@@ -28,6 +28,9 @@ def sendImage(filepath):
 	#attention le serveur attend une réponse, si un déchet à été instancié
 	# ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
 
+def interactionAnswer(trashFound, braceletID, type, typePropose, reponseEleve):
+	socket.send(bytes(json.dumps({"trashFound" : trashFound, "braceletID" : braceletID, "type" : type, "typePropose" : typePropose, "reponseEleve" : reponseEleve}),'utf-8'))
+
 def stopConnexion():
 	socket.send(bytes("close",'utf-8'))
 	socket.close()
