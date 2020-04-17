@@ -41,7 +41,7 @@ public class Main {
 	   }
 	   
 	   public static void getStats(int sessionID) {
-		   //todo (renvoie //todo)
+		   String query = "";
 	   }
 	   
 	   public static String executePythonScriptForAI(String image) throws IOException {

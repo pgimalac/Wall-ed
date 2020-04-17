@@ -85,6 +85,7 @@ public class AppClientProcessor implements Runnable{
             	   this.initDone = true;
                	   break;
                case "getStats":
+               	   // choix de statistiques globales ou de statistiques particulières d'une session
             	   Main.getStats(sessionID);
                	   break;
                case "close":
