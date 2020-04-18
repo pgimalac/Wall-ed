@@ -55,7 +55,7 @@ import fr.telecom.wall_ed.view.UtilisateursFragment;
 public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     //If testing without the server, set to false; otherwise, set to true
-    private static final boolean SERVER_AVAILABLE = true;
+    private static final boolean SERVER_AVAILABLE = false;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -194,28 +194,33 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onNavigationItemSelected : " + item.getItemId());
+        Log.i("PACT32_DEBUG", "BackStackCheck (MainActivity): " + mFragmentManager.getBackStackEntryCount() + " entries");
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_users:
                 Fragment listeUtilisateurs = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, listeUtilisateurs)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_add_user:
                 Fragment ajoutUtilisateurFragment = new AjoutUtilisateurFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, ajoutUtilisateurFragment)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_statistiques:
                 Fragment statistiques_globales = new Statistiques_globales();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, statistiques_globales)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_params:
                 Fragment settings_fragment = new SettingsFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, settings_fragment)
                         .addToBackStack(null).commit();
@@ -238,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         switch (viewId){
             case R.id.demarrer_button:
                 utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
@@ -245,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
             case R.id.enregistrement_button:
                 addUser(new Utilisateur(getIntent().getExtras().getString("firstName"), getIntent().getExtras().getString("name"), getIntent().getExtras().getString("group"), getIntent().getExtras().getString("id")));
                 utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
@@ -263,6 +270,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
             case R.id.session_bt_stop:
                 serveur.endSession();
                 utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();

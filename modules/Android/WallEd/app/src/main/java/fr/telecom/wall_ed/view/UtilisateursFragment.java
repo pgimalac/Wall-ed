@@ -95,7 +95,6 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
         LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
     }
-
 }
 
 
