@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,18 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
         LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
         LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("PACT32_DEBUG", "CheckPoint (UtilisateursFragment) : detached");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("PACT32_DEBUG", "CheckPoint (UtilisateursFragment) : destroyed");
     }
 }
 

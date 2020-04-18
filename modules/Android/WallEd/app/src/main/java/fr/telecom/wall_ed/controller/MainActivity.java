@@ -34,11 +34,9 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.CheckBox;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.telecom.wall_ed.model.InterfaceServeur;
 import fr.telecom.wall_ed.model.Utilisateur;
@@ -48,7 +46,7 @@ import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
 import fr.telecom.wall_ed.view.MainFragment;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.view.SettingsFragment;
-import fr.telecom.wall_ed.view.Statistiques_globales;
+import fr.telecom.wall_ed.view.StatistiquesGlobalesFragment;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
@@ -212,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_statistiques:
-                Fragment statistiques_globales = new Statistiques_globales();
+                Fragment statistiques_globales = new StatistiquesGlobalesFragment();
                 mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, statistiques_globales)
