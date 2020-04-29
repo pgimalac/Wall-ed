@@ -82,5 +82,16 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : detached");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : destroyed");
+    }
 
 }
