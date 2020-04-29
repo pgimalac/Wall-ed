@@ -105,7 +105,6 @@ with open(annotations_file, 'r') as f:
                     draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,255,0), width=10)
                     draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,0,255), width=5)
                     del draw
-                    im.show()
 
                     category =-1
                     print("0 - Divers")
@@ -115,6 +114,7 @@ with open(annotations_file, 'r') as f:
                     print("4 - Plastique")
                     print("5 - Ignorer")
                     while not (0 <= category <= 5):
+                        im.show()
                         category = int(input("Categorie : "))
 
                     image_d["annotation"] = str(category) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
