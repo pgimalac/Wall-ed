@@ -5,9 +5,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Queue;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import fr.telecom.wall_ed.model.Dechet;
 
 public class Main_appli implements Runnable{
 
@@ -21,6 +25,7 @@ public class Main_appli implements Runnable{
     private int sessionID;
     private Eleve[] eleves = {};
     private boolean initEleve = false;
+    private Queue<Dechet> dechets;
 
 
 
@@ -65,6 +70,12 @@ public class Main_appli implements Runnable{
                         command = "none";
                         break;
                     case "getStats":
+                        String receiv;
+                        while ((receiv = read()) != "nomore") {
+                            JSONObject dechetJSON = this.decode(receiv);
+                            Dechet dechet = new Dechet((int)dechetJSON.get("dechetID"), (int)dechetJSON.get("braceletID"), (String)dechetJSON.get("type"), (String)dechetJSON.get("typePropose"), (boolean)dechetJSON.get("reponseEleve"), (String)dechetJSON.get("heureRamassage"));
+                            dechets.add(dechet);
+                        }
                         command = "none";
                         break;
                     case "getEleves":
@@ -117,7 +128,7 @@ public class Main_appli implements Runnable{
         command = "getEleves";
     }
 
-    public void getStats(int sessionID) {
+    public void getStats() {
         command = "getStats";
     }
 

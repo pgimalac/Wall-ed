@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Queue;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +23,7 @@ public class AppClientProcessor implements Runnable{
    private int sessionID;
    private Activite act;
    private boolean initDone = false;
+   private Queue<Dechet> dechetQueue;
    
    public AppClientProcessor(Socket pSock){
       sock = pSock;
@@ -85,8 +87,21 @@ public class AppClientProcessor implements Runnable{
             	   this.initDone = true;
                	   break;
                case "getStats":
-               	   // choix de statistiques globales ou de statistiques particulières d'une session
-            	   Main.getStats(sessionID);
+               	   // récupération des statistiques en temps réel
+            	   Dechet dechet;
+				   while ((dechet = dechetQueue.poll()) != null) {
+					   JSONObject dechetJSON = new JSONObject();
+					   dechetJSON.put("dechetID", dechet.getDechetID());
+					   dechetJSON.put("braceletID", dechet.getBraceletID());
+					   dechetJSON.put("type", dechet.getType());
+					   dechetJSON.put("typePropose", dechet.getTypeEleve());
+					   dechetJSON.put("reponseEleve", dechet.getReponseEleve());
+					   dechetJSON.put("heureRamassage", dechet.getHeureRamassage());
+					   dechetJSON.writeJSONString(writer);
+				   	writer.flush();
+				   }
+				   writer.write("nomore");
+				   writer.flush();
                	   break;
                case "close":
             	   writer.write("[AppCP] Communication terminée");
@@ -144,6 +159,10 @@ public class AppClientProcessor implements Runnable{
 			e.printStackTrace();
 		}         
       }
+   }
+
+   public void sendDechet(Dechet dechet) {
+   	  dechetQueue.add(dechet);
    }
    
    private String read() throws IOException{      

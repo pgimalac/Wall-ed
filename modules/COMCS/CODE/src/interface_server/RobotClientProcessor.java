@@ -131,6 +131,7 @@ public class RobotClientProcessor implements Runnable{
             		   String typePropose = (String) data.get("typePropose");
             		   boolean reponseEleve = (boolean) data.get("reponseEleve");
             		   Dechet dechet = new Dechet(this.act.getSession(), braceletID, type, typePropose, reponseEleve);
+            		   this.act.clientApp.sendDechet(dechet);
             		   this.act.changeMode();
             		   // send this dechet info to the app ?
             	   }
