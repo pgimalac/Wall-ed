@@ -17,7 +17,8 @@ import sys
 
 ## Constants
 
-output_directory = "D:\\Git\\pact32\\modules\\Reconnaissance de Déchets\\Yolo\\Images"
+output_directory = "D:\\Images\\Yolo"
+labels_directory = "D:\\Git\\pact32\\modules\\Reconnaissance de Déchets\\Yolo\\Labels"
 annotations_file = "D:\\Git\\TACO\\data\\annotations.json"
 
 
@@ -89,14 +90,13 @@ with open(annotations_file, 'r') as f:
                 height = bheight/image_d["img_height"]
                 x = bx/image_d["img_width"]
                 y = by/image_d["img_height"]
-                annotation_path = os.path.join(output_directory, image_d["img_file_name"][:-4]+".txt")
+                annotation_path = os.path.join(labels_directory, image_d["img_file_name"][:-4]+".txt")
 
                 tmp = ""
                 if os.path.isfile(annotation_path):
                     with open(annotation_path, "r") as f:
                         tmp = f.read()
 
-                print("Lecture de " + annotation_path + " : " + tmp)
                 if not (str(x) + " " + str(y) + " " + str(width) + " " + str(height) in tmp):
 
                     im = Image.open(os.path.join(output_directory, image_d["img_file_name"]))
@@ -113,7 +113,8 @@ with open(annotations_file, 'r') as f:
                     print("2 - Carton / Papier")
                     print("3 - Métal")
                     print("4 - Plastique")
-                    while not (0 <= category <= 6):
+                    print("5 - Ignorer")
+                    while not (0 <= category <= 5):
                         category = int(input("Categorie : "))
 
                     image_d["annotation"] = str(category) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
