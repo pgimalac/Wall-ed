@@ -107,25 +107,34 @@ with open(annotations_file, 'r') as f:
 
                 if not (str(x) + " " + str(y) + " " + str(width) + " " + str(height) in tmp):
 
-                    im = Image.open(os.path.join(output_directory, image_d["img_file_name"]))
-                    draw = ImageDraw.Draw(im)
-                    draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(255,0,0), width=15)
-                    draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,255,0), width=10)
-                    draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,0,255), width=5)
-                    del draw
+                    if max(width,height)<0.04:
+                        image_d["annotation"] = str(5) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
 
-                    category =-1
-                    print("0 - Divers")
-                    print("1 - Verre")
-                    print("2 - Carton / Papier")
-                    print("3 - Métal")
-                    print("4 - Plastique")
-                    print("5 - Ignorer")
-                    while not (0 <= category <= 5):
-                        im.show()
-                        category = int(input("Categorie : "))
+                    else:
 
-                    image_d["annotation"] = str(category) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
+                        im = Image.open(os.path.join(output_directory, image_d["img_file_name"]))
+                        draw = ImageDraw.Draw(im)
+                        draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(255,0,0), width=10)
+                        draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,255,0), width=7)
+                        draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,0,255), width=4)
+                        del draw
+
+                        print("")
+                        print("Analyse de l'image : " + image_d["img_file_name"])
+                        print("Catégorie d'après TACO : " + str(annotation_category_id))
+                        print("Taille : (" + str(width) + ", " + str(height) + ")")
+                        category =-1
+                        print("0 - Divers")
+                        print("1 - Verre")
+                        print("2 - Carton / Papier")
+                        print("3 - Métal")
+                        print("4 - Plastique")
+                        print("5 - Ignorer")
+                        while not (0 <= category <= 5):
+                            im.show()
+                            category = int(input("Categorie : "))
+
+                        image_d["annotation"] = str(category) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
                     with open(annotation_path, "a+") as f:
                         f.write(image_d["annotation"])
 
