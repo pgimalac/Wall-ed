@@ -17,6 +17,8 @@ import sys
 
 ## Constants
 
+utilisateur = 2 # 1=Nico, 2=Victor
+
 output_directory = "D:\\Images\\Yolo"
 labels_directory = "D:\\Git\\pact32\\modules\\Reconnaissance de Déchets\\Yolo\\Labels"
 annotations_file = "D:\\Git\\TACO\\data\\annotations.json"
@@ -69,7 +71,13 @@ with open(annotations_file, 'r') as f:
 ## Loads annotations
 
     n_annotations = len(annotations['annotations'])
-    for i in range(n_annotations):
+
+    if utilisateur==1:
+        L=[i for i in range(n_annotations)]
+    else:
+        L=[i for i in range(n_annotations-1, 0-1, -1)]
+
+    for i in L:
 
         #Loads annotations in TACO format
         annotation = annotations['annotations'][i]
