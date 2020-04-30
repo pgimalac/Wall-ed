@@ -20,6 +20,7 @@ import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 public class StatistiquesIndividuellesFragment extends Fragment {
 
     public TextView prenomJoueur ;
+    public Eleve statEleve ;
     public TextView nombreDechetIndividuel ;
     public TextView poubelleNormale ;
     public TextView poubelleCarton ;
@@ -68,15 +69,14 @@ public class StatistiquesIndividuellesFragment extends Fragment {
     }
 
     public void MAJ (  ) {
-        prenomJoueur.setText(Eleve.getPrenom()) ;
-        nombreDechetIndividuel.setText(mStatsMaster.getTotalByStudent()) ;
+        prenomJoueur.setText(statEleve.getPrenom()) ;
+        nombreDechetIndividuel.setText(mStatsMaster.getTotalByStudent(statEleve)) ;
         poubelleNormale.setText(mStatsMaster.getTotalByType("divers")) ;
         poubelleCarton.setText(mStatsMaster.getTotalByType("carton")) ;
         poubellePlastique.setText(mStatsMaster.getTotalByType("plastique")) ;
         poubelleMetal.setText(mStatsMaster.getTotalByType("metal")) ;
         poubelleVerre.setText(mStatsMaster.getTotalByType("verre")) ;
-        tauxReussite.setText(mStatsMaster.getScoreByStudent()) ;
-
+        tauxReussite.setText(mStatsMaster.getScoreByStudent(statEleve)) ;
     }
 
     @Override
