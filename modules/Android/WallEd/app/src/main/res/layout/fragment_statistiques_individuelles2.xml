@@ -72,13 +72,13 @@
             android:layout_marginBottom="10dp"/>
 
         <TextView
-            android:id="@+id/PoubelleCarton"
             android:layout_marginLeft="7dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Poubelle cartons et papiers :" />
 
         <TextView
+            android:id="@+id/PoubelleCarton"
         android:layout_marginLeft="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,13 +86,13 @@
             android:layout_marginBottom="10dp"    />
 
         <TextView
-            android:id="@+id/Poubellemétaux"
         android:layout_marginLeft="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Poubelle métaux :" />
 
         <TextView
+            android:id="@+id/Poubellemétaux"
         android:layout_marginLeft="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,14 +100,14 @@
             android:layout_marginBottom="10dp"    />
 
         <TextView
-            android:id="@+id/Poubelleplastique"
+
         android:layout_marginLeft="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Poubelle plastique :" />
 
         <TextView
-            android:id="@+id/Poubelleverte"
+            android:id="@+id/Poubelleplastique"
         android:layout_marginLeft="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -121,6 +121,7 @@
         android:text="Poubelle verte :" />
 
         <TextView
+            android:id="@+id/Poubelleverte"
         android:layout_marginLeft="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

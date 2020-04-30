@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceStatsMaster;
@@ -17,7 +18,14 @@ import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 
 public class StatistiquesIndividuellesFragment extends Fragment {
 
-    private InterfaceStatsMaster mStatsMaster;
+    public TextView prenomJoueur ;
+    public TextView nombreDechetIndividuel ;
+    public TextView poubelleNormale ;
+    public TextView poubelleCarton ;
+    public TextView poubellePlastique;
+    public TextView poubelleMetal ;
+    public TextView poubelleVerte ;
+    public TextView tauxReussite ;
 
     public StatistiquesIndividuellesFragment() {
         // Required empty public constructor
@@ -57,5 +65,7 @@ public class StatistiquesIndividuellesFragment extends Fragment {
         super.onDestroy();
         Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesIndividuellesFragment) : destroyed");
     }
+
+
 
 }
