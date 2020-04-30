@@ -1,0 +1,17 @@
+= Interfaces du groupe “3.2”
+ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
+:doctype: book
+:stem: latexmath
+:source-highlighter: coderay
+:toc-title: Table des matières
+:toc: macro
+:sectnums:
+:imagesdir: images
+
+== Interfaces par module
+
+include::interfaces_par_module.adoc[interfaces par module]
+
+== Description des interfaces
+
+include::description_des_interfaces.adoc[description des interfaces]

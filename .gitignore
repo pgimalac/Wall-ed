@@ -18,7 +18,8 @@ _book
 .*.swp
 
 *.html
-
+modules/COMCS/CODE/.idea/*
+modules/COMCS/CODE/CODE-SERVEUR-PACT.iml
 modules/Android/Wall-Ed/*
 modules/Android/WallEd/.idea/*
 modules/Android/WallEd/local.properties
@@ -30,3 +31,5 @@ modules/Android/WallEd/app/proguard-rules.pro
 modules/Android/WallEd/app/src/androidTest/*
 modules/Android/WallEd/app/src/test/*
 modules/Android/WallEd/.gradle/*
+modules/Android/WallEd/build.gradle
+modules/Android/WallEd/gradle/wrapper/gradle-wrapper.properties

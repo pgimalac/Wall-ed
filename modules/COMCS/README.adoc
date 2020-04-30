@@ -1,0 +1,31 @@
+= Rapport du module client-serveur
+
+ifdef::env-gitlab,env-browser[:outfilesuffix: .adoc]
+:doctype: book
+:stem: latexmath
+:source-highlighter: coderay
+:toc: macro
+:sectnums:
+:imagesdir: images
+
+== Matériel utilisé
+
+Nous utiliserons un pc fixe classique comme serveur. Un OS linux (basé sur Debian) sera utilisé. La base de donnée sera du MariaDB, le serveur web (servant également de reverse proxy si besoin) sera du nginx ; les deux tourneront sous docker. Le code java pourrait également être exécuté dans un conteneur docker.
+
+== Organisation de la base de donnée
+
+Une base de donnée par établissement scolaire :
+
+- Une table globale, un enregistrement par session (champs : identifiant de la session, date, heure de début, heure de fin, nombre d'enfants)
+
+- Une table par session pour les déchets, un enregistrement par ramassage de déchet (champs : identifiant de l'action, identifiant de session, identifiant de bracelet, type de déchet, réponse de l'élève, heure du ramassage)
+
+- Une table par session pour les élèves, un enregistrement par élève (champs : identifiant de bracelet, identifiant de l'élève)
+
+- Une table élèves, un enregistrement par élève (champs : identifiant de l'élève, nom, prénom)
+
+Les clés primaires sont les premiers champs de chaque table.
+
+== Description des interactions entre les clients et le serveur
+
+include::description_interactions_client-serveur.adoc[Description des interactions entre le client et le serveur]

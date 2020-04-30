@@ -1,6 +1,7 @@
 package fr.telecom.wall_ed.controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
 
     public UtilisateurAdapter(List<Utilisateur> listeUtilisateurs, Context context) {
         super(context, R.layout.single_listview_item, listeUtilisateurs);
+        Log.i("PACT32_DEBUG_LOW", "CheckPoint (MainActivity) : UtilisateurAdapter");
         this.listeUtilisateurs = listeUtilisateurs ;
         this.context = context ;
     }
@@ -32,6 +34,7 @@ public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
+        Log.i("PACT32_DEBUG_LOW", "CheckPoint (MainActivity) : getView");
         View v = convertView ;
         UtilisateurHolder holder = new UtilisateurHolder() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

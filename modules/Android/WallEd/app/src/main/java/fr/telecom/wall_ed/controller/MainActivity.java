@@ -34,11 +34,9 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.CheckBox;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.telecom.wall_ed.model.InterfaceServeur;
 import fr.telecom.wall_ed.model.Utilisateur;
@@ -48,11 +46,14 @@ import fr.telecom.wall_ed.view.AjoutUtilisateurFragment;
 import fr.telecom.wall_ed.view.MainFragment;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.view.SettingsFragment;
-import fr.telecom.wall_ed.view.Statistiques_globales;
+import fr.telecom.wall_ed.view.StatistiquesGlobalesFragment;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
 public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
+
+    //If testing without the server, set to false; otherwise, set to true
+    private static final boolean SERVER_AVAILABLE = false;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -95,31 +96,38 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
                 .replace(R.id.main_frame_layout, mainFragment)
                 .addToBackStack(null).commit();
 
-        serveur = new Serveur();
-        mPrefs = getPreferences(MODE_PRIVATE);
-
-        try{
-            Thread.sleep(500);
-            mUsers = serveur.getUsers();
-            Log.i("PACT32_DEBUG", "Déroulement nominal : mUsers récupérée sur serveur");
-        }catch (Exception e){
+        if (SERVER_AVAILABLE){
+            serveur = new Serveur();
+            Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = true");
+            try{
+                Thread.sleep(500);
+                mUsers = serveur.getUsers();
+                Log.i("PACT32_DEBUG", "Déroulement nominal : mUsers récupérée sur serveur");
+            }catch (Exception e){
+                mUsers = new ArrayList<>();
+                Log.e("PACT32_DEBUG", "Initialisation alternative : mUsers initialisée vide");
+            }
+        }else{
+            Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = false");
             mUsers = new ArrayList<>();
-            Log.e("PACT32_DEBUG", "Solution de secours : mUsers initialisée vide");
+            Log.e("PACT32_DEBUG", "Initialisation alternative : mUsers initialisée vide");
         }
+        mPrefs = getPreferences(MODE_PRIVATE);
         utAdapter = new UtilisateurAdapter(mUsers,this);
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onCheckedChanged");
         ListView lv = findViewById(R.id.LU);
         int pos = lv.getPositionForView(buttonView);
         if (pos != ListView.INVALID_POSITION) {
             Utilisateur u = mUsers.get(pos);
             u.setSelected(isChecked);
-            Toast.makeText( this, "clicked on User" + u.getPrenom() + ". State is " + isChecked, Toast.LENGTH_SHORT).show() ;
         }
     }
 
     private void loadUsers(){
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadUsers");
         Gson gson = new Gson();
         String json = mPrefs.getString("mUsers", "");
         Type listType = new TypeToken<ArrayList<Utilisateur>>(){}.getType();
@@ -127,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     }
 
     private void saveUsers(){
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveUsers");
         //TODO: replace with server-oriented code
         /*SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
@@ -137,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     }
 
     private void addUser(Utilisateur user){
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans addUser " + user.toString());
         if (mUsers==null){
             mUsers = new ArrayList<>();
         }
@@ -144,55 +154,71 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         this.saveUsers();
     }
 
-    public ArrayList<Utilisateur> getUsers(){
-        return mUsers;
-    }
-
     public ArrayList<Utilisateur> getUser () {
-        return (mUsers);
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUser");
+        return mUsers;
     }
 
     @Override
     public UtilisateurAdapter getUserAdaptateur() {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUserAdaptateur");
         return utAdapter;
     }
 
     @Override
     public void startNewSession(ArrayList<Utilisateur> users) {
-        serveur.startNewSession(users);
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans startNewSession");
+        if (SERVER_AVAILABLE){
+            serveur.startNewSession(users);
+            Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : Session initialisée");
+        }else{
+            Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : Commande annulée");
+        }
     }
 
     @Override
     public void endSession() {
-        serveur.endSession();
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans endSession");
+        if (SERVER_AVAILABLE){
+            serveur.endSession();
+            Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : Session terminée");
+        }else{
+            Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : Commande annulée");
+        }
     }
 
     // ==================== MENU ====================
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onNavigationItemSelected : " + item.getItemId());
+        Log.i("PACT32_DEBUG", "BackStackCheck (MainActivity): " + mFragmentManager.getBackStackEntryCount() + " entries");
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_users:
                 Fragment listeUtilisateurs = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, listeUtilisateurs)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_add_user:
                 Fragment ajoutUtilisateurFragment = new AjoutUtilisateurFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, ajoutUtilisateurFragment)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_statistiques:
-                Fragment statistiques_globales = new Statistiques_globales();
+                Fragment statistiques_globales = new StatistiquesGlobalesFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, statistiques_globales)
                         .addToBackStack(null).commit();
                 break;
             case R.id.menu_params:
                 Fragment settings_fragment = new SettingsFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, settings_fragment)
                         .addToBackStack(null).commit();
@@ -210,17 +236,20 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onClick : " + viewId);
         Fragment utilisateursFragment;
         switch (viewId){
             case R.id.demarrer_button:
                 utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
             case R.id.enregistrement_button:
-                addUser(new Utilisateur(getIntent().getExtras().getString("firstName"), getIntent().getExtras().getString("name"), getIntent().getExtras().getString("group"), "0"));
+                addUser(new Utilisateur(getIntent().getExtras().getString("firstName"), getIntent().getExtras().getString("name"), getIntent().getExtras().getString("group"), getIntent().getExtras().getString("id")));
                 utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
@@ -239,6 +268,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
             case R.id.session_bt_stop:
                 serveur.endSession();
                 utilisateursFragment = new UtilisateursFragment();
+                mFragmentManager.popBackStack();
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
@@ -251,6 +281,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onRequestPermissionsResult : " + requestCode);
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode){
             case PERMISSION_CODE:
@@ -264,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onActivityResult : " + requestCode + ", " + resultCode);
         super.onActivityResult(requestCode, resultCode, data);
         /*ImageView imageViewPhoto = findViewById(R.id.imageView_photo);
         if (resultCode == RESULT_OK){
@@ -272,6 +304,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     }
 
     private void openCamera(){
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans openCamera");
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "Image bracelet");
         values.put(MediaStore.Images.Media.DESCRIPTION, "Image d'un bracelet d'identification");
