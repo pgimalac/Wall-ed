@@ -24,8 +24,11 @@ public class StatistiquesIndividuellesFragment extends Fragment {
     public TextView poubelleCarton ;
     public TextView poubellePlastique;
     public TextView poubelleMetal ;
-    public TextView poubelleVerte ;
+    public TextView poubelleVerre ;
     public TextView tauxReussite ;
+    private InterfaceStatsMaster mStatsMaster;
+
+
 
     public StatistiquesIndividuellesFragment() {
         // Required empty public constructor
@@ -51,8 +54,23 @@ public class StatistiquesIndividuellesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistiques_individuelles2, container, false);
+        View result = inflater.inflate(R.layout.fragment_statistiques_individuelles2, container, false);
+        prenomJoueur = result.findViewById(R.id.textView2) ;
+        nombreDechetIndividuel = result.findViewById(R.id.Nbre_dechets_individuel) ;
+        poubelleNormale = result.findViewById(R.id.PoubelleNormale) ;
+        poubelleCarton  = result.findViewById(R.id.PoubelleCarton) ;
+        poubellePlastique = result.findViewById(R.id.Poubelleplastique) ;
+        poubelleMetal = result.findViewById(R.id.Poubellemétaux) ;
+        poubelleVerre = result.findViewById(R.id.Poubelleverre) ;
+        tauxReussite  = result.findViewById(R.id.TauxReussite) ;
+        return result ;
     }
+
+    public void MAJ (TextView prenomJoueur, TextView nombreDechetIndividuel, TextView poubelleNormale, TextView poubelleCarton, TextView poubellePlastique, TextView poubelleMetal, TextView poubelleVerre, TextView tauxReussite ) {
+        
+
+    }
+
 
     @Override
     public void onDetach() {
