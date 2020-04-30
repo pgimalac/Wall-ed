@@ -1,6 +1,7 @@
 package fr.telecom.wall_ed.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,18 +12,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StatistiquesIndividuellesFragment extends Fragment {
 
+    private InterfaceStatsMaster mStatsMaster;
 
     public StatistiquesIndividuellesFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesIndividuellesFragment) : attached");
+        super.onAttach(context);
+        createCallbackToParentActivity();
+    }
+
+    private void createCallbackToParentActivity(){
+        try {
+            //Parent activity will automatically subscribe to callback
+            mStatsMaster = (InterfaceStatsMaster) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ " InterfaceStatsMaster");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
