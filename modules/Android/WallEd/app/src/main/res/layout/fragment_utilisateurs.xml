@@ -63,6 +63,20 @@
             android:layout_alignParentTop="false"
             android:layout_marginTop="25dp"></ListView>
 
+        <Button
+            android:id="@+id/users_start_new_session"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/user_new_session"
+            />
+
+        <Button
+            android:id="@+id/users_end_session"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/user_end_session"
+            />
+
     </LinearLayout>
 
 </FrameLayout>

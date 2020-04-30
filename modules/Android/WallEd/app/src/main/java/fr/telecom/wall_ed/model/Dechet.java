@@ -10,12 +10,12 @@ public class Dechet {
     private final String heureRamassage;
 
     public Dechet(int dechetID, int braceletID, String type, String typePropose, boolean reponseEleve, String heureRamassage) {
-        this.dechetID = dechetID;
-        this.braceletID = braceletID;
-        this.type = type;
-        this.typePropose = typePropose;
-        this.heureRamassage = heureRamassage;
-        this.reponseEleve = reponseEleve;
+        this.dechetID = dechetID ;
+        this.braceletID = braceletID ;
+        this.type = type ;
+        this.typePropose = typePropose ;
+        this.heureRamassage = heureRamassage ;
+        this.reponseEleve = reponseEleve ;
     }
 
     public int getDechetID() {
