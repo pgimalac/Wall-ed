@@ -1,5 +1,7 @@
 package fr.telecom.wall_ed.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Serveur {
@@ -27,6 +29,11 @@ public class Serveur {
             users.add(user);
         }
         return users;
+    }
+
+    public ArrayList<Dechet> getDechets() {
+        Log.i("PACT32_DEBUG", "CheckPoint (Server) : MAJ des stats");
+        return mn.getDechets();
     }
 
     /**
