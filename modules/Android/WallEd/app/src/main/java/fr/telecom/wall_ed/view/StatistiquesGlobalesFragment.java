@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceStatsMaster;
@@ -18,6 +19,13 @@ import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 public class StatistiquesGlobalesFragment extends Fragment {
 
     private InterfaceStatsMaster mStatsMaster;
+    public TextView nombreDechet;
+    public TextView poubelleNormale ;
+    public TextView poubelleCarton ;
+    public TextView poubellePlastique;
+    public TextView poubelleMetal ;
+    public TextView poubelleVerre ;
+    public TextView tauxReussite ;
 
     public StatistiquesGlobalesFragment() {
         // Required empty public constructor
@@ -42,8 +50,26 @@ public class StatistiquesGlobalesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistiques_globales4, container, false);
+        View view = inflater.inflate(R.layout.fragment_statistiques_globales4, container, false);
+        nombreDechet = (TextView) view.findViewById(R.id.nbre_dechets_global);
+        poubelleNormale = (TextView) view.findViewById(R.id.poubelleNormaleG);
+        poubellePlastique = (TextView) view.findViewById(R.id.poubellePlastiqueG);
+        poubelleCarton = (TextView) view.findViewById(R.id.poubelleCartonG);
+        poubelleVerre = (TextView) view.findViewById(R.id.poubelleVerreG);
+        poubelleMetal = (TextView) view.findViewById(R.id.poubelleMétauxG);
+        tauxReussite = (TextView) view.findViewById(R.id.tauxRéussiteG);
+        updateContent();
+        return view;
+    }
+
+    private void updateContent(){
+        nombreDechet.setText(mStatsMaster.getTotal());
+        poubelleNormale.setText(mStatsMaster.getCorrectByType("divers"));
+        poubellePlastique.setText(mStatsMaster.getCorrectByType("plastique"));
+        poubelleCarton.setText(mStatsMaster.getCorrectByType("carton"));
+        poubelleVerre.setText(mStatsMaster.getCorrectByType("verre"));
+        poubelleMetal.setText(mStatsMaster.getCorrectByType("metal"));
+        tauxReussite.setText(mStatsMaster.getTotalScore());
     }
 
     @Override

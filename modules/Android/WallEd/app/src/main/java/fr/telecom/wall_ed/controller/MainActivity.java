@@ -294,6 +294,34 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
         return c;
     }
 
+    @Override
+    public int getTotalScore() {
+        mDechets.addAll(serveur.getDechets());
+        saveStats();
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getReponseEleve()){
+                c++;
+            }
+        }
+        return (int) (100*c/mDechets.size());
+    }
+
+    @Override
+    public int getScoreByStudent(Eleve eleve) {
+        mDechets.addAll(serveur.getDechets());
+        saveStats();
+        int c1=0, c2=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
+                c1++;
+                c2++;
+            }else if (dechet.getBraceletID()==eleve.getEleveID()){
+                c2++;
+            }
+        }
+        return (int) (100*c1/c2);
+    }
 
     // ==================== SERVER ====================
 
