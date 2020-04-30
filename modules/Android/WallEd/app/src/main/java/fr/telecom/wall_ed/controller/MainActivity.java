@@ -38,7 +38,10 @@ import android.widget.Toast;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import fr.telecom.wall_ed.model.Dechet;
+import fr.telecom.wall_ed.model.Eleve;
 import fr.telecom.wall_ed.model.InterfaceServeur;
+import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 import fr.telecom.wall_ed.model.Utilisateur;
 import fr.telecom.wall_ed.model.InterfaceGestionUtilisateurs;
 import fr.telecom.wall_ed.model.Serveur;
@@ -50,7 +53,7 @@ import fr.telecom.wall_ed.view.StatistiquesGlobalesFragment;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
 
-public class MainActivity extends AppCompatActivity implements InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
+public class MainActivity extends AppCompatActivity implements InterfaceStatsMaster, InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     //If testing without the server, set to false; otherwise, set to true
     private static final boolean SERVER_AVAILABLE = false;
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
     private AppBarConfiguration mAppBarConfiguration = null;
     private ArrayList<fr.telecom.wall_ed.model.Utilisateur> mUsers = null;
     private SharedPreferences mPrefs = null;
-
+    private ArrayList<Dechet> mDechets = null;
     private UtilisateurAdapter utAdapter ;
 
 
@@ -114,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         }
         mPrefs = getPreferences(MODE_PRIVATE);
         utAdapter = new UtilisateurAdapter(mUsers,this);
+
+        loadStats();
+        Log.i("PACT32_DEBUG", mDechets.size() + " statistiques chargées");
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -145,6 +151,23 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         */
     }
 
+    private void loadStats(){
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadStats");
+        Gson gson = new Gson();
+        String json = mPrefs.getString("mStats", "");
+        Type listType = new TypeToken<ArrayList<Dechet>>(){}.getType();
+        mDechets = gson.fromJson(json, listType);
+    }
+
+    private void saveStats(){
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveStats");
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mDechets);
+        prefsEditor.putString("mStats", json);
+        prefsEditor.apply();
+    }
+
     private void addUser(Utilisateur user){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans addUser " + user.toString());
         if (mUsers==null){
@@ -164,6 +187,101 @@ public class MainActivity extends AppCompatActivity implements InterfaceGestionU
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUserAdaptateur");
         return utAdapter;
     }
+
+    // ==================== STATS ====================
+
+    @Override
+    public int getTotal() {
+        mDechets.addAll(serveur.getDechets());
+        return mDechets.size();
+    }
+
+    @Override
+    public int getTotalByStudent(Eleve eleve) {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getBraceletID()==eleve.getEleveID()){
+                c++;
+            }
+        }
+        return c;
+    }
+
+    @Override
+    public int getTotalByType(String type) {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getType().equals(type)){
+                c++;
+            }
+        }
+        return c;
+    }
+
+    @Override
+    public int getTotalByTypeAndStudent(String type, Eleve eleve) {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type)){
+                c++;
+            }
+        }
+        return c;
+    }
+
+    @Override
+    public int getCorrect() {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getReponseEleve()){
+                c++;
+            }
+        }
+        return c;
+    }
+
+    @Override
+    public int getCorrectByStudent(Eleve eleve) {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
+                c++;
+            }
+        }
+        return c;
+    }
+
+    @Override
+    public int getCorrectByType(String type) {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getType().equals(type) && dechet.getReponseEleve()){
+                c++;
+            }
+        }
+        return c;
+    }
+
+    @Override
+    public int getCorrectByTypeAndStudent(String type, Eleve eleve) {
+        mDechets.addAll(serveur.getDechets());
+        int c=0;
+        for (Dechet dechet : mDechets){
+            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type) && dechet.getReponseEleve()){
+                c++;
+            }
+        }
+        return c;
+    }
+
+
+    // ==================== SERVER ====================
 
     @Override
     public void startNewSession(ArrayList<Utilisateur> users) {

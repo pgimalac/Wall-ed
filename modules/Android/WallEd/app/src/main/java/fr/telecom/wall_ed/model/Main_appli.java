@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Queue;
+import java.util.Calendar;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -26,10 +29,10 @@ public class Main_appli implements Runnable{
     private Eleve[] eleves = {};
     private boolean initEleve = false;
     private Queue<Dechet> dechets;
-
-
+    private Date lastUpdate;
 
     public Main_appli(String host, int port){
+        lastUpdate = Calendar.getInstance().getTime();
         name += ++count;
         try {
             connexion = new Socket(host, port);
@@ -46,6 +49,11 @@ public class Main_appli implements Runnable{
 
         while(!connexion.isClosed()){
             try {
+
+                //Si les stats datent d'il y a plus de 5s & qu'aucune commande n'est en attente, on les met à jour
+                if (command.length() > 0 && (lastUpdate.getTime()-Calendar.getInstance().getTime().getTime())/1000 > 5){
+                    command = "getStats";
+                }
 
                 writer = new PrintWriter(connexion.getOutputStream(), true);
                 reader = new BufferedInputStream(connexion.getInputStream());
@@ -191,5 +199,11 @@ public class Main_appli implements Runnable{
             e.printStackTrace();
         }
         return eleves;
+    }
+
+    public ArrayList<Dechet> getDechets() {
+        ArrayList list = new ArrayList(dechets);
+        dechets.clear();
+        return list;
     }
 }

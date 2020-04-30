@@ -29,6 +29,10 @@ public class Serveur {
         return users;
     }
 
+    public ArrayList<Dechet> getDechets() {
+        return mn.getDechets();
+    }
+
     /**
      * Asks the server to start a new session of the activity
      * @param users : users that will participate in the activity
