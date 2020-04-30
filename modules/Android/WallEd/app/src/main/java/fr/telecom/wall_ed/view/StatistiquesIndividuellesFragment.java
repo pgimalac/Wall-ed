@@ -30,8 +30,6 @@ public class StatistiquesIndividuellesFragment extends Fragment {
     public TextView tauxReussite ;
     private InterfaceStatsMaster mStatsMaster;
 
-
-
     public StatistiquesIndividuellesFragment() {
         // Required empty public constructor
     }
