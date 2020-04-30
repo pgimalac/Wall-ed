@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.model.Eleve;
 import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 
 
@@ -66,11 +67,17 @@ public class StatistiquesIndividuellesFragment extends Fragment {
         return result ;
     }
 
-    public void MAJ (TextView prenomJoueur, TextView nombreDechetIndividuel, TextView poubelleNormale, TextView poubelleCarton, TextView poubellePlastique, TextView poubelleMetal, TextView poubelleVerre, TextView tauxReussite ) {
-        
+    public void MAJ (  ) {
+        prenomJoueur.setText(Eleve.getPrenom()) ;
+        nombreDechetIndividuel.setText(mStatsMaster.getTotalByStudent()) ;
+        poubelleNormale.setText(mStatsMaster.getTotalByType("divers")) ;
+        poubelleCarton.setText(mStatsMaster.getTotalByType("carton")) ;
+        poubellePlastique.setText(mStatsMaster.getTotalByType("plastique")) ;
+        poubelleMetal.setText(mStatsMaster.getTotalByType("metal")) ;
+        poubelleVerre.setText(mStatsMaster.getTotalByType("verre")) ;
+        tauxReussite.setText(mStatsMaster.getScoreByStudent()) ;
 
     }
-
 
     @Override
     public void onDetach() {
