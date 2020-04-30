@@ -113,13 +113,19 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
         }else{
             Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = false");
             mUsers = new ArrayList<>();
-            Log.e("PACT32_DEBUG", "Initialisation alternative : mUsers initialisée vide");
+            Log.i("PACT32_DEBUG", "Initialisation offline : mUsers initialisée vide");
         }
         mPrefs = getPreferences(MODE_PRIVATE);
         utAdapter = new UtilisateurAdapter(mUsers,this);
 
-        loadStats();
-        Log.i("PACT32_DEBUG", mDechets.size() + " statistiques chargées");
+        mDechets = new ArrayList<>();
+        try {
+            loadStats();
+            Log.i("PACT32_DEBUG", mDechets.size() + " statistiques chargées");
+        }catch (Exception ex){
+            Log.e("PACT32_DEBUG", "échec de loadStats");
+            Log.i("PACT32_DEBUG", "0 statistique chargées");
+        }
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -193,12 +199,14 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getTotal() {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         return mDechets.size();
     }
 
     @Override
     public int getTotalByStudent(Eleve eleve) {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID()){
@@ -211,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getTotalByType(String type) {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getType().equals(type)){
@@ -223,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getTotalByTypeAndStudent(String type, Eleve eleve) {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type)){
@@ -235,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getCorrect() {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getReponseEleve()){
@@ -247,6 +258,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getCorrectByStudent(Eleve eleve) {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
@@ -259,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getCorrectByType(String type) {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getType().equals(type) && dechet.getReponseEleve()){
@@ -271,6 +284,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceStatsMas
     @Override
     public int getCorrectByTypeAndStudent(String type, Eleve eleve) {
         mDechets.addAll(serveur.getDechets());
+        saveStats();
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type) && dechet.getReponseEleve()){
