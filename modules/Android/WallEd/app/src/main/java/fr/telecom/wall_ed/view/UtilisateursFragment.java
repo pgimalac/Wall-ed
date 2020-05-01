@@ -30,6 +30,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
     @Override
     public void onAttach(Context context) {
+        Log.i("PACT32_DEBUG", "CheckPoint (UtilisateursFragment) : attached");
         super.onAttach(context);
         createCallbackToParentActivity() ;
     }
@@ -70,7 +71,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         Button button2 = result.findViewById(R.id.users_end_session);
         button2.setOnClickListener(this);
 
-        displayListeUtilisateurs();
+        addFake();
 
         return result;
 
@@ -95,12 +96,15 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     }
 
 
-    private void displayListeUtilisateurs() {
+    private void addFake() {
         ArrayList<Utilisateur> LU = mCallBackUtilisateur.getUser();
-        LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
-        LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
-        LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
-        LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
+        if (LU.size() < 1){
+            Log.i("PACT32_DEBUG", "(UtilisateursFragment) fake users created");
+            LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
+            LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
+            LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
+            LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
+        }
     }
 
     @Override

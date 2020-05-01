@@ -21,7 +21,7 @@ public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
 
     public UtilisateurAdapter(List<Utilisateur> listeUtilisateurs, Context context) {
         super(context, R.layout.single_listview_item, listeUtilisateurs);
-        Log.i("PACT32_DEBUG_LOW", "CheckPoint (MainActivity) : UtilisateurAdapter");
+        Log.i("PACT32_DEBUG", "CheckPoint (UtilisateurAdaptater) : UtilisateurAdapter");
         this.listeUtilisateurs = listeUtilisateurs ;
         this.context = context ;
     }
@@ -34,7 +34,7 @@ public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
-        Log.i("PACT32_DEBUG_LOW", "CheckPoint (MainActivity) : getView");
+        Log.i("PACT32_DEBUG", "CheckPoint (UtilisateurAdaptater) : getView");
         View v = convertView ;
         UtilisateurHolder holder = new UtilisateurHolder() ;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
