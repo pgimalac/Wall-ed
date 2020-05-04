@@ -31,6 +31,7 @@ def lire(chn=0):
            
     cap.release()
     cv2.destroyAllWindows()
+    exec(open("./lectreg1.py").read())
 
 if __name__ == '__main__':
     lire()

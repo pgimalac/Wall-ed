@@ -6,7 +6,6 @@ Created on Fri May  1 10:52:28 2020
 @author: romain
 """
 
-
 import numpy as np
 import cv2
 
@@ -28,9 +27,10 @@ def lire(chn=0):
                 break
         else:
             break
-        
+    
     cap.release()
     cv2.destroyAllWindows()
-
+    exec(open("./lectreg1.py").read())
+    
 if __name__ == '__main__':
     lire()
