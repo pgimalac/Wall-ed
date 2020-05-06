@@ -100,7 +100,8 @@ public class Main_appli implements Runnable{
                                     (String)dechetJSON.get("type"),
                                     (String)dechetJSON.get("typePropose"),
                                     (boolean)dechetJSON.get("reponseEleve"),
-                                    (String)dechetJSON.get("heureRamassage"));
+                                    (String)dechetJSON.get("heureRamassage"),
+                                    this.sessionID);
                             dechets.add(dechet);
                         }
                         command = "none";
