@@ -100,6 +100,7 @@ public class RobotClientProcessor implements Runnable{
             	   this.initDone = true;
                	   break;
                case "newImage":
+            	   /*
             	   byte[] b= new byte[20000];
             	   writer.write("sendImage");
             	   writer.flush();
@@ -110,7 +111,8 @@ public class RobotClientProcessor implements Runnable{
             	   FileOutputStream image = new FileOutputStream(imagePath);
             	   int n;
             	   while((n=reader.read(b,0,b.length))>=20000){
-   	            		image.write(b,0,n);                                        
+            		    System.out.println(n);
+   	            		image.write(b,0,n);
             	   }
             	   image.write(b,0,n);
             	   System.out.println("image stored, launching IA");
@@ -119,6 +121,7 @@ public class RobotClientProcessor implements Runnable{
             	   // then send results to the robot
             	   writer.write(AIresult);
             	   writer.flush();
+            	   */
             	   // receive the answer of the robot :
             	   String stringData = read();
             	   JSONObject data = decode(stringData);
@@ -126,7 +129,7 @@ public class RobotClientProcessor implements Runnable{
             	   // --> if trash found then we get the trash info and continue in "RECHERCHE" mode
             	   // --> if no trash found nothing is done more
             	   if (trashFound) {
-            		   int braceletID = (int) data.get("braceletID");
+            		   int braceletID = Integer.parseInt(data.get("braceletID").toString());
             		   String type = (String) data.get("type");
             		   String typePropose = (String) data.get("typePropose");
             		   boolean reponseEleve = (boolean) data.get("reponseEleve");
@@ -179,6 +182,19 @@ public class RobotClientProcessor implements Runnable{
    }
    
    private JSONObject decode(String input){
+	   JSONParser parser;
+	   JSONObject json = null;
+	try {
+		parser = new JSONParser();
+		json = (JSONObject) parser.parse(input);
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+	   return json;
+   }
+   /*
+   private JSONObject decode(String input){
+	   System.out.println(input);
 	   JSONParser parser = new JSONParser();
 	   Object ObjData;
 	   JSONObject jSONData = new JSONObject();
@@ -190,6 +206,7 @@ public class RobotClientProcessor implements Runnable{
 	}
 	   return jSONData;
    }
+   */
    
    private JSONObject encode(String[] noms, String[] prenoms, int[] ids) {
 	   int nb = noms.length;

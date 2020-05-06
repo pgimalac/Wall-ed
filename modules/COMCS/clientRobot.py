@@ -5,7 +5,7 @@ import imageio
 import numpy
 import time
 
-hote = "192.168.1.15"
+hote = "192.168.1.79"
 port = 22346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,7 +29,7 @@ def sendImage(filepath):
 	# ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
 
 def interactionAnswer(trashFound, braceletID, type, typePropose, reponseEleve):
-	socket.send(bytes(json.dumps({"trashFound" : trashFound, "braceletID" : braceletID, "type" : type, "typePropose" : typePropose, "reponseEleve" : reponseEleve}),'utf-8'))
+	socket.send(bytes(json.dumps({'trashFound' : trashFound, 'braceletID' : braceletID, 'type' : type, 'typePropose' : typePropose, 'reponseEleve' : reponseEleve}),'utf-8'))
 
 def stopConnexion():
 	socket.send(bytes("close",'utf-8'))

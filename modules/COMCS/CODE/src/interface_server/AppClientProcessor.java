@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import org.json.simple.JSONArray;
@@ -23,7 +24,7 @@ public class AppClientProcessor implements Runnable{
    private int sessionID;
    private Activite act;
    private boolean initDone = false;
-   private Queue<Dechet> dechetQueue;
+   private Queue<Dechet> dechetQueue = new LinkedList<Dechet>();
    
    public AppClientProcessor(Socket pSock){
       sock = pSock;
@@ -81,15 +82,17 @@ public class AppClientProcessor implements Runnable{
             	   System.out.println("[AppCP] activity created");
             	   this.act = act;
             	   this.sessionID = act.getSession().getSessionID();
+            	   this.act.start();
             	   writer.write(Integer.toString(sessionID));
             	   writer.flush();
-            	   this.act.start();
             	   this.initDone = true;
                	   break;
                case "getStats":
                	   // récupération des statistiques en temps réel
+            	   System.out.println("[AppCP] app asked stats");
             	   Dechet dechet;
-				   while ((dechet = dechetQueue.poll()) != null) {
+				   while (dechetQueue.peek() != null) {
+					   dechet = dechetQueue.poll();
 					   JSONObject dechetJSON = new JSONObject();
 					   dechetJSON.put("dechetID", dechet.getDechetID());
 					   dechetJSON.put("braceletID", dechet.getBraceletID());
