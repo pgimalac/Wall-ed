@@ -11,7 +11,7 @@ import cv2
 
 def lire(chn=0):
 
-    cap = cv2.VideoCapture('regard3.mkv')
+    cap = cv2.VideoCapture('regard3bis.mkv')
     cv2.namedWindow("frame", cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty("frame",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
     

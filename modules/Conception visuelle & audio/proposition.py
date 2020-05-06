@@ -10,6 +10,7 @@ import sys
 from random import randint
 import cv2
 
+valeur = 1
 
 
 def action1(i):
@@ -42,7 +43,7 @@ def proposition():
     
     if i==0:
         
-        msg = Label(root, text="C'est un déchet recyclable")
+        msg = Label(root, text="C'est un déchet\nrecyclable")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
         msg.pack(expand= True, side = TOP, fill=BOTH)
@@ -50,7 +51,7 @@ def proposition():
     
     elif i == 1:
         
-        msg = Label(root, text="C'est un déchet non-recyclable")
+        msg = Label(root, text="C'est un déchet\nnon-recyclable")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
         msg.pack(expand= True, side = TOP, fill=BOTH)
@@ -58,7 +59,7 @@ def proposition():
      
     else:
         
-        msg = Label(root, text="C'est un déchet en verre")
+        msg = Label(root, text="C'est un déchet\nen verre")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
         msg.pack(expand= True, side = TOP, fill=BOTH)
@@ -78,9 +79,9 @@ def proposition():
     root.mainloop()
     
 
-if __name__=='__main__':
-   valeur= sys.argv[1]
-   proposition()
+#if __name__=='__main__':
+ #  valeur= sys.argv[1]
+  # proposition()
     
     
     
