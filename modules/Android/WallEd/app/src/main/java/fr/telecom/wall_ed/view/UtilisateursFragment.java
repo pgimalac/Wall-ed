@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -25,11 +26,11 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     private ListView mListView ;
     private InterfaceGestionUtilisateurs mCallBackUtilisateur ;
     private InterfaceServeur mCallbackServeur;
-
-    private ListView lv ;
+    private AdapterView.OnItemClickListener mCallbackOnItemClickListener;
 
     @Override
     public void onAttach(Context context) {
+        Log.i("PACT32_DEBUG", "CheckPoint (UtilisateursFragment) : attached");
         super.onAttach(context);
         createCallbackToParentActivity() ;
     }
@@ -45,6 +46,11 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ "InterfaceServeur");
         }
+        try {
+            mCallbackOnItemClickListener = (AdapterView.OnItemClickListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ "OnItemClickListener");
+        }
     }
 
 
@@ -55,8 +61,9 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false);
 
-        ListView listView = result.findViewById(R.id.LU);
-        listView.setAdapter(mCallBackUtilisateur.getUserAdaptateur());
+        mListView = result.findViewById(R.id.LU);
+        mListView.setAdapter(mCallBackUtilisateur.getUserAdaptateur());
+        mListView.setOnItemClickListener(mCallbackOnItemClickListener);
 
         Button button1 = result.findViewById(R.id.users_start_new_session);
         button1.setOnClickListener(this);
@@ -64,7 +71,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         Button button2 = result.findViewById(R.id.users_end_session);
         button2.setOnClickListener(this);
 
-        //displayListeUtilisateurs();
+        addFake();
 
         return result;
 
@@ -89,12 +96,15 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     }
 
 
-    private void displayListeUtilisateurs() {
+    private void addFake() {
         ArrayList<Utilisateur> LU = mCallBackUtilisateur.getUser();
-        LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
-        LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
-        LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
-        LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
+        if (LU.size() < 1){
+            Log.i("PACT32_DEBUG", "(UtilisateursFragment) fake users created");
+            LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
+            LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
+            LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
+            LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
+        }
     }
 
     @Override

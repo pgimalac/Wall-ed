@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.model.Eleve;
 
 
 public class AjoutUtilisateurFragment extends Fragment implements View.OnClickListener {

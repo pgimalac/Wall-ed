@@ -1,6 +1,7 @@
 package fr.telecom.wall_ed.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,26 +10,73 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import fr.telecom.wall_ed.R;
+import fr.telecom.wall_ed.model.Eleve;
+import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class StatistiquesIndividuellesFragment extends Fragment {
+
+    public TextView prenomJoueur ;
+    public Eleve statEleve ;
+    public TextView nombreDechetIndividuel ;
+    public TextView poubelleNormale ;
+    public TextView poubelleCarton ;
+    public TextView poubellePlastique;
+    public TextView poubelleMetal ;
+    public TextView poubelleVerre ;
+    public TextView tauxReussite ;
+    private InterfaceStatsMaster mStatsMaster;
+
 
 
     public StatistiquesIndividuellesFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesIndividuellesFragment) : attached");
+        super.onAttach(context);
+        createCallbackToParentActivity();
+    }
+
+    private void createCallbackToParentActivity(){
+        try {
+            //Parent activity will automatically subscribe to callback
+            mStatsMaster = (InterfaceStatsMaster) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ " InterfaceStatsMaster");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistiques_individuelles2, container, false);
+        View result = inflater.inflate(R.layout.fragment_statistiques_individuelles2, container, false);
+        prenomJoueur = result.findViewById(R.id.textView2) ;
+        nombreDechetIndividuel = result.findViewById(R.id.Nbre_dechets_individuel) ;
+        poubelleNormale = result.findViewById(R.id.PoubelleNormale) ;
+        poubelleCarton  = result.findViewById(R.id.PoubelleCarton) ;
+        poubellePlastique = result.findViewById(R.id.Poubelleplastique) ;
+        poubelleMetal = result.findViewById(R.id.Poubellemétaux) ;
+        poubelleVerre = result.findViewById(R.id.Poubelleverre) ;
+        tauxReussite  = result.findViewById(R.id.TauxReussite) ;
+        return result ;
+    }
+
+    public void MAJ (  ) {
+        prenomJoueur.setText(statEleve.getPrenom()) ;
+        nombreDechetIndividuel.setText(mStatsMaster.getTotalByStudent(statEleve)) ;
+        poubelleNormale.setText(mStatsMaster.getTotalByType("divers")) ;
+        poubelleCarton.setText(mStatsMaster.getTotalByType("carton")) ;
+        poubellePlastique.setText(mStatsMaster.getTotalByType("plastique")) ;
+        poubelleMetal.setText(mStatsMaster.getTotalByType("metal")) ;
+        poubelleVerre.setText(mStatsMaster.getTotalByType("verre")) ;
+        tauxReussite.setText(mStatsMaster.getScoreByStudent(statEleve)) ;
     }
 
     @Override
@@ -42,5 +90,7 @@ public class StatistiquesIndividuellesFragment extends Fragment {
         super.onDestroy();
         Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesIndividuellesFragment) : destroyed");
     }
+
+
 
 }

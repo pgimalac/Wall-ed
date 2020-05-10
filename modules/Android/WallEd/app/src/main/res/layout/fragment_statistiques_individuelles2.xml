@@ -6,19 +6,151 @@
     tools:context=".view.StatistiquesIndividuellesFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Performances individuelles des élèves "
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Performances du joueur"
+        android:textColor="#009688"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:textColor="#009688"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:text="Prénom du joueur"
+        android:textSize="50dp"
+        android:textColor="#FF9800"
         />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de déchets ramassés lors de la séance"
+            android:textSize="25dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="7dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/Nbre_dechets_individuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="25dp"
+            android:textSize="50dp"
+            android:text="0"
+            android:textColor="#4CAF50"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Détails du type de déchets ramassés :"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="7dp" />
+
+        <TextView
+            android:layout_marginLeft="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Poubelle normale :"/>
+
+        <TextView
+            android:id="@+id/PoubelleNormale"
+            android:layout_marginLeft="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:layout_marginLeft="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Poubelle cartons et papiers :" />
+
+        <TextView
+            android:id="@+id/PoubelleCarton"
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+            android:layout_marginBottom="10dp"    />
+
+        <TextView
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Poubelle métaux :" />
+
+        <TextView
+            android:id="@+id/Poubellemétaux"
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+            android:layout_marginBottom="10dp"    />
+
+        <TextView
+
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Poubelle plastique :" />
+
+        <TextView
+            android:id="@+id/Poubelleplastique"
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+            android:layout_marginBottom="10dp"    />
+
+        <TextView
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Poubelle verte :" />
+
+        <TextView
+            android:id="@+id/Poubelleverre"
+        android:layout_marginLeft="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+            android:layout_marginBottom="25dp"    />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Taux de réussite :"
+            android:textSize="25dp"
+            android:layout_marginLeft="7dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/TauxReussite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="25dp"
+            android:textSize="50dp"
+            android:text="100"
+            android:textColor="#4CAF50"/>
 
 
+    </LinearLayout>
 
 </FrameLayout>
