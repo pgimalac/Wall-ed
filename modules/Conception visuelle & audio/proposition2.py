@@ -37,14 +37,13 @@ def action2(i):
         exec(open("./lectreg3.py").read())
         
         
-def proposition():
     
-    root=Tk()
-    root.attributes('-fullscreen', True)
-    global i
-    i=randint(0,2)
+root=Tk()
+root.attributes('-fullscreen', True)
+global i
+i=randint(0,2)
     
-    if i==0:
+if i==0:
         
         msg = Label(root, text="C'est un déchet\nrecyclable")
         msg.config(font=('courier', 70, 'bold'))
@@ -52,7 +51,7 @@ def proposition():
         msg.pack(expand= True, side = TOP, fill=BOTH)
     
     
-    elif i == 1:
+elif i == 1:
         
         msg = Label(root, text="C'est un déchet\nnon-recyclable")
         msg.config(font=('courier', 70, 'bold'))
@@ -60,26 +59,26 @@ def proposition():
         msg.pack(expand= True, side = TOP, fill=BOTH)
         
      
-    else:
+else:
         
         msg = Label(root, text="C'est un déchet\nen verre")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
         msg.pack(expand= True, side = TOP, fill=BOTH)
         
-    redbutton = Label(root, text="FAUX")
-    redbutton.config(font=('courier', 70, 'bold'))
-    redbutton.config(bg='red', fg='black')
-    redbutton.pack(expand=True, side = LEFT, fill = BOTH)
+redbutton = Label(root, text="FAUX")
+redbutton.config(font=('courier', 70, 'bold'))
+redbutton.config(bg='red', fg='black')
+redbutton.pack(expand=True, side = LEFT, fill = BOTH)
     
-    greenbutton = Label(root, text="VRAI") 
-    greenbutton.config(font=('courier', 70, 'bold'))
-    greenbutton.config(bg='green', fg='black')
-    greenbutton.pack(expand=True,side = RIGHT, fill=BOTH)
+greenbutton = Label(root, text="VRAI") 
+greenbutton.config(font=('courier', 70, 'bold'))
+greenbutton.config(bg='green', fg='black')
+greenbutton.pack(expand=True,side = RIGHT, fill=BOTH)
          
 
     
-    root.mainloop()
+root.mainloop()
     
 
 #if __name__=='__main__':
@@ -103,7 +102,7 @@ GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
                                         #et activation résistance soutirage
                                         #au ground
 if __name__ == '__main__':
-     proposition()
+    
      print("Début du programme")        #IHM
      print("/nSortie par ctrl-c\n")       #IHM
      try:
