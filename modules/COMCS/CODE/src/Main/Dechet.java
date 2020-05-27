@@ -55,4 +55,6 @@ public class Dechet {
 		return this.heureRamassage;
 	}
 
+	public boolean getReponseEleve() { return this.reponseEleve; }
+
 }

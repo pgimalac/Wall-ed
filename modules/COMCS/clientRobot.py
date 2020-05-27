@@ -1,38 +1,32 @@
 import socket
-import pickle
 import json
-import imageio
-import numpy
-import time
 
-hote = "192.168.2.4"
+hote = "192.168.1.79"
 port = 22346
 
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def sendMessage(message):
-    socket.send(bytes(message, 'utf-8'))
-
 def initConnexion():
     socket.connect((hote, port))
-    sendMessage("init")
+    socket.send(bytes("init", 'utf-8'))
     liste_eleves = socket.recv(255)
     return json.loads(liste_eleves)
 
-def sendInfoCoque(id_bracelet, type_trash, type_random, answer):
-    pass
-
 def sendImage(filepath):
-    sendMessage("newImage")
-	print("sent command")
-	time.sleep(5)
-	print(socket.recv(255))
-	time.sleep(5)
-	file = open(filepath,'rb')
-	socket.send(pickle.dumps(file))
-	print("sent image")
-	time.sleep(5)
-	return json.loads(socket.recv(255))
+    socket.send(bytes("newImage",'utf-8'))
+    print("command sent")
+    print(socket.recv(255))
+    file = open(filepath,'rb')
+    data = file.read()
+    socket.sendall(data)
+    print("image sent")
+    return json.loads(socket.recv(255))
+    #attention le serveur attend une réponse, si un déchet à été instancié
+    # ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
+
+def interactionAnswer(trashFound, braceletID, type, typePropose, reponseEleve):
+    socket.send(bytes(json.dumps({'trashFound' : trashFound, 'braceletID' : braceletID, 'type' : type, 'typePropose' : typePropose, 'reponseEleve' : reponseEleve}), 'utf-8'))
 
 def stopConnexion():
+    socket.send(bytes("close", 'utf-8'))
     socket.close()

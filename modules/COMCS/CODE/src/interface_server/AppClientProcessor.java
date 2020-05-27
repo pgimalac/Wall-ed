@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +24,7 @@ public class AppClientProcessor implements Runnable{
    private int sessionID;
    private Activite act;
    private boolean initDone = false;
+   private Queue<Dechet> dechetQueue = new LinkedList<Dechet>();
    
    public AppClientProcessor(Socket pSock){
       sock = pSock;
@@ -79,13 +82,29 @@ public class AppClientProcessor implements Runnable{
             	   System.out.println("[AppCP] activity created");
             	   this.act = act;
             	   this.sessionID = act.getSession().getSessionID();
+            	   this.act.start();
             	   writer.write(Integer.toString(sessionID));
             	   writer.flush();
-            	   this.act.start();
             	   this.initDone = true;
                	   break;
                case "getStats":
-            	   Main.getStats(sessionID);
+               	   // récupération des statistiques en temps réel
+            	   System.out.println("[AppCP] app asked stats");
+            	   Dechet dechet;
+				   while (dechetQueue.peek() != null) {
+					   dechet = dechetQueue.poll();
+					   JSONObject dechetJSON = new JSONObject();
+					   dechetJSON.put("dechetID", dechet.getDechetID());
+					   dechetJSON.put("braceletID", dechet.getBraceletID());
+					   dechetJSON.put("type", dechet.getType());
+					   dechetJSON.put("typePropose", dechet.getTypeEleve());
+					   dechetJSON.put("reponseEleve", dechet.getReponseEleve());
+					   dechetJSON.put("heureRamassage", dechet.getHeureRamassage());
+					   dechetJSON.writeJSONString(writer);
+				   	writer.flush();
+				   }
+				   writer.write("nomore");
+				   writer.flush();
                	   break;
                case "close":
             	   writer.write("[AppCP] Communication terminée");
@@ -143,6 +162,10 @@ public class AppClientProcessor implements Runnable{
 			e.printStackTrace();
 		}         
       }
+   }
+
+   public void sendDechet(Dechet dechet) {
+   	  dechetQueue.add(dechet);
    }
    
    private String read() throws IOException{      

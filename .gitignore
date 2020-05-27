@@ -18,7 +18,8 @@ _book
 .*.swp
 
 *.html
-
+modules/COMCS/CODE/.idea/*
+modules/COMCS/CODE/CODE-SERVEUR-PACT.iml
 modules/Android/Wall-Ed/*
 modules/Android/WallEd/.idea/*
 modules/Android/WallEd/local.properties
@@ -34,3 +35,9 @@ modules/Android/WallEd/.gradle/*
 *.class
 *.pyc
 */__pycache__/*
+
+modules/Android/WallEd/build.gradle
+modules/Android/WallEd/gradle/wrapper/gradle-wrapper.properties
+modules/COMCS/interfaceweb/interfaceweb/__pycache__/*
+modules/COMCS/interfaceweb/stats/__pycache__/*
+modules/COMCS/interfaceweb/stats/migrations/__pycache__/*

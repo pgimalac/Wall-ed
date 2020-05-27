@@ -4,6 +4,8 @@ package fr.telecom.wall_ed.view;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     private EditText mPrenomEditText;
     private EditText mNomEditText;
     private EditText mClasseEditText;
+    private EditText mIdEditText;
 
     public AjoutUtilisateurFragment() {
         // Required empty public constructor
@@ -28,6 +31,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onCreateView");
         View result = inflater.inflate(R.layout.fragment_ajout_utilisateur, container, false);
 
         mAjoutButton = result.findViewById(R.id.enregistrement_button);
@@ -39,23 +43,27 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         mPrenomEditText = result.findViewById(R.id.prenom_txt);
         mNomEditText = result.findViewById(R.id.nom_txt);
         mClasseEditText = result.findViewById(R.id.classe_txt);
+        mIdEditText = result.findViewById(R.id.id_txt);
         return result;
     }
 
     @Override
     public void onAttach(Context context) {
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onAttach");
         super.onAttach(context);
         createCallbackToParentActivity();
     }
 
     @Override
     public void onClick(View v) {
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onClick (" + v.getId() + ")");
 
         switch (v.getId()){
             case R.id.enregistrement_button:
                 getActivity().getIntent().putExtra("firstName", mPrenomEditText.getText().toString());
                 getActivity().getIntent().putExtra("name", mNomEditText.getText().toString());
                 getActivity().getIntent().putExtra("group", mClasseEditText.getText().toString());
+                getActivity().getIntent().putExtra("id", mIdEditText.getText().toString());
                 mOnClickListenerCallback.onClick(v);
                 break;
             case R.id.bt_photo:
@@ -65,6 +73,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     }
 
     private void createCallbackToParentActivity(){
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans createCallbackToParentActivity");
         try {
             //Parent activity will automatically subscribe to callback
             mOnClickListenerCallback = (View.OnClickListener) getActivity();
@@ -73,5 +82,16 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : detached");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : destroyed");
+    }
 
 }

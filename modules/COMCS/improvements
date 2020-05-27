@@ -1,0 +1,4 @@
+on peut améliorer :
+- l'interface web
+- ajout de la gestion d'utilisateur (pour la co au serveur et l'interface web)
+- meilleur code serveur : penser à des files dans lesquelles on regarde régulièrement, 2 socket ouvert par co pour éviter que les read() bloquent les échanges

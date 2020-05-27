@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,16 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.i("PACT32_DEBUG", "CheckPoint (MainFragment) : detached");
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i("PACT32_DEBUG", "CheckPoint (MainFragment) : destroyed");
+    }
 
 }
