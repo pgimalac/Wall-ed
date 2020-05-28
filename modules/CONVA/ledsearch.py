@@ -36,18 +36,18 @@ def theaterChase(strip, color, wait_ms=50, iterations=20):
                 strip.setPixelColor(i + q, 0)
 
 
-if __name__ == '__main__':
+def read():
     # Process arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
+    # args = parser.parse_args()
 
     # Create NeoPixel object with appropriate configuration.
     strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     # Intialize the library (must be called once before other functions).
     strip.begin()
 
-    print('Press Ctrl-C to quit.')
+    # print('Press Ctrl-C to quit.')
 
     try:
 

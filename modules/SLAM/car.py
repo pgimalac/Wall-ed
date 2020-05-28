@@ -186,9 +186,9 @@ class Car():
             self.camera_to_position(0, 0)
             time.sleep(delay)
         finally:
+            self.stop()
             self.camera_to_position(0, 0)
             self.turn_straight()
-            self.stop()
 
     def goNear(self, width, height, x, y, tilt_pos, pan_pos):
         # no idea how to do it if the tilt or the pan aren't at 0

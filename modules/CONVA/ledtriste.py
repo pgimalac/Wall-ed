@@ -36,7 +36,7 @@ def theaterChase(strip, color, wait_ms=50, iterations=10):
                 strip.setPixelColor(i + q, 0)
 
 
-if __name__ == '__main__':
+def read():
     # Process arguments
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')

@@ -1,14 +1,9 @@
-import multiprocessing
-import time
-from random import randint
-import cv2
+from conva import Conva
+import lectreg2
+import ledcontent
 
-def worker(file):
-    exec(open(file).read())
-
-
-if __name__ == '__main__':
-    files = ["./lectreg2.py","./ledcontent.py"]
-    for i in files:
-        p = multiprocessing.Process(target=worker, args=(i,))
-        p.start()
+def read(c=None):
+    if c is None:
+        return Conva(lectreg2.read, ledcontent.read)
+    c.set(lectreg2.read, ledcontent.read)
+    return c
