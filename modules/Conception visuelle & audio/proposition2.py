@@ -12,35 +12,18 @@ import sys
 from random import randint
 import cv2
 
-valeur = 1
-i = 0
 
-def action1(i):
-    
-    if valeur == i: 
-        exec(open("./lectreg2.py").read())
-        
-        
-    else:
-        exec(open("./lectreg3.py").read())
-        
-      
+def action1():
+    root.destroy()
+    exec(open("./lectreg2.py").read())
 
 
-def action2(i):
-    
-    if valeur != i:
-        exec(open("./lectreg2.py").read())
-        
-        
-    else:
-        exec(open("./lectreg3.py").read())
-        
-        
-    
+def action2():
+    root.destroy()
+    exec(open("./lectreg3.py").read())
+
 root=Tk()
 root.attributes('-fullscreen', True)
-global i
 i=randint(0,2)
     
 if i==0:
@@ -75,24 +58,19 @@ greenbutton = Label(root, text="VRAI")
 greenbutton.config(font=('courier', 70, 'bold'))
 greenbutton.config(bg='green', fg='black')
 greenbutton.pack(expand=True,side = RIGHT, fill=BOTH)
-         
-
-    
-root.mainloop()
-    
 
 #if __name__=='__main__':
  #  valeur= sys.argv[1]
   # proposition()
-    
-pin1 = 20  
-pin2 = 16                              #broche utilisé en entrée
+
+pin1 = 16
+pin2 = 20                              #broche utilisé en entrée
 #temps = 1                              #valeur attente en msec
 #temps = 10
 temps = 100
 #temps = 100
 #temps = 1000
- 
+
 GPIO.setwarnings(False)                 #désactive le mode warning
 GPIO.setmode(GPIO.BCM)                  #utilisation des numéros de ports du
                                         #processeur
@@ -110,13 +88,15 @@ if __name__ == '__main__':
              entree1 = GPIO.input(pin1) #lecture entrée
              entree2 = GPIO.input(pin2)
              if (entree1 == False):       #si touche appuyée
-                 print("BP vrai")         #IHM
-                 action1(i)
+                 print("BP vrai")
+                 action1()
              if (entree2 == False):
                  print("BP faux")
-                 action2(i)
-             time.sleep(temps / 1000)   #attente en msec 
+                 action2()
+             time.sleep(temps / 1000)   #attente en msec
+             root.update()
      except KeyboardInterrupt:          #sortie boucle par ctrl-c
          GPIO.cleanup()                 #libère toutes les ressources
          print("\nFin du programme\n")  #IHM[/code]
-    
+
+

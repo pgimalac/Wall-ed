@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3 -*- coding: utf-8 -*-
 """
 Created on Fri May  1 10:52:28 2020
 
@@ -30,7 +29,7 @@ def lire(chn=0):
     
     cap.release()
     cv2.destroyAllWindows()
-    exec(open("./lectreg1.py").read())
+    exec(open("./recherche.py").read())
     
 if __name__ == '__main__':
     lire()

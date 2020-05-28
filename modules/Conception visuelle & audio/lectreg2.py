@@ -6,7 +6,7 @@ Created on Fri May  1 10:51:42 2020
 @author: romain
 """
 
-
+import time
 import numpy as np
 import cv2
 
@@ -31,7 +31,7 @@ def lire(chn=0):
            
     cap.release()
     cv2.destroyAllWindows()
-    exec(open("./lectreg1.py").read())
+    exec(open("./recherche.py").read())
 
 if __name__ == '__main__':
     lire()
