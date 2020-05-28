@@ -6,13 +6,13 @@ Created on Fri May  1 10:51:42 2020
 @author: romain
 """
 
-
+import time
 import numpy as np
 import cv2
 
 def lire(chn=0):
     
-    cap = cv2.VideoCapture('regard2.mkv')
+    cap = cv2.VideoCapture('regard2bis.mkv')
     cv2.namedWindow("frame", cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty("frame",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
     
@@ -31,6 +31,7 @@ def lire(chn=0):
            
     cap.release()
     cv2.destroyAllWindows()
+    exec(open("./recherche.py").read())
 
 if __name__ == '__main__':
     lire()

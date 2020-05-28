@@ -1,18 +1,16 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3 -*- coding: utf-8 -*-
 """
 Created on Fri May  1 10:52:28 2020
 
 @author: romain
 """
 
-
 import numpy as np
 import cv2
 
 def lire(chn=0):
 
-    cap = cv2.VideoCapture('regard3.mkv')
+    cap = cv2.VideoCapture('regard3bis.mkv')
     cv2.namedWindow("frame", cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty("frame",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
     
@@ -28,9 +26,10 @@ def lire(chn=0):
                 break
         else:
             break
-        
+    
     cap.release()
     cv2.destroyAllWindows()
-
+    exec(open("./recherche.py").read())
+    
 if __name__ == '__main__':
     lire()
