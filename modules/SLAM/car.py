@@ -1,5 +1,4 @@
 import time
-import math
 import random
 
 import back_wheels
@@ -108,6 +107,7 @@ class Car():
 
     def stop(self):
         ''' Stop both wheels '''
+        self.speed = 0
         self.back_wheels.stop()
 
     @property
@@ -192,10 +192,27 @@ class Car():
 
     def goNear(self, width, height, x, y, tilt_pos, pan_pos):
         # no idea how to do it if the tilt or the pan aren't at 0
-        if tilt_pos != 0 or pan_pos != 0:
-            return
+        # (would need to do some math and we'd like to avoid that)
+        assert tilt_pos == 0 and pan_pos == 0
 
-        # dist = math.sqrt()
+        if y > 3 * height / 4:
+            return True
+
+        if x < width / 3:
+            self.turn(10)
+        elif x > 2 * width / 3:
+            self.turn(-10)
+
+        self.forward()
+        car.speed = 15
+
+        time.sleep(1)
+
+        self.turn_straight()
+        self.speed = 0
+        self.stop()
+
+        return False
 
 if __name__ == "__main__":
     import cv2

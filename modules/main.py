@@ -24,7 +24,7 @@ try:
             print("Photo error", file=sys.stderr)
         else:
             cv2.imwrite(imgPath, img)
-            rep = json.loads(clientRobot.sendFile(imgPath))
+            rep = json.loads(clientRobot.sendImage(imgPath))
             if not rep:
                 continue
             for trash, pos in rep.items():

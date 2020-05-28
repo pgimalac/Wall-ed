@@ -13,10 +13,10 @@ def initConnexion():
     return json.loads(liste_eleves)
 
 def sendImage(filepath):
-    socket.send(bytes("newImage",'utf-8'))
+    socket.send(bytes("newImage", 'utf-8'))
     print("command sent")
     print(socket.recv(255))
-    file = open(filepath,'rb')
+    file = open(filepath, 'rb')
     data = file.read()
     socket.sendall(data)
     print("image sent")
