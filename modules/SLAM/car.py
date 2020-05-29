@@ -198,10 +198,11 @@ class Car():
     def goNear(self, width, height, x, y):
         # no idea how to do it if the tilt or the pan aren't at 0 (=> 90)
         # (would need to do some math and we'd like to avoid that)
-        assert self.camera.current_tilt == 0 and self.camera.current_pan == 0
+        # assert self.camera.current_tilt == 0 and self.camera.current_pan == 0
 
-        if y > 3 * height / 4:
-            return True
+        # if y > 3 * height / 4:
+        print(x, y, width, height)
+        return True
 
         if x < width / 3:
             self.turn(10)
@@ -209,7 +210,7 @@ class Car():
             self.turn(-10)
 
         self.forward()
-        car.speed = 15
+        self.speed = 15
 
         time.sleep(1)
 

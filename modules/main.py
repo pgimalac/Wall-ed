@@ -1,3 +1,5 @@
+import RPi.GPIO as GPIO
+import cv2
 import time
 import sys
 import json
@@ -6,18 +8,56 @@ import cv2
 from SLAM.car import Car
 from COMCS import clientRobot
 from CONVA import proposition2, recherche, noms
+from IDB import prog
 
 imgPath = "/tmp/cv2-img.png"
 
 car = Car(debug=True)
-rawStudents = json.loads(clientRobot.initConnexion())
+rawStudents = clientRobot.initConnexion()
 
-nbEleves = rawStudents["numberOfStudents"]
-students = {}
-for i in range(nbEleves):
-    students[rawStudents["ids"][i]] = rawStudents["firstnames"], rawStudents["lastnames"]
+# pour l'instant on n'a pas besoin des noms des élèves
+# (on n'affiche pas leur nom, premier arrivé premier servi)
+# nbEleves = rawStudents["numberOfStudents"]
+# students = {}
+# for i in range(nbEleves):
+#     ident = rawStudents["IDs"][i]
+#     students[ident] = rawStudents["firstNames"][str(i)], rawStudents["lastNames"][str(i)]
 
 conva = recherche.read()
+
+def scan_bracelet():
+    pin1 = 16
+    pin2 = 20                              #broche utilisé en entrée
+
+    GPIO.setwarnings(False)                 #désactive le mode warning
+    GPIO.setmode(GPIO.BCM)                  #utilisation des numéros de ports du
+                                            #processeur
+    GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+    conva.stop()
+
+    while True:
+        frame = car.capture()
+        if frame is None:
+            print("Image error")
+            return "J", "R"
+        cv2.imshow("Capturing", frame)
+        if not GPIO.input(pin1) or not GPIO.input(pin2):
+            break
+
+    imgs = []
+    for _ in range(8):
+        frame = car.capture()
+        if frame is None:
+            print("Image error")
+            return "J", "R"
+        cv2.imwrite(filename='saved_img.jpg', img=frame)
+        img_new = cv2.imread('saved_img.jpg', cv2.IMREAD_GRAYSCALE)
+        time.sleep(0.1)
+
+    return prog.mainServeur(imgs)
+
 tries = 20
 try:
     while True:
@@ -28,38 +68,38 @@ try:
             continue
 
         cv2.imwrite(imgPath, img)
-        rep = json.loads(clientRobot.sendImage(imgPath))
-        if not rep:
-            continue
+        rep = clientRobot.sendImage(imgPath)
 
         for trash, pos in rep.items():
             if len(pos) != 2:
                 print("Invalid coordinates (two values needed)", file=sys.stderr)
                 continue
-            x = int(pos[0])
-            y = int(pos[1])
-            width = img.size
-            height = img[0].size
+            x, y = map(int, pos)
+            width = img[0].size
+            height = img.size
             print(trash, x, y, width, height)
             for _ in range(tries):
-                if car.goNear(width, height, x, y, 0, 0):
+                if car.goNear(width, height, x, y):
                     # on est à côté d'un déchet
+                    # c1, c2 = scan_bracelet()
                     ret, t = proposition2.askForWaste(trash, conva)
                     if ret is not None:
-                        noms.affiche_noms(noms.choix_noms(list(map(lambda x: x[0], students.values()))))
-                        # TODO récupérer un id
-                        clientRobot.interactionAnswer(True, 0, trash, t, ret) #TODO bracelet id
+                        # clientRobot.interactionAnswer(True, "".join([c1[0], c2[0]]), trash, t, ret)
+                        clientRobot.interactionAnswer(True, "YR", trash, t, ret)
                         time.sleep(3)
+                    else:
+                        clientRobot.interactionAnswer(False, None, None, None, None)
                     recherche.read(c=conva)
                     break
 
+                clientRobot.interactionAnswer(False, None, None, None, None)
                 img = car.capture()
                 if img is None:
                     print("Photo error", file=sys.stderr)
                     continue
 
                 cv2.imwrite(imgPath, img)
-                rep = json.loads(clientRobot.sendImage(imgPath)).get(trash, default=None)
+                rep = clientRobot.sendImage(imgPath).get(trash, default=None)
                 if rep is None:
                     print("Trash lost")
                     break
@@ -67,7 +107,12 @@ try:
 
             else:
                 print("Could not reach target after {} tries".format(tries))
+                clientRobot.interactionAnswer(False, None, None, None, None)
+                break
             break
+        else:
+            clientRobot.interactionAnswer(False, None, None, None, None)
+
 
 except KeyboardInterrupt:
     print("Interrupted !", file=sys.stderr)

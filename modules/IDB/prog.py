@@ -8,19 +8,12 @@ import numpy as np
 # découpage de l'algorithme en quatres étapes, détermination du seuillage, de la composante connexe, de l'histogramme et enfin des pics
 # il y a donc 4 parties qui suivent, chacune implémentant une étape en une ou plusieurs fonctions
 
-def mainServeur(img1, img2, img3, img4, img5, img6, img7, img8):
+def mainServeur(imgs):
     L = []
     Color = [["JAUNE", 0], ["VERT", 0], ["MAGENTA", 0], ["BLEU", 0], ["TURQUOISE", 0], ["ROUGE", 0]]
 
-
-    trouverCouleurImg(img1, Color)
-    trouverCouleurImg(img2, Color)
-    trouverCouleurImg(img3, Color)
-    trouverCouleurImg(img4, Color)
-    trouverCouleurImg(img5, Color)
-    trouverCouleurImg(img6, Color)
-    trouverCouleurImg(img7, Color)
-    trouverCouleurImg(img8, Color)
+    for img in imgs:
+        trouverCouleurImg(img, Color)
 
     max1 = 0
     i1 = 0

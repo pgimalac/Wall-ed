@@ -7,6 +7,7 @@ Created on Fri May  1 10:51:42 2020
 """
 
 import cv2
+from . import recherche
 
 def read():
     cap = cv2.VideoCapture('regard2bis.mkv')
@@ -28,7 +29,7 @@ def read():
 
     cap.release()
     cv2.destroyAllWindows()
-    open("./recherche.py").read()
+    recherche.read()
 
 if __name__ == '__main__':
     read()
