@@ -38,7 +38,7 @@ try:
             height = img[0].size
             print(trash, x, y, width, height)
             for _ in range(tries):
-                if car.goNear(width, height, x, y, 0, 0):
+                if car.goNear(width, height, x, y):
                     # on est à côté d'un déchet
                     ret, t = proposition2.askForWaste(trash, conva)
                     if ret is not None:

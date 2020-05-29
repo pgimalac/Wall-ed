@@ -12,7 +12,7 @@
 **********************************************************************
 '''
 
-import PCA9685
+from . import PCA9685
 
 class Servo(object):
 	'''Servo driver class'''

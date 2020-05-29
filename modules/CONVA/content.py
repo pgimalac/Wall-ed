@@ -1,6 +1,6 @@
-from conva import Conva
-import lectreg2
-import ledcontent
+from .conva import Conva
+from . import lectreg2
+from . import ledcontent
 
 def read(c=None):
     if c is None:

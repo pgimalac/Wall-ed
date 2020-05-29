@@ -12,8 +12,8 @@
 **********************************************************************
 '''
 import time
-from SunFounder_PCA9685 import Servo
-import filedb
+from .SunFounder_PCA9685 import Servo
+from . import filedb
 
 class Front_Wheels():
     ''' Front wheels control class '''

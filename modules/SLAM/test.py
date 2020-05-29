@@ -11,9 +11,10 @@ def find_video():
     for _, _, f in os.walk(path):
         for file in f:
             if file.startswith("video"):
-                cam = cv2.VideoCapture(int(file[-1]))
+                cam = cv2.VideoCapture(int(file[5:]))
 
                 if cam.isOpened():
+                    print("CHOOSE", file)
                     return cam
 
                 cam.release()

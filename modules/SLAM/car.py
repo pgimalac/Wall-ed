@@ -1,10 +1,10 @@
 import time
 import random
 
-import back_wheels
-import front_wheels
-import camera
-from SunFounder_PCA9685 import PCA9685
+from . import back_wheels
+from . import front_wheels
+from . import camera
+from .SunFounder_PCA9685 import PCA9685
 
 class Car():
     ''' Whole car control class '''
@@ -188,17 +188,17 @@ class Car():
             self.turn(90 + direction)
             self.forward()
             self.speed = 75
-            self.camera_to_position(0, 0)
+            self.camera_to_position(90, 90)
             time.sleep(delay)
         finally:
             self.stop()
-            self.camera_to_position(0, 0)
+            self.camera_to_position(90, 90)
             self.turn_straight()
 
-    def goNear(self, width, height, x, y, tilt_pos, pan_pos):
-        # no idea how to do it if the tilt or the pan aren't at 0
+    def goNear(self, width, height, x, y):
+        # no idea how to do it if the tilt or the pan aren't at 0 (=> 90)
         # (would need to do some math and we'd like to avoid that)
-        assert tilt_pos == 0 and pan_pos == 0
+        assert self.camera.current_tilt == 0 and self.camera.current_pan == 0
 
         if y > 3 * height / 4:
             return True

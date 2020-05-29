@@ -1,11 +1,11 @@
 import sys
+import time
 import front_wheels
 import back_wheels
 from SunFounder_PCA9685 import Servo
 from SunFounder_PCA9685 import PCA9685
 
 def servo_install():
-    import time
     delay = 1.0/180
     if len(sys.argv) >= 3:
         print("servo-install takes no value")

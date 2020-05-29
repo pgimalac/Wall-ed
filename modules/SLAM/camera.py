@@ -14,8 +14,8 @@
 import os
 import time
 import cv2
-from SunFounder_PCA9685 import Servo
-import filedb
+from .SunFounder_PCA9685 import Servo
+from . import filedb
 
 class Camera():
     '''Camera movement control class'''
@@ -228,7 +228,10 @@ class Camera():
                         continue
 
                     if cam.isOpened():
+                        print("CHOOSE", file)
                         return cam
+
+                    cam.release()
         return None
 
     def webcam_setup(self):
@@ -257,32 +260,18 @@ class Camera():
 if __name__ == '__main__':
     camera = Camera()
     try:
-        for i in range(0, 36):
-            print("pan moving left     ", i)
-            camera.turn_left()
-            time.sleep(camera.CAMERA_DELAY*camera.PAN_STEP)
-        for i in range(0, 36):
-            print("pan moving right    ", i)
-            camera.turn_right()
-            time.sleep(camera.CAMERA_DELAY*camera.PAN_STEP)
-        for i in range(0, 36):
-            print("tilt moving up      ", i)
-            camera.turn_up()
-            time.sleep(camera.CAMERA_DELAY*camera.TILT_STEP)
-        for i in range(0, 36):
-            print("tilt moving right   ", i)
-            camera.turn_down()
-            time.sleep(camera.CAMERA_DELAY*camera.TILT_STEP)
-
         print("Camera move to ready position")
         camera.ready()
+        camera.to_position(90, 90)
 
-        print("Camera move to position (0, 0)")
-        camera.to_position(0, 0)
-        print("Camera move to position (180, 180)")
-        camera.to_position(180, 180)
+        time.sleep(10)
 
-        print("Camera move to ready position")
-        camera.ready()
+        # print("Camera move to position (0, 0)")
+        # camera.to_position(0, 0)
+        # print("Camera move to position (180, 180)")
+        # camera.to_position(180, 180)
+
+        # print("Camera move to ready position")
+        # camera.ready()
     except KeyboardInterrupt:
         camera.ready()

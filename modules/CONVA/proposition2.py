@@ -11,8 +11,9 @@ from tkinter import *
 import sys
 from random import randint
 import cv2
-import content
-import triste
+
+from . import content
+from . import triste
 
 
 def askForWaste(waste, conva):
