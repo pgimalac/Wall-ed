@@ -10,13 +10,7 @@ from CONVA import proposition2, recherche, noms
 imgPath = "/tmp/cv2-img.png"
 
 car = Car(debug=True)
-rawStudents = json.loads(clientRobot.initConnexion())
-
-nbEleves = rawStudents["numberOfStudents"]
-students = {}
-for i in range(nbEleves):
-    students[rawStudents["ids"][i]] = rawStudents["firstnames"], rawStudents["lastnames"]
-
+students = {0: "Pierre", 1: "Florian", 2: "Romain", 3: "Victor"}
 conva = recherche.read()
 tries = 20
 try:
@@ -28,7 +22,9 @@ try:
             continue
 
         cv2.imwrite(imgPath, img)
-        rep = json.loads(clientRobot.sendImage(imgPath))
+        cv2.imshow("image", img)
+        x, y = map(int, input().split())
+        rep = {"glass": (x, y)}
         if not rep:
             continue
 
@@ -59,11 +55,8 @@ try:
                     continue
 
                 cv2.imwrite(imgPath, img)
-                rep = json.loads(clientRobot.sendImage(imgPath)).get(trash, default=None)
-                if rep is None:
-                    print("Trash lost")
-                    break
-                x, y = rep
+                cv2.imshow("image", img)
+                x, y = map(int, input().split())
 
             else:
                 print("Could not reach target after {} tries".format(tries))
@@ -76,4 +69,4 @@ finally:
     car.turn_straight()
     car.stop()
     conva.stop()
-    clientRobot.stopConnexion()
+    # clientRobot.stopConnexion()

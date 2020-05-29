@@ -12,7 +12,7 @@
 **********************************************************************
 '''
 
-from . import PCA9685
+import PCA9685
 
 class Servo(object):
 	'''Servo driver class'''
@@ -36,7 +36,7 @@ class Servo(object):
 		self.pwm = PCA9685.PWM(bus_number=bus_number, address=address)
 		self.frequency = self._FREQUENCY
 		self.write(90)
-	
+
 	def _debug_(self,message):
 		if self._DEBUG:
 			print(self._DEBUG_INFO,message)

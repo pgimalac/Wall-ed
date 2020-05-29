@@ -4,11 +4,16 @@ import random
 import back_wheels
 import front_wheels
 import camera
+from SunFounder_PCA9685 import PCA9685
 
 class Car():
     ''' Whole car control class '''
 
     def __init__(self, debug=False):
+        pwm = PCA9685.PWM(bus_number=1)
+        pwm.setup()
+        pwm.frequency = 60
+
         self.back_wheels = back_wheels.Back_Wheels(debug=debug)
         self.front_wheels = front_wheels.Front_Wheels(debug=debug)
         self.camera = camera.Camera(debug=debug)

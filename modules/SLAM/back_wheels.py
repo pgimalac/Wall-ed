@@ -185,4 +185,8 @@ def test():
         back_wheels.stop()
 
 if __name__ == '__main__':
+    pwm = PCA9685.PWM(bus_number=1)
+    pwm.setup()
+    pwm.frequency = 60
+
     test()

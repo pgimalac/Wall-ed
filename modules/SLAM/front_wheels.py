@@ -18,7 +18,7 @@ import filedb
 class Front_Wheels():
     ''' Front wheels control class '''
 
-    _DEBUG = False
+    _DEBUG = True
     _DEBUG_INFO = 'DEBUG "front_wheels.py":'
 
     def __init__(self, debug=False, db="config", bus_number=1, channel=0):

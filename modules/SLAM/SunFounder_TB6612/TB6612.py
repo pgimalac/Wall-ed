@@ -14,7 +14,7 @@ import RPi.GPIO as GPIO
 
 class Motor(object):
 	''' Motor driver class
-		Set direction_channel to the GPIO channel which connect to MA, 
+		Set direction_channel to the GPIO channel which connect to MA,
 		Set motor_B to the GPIO channel which connect to MB,
 		Both GPIO channel use BCM numbering;
 		Set pwm_channel to the PWM channel which connect to PWMA,
