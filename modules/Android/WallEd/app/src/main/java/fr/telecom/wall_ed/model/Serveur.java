@@ -43,11 +43,11 @@ public class Serveur {
     public void startNewSession(ArrayList<Utilisateur> users){
         String[] noms = new String[users.size()];
         String[] prenoms = new String[users.size()];
-        int[] braceletsID = new int[users.size()];
+        String[] braceletsID = new String[users.size()];
         for (int i=0 ; i<users.size() ; i++){
             noms[i] = users.get(i).getNom();
             prenoms[i] = users.get(i).getPrenom();
-            braceletsID[i] = Integer.parseInt(users.get(i).getId());
+            braceletsID[i] = users.get(i).getBraceletID();
         }
         mn.initSession(noms, prenoms, braceletsID);
     }

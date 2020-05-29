@@ -11,6 +11,7 @@ public class Utilisateur implements Serializable {
     private String classe;
     private String id;
     private boolean selected;
+    private String braceletID = "ab";
 
     public Utilisateur(String prenom, String nom, String classe, String id) {
         this.prenom = prenom;
@@ -63,5 +64,9 @@ public class Utilisateur implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public String getBraceletID() {
+        return braceletID;
     }
 }

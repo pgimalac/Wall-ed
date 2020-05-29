@@ -131,7 +131,7 @@ public class Main_appli implements Runnable{
         }
     }
 
-    public void initSession(String[] noms, String[] prenoms, int[] braceletsID) {
+    public void initSession(String[] noms, String[] prenoms, String[] braceletsID) {
         command = "initSession";
         int nb = noms.length;
         JSONObject lastNames = new JSONObject();

@@ -5,6 +5,7 @@ public class Eleve {
     private final int eleveID;
     private final String prenom;
     private final String nom;
+    private String braceletID = "ab";
 
     public Eleve(int eleveID, String prenom, String nom) {
         this.prenom = prenom;
@@ -22,5 +23,9 @@ public class Eleve {
 
     public int getEleveID() {
         return this.eleveID;
+    }
+
+    public String getBraceletID() {
+        return braceletID;
     }
 }
