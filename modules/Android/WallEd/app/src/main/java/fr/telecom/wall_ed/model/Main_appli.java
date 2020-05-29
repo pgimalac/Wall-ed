@@ -1,11 +1,17 @@
 package fr.telecom.wall_ed.model;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Calendar;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,14 +28,15 @@ public class Main_appli implements Runnable{
     private String name = "Client-";
     private String command = "none";
     private JSONObject data;
-    private int sessionID;
+    private int sessionID = -1;
     private Eleve[] eleves = {};
     private boolean initEleve = false;
-    private Queue<Dechet> dechets;
-
-
+    private Queue<Dechet> dechets = new LinkedList<>();
+    private Date lastUpdate;
+    private boolean isReadyToGetStats = false;
 
     public Main_appli(String host, int port){
+        lastUpdate = Calendar.getInstance().getTime();
         name += ++count;
         try {
             connexion = new Socket(host, port);
@@ -46,6 +53,18 @@ public class Main_appli implements Runnable{
 
         while(!connexion.isClosed()){
             try {
+
+                //Si les stats datent d'il y a plus de 5s, qu'aucune commande n'est en attente et que le serveur est prêt, on les met à jour
+                if (sessionID>-1 && command.equals("none") && (Calendar.getInstance().getTime().getTime()-lastUpdate.getTime())/1000 > 5){
+                    if (isReadyToGetStats){
+                        Log.i("PACT32_DEBUG", "(Main_appli) getStats command sent");
+                        command = "getStats";
+                    }else{
+                        Log.i("PACT32_DEBUG", "(Main_appli) isReadyToGetStats set to true");
+                        isReadyToGetStats = true;
+                    }
+                    lastUpdate = Calendar.getInstance().getTime();
+                }
 
                 writer = new PrintWriter(connexion.getOutputStream(), true);
                 reader = new BufferedInputStream(connexion.getInputStream());
@@ -70,13 +89,23 @@ public class Main_appli implements Runnable{
                         command = "none";
                         break;
                     case "getStats":
+                        writer.write(command);
+                        writer.flush();
                         String receiv;
-                        while ((receiv = read()) != "nomore") {
+                        while (!(receiv = read()).equals("nomore")) {
                             JSONObject dechetJSON = this.decode(receiv);
-                            Dechet dechet = new Dechet((int)dechetJSON.get("dechetID"), (int)dechetJSON.get("braceletID"), (String)dechetJSON.get("type"), (String)dechetJSON.get("typePropose"), (boolean)dechetJSON.get("reponseEleve"), (String)dechetJSON.get("heureRamassage"));
+                            Dechet dechet = new Dechet(
+                                    (int)dechetJSON.get("dechetID"),
+                                    (int)dechetJSON.get("braceletID"),
+                                    (String)dechetJSON.get("type"),
+                                    (String)dechetJSON.get("typePropose"),
+                                    (boolean)dechetJSON.get("reponseEleve"),
+                                    (String)dechetJSON.get("heureRamassage"),
+                                    this.sessionID);
                             dechets.add(dechet);
                         }
                         command = "none";
+                        Log.i("PACT32_DEBUG", "(Main_appli) size of dechets: " + dechets.size());
                         break;
                     case "getEleves":
                         writer.write(command);
@@ -191,5 +220,11 @@ public class Main_appli implements Runnable{
             e.printStackTrace();
         }
         return eleves;
+    }
+
+    public ArrayList<Dechet> getDechets() {
+        ArrayList list = new ArrayList(dechets);
+        dechets.clear();
+        return list;
     }
 }
