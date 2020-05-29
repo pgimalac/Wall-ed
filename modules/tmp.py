@@ -72,7 +72,6 @@ tries = 20
 try:
     while True:
         car.randomMove(delay=3)
-        continue
         img = car.capture()
         if img is None:
             print("Photo error", file=sys.stderr)

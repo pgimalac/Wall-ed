@@ -16,13 +16,13 @@ def initConnexion():
 def sendImage(filepath):
     socket.send(bytes("newImage", 'utf-8'))
     print("command sent")
-    # print(socket.recv(255))
-    # file = open(filepath, 'rb')
-    # data = file.read()
-    # socket.sendall(data)
-    # print("image sent")
-    # return json.loads(socket.recv(255))
-    return {"glass": (320, 480)}
+    print(socket.recv(255))
+    file = open(filepath, 'rb')
+    data = file.read()
+    socket.sendall(data)
+    print("image sent")
+    return json.loads(socket.recv(255))
+    # return {"glass": (320, 480)}
     #attention le serveur attend une réponse, si un déchet à été instancié
     # ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
 
