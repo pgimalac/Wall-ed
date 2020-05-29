@@ -58,7 +58,7 @@ public class AppClientProcessor implements Runnable{
             	   System.out.println("[AppCP] asked app to send init info");
             	   String stringData = read();
             	   System.out.print("[AppCP] info received, decoding ...");
-            	   Thread.sleep(2000);
+            	   Thread.sleep(1000);
             	   JSONObject data = decode(stringData);
             	   long nbtemp = (long)data.get("numberOfStudents");
             	   int nb = (int)nbtemp;
@@ -76,7 +76,7 @@ public class AppClientProcessor implements Runnable{
             		   braceletsID[i] = (int) temp;
             	   }
             	   System.out.println("decoded !");
-            	   Thread.sleep(4000);
+            	   Thread.sleep(1000);
             	   System.out.println("[AppCP] creating activity");
             	   Activite act = new Activite(noms, prenoms, braceletsID, this);
             	   System.out.println("[AppCP] activity created");
