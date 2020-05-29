@@ -55,7 +55,7 @@ public class Main_appli implements Runnable{
             try {
 
                 //Si les stats datent d'il y a plus de 5s, qu'aucune commande n'est en attente et que le serveur est prêt, on les met à jour
-                if (sessionID>-1 && command.equals("none") && (Calendar.getInstance().getTime().getTime()-lastUpdate.getTime())/1000 > 5){
+                if (sessionID>-1 && command.equals("none") && (Calendar.getInstance().getTime().getTime()-lastUpdate.getTime())/1000 > 20){
                     if (isReadyToGetStats){
                         Log.i("PACT32_DEBUG", "(Main_appli) getStats command sent");
                         command = "getStats";
