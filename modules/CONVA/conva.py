@@ -4,13 +4,22 @@ class Conva():
     lectr = None
     leds = None
 
-    def __init__(self, lectr, leds):
+    def __init__(self, lectr=None, leds=None):
         self.set(lectr, leds)
 
     def set(self, lectr, leds):
         self.stop()
-        self.lectr = multiprocessing.Process(target=lectr)
-        self.leds = multiprocessing.Process(target=leds)
+
+        if lectr is None:
+            self.lectr = None
+        else:
+            self.lectr = multiprocessing.Process(target=lectr)
+
+        if leds is None:
+            self.leds = None
+        else:
+            self.leds = multiprocessing.Process(target=leds)
+
         self.start()
 
     def start(self):

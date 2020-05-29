@@ -59,13 +59,14 @@ def scan_bracelet():
     return "J", "R"
 
 
-print(scan_bracelet())
-sys.exit(0)
+# print(scan_bracelet())
+# sys.exit(0)
 
 tries = 20
 try:
     while True:
-        car.randomMove()
+        car.randomMove(delay=3)
+        continue
         img = car.capture()
         if img is None:
             print("Photo error", file=sys.stderr)

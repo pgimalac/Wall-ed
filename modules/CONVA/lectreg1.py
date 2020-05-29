@@ -6,18 +6,14 @@ Created on Fri May  1 10:05:17 2020
 @author: romain
 """
 
-from tkinter import*
 import cv2
 
 def read():
     try:
-        while 1:
-            cap = cv2.VideoCapture('regard1bis.mkv')
-            height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
-            width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-            print(height, width)
+        while True:
+            cap = cv2.VideoCapture('/home/walled/pact32/modules/CONVA/regard1bis.mkv')
             cv2.namedWindow("frame", cv2.WND_PROP_FULLSCREEN)
-            cv2.setWindowProperty("frame",cv2.WND_PROP_FULLSCREEN,cv2.WINDOW_FULLSCREEN)
+            cv2.setWindowProperty("frame", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
             if not cap.isOpened():
                 print("Error opening video file")
@@ -27,17 +23,13 @@ def read():
                 if ret:
 
                     cv2.imshow('frame', frame)
-                    if cv2.waitKey(24) & 0xFF == ord('q'):
+                    if cv2.waitKey(25) & 0xFF == ord('q'):
                         break
                 else:
                     break
-
+    finally:
         cap.release()
         cv2.destroyAllWindows()
-    except KeyboardInterrupt:
-        cap.release()
-        cv2.destroyAllWindows()
-
 
 if __name__ == '__main__':
     read()

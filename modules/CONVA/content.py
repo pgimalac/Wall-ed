@@ -7,3 +7,6 @@ def read(c=None):
         return Conva(lectreg2.read, ledcontent.read)
     c.set(lectreg2.read, ledcontent.read)
     return c
+
+if __name__ == "__main__":
+    read()

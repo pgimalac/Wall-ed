@@ -1,7 +1,6 @@
 from random import randint
 import time
 from rpi_ws281x import PixelStrip, Color
-import argparse
 
 #-------------------------------------------------------------------------------------------
 
@@ -37,20 +36,12 @@ def theaterChase(strip, color, wait_ms=50, iterations=20):
 
 
 def read():
-    # Process arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
-    args = parser.parse_args()
-
     # Create NeoPixel object with appropriate configuration.
     strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
     # Intialize the library (must be called once before other functions).
     strip.begin()
 
-    print('Press Ctrl-C to quit.')
-
     try:
-
         while True:
             i=randint(0,4)
             if i == 0:
@@ -58,12 +49,10 @@ def read():
                 colorWipe(strip,Color(0,255,0))
             elif i== 1:
                 theaterChase(strip, Color(0,255,0)) #blue theaterchase
-            """elif i == 2:
-                rainbowCycle(strip)
-            else:
-                theaterChaseRainbow(strip)"""
+            # elif i == 2:
+            #     rainbowCycle(strip)
+            # else:
+            #     theaterChaseRainbow(strip)
 
-
-
-    except KeyboardInterrupt:
+    finally:
         colorWipe(strip, Color(0, 0, 0), 10)

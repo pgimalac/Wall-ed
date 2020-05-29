@@ -14,14 +14,14 @@ import cv2
 
 from . import content
 from . import triste
-
+from .conva import Conva
 
 def askForWaste(waste, conva):
     t = waste
     if waste == "cardboard":
         waste = "carton"
     elif waste == "metal":
-        waste = "metalique"
+        waste = "metallique"
     elif waste == "plastic":
         waste = "plastique"
     elif waste == "glass":
@@ -84,3 +84,6 @@ def askForWaste(waste, conva):
         GPIO.cleanup()                 #libère toutes les ressources
         # print("\nFin du programme\n")  #IHM[/code]
     return None, None
+
+if __name__ == "__main__":
+    askForWaste("metal", Conva())
