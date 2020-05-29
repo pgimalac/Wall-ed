@@ -54,6 +54,6 @@ def mise_a_jour_activite(activite, sessionID):
         cursor.execute("""SELECT * FROM RAMA_%s""", (sessionID, ))
         row = cursor.fetchall()
         for i in range(1, len(row)):
-            eleve = (Eleve.objects.filter(eleveID=temp[row[i,2]]))[0]
+            eleve = (Eleve.objects.filter(eleveID=temp[row[i][2]]))[0]
             dechet = Dechet.objects.create(dechetID=row[i,0], activite=activite, eleve=eleve, type=row[i,3], typePropose=row[i,4], reponseEleve=row[i,5], heureRamassage=row[i,6])
     conn.close()

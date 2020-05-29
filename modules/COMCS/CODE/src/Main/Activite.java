@@ -10,7 +10,7 @@ public class Activite {
 	public final RobotClientProcessor clientRobot;
 	
 	
-	public Activite(String[] noms, String[] prenoms, int[] braceletsID, AppClientProcessor clientApp) throws InterruptedException {
+	public Activite(String[] noms, String[] prenoms, String[] braceletsID, AppClientProcessor clientApp) throws InterruptedException {
 		this.clientApp = clientApp;
 		this.session = Initialisation.initialisation(noms, prenoms, braceletsID);
 		System.out.println("[ACTIVITE] initialisation completed");
