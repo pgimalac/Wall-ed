@@ -33,34 +33,40 @@ def scan_bracelet():
     GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     conva.stop()
-    car.camera_to_position(90, 140)
 
-    try:
-        while True:
-            frame = car.capture()
-            if frame is None:
-                print("Image error")
-                return "J", "R"
-            cv2.imshow("Capturing", frame)
-            cv2.waitKey(1)
-            if not GPIO.input(pin1) or not GPIO.input(pin2):
-                break
+    cv2.namedWindow("Capturing", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Capturing", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-        imgs = []
-        for _ in range(8):
-            cv2.imwrite(filename='saved_img.jpg', img=frame)
-            img_new = cv2.imread('saved_img.jpg', cv2.IMREAD_GRAYSCALE)
-            time.sleep(0.1)
+    car.camera_to_position(90, 150)
 
-        print("ok")
-        return prog.mainServeur(imgs)
-    finally:
-        car.camera_to_position(90, 90)
-    return "J", "R"
+    while True:
+        frame = car.capture()
+        if frame is None:
+            print("Image error")
+            car.camera_to_position(90, 90)
+            return "J", "R"
+        cv2.imshow("Capturing", frame)
+        if not GPIO.input(pin1) or not GPIO.input(pin2):
+            break
 
+        cv2.waitKey(1)
 
-# print(scan_bracelet())
-# sys.exit(0)
+    imgs = []
+    for _ in range(1):
+        frame = car.capture()
+        if frame is None:
+            print("Image error")
+            continue
+        imgs.append(frame)
+        time.sleep(0.1)
+
+    car.camera_to_position(90, 90)
+    return prog.mainServeur(imgs)
+
+time.sleep(2)
+
+print(scan_bracelet())
+sys.exit(0)
 
 tries = 20
 try:

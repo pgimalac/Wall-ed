@@ -1,4 +1,6 @@
 import multiprocessing
+from rpi_ws281x import Color
+from .led import colorWipe
 
 class Conva():
     lectr = None
@@ -30,8 +32,9 @@ class Conva():
 
     def stop(self):
         if self.lectr is not None:
-            self.lectr.kill()
+            self.lectr.terminate()
             self.lectr = None
         if self.leds is not None:
-            self.leds.kill()
+            self.leds.terminate()
             self.leds = None
+            colorWipe(Color(0, 0, 0), 10)

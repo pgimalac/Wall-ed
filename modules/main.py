@@ -37,26 +37,36 @@ def scan_bracelet():
 
     conva.stop()
 
-    while True:
-        frame = car.capture()
-        if frame is None:
-            print("Image error")
-            return "J", "R"
-        cv2.imshow("Capturing", frame)
-        if not GPIO.input(pin1) or not GPIO.input(pin2):
-            break
+    cv2.namedWindow("Capturing", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Capturing", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
+    car.camera_to_position(90, 150)
 
     imgs = []
-    for _ in range(8):
-        frame = car.capture()
-        if frame is None:
-            print("Image error")
-            return "J", "R"
-        cv2.imwrite(filename='saved_img.jpg', img=frame)
-        img_new = cv2.imread('saved_img.jpg', cv2.IMREAD_GRAYSCALE)
-        time.sleep(0.1)
+    try:
+        while True:
+            frame = car.capture()
+            if frame is None:
+                print("Image error")
+                car.camera_to_position(90, 90)
+                return "J", "R"
+            cv2.imshow("Capturing", frame)
+            if not GPIO.input(pin1) or not GPIO.input(pin2):
+                break
 
-    return prog.mainServeur(imgs)
+            cv2.waitKey(1)
+
+        for _ in range(1):
+            frame = car.capture()
+            if frame is None:
+                print("Image error")
+                continue
+            imgs.append(frame)
+            time.sleep(0.1)
+        return prog.mainServeur(imgs)
+    finally:
+        car.camera_to_position(90, 90)
+    return "Jaune", "Rouge"
 
 tries = 20
 try:

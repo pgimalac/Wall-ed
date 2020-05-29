@@ -82,8 +82,7 @@ def main(img):
 ## algorithme de seuillage de l'image
 
 
-def seuillageGris(img, seuil):
-    image = Image.open(img)
+def seuillageGris(image, seuil):
     ImageTab = np.array(image)
     imgHSI = cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
     dim = imgHSI.shape
@@ -261,8 +260,7 @@ def HashSuppr(table, cle):
 ## CONSTRUCTION DE L'HISTOGRAMME ET DETERMINATION DES PICS
 
 
-def convertToHSI(img):
-    image = Image.open(img)
+def convertToHSI(image):
     ImageTab = np.array(image)
     return cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
 
