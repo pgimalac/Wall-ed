@@ -64,7 +64,7 @@ public class AppClientProcessor implements Runnable{
             	   int nb = (int)nbtemp;
             	   String[] noms = new String[nb];
             	   String[] prenoms = new String[nb];
-            	   int[] braceletsID = new int[nb];
+            	   String[] braceletsID = new String[nb];
             	   JSONObject lastNames = (JSONObject)data.get("lastNames");
             	   JSONObject firstNames = (JSONObject)data.get("firstNames");
             	   JSONObject IDs = (JSONObject)data.get("IDs");
@@ -72,8 +72,7 @@ public class AppClientProcessor implements Runnable{
             		   String strI = Integer.toString(i);
             		   noms[i] = (String)lastNames.get(strI);
             		   prenoms[i] = (String)firstNames.get(strI);
-            		   long temp = (long)IDs.get(strI);
-            		   braceletsID[i] = (int) temp;
+            		   braceletsID[i] = (String)IDs.get(strI);
             	   }
             	   System.out.println("decoded !");
             	   Thread.sleep(1000);
