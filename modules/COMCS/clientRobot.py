@@ -26,7 +26,7 @@ def sendImage(filepath):
     print("image sent")
     res = socket2.recv(255)
     socket2.close()
-    return res
+    return json.loads(res.decode())
     #attention le serveur attend une réponse, si un déchet à été instancié
     # ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
 
