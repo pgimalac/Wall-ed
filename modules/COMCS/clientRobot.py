@@ -1,7 +1,7 @@
 import socket
 import json
 
-hote = "192.168.1.15"
+hote = "pact32.ml"
 port = 22346
 
 socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -20,14 +20,15 @@ def sendImage(filepath):
     file = open(filepath, 'rb')
     data = file.read()
     size = len(data)
-    size.to_bytes(8, byteorder='big')
-    socket2.sendall(str(size).encode())
+    socket2.send(size.to_bytes(8, byteorder='big'))
     socket2.sendall(data)
     socket2.send(bytes("False", 'utf-8'))
     print("image sent")
     res = socket2.recv(255)
     socket2.close()
-    l = json.loads(res.decode())
+    s = res.decode()
+    print(s)
+    l = json.loads(s)
     d = {}
     for tr in l:
         d[tr[1]] = tr[0]

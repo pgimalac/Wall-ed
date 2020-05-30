@@ -1,4 +1,5 @@
 import multiprocessing
+import time
 from rpi_ws281x import Color
 from .led import colorWipe
 
@@ -27,13 +28,16 @@ class Conva():
     def start(self):
         if self.lectr is not None:
             self.lectr.start()
+            time.sleep(1)
         if self.leds is not None:
             self.leds.start()
+
 
     def stop(self):
         if self.lectr is not None:
             self.lectr.terminate()
             self.lectr = None
+            time.sleep(1)
         if self.leds is not None:
             self.leds.terminate()
             self.leds = None

@@ -10,14 +10,14 @@ import RPi.GPIO as GPIO
 
 from SLAM.car import Car
 # from COMCS import clientRobot
-from CONVA import proposition2, recherche
+from CONVA import proposition2, recherche, content, triste
 from IDB import prog
 
 # chemin où seront écrites les images prises
 imgPath = "/tmp/cv2-img.png"
 
 # le nombre d'images prise et envoyées à la reconnaissance de bracelet
-nb_images = 4
+nb_images = 1
 
 # nombre d'essais pour s'approcher d'un dêchet
 # si on n'est pas assez proche du dêchet au bout de ce nombre d'essais on abandonne
@@ -36,25 +36,24 @@ conva = recherche.read()
 #     ident = rawStudents["IDs"][i]
 #     students[ident] = rawStudents["firstNames"][str(i)], rawStudents["lastNames"][str(i)]
 
+
 def scan_bracelet():
     # pour lire les boutons
     pin1 = 16
     pin2 = 20                              #broche utilisé en entrée
-
-    GPIO.setwarnings(False)                 #désactive le mode warning
-    GPIO.setmode(GPIO.BCM)                  #utilisation des numéros de ports du
                                             #processeur
     GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     # l'écran et les leds modifient les couleurs perçues par la reconnaissance de bracelet
-    conva.stop()
+    # conva.stop()
 
-    cv2.namedWindow("Capturing", cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty("Capturing", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    # cv2.namedWindow("Capturing", cv2.WND_PROP_FULLSCREEN)
+    # cv2.destroyWindow("Capturing")
+    # cv2.setWindowProperty("Capturing", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     # on incline la caméra vers le haut
-    car.camera_to_position(90, 150)
+    # car.camera_to_position(90, 150)
 
     # le tableau d'images que l'on va donner à la caméra
     imgs = []
@@ -65,13 +64,13 @@ def scan_bracelet():
             if frame is None:
                 print("Image error")
                 return "Jaune", "Rouge"
-            cv2.imshow("Capturing", frame)
+            # cv2.imshow("Capturing", frame)
             if not GPIO.input(pin1) or not GPIO.input(pin2):
                 # si l'un des boutons a été appuyé, on sort de la boucle
                 break
 
             # sans cet appel l'affichage ne se fait pas...
-            cv2.waitKey(1)
+            # cv2.waitKey(1)
 
         for _ in range(nb_images):
             frame = car.capture()
@@ -80,11 +79,26 @@ def scan_bracelet():
                 continue
             imgs.append(frame)
             time.sleep(1. / nb_images)
+        return "Y", "R"
         return prog.mainServeur(imgs)
     finally:
         car.camera_to_position(90, 90)
         cv2.destroyAllWindows()
     return "Jaune", "Rouge"
+
+
+time.sleep(3)
+
+scan_bracelet()
+time.sleep(3)
+
+# proposition2.askForWaste("glass", conva)
+content.read(c=conva)
+time.sleep(3)
+
+recherche.read(c=conva)
+sys.exit(0)
+
 
 try:
     while True:

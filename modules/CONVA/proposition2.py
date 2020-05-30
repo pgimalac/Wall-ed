@@ -26,8 +26,11 @@ def askForWaste(waste, conva):
         waste = "plastique"
     elif waste == "glass":
         waste = "verre"
+    elif waste == "paper":
+        waste = "papier"
     else:
-        return None, None
+        # on ne sait pas quel est le type du déchet, on affiche un type quelconque
+        waste = "carton"
 
     conva.stop()
 
@@ -53,8 +56,8 @@ def askForWaste(waste, conva):
     pin2 = 20                              #broche utilisé en entrée
     temps = 100
 
-    GPIO.setwarnings(False)                 #désactive le mode warning
-    GPIO.setmode(GPIO.BCM)                  #utilisation des numéros de ports du
+    # GPIO.setwarnings(False)                 #désactive le mode warning
+    # GPIO.setmode(GPIO.BCM)                  #utilisation des numéros de ports du
                                             #processeur
     GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -64,25 +67,26 @@ def askForWaste(waste, conva):
 
     # print("Début du programme")        #IHM
     # print("\nSortie par ctrl-c\n")     #IHM
-    try:
-        while True:                    #boucle infinie
-            entree1 = GPIO.input(pin1) #lecture entrée
-            entree2 = GPIO.input(pin2)
-            if not entree1:       #si touche appuyée
-                print("BP vrai")
-                root.destroy()
-                content.read(c=conva)
-                return True, t
-            if not entree2:
-                print("BP faux")
-                root.destroy()
-                triste.read(c=conva)
-                return False, t
-            time.sleep(temps / 1000)   #attente en msec
-            root.update()
-    finally:
-        GPIO.cleanup()                 #libère toutes les ressources
+    # try:
+    while True:                    #boucle infinie
+        entree1 = GPIO.input(pin1) #lecture entrée
+        entree2 = GPIO.input(pin2)
+        if not entree1:       #si touche appuyée
+            print("BP vrai")
+            root.destroy()
+            content.read(c=conva)
+            return True, t
+        if not entree2:
+            print("BP faux")
+            root.destroy()
+            triste.read(c=conva)
+            return False, t
+        time.sleep(temps / 1000)   #attente en msec
+        root.update()
+    # finally:
+        # GPIO.cleanup()                 #libère toutes les ressources
         # print("\nFin du programme\n")  #IHM[/code]
+    root.destroy()
     return None, None
 
 if __name__ == "__main__":

@@ -184,9 +184,8 @@ class Car():
     def randomMove(self, delay=5):
         ''' moves randomly for delay secs and then stops, looking front '''
         try:
-            # direction = -3
-            # direction = random.randint(-45, 45)
-            # self.turn(90 + direction)
+            direction = random.randint(-45, 45)
+            self.turn(90 + direction)
             self.forward()
             self.speed = 75
             self.camera_to_position(90, 90)
@@ -214,13 +213,12 @@ class Car():
         else:
             speed = 45
 
-        self.forward()
         self.speed = speed
+        self.forward()
 
         time.sleep(3)
 
         self.turn_straight()
-        self.speed = 0
         self.stop()
 
         return False

@@ -14,7 +14,7 @@ from IDB import prog
 imgPath = "/tmp/cv2-img.png"
 
 # le nombre d'images prise et envoyées à la reconnaissance de bracelet
-nb_images = 4
+nb_images = 1
 
 # nombre d'essais pour s'approcher d'un dêchet
 # si on n'est pas assez proche du dêchet au bout de ce nombre d'essais on abandonne
@@ -47,8 +47,8 @@ def scan_bracelet():
     # l'écran et les leds modifient les couleurs perçues par la reconnaissance de bracelet
     conva.stop()
 
-    cv2.namedWindow("Capturing", cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty("Capturing", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    # cv2.namedWindow("Capturing", cv2.WND_PROP_FULLSCREEN)
+    # cv2.setWindowProperty("Capturing", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     # on incline la caméra vers le haut
     car.camera_to_position(90, 150)
@@ -62,13 +62,13 @@ def scan_bracelet():
             if frame is None:
                 print("Image error")
                 return "Jaune", "Rouge"
-            cv2.imshow("Capturing", frame)
+            # cv2.imshow("Capturing", frame)
             if not GPIO.input(pin1) or not GPIO.input(pin2):
                 # si l'un des boutons a été appuyé, on sort de la boucle
                 break
 
             # sans cet appel l'affichage ne se fait pas...
-            cv2.waitKey(1)
+            # cv2.waitKey(1)
 
         for _ in range(nb_images):
             frame = car.capture()
@@ -97,28 +97,22 @@ try:
         cv2.imwrite(imgPath, img)
         rep = clientRobot.sendImage(imgPath)
 
-        answered = False
         for trash, pos in rep.items():
-            if len(pos) != 2:
-                print("Invalid coordinates (two values needed)", file=sys.stderr)
-                continue
-
-            x, y = map(int, pos)
-            width = img[0].size
-            height = img.size
-            print(trash, x, y, width, height)
+            x, y, x2, y2 = map(int, pos)
+            height, width, _ = img.shape
+            print(trash, (x, y, x2, y2), width, height)
             # on essaie de s'approcher du déchet
             for _ in range(tries):
-                if car.goNear(width, height, x, y):
+                if car.goNear(width, height, (x + x2) // 2, y2):
                     # on est à côté d'un déchet
                     # on scanne le bracelet pour savoir avec qui on communique
                     c1, c2 = scan_bracelet()
+                    print(c1, c2)
                     # on affiche notre proposition de déchet
                     ret, t = proposition2.askForWaste(trash, conva)
                     if ret is not None:
                         # ret est vrai/faux selon si on a donné le bon type de déchet
                         clientRobot.interactionAnswer(True, "".join([c1[0], c2[0]]), trash, t, ret)
-                        answered = True
                         time.sleep(5)
                     recherche.read(c=conva)
                     break
@@ -128,28 +122,17 @@ try:
                     print("Photo error", file=sys.stderr)
                     continue
 
-                if not answered:
-                    # cette fonction doit être appelée pour indiquer au serveur si un déchet a été atteint
-                    # clientRobot.interactionAnswer(False, None, None, None, None)
-                    answered = True
-
                 cv2.imwrite(imgPath, img)
                 # on renvoie une nouvelle image et on cherche le même type de déchet
-                rep = clientRobot.sendImage(imgPath).get(trash, default=None)
-                answered = False
-                if rep is None:
-                    # le type de déchet n'apparait plus...
-                    print("Trash lost")
+                for trash, pos in clientRobot.sendImage(imgPath).items():
+                    x, y, x2, y2 = map(int, pos)
                     break
-                x, y = rep
+                else:
+                    print("Trash not found")
+                    break
             else:
                 print("Could not reach target after {} tries".format(tries))
             break
-
-        if not answered:
-            # cette fonction doit être appelée pour indiquer au serveur si un déchet a été atteint
-            # clientRobot.interactionAnswer(False, None, None, None, None)
-            pass
 
 except KeyboardInterrupt:
     print("Interrupted !", file=sys.stderr)
@@ -162,3 +145,5 @@ finally:
     conva.stop()
     # arrêt de la connexion au serveur
     clientRobot.stopConnexion()
+    # stop GPIO
+    GPIO.cleanup()
