@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID())){
                 c++;
             }
         }
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type)){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getType().equals(type)){
                 c++;
             }
         }
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getReponseEleve()){
                 c++;
             }
         }
@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type) && dechet.getReponseEleve()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getType().equals(type) && dechet.getReponseEleve()){
                 c++;
             }
         }
@@ -365,10 +365,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c1=0, c2=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getReponseEleve()){
                 c1++;
                 c2++;
-            }else if (dechet.getBraceletID()==eleve.getEleveID()){
+            }else if (dechet.getBraceletID().equals(eleve.getBraceletID())){
                 c2++;
             }
         }

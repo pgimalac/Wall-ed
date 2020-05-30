@@ -3,14 +3,14 @@ package fr.telecom.wall_ed.model;
 public class Dechet {
 
     private final int dechetID;
-    private final int braceletID;
+    private final String braceletID;
     private final String type;
     private final String typePropose;
     private final boolean reponseEleve;
     private final String heureRamassage;
     private final int sessionID;
 
-    public Dechet(int dechetID, int braceletID, String type, String typePropose, boolean reponseEleve, String heureRamassage, int sessionID) {
+    public Dechet(int dechetID, String braceletID, String type, String typePropose, boolean reponseEleve, String heureRamassage, int sessionID) {
         this.dechetID = dechetID ;
         this.braceletID = braceletID ;
         this.type = type ;
@@ -24,7 +24,7 @@ public class Dechet {
         return this.dechetID;
     }
 
-    public int getBraceletID() {
+    public String getBraceletID() {
         return this.braceletID;
     }
 
