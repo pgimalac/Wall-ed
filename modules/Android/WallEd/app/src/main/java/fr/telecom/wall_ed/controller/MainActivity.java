@@ -57,7 +57,8 @@ import fr.telecom.wall_ed.view.UtilisateursFragment;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,InterfaceStatsMaster, InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     //If testing without the server, set to false; otherwise, set to true
-    private static final boolean SERVER_AVAILABLE = true;
+
+    private static final boolean SERVER_AVAILABLE = true ;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -119,13 +120,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mPrefs = getPreferences(MODE_PRIVATE);
         utAdapter = new UtilisateurAdapter(mUsers,this);
 
-        mDechets = new ArrayList<>();
         try {
+            mDechets = new ArrayList<>();
             loadStats();
             Log.i("PACT32_DEBUG", mDechets.size() + " statistiques chargées");
         }catch (Exception ex){
             Log.e("PACT32_DEBUG", "échec de loadStats");
             Log.i("PACT32_DEBUG", "0 statistique chargées");
+            mDechets = new ArrayList<>();
         }
     }
 
@@ -204,15 +206,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getTotal() {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getTotal() failed");
+        }
         return mDechets.size();
     }
 
     @Override
     public int getTotalByStudent(Eleve eleve) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getTotalByStudent() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID()){
@@ -224,8 +234,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getTotalByType(String type) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getTotalByType() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getType().equals(type)){
@@ -237,8 +251,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getTotalByTypeAndStudent(String type, Eleve eleve) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getTotalByTypeAndStudent() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type)){
@@ -250,8 +268,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getCorrect() {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getCorrect() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getReponseEleve()){
@@ -263,8 +285,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getCorrectByStudent(Eleve eleve) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getCorrectByStudent() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
@@ -276,8 +302,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getCorrectByType(String type) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getCorrectByType() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getType().equals(type) && dechet.getReponseEleve()){
@@ -289,8 +319,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getCorrectByTypeAndStudent(String type, Eleve eleve) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getCorrectByTypeAndStudent() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type) && dechet.getReponseEleve()){
@@ -302,21 +336,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public int getTotalScore() {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getTotalScore() failed");
+        }
         int c=0;
         for (Dechet dechet : mDechets){
             if(dechet.getReponseEleve()){
                 c++;
             }
         }
-        return (int) (100*c/mDechets.size());
+        if (mDechets.size()==0){
+            return 0;
+        }else{
+            return (int) (100*c/mDechets.size());
+        }
     }
 
     @Override
     public int getScoreByStudent(Eleve eleve) {
-        mDechets.addAll(serveur.getDechets());
-        saveStats();
+        try {
+            mDechets.addAll(serveur.getDechets());
+            saveStats();
+        } catch (Exception e) {
+            Log.e("PACT32_DEBUG", "CheckPoint (MainActivity) : getTotalScoreByStudent() failed");
+        }
         int c1=0, c2=0;
         for (Dechet dechet : mDechets){
             if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
@@ -431,6 +477,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }else{
                     openCamera();
                 }
+                break;
             case R.id.session_bt_stop:
                 serveur.endSession();
                 utilisateursFragment = new UtilisateursFragment();
