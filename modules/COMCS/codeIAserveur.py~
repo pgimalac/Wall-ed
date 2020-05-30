@@ -21,6 +21,19 @@ def start_analysis():
         client, address = socket.accept()
         print("connexion reçue")
 
+        #myfile = open(basename % imgcounter, 'wb')
+        #data = client.recv(200000)
+        #myfile.write(data)
+        #myfile.close()
+
+
+
+#        buf = b''            # this caused an error, I added a b so it would be read as bytes and not string
+#        while len(buf)<4:
+#            buf += client.recv(4-len(buf))
+#        size = struct.unpack('!i', buf)
+#        print("receiving %s bytes" % size)
+
 
         store_image(client,basename, imgcounter)
 
