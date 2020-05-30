@@ -17,19 +17,27 @@
 
             <TextView
                 android:id="@+id/textView_ajoutUtilisateur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:text="@string/add_user_text"
+                android:textColor="#009688"
+                android:textSize="32dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
-                android:background="#EEBA20"
-                android:padding="25dp"
-                android:text="@string/add_user_text"
-                android:textColor="#FCFBFB"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:text="Veuillez renseigner les catégories suivantes :"
+                android:layout_marginLeft="23dp"
+                android:textSize="20dp"
+                android:gravity="left"
+                android:textStyle="italic"
+                android:textColor="#323437"
+                />
 
             <EditText
                 android:id="@+id/nom_txt"
@@ -78,15 +86,16 @@
 
             <Button
                 android:id="@+id/bt_photo"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:padding="25dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/add_user_take_picture"
-                android:background="#42AD2F"
-                android:textSize="18sp">
+                android:background="#919890"
+                android:layout_marginBottom="75dp">
             </Button>
 
             <Button
@@ -98,8 +107,8 @@
                 android:layout_marginTop="20dp"
                 android:padding="25dp"
                 android:text="@string/add_user_bt"
-                android:background="#42AD2F"
-                android:textSize="18sp" />
+                android:background="#4CAF50"
+                android:textSize="20dp" />
 
         </LinearLayout>
 

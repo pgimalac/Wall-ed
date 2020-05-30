@@ -14,14 +14,15 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="right"
             >
             <ImageButton
                 android:id="@+id/imgBt_utilisateurs_addUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:src="@drawable/ic_add_user" />
+                android:src="@drawable/ic_add_user"
+                />
 
             <ImageButton
                 android:id="@+id/imgBt_utilisateurs_modifyUser"
@@ -44,8 +45,22 @@
             android:layout_height="wrap_content"
             android:text="Liste des élèves"
             android:textSize="40dp"
-            android:gravity="center"
+            android:gravity="left"
+            android:textStyle="bold"
             android:textColor="#009688"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="5dp"
+                        />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Veuillez sélectionner les élèves participant à la prochaine session :"
+            android:layout_marginLeft="12dp"
+            android:textSize="20dp"
+            android:gravity="left"
+            android:textStyle="italic"
+            android:textColor="#323437"
             />
 
         <ListView
@@ -61,20 +76,27 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="false"
             android:layout_alignParentTop="false"
-            android:layout_marginTop="25dp"></ListView>
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="70dp"
+            ></ListView>
 
         <Button
             android:id="@+id/users_start_new_session"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="@string/user_new_session"
+            android:background="#CDDC39"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
             />
 
         <Button
             android:id="@+id/users_end_session"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="50dp"
             android:text="@string/user_end_session"
+            android:background="#EF695F"
+            android:layout_gravity="center"
             />
 
     </LinearLayout>
