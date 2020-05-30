@@ -184,8 +184,9 @@ class Car():
     def randomMove(self, delay=5):
         ''' moves randomly for delay secs and then stops, looking front '''
         try:
-            direction = random.randint(-45, 45)
-            self.turn(90 + direction)
+            # direction = -3
+            # direction = random.randint(-45, 45)
+            # self.turn(90 + direction)
             self.forward()
             self.speed = 75
             self.camera_to_position(90, 90)
@@ -196,23 +197,27 @@ class Car():
             self.turn_straight()
 
     def goNear(self, width, height, x, y):
-        # no idea how to do it if the tilt or the pan aren't at 0 (=> 90)
+        # no idea how to do it if the tilt or the pan aren't at 90
         # (would need to do some math and we'd like to avoid that)
-        # assert self.camera.current_tilt == 0 and self.camera.current_pan == 0
+        assert self.camera.current_tilt == 90 and self.camera.current_pan == 90
 
-        # if y > 3 * height / 4:
         print(x, y, width, height)
-        return True
+        if y > 3 * height / 4:
+            return True
+
+        speed = 25
 
         if x < width / 3:
-            self.turn(10)
+            self.turn(60)
         elif x > 2 * width / 3:
-            self.turn(-10)
+            self.turn(120)
+        else:
+            speed = 45
 
         self.forward()
-        self.speed = 15
+        self.speed = speed
 
-        time.sleep(1)
+        time.sleep(3)
 
         self.turn_straight()
         self.speed = 0

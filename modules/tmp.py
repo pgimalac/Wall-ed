@@ -9,7 +9,7 @@ import cv2
 import RPi.GPIO as GPIO
 
 from SLAM.car import Car
-from COMCS import clientRobot
+# from COMCS import clientRobot
 from CONVA import proposition2, recherche
 from IDB import prog
 
@@ -83,6 +83,7 @@ def scan_bracelet():
         return prog.mainServeur(imgs)
     finally:
         car.camera_to_position(90, 90)
+        cv2.destroyAllWindows()
     return "Jaune", "Rouge"
 
 try:
@@ -99,11 +100,11 @@ try:
         # on l'envoie au serveur et on regarde si des dêchets sont trouvés
         # cv2.imwrite(imgPath, img)
         # rep = clientRobot.sendImage(imgPath)
+        cv2.imshow("Show", img)
+        cv2.waitKey(3000)
         print("Entrer les coordonnées du déchet: ", end='')
         x, y = map(int, input().split())
         rep = {"glass": (x, y)}
-        cv2.imshow("Show", img)
-        cv2.waitKey(0)
 
         for trash, pos in rep.items():
             if len(pos) != 2:
@@ -111,8 +112,7 @@ try:
                 continue
 
             x, y = map(int, pos)
-            width = img[0].size
-            height = img.size
+            height, width, _ = img.shape
             print(trash, x, y, width, height)
             # on essaie de s'approcher du déchet
             for _ in range(tries):
@@ -134,17 +134,17 @@ try:
                     print("Photo error", file=sys.stderr)
                     continue
 
+                cv2.imshow("Show", img)
+                cv2.waitKey(3000)
                 print("Entrer les coordonnées du déchet: ", end='')
                 x, y = map(int, input().split())
                 rep = {"glass": (x, y)}
-                cv2.imshow("Show", img)
-                cv2.waitKey(0)
 
-                if rep is None:
+                if rep.get(trash, None) is None:
                     # le type de déchet n'apparait plus...
                     print("Trash lost")
                     break
-                x, y = rep
+                x, y = rep[trash]
             else:
                 print("Could not reach target after {} tries".format(tries))
             break
