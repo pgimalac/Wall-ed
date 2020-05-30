@@ -16,7 +16,7 @@ public class Initialisation {
 	private static final int[] bracelets;
 	*/
 	
-	public static Session initialisation(String[] noms, String[] prenoms, int[] bracelets) {
+	public static Session initialisation(String[] noms, String[] prenoms, String[] bracelets) {
 		/* IDEM
 		
 		this.noms = noms;

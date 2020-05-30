@@ -1,14 +1,14 @@
-from composantes_connexes import *
-from filtreImage import *
-from determinationPics import *
-from HistogramConstructor import *
-
+from composantes_connexes import main
+from filtreImage import seuillageGris
+#from determinationPics import main
+from HistogramConstructor import histo
+from determinationPics import determinationLABEL
 from PIL import Image
+import numpy as np
 
 def test(img):
-    imageFiltree = seuillageGris(img, 220)
-    impageNonFiltree = Image.open(img)
+    imageFiltree = seuillageGris(img, 65)
     imageComp, composante = main(imageFiltree)
-    histogramme = histo(imageNonFiltree, imageComp, composante)
-    pic1, pic2 = determinationPics(histogramme)
-    return (pic1,pic2)
+    histogramme = histo(img, imageComp, composante)
+    l1, l2 = determinationLABEL(histogramme)
+    return (l1,l2)

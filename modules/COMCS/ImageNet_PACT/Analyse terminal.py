@@ -8,7 +8,7 @@ for line in file:
     token = "Cross entropy = "
     token_length = len(token)
     entropy_index = line.find(token)
-    if entropy_index>=0:
+    if entropy_index >= 0:
         entropy_string_array.append(line[entropy_index+token_length:-1])
 
 X = [10*i for i in range(len(entropy_array))]

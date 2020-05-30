@@ -54,27 +54,27 @@ public class RobotClientProcessor implements Runnable{
             
             if (!this.act.clientApp.getInitSate()) {System.err.println("[RobotCP] Waiting app initialisation to be finished");}
             while (!this.act.clientApp.getInitSate()) {
-            	Thread.sleep(3000);
+            	Thread.sleep(2000);
             	System.out.println("[RobotCP] Still not finished");
             }
             
             if (this.initDone) {
             	
             	System.err.println("[RobotCP] init done, waiting to see if change mode needed");
-            	Thread.sleep(3000);
+            	Thread.sleep(1000);
             	if (this.changeMode) {
             		System.out.println("[RobotCP] NOT reading socket because of specific action");
             		action = command;
             	}
             	else {
                 	System.err.println("[RobotCP] reading socket");
-                	Thread.sleep(3000);
+                	Thread.sleep(2000);
                 	action = read();
                 }
             }
             else {
             	System.err.println("[RobotCP] reading socket");
-            	Thread.sleep(3000);
+            	Thread.sleep(2000);
             	action = read();
             }
             
@@ -99,26 +99,32 @@ public class RobotClientProcessor implements Runnable{
             	   System.out.println("done");
             	   this.initDone = true;
                	   break;
-               case "newImage":
+				case "newImage":
+					/*
             	   byte[] b= new byte[20000];
             	   writer.write("sendImage");
             	   writer.flush();
             	   this.numberOfImages++;
             	   System.out.println("receiving image");
             	   String imagePath = this.imageStoringPath + Integer.toString(this.numberOfImages) + ".jpg";
-            	   
+
             	   FileOutputStream image = new FileOutputStream(imagePath);
             	   int n;
             	   while((n=reader.read(b,0,b.length))>=20000){
-   	            		image.write(b,0,n);                                        
+            		    System.out.println(n);
+   	            		image.write(b,0,n);
             	   }
             	   image.write(b,0,n);
             	   System.out.println("image stored, launching IA");
+
             	   String AIresult = Main.executePythonScriptForAI(imagePath);
             	   System.out.println("ai done");
+
             	   // then send results to the robot
+					String AIresult = "{glass: (320, 240)}";
             	   writer.write(AIresult);
             	   writer.flush();
+					*/
             	   // receive the answer of the robot :
             	   String stringData = read();
             	   JSONObject data = decode(stringData);
@@ -126,7 +132,7 @@ public class RobotClientProcessor implements Runnable{
             	   // --> if trash found then we get the trash info and continue in "RECHERCHE" mode
             	   // --> if no trash found nothing is done more
             	   if (trashFound) {
-            		   int braceletID = (int) data.get("braceletID");
+            		   String braceletID = (String) data.get("braceletID");
             		   String type = (String) data.get("type");
             		   String typePropose = (String) data.get("typePropose");
             		   boolean reponseEleve = (boolean) data.get("reponseEleve");
@@ -179,6 +185,19 @@ public class RobotClientProcessor implements Runnable{
    }
    
    private JSONObject decode(String input){
+	   JSONParser parser;
+	   JSONObject json = null;
+	try {
+		parser = new JSONParser();
+		json = (JSONObject) parser.parse(input);
+	} catch (ParseException e) {
+		e.printStackTrace();
+	}
+	   return json;
+   }
+   /*
+   private JSONObject decode(String input){
+	   System.out.println(input);
 	   JSONParser parser = new JSONParser();
 	   Object ObjData;
 	   JSONObject jSONData = new JSONObject();
@@ -190,6 +209,7 @@ public class RobotClientProcessor implements Runnable{
 	}
 	   return jSONData;
    }
+   */
    
    private JSONObject encode(String[] noms, String[] prenoms, int[] ids) {
 	   int nb = noms.length;
