@@ -1,15 +1,15 @@
 import socket
 import json
 
-hote = "pact32.ml"
+hote = "192.168.1.15"
 port = 22346
 
-#socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def initConnexion():
-    socket.connect((hote, port))
-    socket.send(bytes("init", 'utf-8'))
-    liste_eleves = socket.recv(255)
+    socket1.connect((hote, port))
+    socket1.send(bytes("init", 'utf-8'))
+    liste_eleves = socket1.recv(255)
     print(liste_eleves)
     return json.loads(liste_eleves)
 
@@ -20,7 +20,7 @@ def sendImage(filepath):
     file = open(filepath, 'rb')
     data = file.read()
     size = len(data)
-    size.to_bytes(8, byteorder = 'big')
+    size.to_bytes(8, byteorder='big')
     socket2.sendall(str(size).encode())
     socket2.sendall(data)
     socket2.send(bytes("False", 'utf-8'))
@@ -38,10 +38,9 @@ def sendImage(filepath):
     # ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
 
 def interactionAnswer(trashFound, braceletID, type, typePropose, reponseEleve):
-    socket.send(bytes("newImage", 'utf-8'))
-    socket.send(bytes(json.dumps({'trashFound' : trashFound, 'braceletID' : braceletID, 'type' : type, 'typePropose' : typePropose, 'reponseEleve' : reponseEleve}), 'utf-8'))
+    socket1.send(bytes("newImage", 'utf-8'))
+    socket1.send(bytes(json.dumps({'trashFound' : trashFound, 'braceletID' : braceletID, 'type' : type, 'typePropose' : typePropose, 'reponseEleve' : reponseEleve}), 'utf-8'))
 
 def stopConnexion():
-    socket.send(bytes("close", 'utf-8'))
-    socket.close()
-
+    socket1.send(bytes("close", 'utf-8'))
+    socket1.close()

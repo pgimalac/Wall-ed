@@ -130,7 +130,7 @@ try:
 
                 if not answered:
                     # cette fonction doit être appelée pour indiquer au serveur si un déchet a été atteint
-                    clientRobot.interactionAnswer(False, None, None, None, None)
+                    # clientRobot.interactionAnswer(False, None, None, None, None)
                     answered = True
 
                 cv2.imwrite(imgPath, img)
@@ -148,8 +148,8 @@ try:
 
         if not answered:
             # cette fonction doit être appelée pour indiquer au serveur si un déchet a été atteint
-            clientRobot.interactionAnswer(False, None, None, None, None)
-
+            # clientRobot.interactionAnswer(False, None, None, None, None)
+            pass
 
 except KeyboardInterrupt:
     print("Interrupted !", file=sys.stderr)
