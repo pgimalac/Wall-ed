@@ -139,7 +139,7 @@
                 android:textSize="50dp"
                 android:text="100"
                 android:textColor="#4CAF50"/>
-            
+
         </LinearLayout>
 
     </ScrollView>

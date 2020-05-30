@@ -477,6 +477,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }else{
                     openCamera();
                 }
+                break;
             case R.id.session_bt_stop:
                 serveur.endSession();
                 utilisateursFragment = new UtilisateursFragment();
