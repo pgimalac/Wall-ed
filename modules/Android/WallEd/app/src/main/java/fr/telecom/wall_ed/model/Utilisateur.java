@@ -12,6 +12,7 @@ public class Utilisateur implements Serializable {
     private String id;
     private boolean selected;
     private String braceletID = "ab";
+    private final String[] possible = new String[]{"V","R","C","J","M","B"};
 
     public Utilisateur(String prenom, String nom, String classe, String id) {
         this.prenom = prenom;
@@ -19,6 +20,7 @@ public class Utilisateur implements Serializable {
         this.classe = classe;
         this.id = id;
         this.selected = false;
+        this.braceletID = possible[Integer.parseInt(id)] + possible[Integer.parseInt(id)];
     }
 
     @Override

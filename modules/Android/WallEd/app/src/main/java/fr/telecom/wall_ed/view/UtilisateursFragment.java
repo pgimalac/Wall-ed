@@ -102,9 +102,9 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         if (LU.size() < 1){
             Log.i("PACT32_DEBUG", "(UtilisateursFragment) fake users created");
             LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
-            LU.add(new Utilisateur("Maes", "Adrien", "CE1", "0"));
-            LU.add(new Utilisateur("Louvet", "Romain", "CE2", "0"));
-            LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "0"));
+            LU.add(new Utilisateur("Maes", "Adrien", "CE1", "1"));
+            LU.add(new Utilisateur("Louvet", "Romain", "CE2", "2"));
+            LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "3"));
         }
     }
 
