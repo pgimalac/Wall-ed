@@ -165,7 +165,6 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="#FFC107"
-                android:onClick="openUrl"
                 android:text="Lien url"
                 android:textSize="20dp" />
 
