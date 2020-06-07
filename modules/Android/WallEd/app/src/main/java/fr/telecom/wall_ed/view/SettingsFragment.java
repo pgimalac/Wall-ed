@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import fr.telecom.wall_ed.R;
 
 
+
 public class SettingsFragment extends Fragment {
 
     public SettingsFragment() {

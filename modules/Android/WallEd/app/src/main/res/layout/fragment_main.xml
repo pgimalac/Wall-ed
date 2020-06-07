@@ -22,14 +22,14 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
-                android:layout_height="470dp"
+                android:layout_height="450dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/logof" />
 
             <Button
                 android:id="@+id/demarrer_button"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="68dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"

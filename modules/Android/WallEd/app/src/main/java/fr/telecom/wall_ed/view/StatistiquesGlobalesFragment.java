@@ -70,6 +70,10 @@ public class StatistiquesGlobalesFragment extends Fragment implements View.OnCli
         return view;
     }
 
+    /*
+    Fonction qui permet  de mettre à jour les données de la page Statistiques globales (nombre
+    de déchets ramassés, de quels types ...)
+     */
     private void updateContent(){
         nombreDechet.setText(String.valueOf(mStatsMaster.getTotal()));
         poubelleNormale.setText(String.valueOf(mStatsMaster.getCorrectByType("trash")));
@@ -92,13 +96,19 @@ public class StatistiquesGlobalesFragment extends Fragment implements View.OnCli
         Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesGlobalesFragment) : destroyed");
     }
 
+
+
+    /*fonctions qui gèrent l'ouverture d'une URL quand on clique sur le bouton en fin de page de "Statistiques Globales",
+     cette URL doit normalement menée au site de Wall-Ed qui affiche les statistiques individuelles et détaillées"
+     */
+
+
     public void openUrl(String url) {
         Uri uri = Uri.parse(url);
         Intent intent =  new Intent (Intent.ACTION_VIEW,uri);
         startActivity(intent);
     }
 
-    @Override
     public void onClick(View v) {
         openUrl("https://www.google.com/");
     }

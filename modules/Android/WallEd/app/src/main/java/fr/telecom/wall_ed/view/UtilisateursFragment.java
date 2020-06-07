@@ -117,6 +117,9 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     }
 
 
+    /**
+     * Ajoût de quelques utilisateurs factices
+     */
     private void addFake() {
         ArrayList<Utilisateur> LU = mCallBackUtilisateur.getUser();
         if (LU.size() < 1){

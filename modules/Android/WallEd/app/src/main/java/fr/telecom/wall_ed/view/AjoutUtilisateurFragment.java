@@ -69,7 +69,7 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         super.onAttach(context);
         createCallbackToParentActivity();
     }
-    
+
     public void preset(Utilisateur utilisateur){
         prenom = utilisateur.getPrenom();
         nom = utilisateur.getNom();
