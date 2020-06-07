@@ -6,99 +6,106 @@
     android:layout_height="match_parent"
     tools:context=".view.UtilisateursFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            >
-            <ImageButton
-                android:id="@+id/imgBt_utilisateurs_addUser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_add_user"
+                android:layout_gravity="right"
+                >
+                <ImageButton
+                    android:id="@+id/imgBt_utilisateurs_addUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_add_user"
+                    />
+
+                <ImageButton
+                    android:id="@+id/imgBt_utilisateurs_modifyUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_modify_user" />
+
+                <ImageButton
+                    android:id="@+id/imgBt_utilisateurs_deleteUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_delete_user" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Liste des élèves"
+                android:textSize="40dp"
+                android:gravity="left"
+                android:textStyle="bold"
+                android:textColor="#009688"
+                android:layout_marginLeft="12dp"
+                android:layout_marginBottom="5dp"
+                />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Veuillez sélectionner les élèves participant à la prochaine session :"
+                android:layout_marginLeft="12dp"
+                android:textSize="20dp"
+                android:gravity="left"
+                android:textStyle="italic"
+                android:textColor="#323437"
                 />
 
-            <ImageButton
-                android:id="@+id/imgBt_utilisateurs_modifyUser"
+            <ListView
+                android:id="@+id/LU"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_modify_user" />
+                android:layout_marginTop="25dp">
+            </ListView>
 
-            <ImageButton
-                android:id="@+id/imgBt_utilisateurs_deleteUser"
+            <ListView
+                android:id="@+id/listViewUtilisateurs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_delete_user" />
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="70dp"
+                ></ListView>
+
+            <Button
+                android:id="@+id/users_start_new_session"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:text="@string/user_new_session"
+                android:background="#CDDC39"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                />
+
+            <Button
+                android:id="@+id/users_end_session"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:text="@string/user_end_session"
+                android:background="#EF695F"
+                android:layout_gravity="center"
+                />
+
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Liste des élèves"
-            android:textSize="40dp"
-            android:gravity="left"
-            android:textStyle="bold"
-            android:textColor="#009688"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="5dp"
-                        />
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Veuillez sélectionner les élèves participant à la prochaine session :"
-            android:layout_marginLeft="12dp"
-            android:textSize="20dp"
-            android:gravity="left"
-            android:textStyle="italic"
-            android:textColor="#323437"
-            />
-
-        <ListView
-            android:id="@+id/LU"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp">
-        </ListView>
-
-        <ListView
-            android:id="@+id/listViewUtilisateurs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="70dp"
-            ></ListView>
-
-        <Button
-            android:id="@+id/users_start_new_session"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="@string/user_new_session"
-            android:background="#CDDC39"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            />
-
-        <Button
-            android:id="@+id/users_end_session"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="@string/user_end_session"
-            android:background="#EF695F"
-            android:layout_gravity="center"
-            />
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
