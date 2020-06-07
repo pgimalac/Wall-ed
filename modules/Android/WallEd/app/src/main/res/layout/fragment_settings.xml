@@ -6,8 +6,13 @@
     tools:context=".view.SettingsFragment">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This page is not done yet" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="PARAMETRES"
+        android:textColor="#009688"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
 </FrameLayout>

@@ -140,6 +140,35 @@
                 android:text="100"
                 android:textColor="#4CAF50"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Accès aux détailes des statistiques :"
+                android:textSize="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="7dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pour avoir accès aux détails sur les performances des élèves, cliquez sur le lien suivant :"
+                android:textSize="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="12dp"
+                />
+
+            <Button
+                android:id="@+id/btnLienUrl"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="#FFC107"
+                android:onClick="openUrl"
+                android:text="Lien url"
+                android:textSize="20dp" />
+
         </LinearLayout>
 
     </ScrollView>
