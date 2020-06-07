@@ -22,7 +22,7 @@ import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 import static android.content.Intent.ACTION_VIEW;
 
 
-public class StatistiquesGlobalesFragment extends Fragment  {
+public class StatistiquesGlobalesFragment extends Fragment implements View.OnClickListener {
 
     private InterfaceStatsMaster mStatsMaster;
     public TextView nombreDechet;
@@ -64,8 +64,8 @@ public class StatistiquesGlobalesFragment extends Fragment  {
         poubelleVerre = (TextView) view.findViewById(R.id.poubelleVerreG);
         poubelleMetal = (TextView) view.findViewById(R.id.poubelleMétauxG);
         tauxReussite = (TextView) view.findViewById(R.id.tauxRéussiteG);
-
-
+        Button bt = view.findViewById(R.id.btnLienUrl);
+        bt.setOnClickListener(this);
         updateContent();
         return view;
     }
@@ -92,14 +92,14 @@ public class StatistiquesGlobalesFragment extends Fragment  {
         Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesGlobalesFragment) : destroyed");
     }
 
-    public void OuvrirUrl(View view) {
-        openUrl("https://www.google.com/");
-    }
-
     public void openUrl(String url) {
         Uri uri = Uri.parse(url);
         Intent intent =  new Intent (Intent.ACTION_VIEW,uri);
         startActivity(intent);
     }
 
+    @Override
+    public void onClick(View v) {
+        openUrl("https://www.google.com/");
+    }
 }
