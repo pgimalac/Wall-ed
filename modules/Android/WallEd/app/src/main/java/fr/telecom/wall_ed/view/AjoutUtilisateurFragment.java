@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.Eleve;
+import fr.telecom.wall_ed.model.Utilisateur;
 
 
 public class AjoutUtilisateurFragment extends Fragment implements View.OnClickListener {
@@ -25,6 +26,10 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
     private EditText mNomEditText;
     private EditText mClasseEditText;
     private EditText mIdEditText;
+    private String prenom="";
+    private String nom="";
+    private String classe="";
+    private String id="";
 
     public AjoutUtilisateurFragment() {
         // Required empty public constructor
@@ -45,6 +50,12 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         mNomEditText = result.findViewById(R.id.nom_txt);
         mClasseEditText = result.findViewById(R.id.classe_txt);
         mIdEditText = result.findViewById(R.id.id_txt);
+
+        mPrenomEditText.setText(prenom);
+        mNomEditText.setText(nom);
+        mClasseEditText.setText(classe);
+        mIdEditText.setText(id);
+
         return result;
     }
 
@@ -53,6 +64,13 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onAttach");
         super.onAttach(context);
         createCallbackToParentActivity();
+    }
+
+    public void preset(Utilisateur utilisateur){
+        prenom = utilisateur.getPrenom();
+        nom = utilisateur.getNom();
+        classe = utilisateur.getClasse();
+        id = utilisateur.getId();
     }
 
     @Override

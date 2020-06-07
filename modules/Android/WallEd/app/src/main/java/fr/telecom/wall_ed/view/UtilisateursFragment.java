@@ -78,6 +78,15 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         Button button2 = result.findViewById(R.id.users_end_session);
         button2.setOnClickListener(this);
 
+        ImageButton button3 = result.findViewById(R.id.imgBt_utilisateurs_addUser);
+        button3.setOnClickListener(this);
+
+        ImageButton button4 = result.findViewById(R.id.imgBt_utilisateurs_modifyUser);
+        button4.setOnClickListener(this);
+
+        ImageButton button5 = result.findViewById(R.id.imgBt_utilisateurs_deleteUser);
+        button5.setOnClickListener(this);
+
         addFake();
 
         return result;
@@ -89,7 +98,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         int id = v.getId();
         switch (id) {
             case R.id.users_start_new_session:
-                mCallbackServeur.startNewSession(mCallBackUtilisateur.getUser());
+                mCallbackServeur.startNewSession(mCallBackUtilisateur.getSelectedUser());
                 break;
             case R.id.users_end_session:
                 mCallbackServeur.endSession();
@@ -112,10 +121,10 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
         ArrayList<Utilisateur> LU = mCallBackUtilisateur.getUser();
         if (LU.size() < 1){
             Log.i("PACT32_DEBUG", "(UtilisateursFragment) fake users created");
-            LU.add(new Utilisateur("Masiak", "Victor", "CP", "0"));
-            LU.add(new Utilisateur("Maes", "Adrien", "CE1", "1"));
-            LU.add(new Utilisateur("Louvet", "Romain", "CE2", "2"));
-            LU.add(new Utilisateur("Dufourt", "Jean-claude", "CM1", "3"));
+            mCallBackUtilisateur.addUser(new Utilisateur("Masiak", "Victor", "CP", "0"));
+            mCallBackUtilisateur.addUser(new Utilisateur("Maes", "Adrien", "CE1", "1"));
+            mCallBackUtilisateur.addUser(new Utilisateur("Louvet", "Romain", "CE2", "2"));
+            mCallBackUtilisateur.addUser(new Utilisateur("Dufourt", "Jean-claude", "CM1", "3"));
         }
     }
 

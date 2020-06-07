@@ -20,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .replace(R.id.main_frame_layout, mainFragment)
                 .addToBackStack(null).commit();
 
+        mPrefs = getPreferences(MODE_PRIVATE);
         if (SERVER_AVAILABLE){
             serveur = new Serveur();
             Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = true");
@@ -115,10 +117,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }else{
             Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = false");
             mUsers = new ArrayList<>();
+            loadUsers();
             Log.i("PACT32_DEBUG", "Initialisation offline : mUsers initialisée vide");
         }
-        mPrefs = getPreferences(MODE_PRIVATE);
-        utAdapter = new UtilisateurAdapter(mUsers,this);
 
         try {
             mDechets = new ArrayList<>();
@@ -129,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.i("PACT32_DEBUG", "0 statistique chargées");
             mDechets = new ArrayList<>();
         }
+
+        utAdapter = new UtilisateurAdapter(mUsers,this);
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -143,21 +146,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void loadUsers(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadUsers");
-        Gson gson = new Gson();
-        String json = mPrefs.getString("mUsers", "");
-        Type listType = new TypeToken<ArrayList<Utilisateur>>(){}.getType();
-        mUsers = gson.fromJson(json, listType);
+        try {
+            Gson gson = new Gson();
+            String json = mPrefs.getString("mUsers", "");
+            Type listType = new TypeToken<ArrayList<Utilisateur>>(){}.getType();
+            mUsers = gson.fromJson(json, listType);
+        } catch (Exception ex) {
+            Log.e("PACT32_DEBUG", "échec de loadUsers" + ex.getMessage());
+            mUsers = new ArrayList<>();
+        }
     }
 
     private void saveUsers(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveUsers");
-        //TODO: replace with server-oriented code
-        /*SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(mUsers);
         prefsEditor.putString("mUsers", json);
         prefsEditor.apply();
-        */
     }
 
     private void loadStats(){
@@ -177,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         prefsEditor.apply();
     }
 
-    private void addUser(Utilisateur user){
+    public void addUser(Utilisateur user){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans addUser " + user.toString());
         if (mUsers==null){
             mUsers = new ArrayList<>();
@@ -188,6 +194,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public ArrayList<Utilisateur> getUser () {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUser");
+        return mUsers;
+    }
+
+    public ArrayList<Utilisateur> getSelectedUser () {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getSelectedUser");
         ArrayList<Utilisateur> tmp = new ArrayList<>();
         for (Utilisateur u : mUsers){
             if (u.isSelected()){
@@ -451,6 +462,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // ==================== CLICK ====================
 
+
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
@@ -500,10 +512,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         .addToBackStack(null).commit();
                 break;
             case R.id.imgBt_utilisateurs_deleteUser:
+                ArrayList<Utilisateur> toBeRemoved = new ArrayList<>();
                 for (Utilisateur u : mUsers){
                     if(u.isSelected()){
-                        mUsers.remove(u);
+                        toBeRemoved.add(u);
                     }
+                }
+                for (Utilisateur u : toBeRemoved){
+                    mUsers.remove(u);
+                }
+                saveUsers();
+                break;
+            case R.id.imgBt_utilisateurs_modifyUser:
+                ArrayList<Utilisateur> toBeModified = new ArrayList<>();
+                for (Utilisateur u : mUsers){
+                    if(u.isSelected()){
+                        toBeModified.add(u);
+                    }
+                }
+                if (toBeModified.size()>0){
+                    Utilisateur tmp = toBeModified.get(0);
+                    mUsers.remove(tmp);
+                    AjoutUtilisateurFragment modifyUser = new AjoutUtilisateurFragment();
+                    mFragmentManager.popBackStack();
+                    mFragmentManager.beginTransaction()
+                            .replace(R.id.main_frame_layout, modifyUser)
+                            .addToBackStack(null).commit();
+                    modifyUser.preset(tmp);
                 }
                 break;
         }
