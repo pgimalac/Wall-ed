@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     //If testing without the server, set to false; otherwise, set to true
 
-    private static final boolean SERVER_AVAILABLE = true ;
+    private static final boolean SERVER_AVAILABLE = false ;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -188,7 +188,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public ArrayList<Utilisateur> getUser () {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUser");
-        return mUsers;
+        ArrayList<Utilisateur> tmp = new ArrayList<>();
+        for (Utilisateur u : mUsers){
+            if (u.isSelected()){
+                tmp.add(u);
+            }
+        }
+        return tmp;
     }
 
     @Override
@@ -485,6 +491,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 mFragmentManager.beginTransaction()
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
+                break;
+            case R.id.imgBt_utilisateurs_addUser:
+                Fragment newUser = new AjoutUtilisateurFragment();
+                mFragmentManager.popBackStack();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, newUser)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.imgBt_utilisateurs_deleteUser:
+                for (Utilisateur u : mUsers){
+                    if(u.isSelected()){
+                        mUsers.remove(u);
+                    }
+                }
                 break;
         }
     }

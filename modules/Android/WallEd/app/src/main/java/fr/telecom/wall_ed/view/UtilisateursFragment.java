@@ -28,6 +28,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     private InterfaceGestionUtilisateurs mCallBackUtilisateur ;
     private InterfaceServeur mCallbackServeur;
     private AdapterView.OnItemClickListener mCallbackOnItemClickListener;
+    private View.OnClickListener mCallbackOnClickListener;
 
     @Override
     public void onAttach(Context context) {
@@ -41,6 +42,11 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
             mCallBackUtilisateur = (InterfaceGestionUtilisateurs) getActivity();
         } catch (ClassCastException e) {
             throw new ClassCastException(e.toString()+ "InterfaceGestionUtilisateurs");
+        }
+        try {
+            mCallbackOnClickListener = (View.OnClickListener) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(e.toString()+ "OnClickListener");
         }
         try {
             mCallbackServeur = (InterfaceServeur) getActivity();
@@ -87,6 +93,11 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
                 break;
             case R.id.users_end_session:
                 mCallbackServeur.endSession();
+                break;
+            case R.id.imgBt_utilisateurs_addUser:
+            case R.id.imgBt_utilisateurs_modifyUser:
+            case R.id.imgBt_utilisateurs_deleteUser:
+                mCallbackOnClickListener.onClick(v);
                 break;
         }
     }
