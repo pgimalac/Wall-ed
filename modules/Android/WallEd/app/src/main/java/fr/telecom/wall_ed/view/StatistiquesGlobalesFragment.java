@@ -2,6 +2,8 @@ package fr.telecom.wall_ed.view;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,13 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.InterfaceStatsMaster;
 
+import static android.content.Intent.ACTION_VIEW;
 
-public class StatistiquesGlobalesFragment extends Fragment {
+
+public class StatistiquesGlobalesFragment extends Fragment  {
 
     private InterfaceStatsMaster mStatsMaster;
     public TextView nombreDechet;
@@ -58,6 +64,8 @@ public class StatistiquesGlobalesFragment extends Fragment {
         poubelleVerre = (TextView) view.findViewById(R.id.poubelleVerreG);
         poubelleMetal = (TextView) view.findViewById(R.id.poubelleMétauxG);
         tauxReussite = (TextView) view.findViewById(R.id.tauxRéussiteG);
+
+
         updateContent();
         return view;
     }
@@ -82,6 +90,16 @@ public class StatistiquesGlobalesFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         Log.i("PACT32_DEBUG", "CheckPoint (StatistiquesGlobalesFragment) : destroyed");
+    }
+
+    public void OuvrirUrl(View view) {
+        openUrl("https://www.google.com/");
+    }
+
+    public void openUrl(String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent =  new Intent (Intent.ACTION_VIEW,uri);
+        startActivity(intent);
     }
 
 }
