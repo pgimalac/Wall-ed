@@ -64,10 +64,10 @@ public class StatistiquesGlobalesFragment extends Fragment {
 
     private void updateContent(){
         nombreDechet.setText(String.valueOf(mStatsMaster.getTotal()));
-        poubelleNormale.setText(String.valueOf(mStatsMaster.getCorrectByType("divers")));
-        poubellePlastique.setText(String.valueOf(mStatsMaster.getCorrectByType("plastique")));
-        poubelleCarton.setText(String.valueOf(mStatsMaster.getCorrectByType("carton")));
-        poubelleVerre.setText(String.valueOf(mStatsMaster.getCorrectByType("verre")));
+        poubelleNormale.setText(String.valueOf(mStatsMaster.getCorrectByType("trash")));
+        poubellePlastique.setText(String.valueOf(mStatsMaster.getCorrectByType("plastic")));
+        poubelleCarton.setText(String.valueOf(mStatsMaster.getCorrectByType("cardboard")));
+        poubelleVerre.setText(String.valueOf(mStatsMaster.getCorrectByType("glass")));
         poubelleMetal.setText(String.valueOf(mStatsMaster.getCorrectByType("metal")));
         tauxReussite.setText(String.valueOf(mStatsMaster.getTotalScore()));
     }
