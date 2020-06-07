@@ -14,6 +14,10 @@ import android.widget.EditText;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.Eleve;
 
+/**
+ * Ce fragment gère les ajoûts des élèves : chaque élève doit renseigner leur nom, prénom, classe et
+ * prendre une photo de leur bracelet qui permettra de les identifier auprès du robot.
+ */
 
 public class AjoutUtilisateurFragment extends Fragment implements View.OnClickListener {
 
@@ -55,7 +59,6 @@ public class AjoutUtilisateurFragment extends Fragment implements View.OnClickLi
         createCallbackToParentActivity();
     }
 
-    @Override
     public void onClick(View v) {
         Log.i("PACT32_DEBUG", "CheckPoint (AjoutUtilisateurFragment) : entrée dans onClick (" + v.getId() + ")");
 
