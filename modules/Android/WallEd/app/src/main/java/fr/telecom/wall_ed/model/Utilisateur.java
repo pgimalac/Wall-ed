@@ -2,7 +2,9 @@ package fr.telecom.wall_ed.model;
 
 import java.io.Serializable;
 
-
+/**
+ * Classe utilisateur (aspect Android)
+ */
 
 public class Utilisateur implements Serializable {
 

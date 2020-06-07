@@ -1,5 +1,9 @@
 package fr.telecom.wall_ed.model;
 
+/**
+ * Déchet détecté par le robot
+ */
+
 public class Dechet {
 
     private final int dechetID;

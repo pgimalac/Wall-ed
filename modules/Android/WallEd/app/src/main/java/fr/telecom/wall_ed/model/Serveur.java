@@ -4,6 +4,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/**
+ * Classe serveur (aspect Android)
+ */
+
 public class Serveur {
 
     private Main_appli mn;

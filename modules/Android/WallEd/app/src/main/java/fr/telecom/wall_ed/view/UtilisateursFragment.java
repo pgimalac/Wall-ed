@@ -68,6 +68,8 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_utilisateurs, container, false);
 
+        addFake();
+
         mListView = result.findViewById(R.id.LU);
         mListView.setAdapter(mCallBackUtilisateur.getUserAdaptateur());
         mListView.setOnItemClickListener(mCallbackOnItemClickListener);
@@ -86,8 +88,6 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
 
         ImageButton button5 = result.findViewById(R.id.imgBt_utilisateurs_deleteUser);
         button5.setOnClickListener(this);
-
-        addFake();
 
         return result;
 
@@ -122,7 +122,7 @@ public class UtilisateursFragment extends Fragment  implements View.OnClickListe
      */
     private void addFake() {
         ArrayList<Utilisateur> LU = mCallBackUtilisateur.getUser();
-        if (LU.size() < 1){
+        if (LU==null || LU.size() < 1){
             Log.i("PACT32_DEBUG", "(UtilisateursFragment) fake users created");
             mCallBackUtilisateur.addUser(new Utilisateur("Masiak", "Victor", "CP", "0"));
             mCallBackUtilisateur.addUser(new Utilisateur("Maes", "Adrien", "CE1", "1"));

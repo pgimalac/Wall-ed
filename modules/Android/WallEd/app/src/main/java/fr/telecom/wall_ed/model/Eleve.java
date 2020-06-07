@@ -1,5 +1,8 @@
 package fr.telecom.wall_ed.model;
 
+/**
+ * Classe utilisateur (aspect serveur)
+ */
 
 public class Eleve {
     private int eleveID;

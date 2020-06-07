@@ -54,6 +54,11 @@ import fr.telecom.wall_ed.view.SettingsFragment;
 import fr.telecom.wall_ed.view.StatistiquesGlobalesFragment;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
+/**
+ * Cette classe gère l'application de manière générale : mémoire, appareil photo, etc.
+ * C'est le lien entre tous les fragments.
+ */
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,InterfaceStatsMaster, InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
@@ -134,6 +139,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         utAdapter = new UtilisateurAdapter(mUsers,this);
     }
 
+    /**
+     * Fonction appelée lorsqu'un utilisateur est checked/unchecked dans la liste
+     * @param buttonView qui provoque l'appel
+     * @param isChecked pour savoir si c'est checked
+     */
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onCheckedChanged");
         ListView lv = findViewById(R.id.LU);
@@ -144,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * Charge les utilisateurs en mémoire
+     */
     private void loadUsers(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadUsers");
         try {
@@ -157,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * Met à jour la mémoire avec les utilisateurs courants
+     */
     private void saveUsers(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveUsers");
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -166,6 +182,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         prefsEditor.apply();
     }
 
+    /**
+     * Charge les stats en mémoire
+     */
     private void loadStats(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadStats");
         Gson gson = new Gson();
@@ -174,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mDechets = gson.fromJson(json, listType);
     }
 
+    /**
+     * Met à jour la mémoire avec les stats courantes
+     */
     private void saveStats(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveStats");
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -183,6 +205,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         prefsEditor.apply();
     }
 
+    /**
+     * Permet d'ajouter un utilisateur à la BDD locale
+     * @param user utilisateur à ajouter
+     */
     public void addUser(Utilisateur user){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans addUser " + user.toString());
         if (mUsers==null){
@@ -192,11 +218,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.saveUsers();
     }
 
+    /**
+     * @return la liste des utilisateurs (local)
+     */
     public ArrayList<Utilisateur> getUser () {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUser");
         return mUsers;
     }
 
+    /**
+     * @return la liste des utilisateurs cochés (local)
+     */
     public ArrayList<Utilisateur> getSelectedUser () {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getSelectedUser");
         ArrayList<Utilisateur> tmp = new ArrayList<>();
@@ -208,6 +240,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return tmp;
     }
 
+    /**
+     * @return adaptateur entre la liste des utilisateurs et l'affichage de celle-ci
+     */
     @Override
     public UtilisateurAdapter getUserAdaptateur() {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUserAdaptateur");
@@ -216,11 +251,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onItemClick");
+        //NADA
     }
 
     // ==================== STATS ====================
 
+    /**
+     * @return nombre total de déchets ramassés
+     */
     @Override
     public int getTotal() {
         try {
@@ -232,6 +270,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return mDechets.size();
     }
 
+    /**
+     * @param eleve pour le filtre
+     * @return nombre de déchets ramassés par l'élève filtre
+     */
     @Override
     public int getTotalByStudent(Eleve eleve) {
         try {
@@ -249,6 +291,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param type de déchet pour le filtre
+     * @return nombre de déchets du type filtre ramassés
+     */
     @Override
     public int getTotalByType(String type) {
         try {
@@ -266,6 +312,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param type de déhcet pour le filtre
+     * @param eleve pour le filtre
+     * @return nombre de déchets du type filtre ramassés par l'élève filtre
+     */
     @Override
     public int getTotalByTypeAndStudent(String type, Eleve eleve) {
         try {
@@ -283,6 +334,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @return nombre total de déchets bien classifiés
+     */
     @Override
     public int getCorrect() {
         try {
@@ -300,6 +354,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param eleve filtre
+     * @return nombre de déchets bien classifiés par l'élève filtre
+     */
     @Override
     public int getCorrectByStudent(Eleve eleve) {
         try {
@@ -317,6 +375,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param type pour le filtre
+     * @return nombre de déchets du type filtre bien classifiés
+     */
     @Override
     public int getCorrectByType(String type) {
         try {
@@ -334,6 +396,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param type pour le filtre
+     * @param eleve pour le filtre
+     * @return nombre de déchets du type filtre bien classifiés par l'élève filtre
+     */
     @Override
     public int getCorrectByTypeAndStudent(String type, Eleve eleve) {
         try {
@@ -351,6 +418,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @return le score en % de déchets bien classifiés
+     */
     @Override
     public int getTotalScore() {
         try {
@@ -372,6 +442,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * @param eleve pour le filtre
+     * @return le score en % de déchets bien classifiés par l'élève filtre
+     */
     @Override
     public int getScoreByStudent(Eleve eleve) {
         try {
@@ -394,6 +468,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // ==================== SERVER ====================
 
+    /**
+     * Démarre un nouvelle session
+     * @param users utilisateurs à ajouter à la session
+     */
     @Override
     public void startNewSession(ArrayList<Utilisateur> users) {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans startNewSession");
@@ -405,6 +483,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * Met fin à la session
+     */
     @Override
     public void endSession() {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans endSession");
@@ -571,6 +652,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }*/
     }
 
+    /**
+     * Gestion de la caméra
+     */
     private void openCamera(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans openCamera");
         ContentValues values = new ContentValues();

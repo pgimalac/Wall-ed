@@ -19,6 +19,10 @@ import org.json.simple.parser.ParseException;
 
 import fr.telecom.wall_ed.model.Dechet;
 
+/**
+ * Classe serveur (aspect serveur)
+ */
+
 public class Main_appli implements Runnable{
 
     private Socket connexion = null;
