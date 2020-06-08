@@ -100,6 +100,7 @@ public class RobotClientProcessor implements Runnable{
             	   this.initDone = true;
                	   break;
 				case "newImage":
+					
 					/*
             	   byte[] b= new byte[20000];
             	   writer.write("sendImage");
