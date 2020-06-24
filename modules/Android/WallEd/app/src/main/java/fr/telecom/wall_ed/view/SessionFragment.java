@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import fr.telecom.wall_ed.R;
 
+/**
+ * Ce fragment gère la durée de vies des différents fragments de l'application.
+ */
 
 public class SessionFragment extends Fragment {
 

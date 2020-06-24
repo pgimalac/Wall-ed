@@ -19,6 +19,10 @@ import org.json.simple.parser.ParseException;
 
 import fr.telecom.wall_ed.model.Dechet;
 
+/**
+ * Classe serveur (aspect serveur)
+ */
+
 public class Main_appli implements Runnable{
 
     private Socket connexion = null;
@@ -54,8 +58,8 @@ public class Main_appli implements Runnable{
         while(!connexion.isClosed()){
             try {
 
-                //Si les stats datent d'il y a plus de 5s, qu'aucune commande n'est en attente et que le serveur est prêt, on les met à jour
-                if (sessionID>-1 && command.equals("none") && (Calendar.getInstance().getTime().getTime()-lastUpdate.getTime())/1000 > 20){
+                //Si les stats datent d'il y a plus de qq s, qu'aucune commande n'est en attente et que le serveur est prêt, on les met à jour
+                if (sessionID>-1 && command.equals("none") && (Calendar.getInstance().getTime().getTime()-lastUpdate.getTime())/1000 > 60){
                     if (isReadyToGetStats){
                         Log.i("PACT32_DEBUG", "(Main_appli) getStats command sent");
                         command = "getStats";
@@ -95,8 +99,8 @@ public class Main_appli implements Runnable{
                         while (!(receiv = read()).equals("nomore")) {
                             JSONObject dechetJSON = this.decode(receiv);
                             Dechet dechet = new Dechet(
-                                    (int)dechetJSON.get("dechetID"),
-                                    (int)dechetJSON.get("braceletID"),
+                                    (int)((long)dechetJSON.get("dechetID")),
+                                    (String)dechetJSON.get("braceletID"),
                                     (String)dechetJSON.get("type"),
                                     (String)dechetJSON.get("typePropose"),
                                     (boolean)dechetJSON.get("reponseEleve"),

@@ -20,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -53,12 +54,17 @@ import fr.telecom.wall_ed.view.SettingsFragment;
 import fr.telecom.wall_ed.view.StatistiquesGlobalesFragment;
 import fr.telecom.wall_ed.view.UtilisateursFragment;
 
+/**
+ * Cette classe gère l'application de manière générale : mémoire, appareil photo, etc.
+ * C'est le lien entre tous les fragments.
+ */
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,InterfaceStatsMaster, InterfaceGestionUtilisateurs, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, android.widget.CompoundButton.OnCheckedChangeListener, InterfaceServeur {
 
     //If testing without the server, set to false; otherwise, set to true
 
-    private static final boolean SERVER_AVAILABLE = true ;
+    private static final boolean SERVER_AVAILABLE = false ;
 
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
@@ -101,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 .replace(R.id.main_frame_layout, mainFragment)
                 .addToBackStack(null).commit();
 
+        mPrefs = getPreferences(MODE_PRIVATE);
         if (SERVER_AVAILABLE){
             serveur = new Serveur();
             Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = true");
@@ -115,10 +122,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }else{
             Log.i("PACT32_DEBUG", "SERVER_AVAILABLE = false");
             mUsers = new ArrayList<>();
+            loadUsers();
             Log.i("PACT32_DEBUG", "Initialisation offline : mUsers initialisée vide");
         }
-        mPrefs = getPreferences(MODE_PRIVATE);
-        utAdapter = new UtilisateurAdapter(mUsers,this);
 
         try {
             mDechets = new ArrayList<>();
@@ -129,8 +135,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Log.i("PACT32_DEBUG", "0 statistique chargées");
             mDechets = new ArrayList<>();
         }
+
+        utAdapter = new UtilisateurAdapter(mUsers,this);
     }
 
+    /**
+     * Fonction appelée lorsqu'un utilisateur est checked/unchecked dans la liste
+     * @param buttonView qui provoque l'appel
+     * @param isChecked pour savoir si c'est checked
+     */
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onCheckedChanged");
         ListView lv = findViewById(R.id.LU);
@@ -141,25 +154,37 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * Charge les utilisateurs en mémoire
+     */
     private void loadUsers(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadUsers");
-        Gson gson = new Gson();
-        String json = mPrefs.getString("mUsers", "");
-        Type listType = new TypeToken<ArrayList<Utilisateur>>(){}.getType();
-        mUsers = gson.fromJson(json, listType);
+        try {
+            Gson gson = new Gson();
+            String json = mPrefs.getString("mUsers", "");
+            Type listType = new TypeToken<ArrayList<Utilisateur>>(){}.getType();
+            mUsers = gson.fromJson(json, listType);
+        } catch (Exception ex) {
+            Log.e("PACT32_DEBUG", "échec de loadUsers" + ex.getMessage());
+            mUsers = new ArrayList<>();
+        }
     }
 
+    /**
+     * Met à jour la mémoire avec les utilisateurs courants
+     */
     private void saveUsers(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveUsers");
-        //TODO: replace with server-oriented code
-        /*SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(mUsers);
         prefsEditor.putString("mUsers", json);
         prefsEditor.apply();
-        */
     }
 
+    /**
+     * Charge les stats en mémoire
+     */
     private void loadStats(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans loadStats");
         Gson gson = new Gson();
@@ -168,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mDechets = gson.fromJson(json, listType);
     }
 
+    /**
+     * Met à jour la mémoire avec les stats courantes
+     */
     private void saveStats(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans saveStats");
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
@@ -177,7 +205,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         prefsEditor.apply();
     }
 
-    private void addUser(Utilisateur user){
+    /**
+     * Permet d'ajouter un utilisateur à la BDD locale
+     * @param user utilisateur à ajouter
+     */
+    public void addUser(Utilisateur user){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans addUser " + user.toString());
         if (mUsers==null){
             mUsers = new ArrayList<>();
@@ -186,11 +218,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.saveUsers();
     }
 
+    /**
+     * @return la liste des utilisateurs (local)
+     */
     public ArrayList<Utilisateur> getUser () {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUser");
         return mUsers;
     }
 
+    /**
+     * @return la liste des utilisateurs cochés (local)
+     */
+    public ArrayList<Utilisateur> getSelectedUser () {
+        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getSelectedUser");
+        ArrayList<Utilisateur> tmp = new ArrayList<>();
+        for (Utilisateur u : mUsers){
+            if (u.isSelected()){
+                tmp.add(u);
+            }
+        }
+        return tmp;
+    }
+
+    /**
+     * @return adaptateur entre la liste des utilisateurs et l'affichage de celle-ci
+     */
     @Override
     public UtilisateurAdapter getUserAdaptateur() {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans getUserAdaptateur");
@@ -199,11 +251,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans onItemClick");
+        //NADA
     }
 
     // ==================== STATS ====================
 
+    /**
+     * @return nombre total de déchets ramassés
+     */
     @Override
     public int getTotal() {
         try {
@@ -215,6 +270,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return mDechets.size();
     }
 
+    /**
+     * @param eleve pour le filtre
+     * @return nombre de déchets ramassés par l'élève filtre
+     */
     @Override
     public int getTotalByStudent(Eleve eleve) {
         try {
@@ -225,13 +284,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID())){
                 c++;
             }
         }
         return c;
     }
 
+    /**
+     * @param type de déchet pour le filtre
+     * @return nombre de déchets du type filtre ramassés
+     */
     @Override
     public int getTotalByType(String type) {
         try {
@@ -249,6 +312,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param type de déhcet pour le filtre
+     * @param eleve pour le filtre
+     * @return nombre de déchets du type filtre ramassés par l'élève filtre
+     */
     @Override
     public int getTotalByTypeAndStudent(String type, Eleve eleve) {
         try {
@@ -259,13 +327,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type)){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getType().equals(type)){
                 c++;
             }
         }
         return c;
     }
 
+    /**
+     * @return nombre total de déchets bien classifiés
+     */
     @Override
     public int getCorrect() {
         try {
@@ -283,6 +354,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param eleve filtre
+     * @return nombre de déchets bien classifiés par l'élève filtre
+     */
     @Override
     public int getCorrectByStudent(Eleve eleve) {
         try {
@@ -293,13 +368,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getReponseEleve()){
                 c++;
             }
         }
         return c;
     }
 
+    /**
+     * @param type pour le filtre
+     * @return nombre de déchets du type filtre bien classifiés
+     */
     @Override
     public int getCorrectByType(String type) {
         try {
@@ -317,6 +396,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return c;
     }
 
+    /**
+     * @param type pour le filtre
+     * @param eleve pour le filtre
+     * @return nombre de déchets du type filtre bien classifiés par l'élève filtre
+     */
     @Override
     public int getCorrectByTypeAndStudent(String type, Eleve eleve) {
         try {
@@ -327,13 +411,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getType().equals(type) && dechet.getReponseEleve()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getType().equals(type) && dechet.getReponseEleve()){
                 c++;
             }
         }
         return c;
     }
 
+    /**
+     * @return le score en % de déchets bien classifiés
+     */
     @Override
     public int getTotalScore() {
         try {
@@ -355,6 +442,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * @param eleve pour le filtre
+     * @return le score en % de déchets bien classifiés par l'élève filtre
+     */
     @Override
     public int getScoreByStudent(Eleve eleve) {
         try {
@@ -365,10 +456,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         int c1=0, c2=0;
         for (Dechet dechet : mDechets){
-            if(dechet.getBraceletID()==eleve.getEleveID() && dechet.getReponseEleve()){
+            if(dechet.getBraceletID().equals(eleve.getBraceletID()) && dechet.getReponseEleve()){
                 c1++;
                 c2++;
-            }else if (dechet.getBraceletID()==eleve.getEleveID()){
+            }else if (dechet.getBraceletID().equals(eleve.getBraceletID())){
                 c2++;
             }
         }
@@ -377,6 +468,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // ==================== SERVER ====================
 
+    /**
+     * Démarre un nouvelle session
+     * @param users utilisateurs à ajouter à la session
+     */
     @Override
     public void startNewSession(ArrayList<Utilisateur> users) {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans startNewSession");
@@ -388,6 +483,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    /**
+     * Met fin à la session
+     */
     @Override
     public void endSession() {
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans endSession");
@@ -445,6 +543,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     // ==================== CLICK ====================
 
+
     @Override
     public void onClick(View v) {
         int viewId = v.getId();
@@ -486,6 +585,43 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         .replace(R.id.main_frame_layout, utilisateursFragment)
                         .addToBackStack(null).commit();
                 break;
+            case R.id.imgBt_utilisateurs_addUser:
+                Fragment newUser = new AjoutUtilisateurFragment();
+                mFragmentManager.popBackStack();
+                mFragmentManager.beginTransaction()
+                        .replace(R.id.main_frame_layout, newUser)
+                        .addToBackStack(null).commit();
+                break;
+            case R.id.imgBt_utilisateurs_deleteUser:
+                ArrayList<Utilisateur> toBeRemoved = new ArrayList<>();
+                for (Utilisateur u : mUsers){
+                    if(u.isSelected()){
+                        toBeRemoved.add(u);
+                    }
+                }
+                for (Utilisateur u : toBeRemoved){
+                    mUsers.remove(u);
+                }
+                saveUsers();
+                break;
+            case R.id.imgBt_utilisateurs_modifyUser:
+                ArrayList<Utilisateur> toBeModified = new ArrayList<>();
+                for (Utilisateur u : mUsers){
+                    if(u.isSelected()){
+                        toBeModified.add(u);
+                    }
+                }
+                if (toBeModified.size()>0){
+                    Utilisateur tmp = toBeModified.get(0);
+                    mUsers.remove(tmp);
+                    AjoutUtilisateurFragment modifyUser = new AjoutUtilisateurFragment();
+                    mFragmentManager.popBackStack();
+                    mFragmentManager.beginTransaction()
+                            .replace(R.id.main_frame_layout, modifyUser)
+                            .addToBackStack(null).commit();
+                    modifyUser.preset(tmp);
+                }
+                break;
         }
     }
 
@@ -516,6 +652,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }*/
     }
 
+    /**
+     * Gestion de la caméra
+     */
     private void openCamera(){
         Log.i("PACT32_DEBUG", "CheckPoint (MainActivity) : entrée dans openCamera");
         ContentValues values = new ContentValues();

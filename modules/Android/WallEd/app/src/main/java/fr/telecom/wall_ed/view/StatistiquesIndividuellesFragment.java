@@ -66,6 +66,7 @@ public class StatistiquesIndividuellesFragment extends Fragment {
         return result ;
     }
 
+
     public void MAJ (  ) {
         prenomJoueur.setText(statEleve.getPrenom()) ;
         nombreDechetIndividuel.setText(mStatsMaster.getTotalByStudent(statEleve)) ;

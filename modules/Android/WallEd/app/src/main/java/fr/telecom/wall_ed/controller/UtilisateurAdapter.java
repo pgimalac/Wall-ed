@@ -14,6 +14,10 @@ import java.util.List;
 import fr.telecom.wall_ed.R;
 import fr.telecom.wall_ed.model.Utilisateur;
 
+/**
+ * Adaptateur entre la liste des utilisateurs et l'affichage de celle-ci
+ */
+
 public class UtilisateurAdapter extends ArrayAdapter<Utilisateur> {
 
     private List<Utilisateur> listeUtilisateurs ;
