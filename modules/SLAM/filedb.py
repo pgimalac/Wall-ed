@@ -10,6 +10,7 @@
 **********************************************************************
 '''
 
+
 class fileDB():
     """A file based database.
     A file based database, read and write arguments in the specific file.
@@ -29,7 +30,7 @@ class fileDB():
             conf = open(self.db, 'r')
             lines = conf.readlines()
             conf.close()
-            file_len = len(lines)-1
+            file_len = len(lines) - 1
             flag = False
             # Find the argument and set the value
             for i in range(file_len):

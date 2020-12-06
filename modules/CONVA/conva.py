@@ -3,6 +3,7 @@ import time
 from rpi_ws281x import Color
 from .led import colorWipe
 
+
 class Conva():
     lectr = None
     leds = None
@@ -31,7 +32,6 @@ class Conva():
             time.sleep(1)
         if self.leds is not None:
             self.leds.start()
-
 
     def stop(self):
         if self.lectr is not None:

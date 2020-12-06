@@ -9,10 +9,12 @@ import cv2
 from PIL import Image
 import numpy as np
 
+
 def convertToHSI(img):
     image = Image.open(img)
     ImageTab = np.array(image)
     return cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
+
 
 def histo(img, imgConnex, n):
     ImHSV = convertToHSI(img)

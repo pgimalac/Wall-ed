@@ -8,14 +8,17 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Activite',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True,
+                                  primary_key=True,
+                                  serialize=False,
+                                  verbose_name='ID')),
                 ('sessionID', models.CharField(max_length=100)),
                 ('date', models.CharField(max_length=100)),
                 ('heureDebut', models.CharField(max_length=100)),
@@ -26,7 +29,11 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Eleve',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True,
+                                  primary_key=True,
+                                  serialize=False,
+                                  verbose_name='ID')),
                 ('eleveID', models.CharField(max_length=100)),
                 ('nom', models.CharField(max_length=100)),
                 ('prenom', models.CharField(max_length=100)),
@@ -35,14 +42,23 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Dechet',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True,
+                                  primary_key=True,
+                                  serialize=False,
+                                  verbose_name='ID')),
                 ('dechetID', models.CharField(max_length=100)),
                 ('type', models.CharField(max_length=100)),
                 ('typePropose', models.CharField(max_length=100)),
-                ('reponseEleve', models.CharField(default='none', max_length=100)),
+                ('reponseEleve',
+                 models.CharField(default='none', max_length=100)),
                 ('heureRamassage', models.CharField(max_length=100)),
-                ('activite', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stats.Activite')),
-                ('eleve', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='stats.Eleve')),
+                ('activite',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                   to='stats.Activite')),
+                ('eleve',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                   to='stats.Eleve')),
             ],
         ),
     ]

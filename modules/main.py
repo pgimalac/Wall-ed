@@ -20,7 +20,6 @@ nb_images = 1
 # si on n'est pas assez proche du dêchet au bout de ce nombre d'essais on abandonne
 tries = 20
 
-
 car = Car(debug=True)
 conva = recherche.read()
 rawStudents = clientRobot.initConnexion()
@@ -33,14 +32,15 @@ rawStudents = clientRobot.initConnexion()
 #     ident = rawStudents["IDs"][i]
 #     students[ident] = rawStudents["firstNames"][str(i)], rawStudents["lastNames"][str(i)]
 
+
 def scan_bracelet():
     # pour lire les boutons
     pin1 = 16
-    pin2 = 20                              #broche utilisé en entrée
+    pin2 = 20  #broche utilisé en entrée
 
-    GPIO.setwarnings(False)                 #désactive le mode warning
-    GPIO.setmode(GPIO.BCM)                  #utilisation des numéros de ports du
-                                            #processeur
+    GPIO.setwarnings(False)  #désactive le mode warning
+    GPIO.setmode(GPIO.BCM)  #utilisation des numéros de ports du
+    #processeur
     GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
@@ -82,6 +82,7 @@ def scan_bracelet():
         car.camera_to_position(90, 90)
     return "Jaune", "Rouge"
 
+
 try:
     while True:
         # on bouge de manière aléatoire
@@ -112,7 +113,9 @@ try:
                     ret, t = proposition2.askForWaste(trash, conva)
                     if ret is not None:
                         # ret est vrai/faux selon si on a donné le bon type de déchet
-                        clientRobot.interactionAnswer(True, "".join([c1[0], c2[0]]), trash, t, ret)
+                        clientRobot.interactionAnswer(True,
+                                                      "".join([c1[0], c2[0]]),
+                                                      trash, t, ret)
                         time.sleep(5)
                     recherche.read(c=conva)
                     break

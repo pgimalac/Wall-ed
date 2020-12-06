@@ -17,6 +17,7 @@ from .SunFounder_TB6612 import TB6612
 from .SunFounder_PCA9685 import PCA9685
 from . import filedb
 
+
 class Back_Wheels():
     ''' Back wheels control class '''
     Motor_A = 17
@@ -45,6 +46,7 @@ class Back_Wheels():
         self.right_wheel = TB6612.Motor(self.Motor_B, offset=self.forward_B)
 
         self.pwm = PCA9685.PWM(bus_number=bus_number)
+
         def _set_a_pwm(value):
             pulse_wide = int(self.pwm.map(value, 0, 100, 0, 4095))
             self.pwm.write(self.PWM_A, 0, pulse_wide)
@@ -59,8 +61,10 @@ class Back_Wheels():
         self._speed = 0
 
         self.debug = debug
-        self._debug_('Set left wheel to #%d, PWM channel to %d' % (self.Motor_A, self.PWM_A))
-        self._debug_('Set right wheel to #%d, PWM channel to %d' % (self.Motor_B, self.PWM_B))
+        self._debug_('Set left wheel to #%d, PWM channel to %d' %
+                     (self.Motor_A, self.PWM_A))
+        self._debug_('Set right wheel to #%d, PWM channel to %d' %
+                     (self.Motor_B, self.PWM_B))
 
     def _debug_(self, message):
         if self._DEBUG:
@@ -106,7 +110,9 @@ class Back_Wheels():
         if debug in (True, False):
             self._DEBUG = debug
         else:
-            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+            raise ValueError(
+                'debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'
+                .format(debug))
 
         if self._DEBUG:
             print(self._DEBUG_INFO, "Set debug on")
@@ -154,6 +160,7 @@ class Back_Wheels():
         self.db.set('forward_B', self.forward_B)
         self.stop()
 
+
 def test():
     back_wheels = Back_Wheels()
     DELAY = 0.1
@@ -183,6 +190,7 @@ def test():
     finally:
         print("Finished, motor stop")
         back_wheels.stop()
+
 
 if __name__ == '__main__':
     pwm = PCA9685.PWM(bus_number=1)

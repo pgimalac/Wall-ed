@@ -11,7 +11,6 @@ from PIL import Image
 import numpy as np
 
 
-
 def seuillageGris(img, seuil):
     image = Image.open(img)
     ImageTab = np.array(image)
@@ -27,6 +26,7 @@ def seuillageGris(img, seuil):
                 imgHSV[i][j][2] = 255
                 imgHSV[i][j][1] = 0
     return res
+
 
 resultat = seuillageGris("images de test/Bracelets cadre épais/im1.jpg", 100)
 

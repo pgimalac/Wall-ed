@@ -15,6 +15,7 @@ import time
 from .SunFounder_PCA9685 import Servo
 from . import filedb
 
+
 class Front_Wheels():
     ''' Front wheels control class '''
 
@@ -29,16 +30,25 @@ class Front_Wheels():
         self._min_angle = 0
         self._max_angle = 0
         self.turning_max = 45
-        self._turning_offset = int(self.db.get('turning_offset', default_value=0))
+        self._turning_offset = int(
+            self.db.get('turning_offset', default_value=0))
         self.cali_turning_offset = None
 
-        self.wheel = Servo.Servo(self._channel, bus_number=bus_number, offset=self.turning_offset)
+        self.wheel = Servo.Servo(self._channel,
+                                 bus_number=bus_number,
+                                 offset=self.turning_offset)
         self.debug = debug
         self._debug_('Front wheel PWM channel: %s' % self._channel)
         self._debug_('Front wheel offset value: %s ' % self.turning_offset)
 
-        self._angle = {"left":self._min_angle, "straight":self._straight_angle, "right":self._max_angle}
-        self._debug_('left angle: %s, straight angle: %s, right angle: %s' % (self._angle["left"], self._angle["straight"], self._angle["right"]))
+        self._angle = {
+            "left": self._min_angle,
+            "straight": self._straight_angle,
+            "right": self._max_angle
+        }
+        self._debug_('left angle: %s, straight angle: %s, right angle: %s' %
+                     (self._angle["left"], self._angle["straight"],
+                      self._angle["right"]))
 
     def _debug_(self, message):
         if self._DEBUG:
@@ -75,6 +85,7 @@ class Front_Wheels():
     @property
     def channel(self):
         return self._channel
+
     @channel.setter
     def channel(self, chn):
         self._channel = chn
@@ -92,7 +103,11 @@ class Front_Wheels():
         self._turning_max = angle
         self._min_angle = self._straight_angle - angle
         self._max_angle = self._straight_angle + angle
-        self._angle = {"left":self._min_angle, "straight":self._straight_angle, "right":self._max_angle}
+        self._angle = {
+            "left": self._min_angle,
+            "straight": self._straight_angle,
+            "right": self._max_angle
+        }
 
     @property
     def turning_offset(self):
@@ -110,13 +125,16 @@ class Front_Wheels():
     @property
     def debug(self):
         return self._DEBUG
+
     @debug.setter
     def debug(self, debug):
         ''' Set if debug information shows '''
         if debug in (True, False):
             self._DEBUG = debug
         else:
-            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+            raise ValueError(
+                'debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'
+                .format(debug))
 
         if self._DEBUG:
             print(self._DEBUG_INFO, "Set debug on")
@@ -156,6 +174,7 @@ class Front_Wheels():
         self.turning_offset = self.cali_turning_offset
         self.db.set('turning_offset', self.turning_offset)
 
+
 def test(chn=0):
     front_wheels = Front_Wheels(channel=chn)
     try:
@@ -174,6 +193,7 @@ def test(chn=0):
             time.sleep(1)
     except KeyboardInterrupt:
         front_wheels.turn_straight()
+
 
 if __name__ == '__main__':
     test()

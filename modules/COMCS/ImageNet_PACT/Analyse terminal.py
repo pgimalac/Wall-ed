@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 
-file = open("/home/victor/pact32/modules/Reconnaissance de Déchets/ImageNet_PACT/retrain_log.txt", "r")
+file = open(
+    "/home/victor/pact32/modules/Reconnaissance de Déchets/ImageNet_PACT/retrain_log.txt",
+    "r")
 
 entropy_string_array = []
 
@@ -9,9 +11,9 @@ for line in file:
     token_length = len(token)
     entropy_index = line.find(token)
     if entropy_index >= 0:
-        entropy_string_array.append(line[entropy_index+token_length:-1])
+        entropy_string_array.append(line[entropy_index + token_length:-1])
 
-X = [10*i for i in range(len(entropy_array))]
+X = [10 * i for i in range(len(entropy_array))]
 Y = [float(x) for x in entropy_string_array]
 
 plt.plot(X, Y)

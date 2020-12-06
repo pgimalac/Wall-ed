@@ -6,12 +6,14 @@ port = 22346
 
 socket1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+
 def initConnexion():
     socket1.connect((hote, port))
     socket1.send(bytes("init", 'utf-8'))
     liste_eleves = socket1.recv(255)
     print(liste_eleves)
     return json.loads(liste_eleves)
+
 
 def sendImage(filepath):
     socket2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,9 +40,19 @@ def sendImage(filepath):
     #attention le serveur attend une réponse, si un déchet à été instancié
     # ---> envoyer un JSON sous la forme : {"trashFound" : boolean, "braceletID" : ID, "type" : type_dechet, "typePropose" : type_propose_par_robot(coque), "reponseEleve" : boolean}
 
+
 def interactionAnswer(trashFound, braceletID, type, typePropose, reponseEleve):
     socket1.send(bytes("newImage", 'utf-8'))
-    socket1.send(bytes(json.dumps({'trashFound' : trashFound, 'braceletID' : braceletID, 'type' : type, 'typePropose' : typePropose, 'reponseEleve' : reponseEleve}), 'utf-8'))
+    socket1.send(
+        bytes(
+            json.dumps({
+                'trashFound': trashFound,
+                'braceletID': braceletID,
+                'type': type,
+                'typePropose': typePropose,
+                'reponseEleve': reponseEleve
+            }), 'utf-8'))
+
 
 def stopConnexion():
     socket1.send(bytes("close", 'utf-8'))

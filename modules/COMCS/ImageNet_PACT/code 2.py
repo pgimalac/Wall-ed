@@ -3,14 +3,12 @@
 from os import listdir
 from os.path import isfile, join
 
-
 ## NN LIBS
 
 import keras
 from keras.applications import InceptionV3
-from keras.models       import Model, Sequential
-from keras.layers       import Dense
-
+from keras.models import Model, Sequential
+from keras.layers import Dense
 
 ## PICTURES
 
@@ -23,14 +21,12 @@ for dir in listdir(PATH):
         for file in listdir(local_path):
             processed_imgs_array.append()
 
-
-
 ## MODEL
 
-original_model    = InceptionV3()
-bottleneck_input  = original_model.get_layer(index=0).input
+original_model = InceptionV3()
+bottleneck_input = original_model.get_layer(index=0).input
 bottleneck_output = original_model.get_layer(index=-2).output
-bottleneck_model  = Model(inputs=bottleneck_input, outputs=bottleneck_output)
+bottleneck_model = Model(inputs=bottleneck_input, outputs=bottleneck_output)
 
 for layer in bottleneck_model.layers:
     layer.trainable = False
@@ -38,7 +34,6 @@ for layer in bottleneck_model.layers:
 new_model = Sequential()
 new_model.add(bottleneck_model)
 new_model.add(Dense(NUM_CLASSES, activation='softmax', input_dim=2048))
-
 
 ## COMPILE AND TRAIN
 
@@ -48,7 +43,4 @@ new_model.compile(optimizer='rmsprop',
                   metrics=['accuracy'])
 
 one_hot_labels = keras.utils.to_categorical(labels, num_classes=NUM_CLASSES)
-new_model.fit(processed_imgs_array,
-              one_hot_labels,
-              epochs=2,
-              batch_size=32)
+new_model.fit(processed_imgs_array, one_hot_labels, epochs=2, batch_size=32)

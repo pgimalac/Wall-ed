@@ -14,15 +14,13 @@ import requests
 from io import BytesIO
 import sys
 
-
 ## Constants
 
-utilisateur = 2 # 1=Nico, 2=Victor
+utilisateur = 2  # 1=Nico, 2=Victor
 
 output_directory = "D:\\Images\\Yolo"
 labels_directory = "D:\\Git\\pact32\\modules\\Reconnaissance de Déchets\\Yolo\\Labels"
 annotations_file = "D:\\Git\\TACO\\data\\annotations.json"
-
 
 ## Main loop
 
@@ -33,14 +31,14 @@ images_list = []
 with open(annotations_file, 'r') as f:
     annotations = json.loads(f.read())
 
-## Downloads images
+    ## Downloads images
 
     nr_images = len(annotations['images'])
     for i in range(nr_images):
 
         image = annotations['images'][i]
 
-        file_name = image['file_name'].replace("/","_")
+        file_name = image['file_name'].replace("/", "_")
         image_id = image['id']
         image_width = image['width']
         image_height = image['height']
@@ -62,20 +60,25 @@ with open(annotations_file, 'r') as f:
                 img.save(file_path, exif=img.info["exif"])
             else:
                 img.save(file_path)
-        images_list.append({"img_id": image_id, "img_file_name": file_name, "img_width": image_width, "img_height": image_height, "annotation": ""})
+        images_list.append({
+            "img_id": image_id,
+            "img_file_name": file_name,
+            "img_width": image_width,
+            "img_height": image_height,
+            "annotation": ""
+        })
 
         #Progress
         print("Downloaded n°" + str(i) + "/" + str(nr_images))
-
 
 ## Loads annotations
 
     n_annotations = len(annotations['annotations'])
 
-    if utilisateur==1:
-        L=[i for i in range(n_annotations)]
+    if utilisateur == 1:
+        L = [i for i in range(n_annotations)]
     else:
-        L=[i for i in range(n_annotations-1, 0-1, -1)]
+        L = [i for i in range(n_annotations - 1, 0 - 1, -1)]
 
     for i in L:
 
@@ -88,42 +91,72 @@ with open(annotations_file, 'r') as f:
         #Load image information, and start conversion
         bwidth = annotation_bbox[2]
         bheight = annotation_bbox[3]
-        bx = annotation_bbox[0] + bwidth/2
-        by = annotation_bbox[1] + bheight/2
+        bx = annotation_bbox[0] + bwidth / 2
+        by = annotation_bbox[1] + bheight / 2
 
         for image_d in images_list:
-            if image_d["img_id"]==annotation_id:
+            if image_d["img_id"] == annotation_id:
 
-                width = bwidth/image_d["img_width"]
-                height = bheight/image_d["img_height"]
-                x = bx/image_d["img_width"]
-                y = by/image_d["img_height"]
-                annotation_path = os.path.join(labels_directory, image_d["img_file_name"][:-4]+".txt")
+                width = bwidth / image_d["img_width"]
+                height = bheight / image_d["img_height"]
+                x = bx / image_d["img_width"]
+                y = by / image_d["img_height"]
+                annotation_path = os.path.join(
+                    labels_directory, image_d["img_file_name"][:-4] + ".txt")
 
                 tmp = ""
                 if os.path.isfile(annotation_path):
                     with open(annotation_path, "r") as f:
                         tmp = f.read()
 
-                if not (str(x) + " " + str(y) + " " + str(width) + " " + str(height) in tmp):
+                if not (str(x) + " " + str(y) + " " + str(width) + " " +
+                        str(height) in tmp):
 
-                    if max(width,height)<0.04:
-                        image_d["annotation"] = str(5) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
+                    if max(width, height) < 0.04:
+                        image_d["annotation"] = str(5) + " " + str(
+                            x) + " " + str(y) + " " + str(width) + " " + str(
+                                height) + chr(13)
 
                     else:
 
-                        im = Image.open(os.path.join(output_directory, image_d["img_file_name"]))
+                        im = Image.open(
+                            os.path.join(output_directory,
+                                         image_d["img_file_name"]))
                         draw = ImageDraw.Draw(im)
-                        draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(255,0,0), width=10)
-                        draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,255,0), width=7)
-                        draw.rectangle([annotation_bbox[0], annotation_bbox[1], annotation_bbox[0]+annotation_bbox[2], annotation_bbox[1]+annotation_bbox[3]], fill=None, outline=(0,0,255), width=4)
+                        draw.rectangle([
+                            annotation_bbox[0], annotation_bbox[1],
+                            annotation_bbox[0] + annotation_bbox[2],
+                            annotation_bbox[1] + annotation_bbox[3]
+                        ],
+                                       fill=None,
+                                       outline=(255, 0, 0),
+                                       width=10)
+                        draw.rectangle([
+                            annotation_bbox[0], annotation_bbox[1],
+                            annotation_bbox[0] + annotation_bbox[2],
+                            annotation_bbox[1] + annotation_bbox[3]
+                        ],
+                                       fill=None,
+                                       outline=(0, 255, 0),
+                                       width=7)
+                        draw.rectangle([
+                            annotation_bbox[0], annotation_bbox[1],
+                            annotation_bbox[0] + annotation_bbox[2],
+                            annotation_bbox[1] + annotation_bbox[3]
+                        ],
+                                       fill=None,
+                                       outline=(0, 0, 255),
+                                       width=4)
                         del draw
 
                         print("")
-                        print("Analyse de l'image : " + image_d["img_file_name"])
-                        print("Catégorie d'après TACO : " + str(annotation_category_id))
-                        print("Taille : (" + str(width) + ", " + str(height) + ")")
-                        category =-1
+                        print("Analyse de l'image : " +
+                              image_d["img_file_name"])
+                        print("Catégorie d'après TACO : " +
+                              str(annotation_category_id))
+                        print("Taille : (" + str(width) + ", " + str(height) +
+                              ")")
+                        category = -1
                         print("0 - Divers")
                         print("1 - Verre")
                         print("2 - Carton / Papier")
@@ -134,13 +167,15 @@ with open(annotations_file, 'r') as f:
                             im.show()
                             category = int(input("Categorie : "))
 
-                        image_d["annotation"] = str(category) + " " + str(x) + " " + str(y) + " " + str(width) + " " + str(height) + chr(13)
+                        image_d["annotation"] = str(category) + " " + str(
+                            x) + " " + str(y) + " " + str(width) + " " + str(
+                                height) + chr(13)
                     with open(annotation_path, "a+") as f:
                         f.write(image_d["annotation"])
 
                     #Progress
-                    print("Set annotation n°" + str(i) + "/" + str(n_annotations))
-
+                    print("Set annotation n°" + str(i) + "/" +
+                          str(n_annotations))
 
 ## The end
 

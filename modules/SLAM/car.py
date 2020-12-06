@@ -6,9 +6,9 @@ from . import front_wheels
 from . import camera
 from .SunFounder_PCA9685 import PCA9685
 
+
 class Car():
     ''' Whole car control class '''
-
     def __init__(self, debug=False):
         pwm = PCA9685.PWM(bus_number=1)
         pwm.setup()
@@ -40,7 +40,9 @@ class Car():
         if debug in (True, False):
             self._DEBUG = debug
         else:
-            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+            raise ValueError(
+                'debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'
+                .format(debug))
 
         if self.debug:
             print(self._DEBUG_INFO, "Set car debug on")
@@ -222,6 +224,7 @@ class Car():
         self.stop()
 
         return False
+
 
 if __name__ == "__main__":
     import cv2

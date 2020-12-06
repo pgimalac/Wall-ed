@@ -18,11 +18,8 @@ def action1(i):
     if valeur == i:
         exec(open("./lectreg2.py").read())
 
-
     else:
         exec(open("./lectreg3.py").read())
-
-
 
 
 def action2(i):
@@ -30,55 +27,50 @@ def action2(i):
     if valeur != i:
         exec(open("./lectreg2.py").read())
 
-
     else:
         exec(open("./lectreg3.py").read())
 
 
 def proposition():
 
-    root=Tk()
+    root = Tk()
     root.attributes('-fullscreen', True)
-    i=randint(0,2)
+    i = randint(0, 2)
 
-    if i==0:
+    if i == 0:
 
         msg = Label(root, text="C'est un déchet\nrecyclable")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
-        msg.pack(expand= True, side = TOP, fill=BOTH)
-
+        msg.pack(expand=True, side=TOP, fill=BOTH)
 
     elif i == 1:
 
         msg = Label(root, text="C'est un déchet\nnon-recyclable")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
-        msg.pack(expand= True, side = TOP, fill=BOTH)
-
+        msg.pack(expand=True, side=TOP, fill=BOTH)
 
     else:
 
         msg = Label(root, text="C'est un déchet\nen verre")
         msg.config(font=('courier', 70, 'bold'))
         msg.config(bg='lavender', fg='black')
-        msg.pack(expand= True, side = TOP, fill=BOTH)
+        msg.pack(expand=True, side=TOP, fill=BOTH)
 
-    redbutton = Button(root, text="FAUX", command = lambda : action2(i))
+    redbutton = Button(root, text="FAUX", command=lambda: action2(i))
     redbutton.config(font=('courier', 70, 'bold'))
     redbutton.config(bg='red', fg='black')
-    redbutton.pack(expand=True, side = LEFT, fill = BOTH)
+    redbutton.pack(expand=True, side=LEFT, fill=BOTH)
 
-    greenbutton = Button(root, text="VRAI", command = lambda : action1(i))
+    greenbutton = Button(root, text="VRAI", command=lambda: action1(i))
     greenbutton.config(font=('courier', 70, 'bold'))
     greenbutton.config(bg='green', fg='black')
-    greenbutton.pack(expand=True,side = RIGHT, fill=BOTH)
-
-
+    greenbutton.pack(expand=True, side=RIGHT, fill=BOTH)
 
     root.mainloop()
 
 
 #if __name__=='__main__':
- #  valeur= sys.argv[1]
-  # proposition()
+#  valeur= sys.argv[1]
+# proposition()

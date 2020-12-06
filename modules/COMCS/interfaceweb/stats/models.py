@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Activite(models.Model):
     sessionID = models.CharField(max_length=100)
     date = models.CharField(max_length=100)
@@ -7,10 +8,12 @@ class Activite(models.Model):
     heureFin = models.CharField(max_length=100)
     nbEleves = models.CharField(max_length=100)
 
+
 class Eleve(models.Model):
     eleveID = models.CharField(max_length=100)
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
+
 
 class Dechet(models.Model):
     dechetID = models.CharField(max_length=100)

@@ -8,9 +8,11 @@ import numpy as np
 # découpage de l'algorithme en quatres étapes, détermination du seuillage, de la composante connexe, de l'histogramme et enfin des pics
 # il y a donc 4 parties qui suivent, chacune implémentant une étape en une ou plusieurs fonctions
 
+
 def mainServeur(imgs):
     L = []
-    Color = [["JAUNE", 0], ["VERT", 0], ["MAGENTA", 0], ["BLEU", 0], ["TURQUOISE", 0], ["ROUGE", 0]]
+    Color = [["JAUNE", 0], ["VERT", 0], ["MAGENTA", 0], ["BLEU", 0],
+             ["TURQUOISE", 0], ["ROUGE", 0]]
 
     for img in imgs:
         trouverCouleurImg(img, Color)
@@ -37,7 +39,6 @@ def mainServeur(imgs):
     return L
 
 
-
 def trouverCouleurImg(img, Color):
     result = main(img)
     if result[0] == "JAUNE":
@@ -53,7 +54,6 @@ def trouverCouleurImg(img, Color):
     elif result[0] == "ROUGE":
         Color[5][1] = Color[5][1] + 1
 
-
     if result[1] == "JAUNE":
         Color[0][1] = Color[0][1] + 1
     elif result[1] == "VERT":
@@ -68,14 +68,13 @@ def trouverCouleurImg(img, Color):
         Color[5][1] = Color[5][1] + 1
 
 
-
-
 def main(img):
     imageFiltree = seuillageGris(img, 110)
     imageComp, composante = main_composantes(imageFiltree)
     histogramme = histo(img, imageComp, composante)
     l1, l2 = determinationLABEL(histogramme)
     return (l1, l2)
+
 
 ## FILTRE IMAGE
 
@@ -93,6 +92,7 @@ def seuillageGris(image, seuil):
                 res[i, j] = 1
     return res
 
+
 ## COMPOSANTES CONNEXES
 
 # Algo de reconaissance des composantes connexes d'un tableau composé de cases ayant soit 0 soit 1 pour valeur
@@ -103,12 +103,14 @@ def seuillageGris(image, seuil):
 # découpage de cette étape en sous étape, car cette étape est la plus longue et la plus compliquée
 # On inverse d'abord l'image, puis on détermine les composantes connexes de l'image, puis celle qui nous intéresse
 
+
 def main_composantes(img):
     a, b = np.shape(img)
     inversionImage(img)
     determinationComposantes(img)
     interieur = determineInterieurCadre(img)
     return img, interieur
+
 
 # renvoie le numéro de la plus grande composante connexe de l'inverse de l'image qui ne touche pas le bord, donc l'intérieur du cadre
 def determineInterieurCadre(image):
@@ -122,13 +124,13 @@ def determineInterieurCadre(image):
     for i in range(a):
         if image[i, 0] not in composantesBord:
             composantesBord.append(image[i, 0])
-        if image[i, b-1] not in composantesBord:
-            composantesBord.append(image[i, b-1])
+        if image[i, b - 1] not in composantesBord:
+            composantesBord.append(image[i, b - 1])
     for j in range(b):
         if image[0, j] not in composantesBord:
             composantesBord.append(image[0, j])
-        if image[a-1, j] not in composantesBord:
-            composantesBord.append(image[a-1, j])
+        if image[a - 1, j] not in composantesBord:
+            composantesBord.append(image[a - 1, j])
     tailleComposantesPasBord = []
     for elem in composantes:
         if elem not in composantesBord:
@@ -147,15 +149,18 @@ def determineInterieurCadre(image):
             plusGrandeComposante = couple[0]
     return plusGrandeComposante
 
+
 def Recup(tab, cle):
     for elem in tab:
         if elem[0] == cle:
             return elem[1]
 
+
 def Modif(tab, cle, val):
     for elem in tab:
         if elem[0] == cle:
             elem[1] = val
+
 
 def Existe(tab, cle):
     for elem in tab:
@@ -163,7 +168,9 @@ def Existe(tab, cle):
             return True
     return False
 
+
 # Fonctions
+
 
 def triCorrespondances(tab):
     for k, e in enumerate(tab):
@@ -173,7 +180,7 @@ def triCorrespondances(tab):
     while k < len(tab):
         continu = True
         val = tab[k]
-        valinf = tab[k-1]
+        valinf = tab[k - 1]
         if val > valinf:
             tab[k] = valinf + 1
         if k == len(tab) - 1:
@@ -185,20 +192,23 @@ def triCorrespondances(tab):
             else:
                 continu = False
 
+
 def numsPrecedent(table, pixel, image):
     (i, j) = pixel
     res = []
-    if i > 0 and image[i-1, j] == 1:
-        res.append(HashRecup(table, (i-1, j)))
-    if j > 0 and image[i, j-1] == 1:
-        res.append(HashRecup(table, (i, j-1)))
+    if i > 0 and image[i - 1, j] == 1:
+        res.append(HashRecup(table, (i - 1, j)))
+    if j > 0 and image[i, j - 1] == 1:
+        res.append(HashRecup(table, (i, j - 1)))
     return res
+
 
 def inversionImage(image):
     (a, b) = np.shape(image)
     for i in range(a):
         for j in range(b):
-            image[i, j] = (image[i, j] + 1)%2
+            image[i, j] = (image[i, j] + 1) % 2
+
 
 def determinationComposantes(image):
     a, b = np.shape(image)
@@ -233,7 +243,9 @@ def determinationComposantes(image):
             if image[i, j] == 1:
                 image[i, j] = HashRecup(composantes, (i, j)) + 1
 
+
 # Dictionnaire sous forme de tableau (complexité en temps bien meilleure)
+
 
 def HashCreation(a, b):
     res = np.zeros((a, b))
@@ -242,20 +254,26 @@ def HashCreation(a, b):
             res[i, j] = -1
     return res
 
+
 def HashAjout(table, cle, elem):
     table[cle] = elem
+
 
 def HashRecup(table, cle):
     return table[cle]
 
+
 def HashExiste(table, cle):
     return table[cle] != -1
+
 
 def HashModif(table, cle, newVal):
     table[cle] = newVal
 
+
 def HashSuppr(table, cle):
     table[cle] = -1
+
 
 ## CONSTRUCTION DE L'HISTOGRAMME ET DETERMINATION DES PICS
 
@@ -263,6 +281,7 @@ def HashSuppr(table, cle):
 def convertToHSI(image):
     ImageTab = np.array(image)
     return cv2.cvtColor(ImageTab, cv2.COLOR_RGB2HSV)
+
 
 def histo(img, imgConnex, n):
     ImHSV = convertToHSI(img)
@@ -275,6 +294,7 @@ def histo(img, imgConnex, n):
             if imgConnex[i][j] == n:
                 histogramme[ImHSV[i][j][0], 1] += 1
     return histogramme
+
 
 def tableauCorresp():
     tab = []
@@ -294,16 +314,19 @@ def tableauCorresp():
         tab.append("ROUGE")
     return np.array(tab)
 
+
 def determinationPics(histogramme):
     premierPic = max(histogramme)
     deuxiemePic = max2(histogramme, premierPic)
     return (premierPic, deuxiemePic)
+
 
 def determinationLABEL(histogramme):
     p1, p2 = determinationPics(histogramme)
     t = tableauCorresp()
     print(p1, p2)
     return (t[int(p1)], t[int(p2)])
+
 
 def max(tab):
     maxi = -math.inf
@@ -314,11 +337,14 @@ def max(tab):
             indice_max = tab[i, 0]
     return indice_max
 
+
 def max2(tab, max1):
     maxi = -math.inf
     indice_max = -1
     for i in range(len(tab)):
-        if (i < (max1 - 45) or i > (max1 + 45)) and (i < (max1 + 180 - 45) or i > (max1 - 180 + 45)) and tab[i, 1] > maxi:
+        if (i < (max1 - 45) or i >
+            (max1 + 45)) and (i < (max1 + 180 - 45) or i >
+                              (max1 - 180 + 45)) and tab[i, 1] > maxi:
             maxi = tab[i, 1]
             indice_max = tab[i, 0]
     return indice_max

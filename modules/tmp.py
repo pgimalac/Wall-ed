@@ -23,7 +23,6 @@ nb_images = 1
 # si on n'est pas assez proche du dêchet au bout de ce nombre d'essais on abandonne
 tries = 20
 
-
 car = Car(debug=True)
 conva = recherche.read()
 # rawStudents = clientRobot.initConnexion()
@@ -40,8 +39,8 @@ conva = recherche.read()
 def scan_bracelet():
     # pour lire les boutons
     pin1 = 16
-    pin2 = 20                              #broche utilisé en entrée
-                                            #processeur
+    pin2 = 20  #broche utilisé en entrée
+    #processeur
     GPIO.setup(pin1, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.setup(pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
@@ -99,7 +98,6 @@ time.sleep(3)
 recherche.read(c=conva)
 sys.exit(0)
 
-
 try:
     while True:
         # on bouge de manière aléatoire
@@ -122,7 +120,8 @@ try:
 
         for trash, pos in rep.items():
             if len(pos) != 2:
-                print("Invalid coordinates (two values needed)", file=sys.stderr)
+                print("Invalid coordinates (two values needed)",
+                      file=sys.stderr)
                 continue
 
             x, y = map(int, pos)
@@ -162,7 +161,6 @@ try:
             else:
                 print("Could not reach target after {} tries".format(tries))
             break
-
 
 except KeyboardInterrupt:
     print("Interrupted !", file=sys.stderr)

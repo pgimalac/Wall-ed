@@ -17,25 +17,26 @@ import cv2
 from .SunFounder_PCA9685 import Servo
 from . import filedb
 
+
 class Camera():
     '''Camera movement control class'''
 
-    READY_PAN = 90          # Ready position angle
-    READY_TILT = 90         # Ready position angle
-    CALI_PAN = 90           # Calibration position angle
-    CALI_TILT = 90          # Calibration position angle
+    READY_PAN = 90  # Ready position angle
+    READY_TILT = 90  # Ready position angle
+    CALI_PAN = 90  # Calibration position angle
+    CALI_TILT = 90  # Calibration position angle
 
     CAMERA_DELAY = 0.005
-    PAN_STEP = 15           # Pan step = 5 degree
-    TILT_STEP = 10          # Tilt step = 5 degree
+    PAN_STEP = 15  # Pan step = 5 degree
+    TILT_STEP = 10  # Tilt step = 5 degree
 
     _DEBUG = False
     _DEBUG_INFO = 'DEBUG "camera.py":'
 
     def __init__(self, debug=False, bus_number=1, db="config"):
         ''' Init the servo channel '''
-        pan_channel = 1         # Pan servo channel
-        tilt_channel = 2        # Tilt servo channel
+        pan_channel = 1  # Pan servo channel
+        tilt_channel = 2  # Tilt servo channel
 
         self.db = filedb.fileDB(db=db)
         self.pan_offset = int(self.db.get('pan_offset', default_value=0))
@@ -44,8 +45,12 @@ class Camera():
         self.cali_pan_offset = None
         self.cali_tilt_offset = None
 
-        self.pan_servo = Servo.Servo(pan_channel, bus_number=bus_number, offset=self.pan_offset)
-        self.tilt_servo = Servo.Servo(tilt_channel, bus_number=bus_number, offset=self.tilt_offset)
+        self.pan_servo = Servo.Servo(pan_channel,
+                                     bus_number=bus_number,
+                                     offset=self.pan_offset)
+        self.tilt_servo = Servo.Servo(tilt_channel,
+                                      bus_number=bus_number,
+                                      offset=self.tilt_offset)
 
         self.debug = debug
         self._debug_('Pan servo channel: %i' % pan_channel)
@@ -77,7 +82,9 @@ class Camera():
         if debug in (True, False):
             self._DEBUG = debug
         else:
-            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+            raise ValueError(
+                'debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'
+                .format(debug))
 
         if self._DEBUG:
             print(self._DEBUG_INFO, "Set debug on")
@@ -132,7 +139,8 @@ class Camera():
         '''Control two servo to write the camera to ready position'''
         pan_diff = self.current_pan - expect_pan
         tilt_diff = self.current_tilt - expect_tilt
-        self._debug_('Turn to posision [%s, %s] (pan, tilt)' % (expect_pan, expect_tilt))
+        self._debug_('Turn to posision [%s, %s] (pan, tilt)' %
+                     (expect_pan, expect_tilt))
         while True:
             if pan_diff != 0 or tilt_diff != 0:
                 pan_diff = self.current_pan - expect_pan
@@ -146,9 +154,11 @@ class Camera():
                     self.current_pan = expect_pan
                 if abs(tilt_diff) > 1:
                     if tilt_diff < 0:
-                        self.current_tilt = self.safe_plus(self.current_tilt, 1)
+                        self.current_tilt = self.safe_plus(
+                            self.current_tilt, 1)
                     elif tilt_diff > 0:
-                        self.current_tilt = self.safe_plus(self.current_tilt, -1)
+                        self.current_tilt = self.safe_plus(
+                            self.current_tilt, -1)
                 else:
                     self.current_tilt = expect_tilt
 
@@ -256,6 +266,7 @@ class Camera():
                 return None
 
         return img
+
 
 if __name__ == '__main__':
     camera = Camera()

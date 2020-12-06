@@ -5,7 +5,6 @@ import front_wheels as fw
 from SunFounder_PCA9685 import PCA9685
 
 
-
 class Car():
     ''' Whole car control class'''
 
@@ -22,6 +21,7 @@ class Car():
     ######################
 
     _DEBUG_INFO = 'DEBUG "voiture.py":'
+
     def _debug_(self, message):
         if self.debug:
             print(self._DEBUG_INFO, message)
@@ -36,7 +36,9 @@ class Car():
         if debug in (True, False):
             self._DEBUG = debug
         else:
-            raise ValueError('debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'.format(debug))
+            raise ValueError(
+                'debug must be "True" (Set debug on) or "False" (Set debug off), not "{0}"'
+                .format(debug))
 
         if self.debug:
             print(self._DEBUG_INFO, "set debug on")
@@ -133,6 +135,7 @@ class Car():
         '''set mobving speed'''
         self.back_wheels.speed = speed
 
+
 if __name__ == '__main__':
     DELAY = 0.1
     pwm = PCA9685.PWM(bus_number=1)
@@ -157,9 +160,9 @@ if __name__ == '__main__':
                     car.turn(car.front_wheels.straight_angle + i)
                     time.sleep(DELAY)
                 for i in range(car.turning_max):
-                    car.turn(car.front_wheels.straight_angle + car.turning_max - i)
+                    car.turn(car.front_wheels.straight_angle +
+                             car.turning_max - i)
                     time.sleep(DELAY)
-
 
             elif theta == 1:
                 print("Going left")
@@ -167,7 +170,8 @@ if __name__ == '__main__':
                     car.turn(car.front_wheels.straight_angle - i)
                     time.sleep(DELAY)
                 for i in range(car.turning_max):
-                    car.turn(car.front_wheels.straight_angle - car.turning_max + i)
+                    car.turn(car.front_wheels.straight_angle -
+                             car.turning_max + i)
                     time.sleep(DELAY)
 
             elif theta == 2:

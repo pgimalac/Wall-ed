@@ -6,6 +6,7 @@ import os
 import sys
 import cv2
 
+
 def find_video():
     path = '/dev/'
     for _, _, f in os.walk(path):
@@ -21,6 +22,7 @@ def find_video():
 
     return None
 
+
 webcam = find_video()
 
 if webcam is None:
@@ -35,7 +37,7 @@ while True:
         cv2.imshow("Capturing", frame)
 
         key = cv2.waitKey(1)
-        if key == ord('s'): # takes a picture
+        if key == ord('s'):  # takes a picture
             cv2.imwrite(filename='saved_img.jpg', img=frame)
             webcam.release()
             img_new = cv2.imread('saved_img.jpg', cv2.IMREAD_GRAYSCALE)
@@ -54,7 +56,7 @@ while True:
             print("Image saved!")
             break
 
-        if key == ord('q'): # stops the camera
+        if key == ord('q'):  # stops the camera
             print("Turning off camera.")
             webcam.release()
             print("Camera off.")
