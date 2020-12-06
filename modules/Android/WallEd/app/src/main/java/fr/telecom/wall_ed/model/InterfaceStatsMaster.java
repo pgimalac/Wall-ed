@@ -12,5 +12,4 @@ public interface InterfaceStatsMaster {
     public int getCorrectByStudent(Eleve eleve);
     public int getCorrectByType(String type);
     public int getCorrectByTypeAndStudent(String type, Eleve eleve);
-
 }

@@ -14,7 +14,8 @@ public class Utilisateur implements Serializable {
     private String id;
     private boolean selected;
     private String braceletID = "ab";
-    private final String[] possible = new String[]{"V","R","C","J","M","B"};
+    private final String[] possible =
+        new String[] {"V", "R", "C", "J", "M", "B"};
 
     public Utilisateur(String prenom, String nom, String classe, String id) {
         this.prenom = prenom;
@@ -22,7 +23,8 @@ public class Utilisateur implements Serializable {
         this.classe = classe;
         this.id = id;
         this.selected = false;
-        this.braceletID = possible[Integer.parseInt(id)] + possible[Integer.parseInt(id)];
+        this.braceletID =
+            possible[Integer.parseInt(id)] + possible[Integer.parseInt(id)];
     }
 
     @Override
@@ -30,47 +32,25 @@ public class Utilisateur implements Serializable {
         return prenom + " " + nom + " (" + classe + ")";
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
+    public String getPrenom() { return prenom; }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
 
-    public String getNom() {
-        return nom;
-    }
+    public String getNom() { return nom; }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+    public void setNom(String nom) { this.nom = nom; }
 
-    public String getClasse() {
-        return classe;
-    }
+    public String getClasse() { return classe; }
 
-    public void setClasse(String classe) {
-        this.classe = classe;
-    }
+    public void setClasse(String classe) { this.classe = classe; }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id; }
 
-    public boolean isSelected() {
-        return selected;
-    }
+    public boolean isSelected() { return selected; }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
+    public void setSelected(boolean selected) { this.selected = selected; }
 
-    public String getBraceletID() {
-        return braceletID;
-    }
+    public String getBraceletID() { return braceletID; }
 }

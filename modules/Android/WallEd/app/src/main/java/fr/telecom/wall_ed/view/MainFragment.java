@@ -1,21 +1,16 @@
 package fr.telecom.wall_ed.view;
 
-
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import androidx.fragment.app.Fragment;
 import fr.telecom.wall_ed.R;
 
-
-public class MainFragment extends Fragment implements View.OnClickListener{
+public class MainFragment extends Fragment implements View.OnClickListener {
 
     private View.OnClickListener mOnClickListenerCallback;
     private Button mDemarrerButton;
@@ -24,10 +19,11 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_main, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View result =
+            inflater.inflate(R.layout.fragment_main, container, false);
         mDemarrerButton = result.findViewById(R.id.demarrer_button);
         mDemarrerButton.setOnClickListener(this);
         return result;
@@ -45,12 +41,13 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mOnClickListenerCallback.onClick(v);
     }
 
-    private void createCallbackToParentActivity(){
+    private void createCallbackToParentActivity() {
         try {
-            //Parent activity will automatically subscribe to callback
-            mOnClickListenerCallback = (View.OnClickListener) getActivity();
+            // Parent activity will automatically subscribe to callback
+            mOnClickListenerCallback = (View.OnClickListener)getActivity();
         } catch (ClassCastException e) {
-            throw new ClassCastException(e.toString()+ " View.OnClickListener");
+            throw new ClassCastException(e.toString() +
+                                         " View.OnClickListener");
         }
     }
 
@@ -65,5 +62,4 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         super.onDestroy();
         Log.i("PACT32_DEBUG", "CheckPoint (MainFragment) : destroyed");
     }
-
 }
